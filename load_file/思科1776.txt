@@ -1,0 +1,2521 @@
+Building configuration...
+
+!! IOS XR Configuration 7.0.2
+
+!! Last configuration change at Thu Jan 14 15:59:12 2021 by admin_cisco
+
+!
+
+service unsupported-transceiver
+
+hostname WHUH-KCJFBP-2J-RGW5501-WQ-I1107
+usergroup readonly_grp
+
+ taskgroup read-only-tg
+
+!
+
+clock timezone CST Asia/Shanghai
+
+banner motd cWARNING!!! Authorised access only, all of your done will be recorded! Disconnect IMMEDIATELY if you are not an authorised user!c 
+
+logging trap debugging
+
+logging archive
+
+ device harddisk
+
+ severity debugging
+
+ file-size 10
+
+ frequency daily
+
+ archive-size 300
+
+ archive-length 4
+
+!
+
+logging console disable
+
+logging buffered 8192000
+
+logging facility local7
+
+logging source-interface Loopback0
+
+service timestamps log datetime
+
+service timestamps debug datetime
+
+logging events link-status software-interfaces
+
+domain lookup disable
+
+username admin_cisco
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$5wWZn1jMtwKCDn1.$pAEBG4qqLonQSbTOUdpwsJF2OFyvev32fJGlfYHm2TWP4muxjBSnfYOkmT9KkQlsuI1hVVtjM.ACE4/EfO0T81
+!
+
+username SD-QD-SDNcontroler
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$iEac2/Y78FWG22/.$8erjJY8x6mr/vljfaQ6wU99cvRcfrWEuq6yXdrGfiVy9vahSUW8YW8pwSE2xTiLHNfIV5HTANto.rgaaDpAId.
+!
+
+username SD-QD-Manager
+
+ group readonly_grp
+
+  secret d3d9446802a44259755d38e6d163e820 $6$V8BRwGH5Dol1w...$Z5sODmBIBfg1lLcguAKkkfatvAUYJOLqLZjpzVzQC6v3Zq1mdmp7eIocE5IMFf.H3C6JSNAy7rYmiU8c2eGV8/
+!
+
+username jxy
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$NbivN/dvSKib3N/.$EmTJNNYdZlKKo2BBDXGj.6FVLTNttzGyOH99wXLV7IqW4/or5FYI2bGHFr7x6bcxkpWqMw2qFrZvhuKpZUaod.
+!
+
+telemetry model-driven
+
+ destination-group Dest_Group1
+
+  address-family ipv4 158.124.210.41 port 8896
+   encoding self-describing-gpb
+
+   protocol grpc no-tls
+
+  !
+
+ !
+
+ sensor-group SGroup1
+
+  sensor-path Cisco-IOS-XR-pfi-im-cmd-oper:interfaces/interface-xr/interface
+
+  sensor-path Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+
+ !
+
+ sensor-group SGroup2
+
+  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization
+
+  sensor-path Cisco-IOS-XR-procmem-oper:processes-memory/nodes/node/process-ids/process-id
+
+ !
+
+ sensor-group SGroup3
+
+  sensor-path Cisco-IOS-XR-nto-misc-oper:memory-summary/nodes/node/summary
+
+ !
+
+ sensor-group SGroup4
+
+  sensor-path Cisco-IOS-XR-man-ipsla-oper:ipsla/operation-data/operations
+
+  sensor-path Cisco-IOS-XR-telemetry-model-driven-oper:telemetry-model-driven
+
+ !
+
+ subscription SUB1
+
+  sensor-group-id SGroup1 sample-interval 10000
+
+  sensor-group-id SGroup2 sample-interval 10000
+
+  sensor-group-id SGroup3 sample-interval 10000
+
+  sensor-group-id SGroup4 sample-interval 60000
+
+  destination-id Dest_Group1
+
+  source-interface Loopback0
+
+ !
+
+!
+
+ptp
+
+ clock
+
+  domain 24
+
+  profile g.8275.1 clock-type T-BC
+
+  priority2 100
+
+  clock-class 165
+
+ !
+
+ profile g82751_any
+
+  multicast
+
+  transport ethernet
+
+  sync frequency 16
+
+  announce frequency 8
+
+  delay-request frequency 16
+
+ !
+
+ time-of-day priority 99
+
+ physical-layer-frequency
+
+ log
+
+  servo events
+
+  best-master-clock changes
+
+ !
+
+!
+
+vrf 4G_OAM
+
+ address-family ipv4 unicast
+
+  import route-target
+
+   64585:20021
+
+  !
+
+  export route-target
+
+   64585:20021
+
+  !
+
+ !
+
+!
+
+vrf 4G_RAN
+
+ address-family ipv4 unicast
+
+  import route-target
+
+   64585:20011
+
+  !
+
+  export route-target
+
+   64585:20011
+
+  !
+
+ !
+
+!
+
+vrf 5G_OAM
+
+ address-family ipv6 unicast
+
+  import route-target
+
+   64585:10030
+
+  !
+
+  export route-target
+
+   64585:10030
+
+  !
+
+ !
+
+!
+
+vrf 5G_RAN
+
+ address-family ipv6 unicast
+
+  import route-target
+
+   64585:10010
+
+  !
+
+  export route-target
+
+   64585:10010
+
+  !
+
+ !
+
+!
+
+tcp selective-ack
+
+tcp path-mtu-discovery
+
+snmp-server ifindex persist
+
+snmp-server ifmib stats cache
+
+snmp-server trap link ietf
+
+ snmp-server host 158.124.2.2 traps version 2c encrypted df1a6e418c25363620bf6cad4db59cb3 udp-port 163
+ snmp-server host 158.124.210.34 traps version 2c encrypted df1a6e418c25363620bf6cad4db59cb3 udp-port 163
+snmp-server community SdqdspDC@2020 RO
+
+snmp-server community SdqdspDC@2020RW RW
+
+snmp-server traps rf
+
+snmp-server traps bfd
+
+snmp-server traps ntp
+
+snmp-server traps snmp linkup
+
+snmp-server traps snmp linkdown
+
+snmp-server traps snmp coldstart
+
+snmp-server traps snmp warmstart
+
+snmp-server traps snmp authentication
+
+snmp-server traps flash removal
+
+snmp-server traps flash insertion
+
+snmp-server traps config
+
+snmp-server traps syslog
+
+snmp-server traps system
+
+snmp-server traps entity-redundancy all
+
+snmp-server trap-source Loopback0
+
+fpd auto-upgrade enable
+
+ntp
+
+  authentication-key 1 md5 encrypted 6ef111cdd35961793f200c5ad4c2d272
+ authenticate
+
+ trusted-key 1
+
+ server 16.44.132.1 prefer
+ server 16.44.132.2
+ access-group ipv4 peer ntp_acl
+
+ source Loopback0
+
+ update-calendar
+
+!
+
+frequency synchronization
+
+ quality itu-t option 1
+
+ log selection changes
+
+!
+
+call-home
+
+ service active
+
+ contact smart-licensing
+
+ profile CiscoTAC-1
+
+  active
+
+  destination transport-method http
+
+ !
+
+!
+
+control-plane
+
+ management-plane
+
+  inband
+
+   interface all
+
+    allow SSH peer
+
+     address ipv4 158.124.1.167
+     address ipv4 16.44.132.0/23
+     address ipv4 16.206.38.52/29
+     address ipv4 16.206.39.52/29
+     address ipv4 138.13.132.0/22
+     address ipv4 138.13.146.0/23
+     address ipv4 158.124.1.160/30
+     address ipv4 158.124.210.0/24
+    !
+
+    allow SNMP peer
+
+     address ipv4 158.124.1.160/30
+     address ipv4 158.124.2.0/30
+     address ipv4 158.124.210.0/24
+    !
+
+    allow Telnet peer
+
+     address ipv4 158.124.1.167
+     address ipv4 16.44.132.0/23
+     address ipv4 16.206.38.52/29
+     address ipv4 16.206.39.52/29
+     address ipv4 138.13.132.0/22
+     address ipv4 138.13.146.0/23
+     address ipv4 158.124.1.160/30
+    !
+
+   !
+
+  !
+
+ !
+
+!
+
+hw-module profile qos hqos-enable
+
+netconf-yang agent
+
+ ssh
+
+!
+
+ipv4 access-list ntp_acl
+
+ 10 permit ipv4 host 16.44.132.1 any
+ 20 permit ipv4 host 16.44.132.2 any
+!
+
+class-map match-any CM_1
+
+ match precedence 1 
+
+ match dscp 8-15 
+
+ match cos inner 1 
+
+ match mpls experimental topmost 1 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_2
+
+ match precedence 2 
+
+ match dscp 16-23 
+
+ match cos inner 2 
+
+ match mpls experimental topmost 2 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_3
+
+ match precedence 3 
+
+ match dscp 24-31 
+
+ match cos inner 3 
+
+ match mpls experimental topmost 3 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_4
+
+ match precedence 4 
+
+ match dscp 32-39 
+
+ match cos inner 4 
+
+ match mpls experimental topmost 4 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_5
+
+ match precedence 5 
+
+ match dscp 40-47 
+
+ match cos inner 5 
+
+ match mpls experimental topmost 5 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_6
+
+ match precedence 6 
+
+ match dscp 48-55 
+
+ match cos inner 6 
+
+ match mpls experimental topmost 6 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_7
+
+ match precedence 7 
+
+ match dscp 56-63 
+
+ match cos inner 7 
+
+ match mpls experimental topmost 7 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_1
+
+ match traffic-class 1 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_2
+
+ match traffic-class 2 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_3
+
+ match traffic-class 3 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_4
+
+ match traffic-class 4 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_5
+
+ match traffic-class 5 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_6
+
+ match traffic-class 6 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_7
+
+ match traffic-class 7 
+
+ end-class-map
+
+! 
+
+policy-map PM_NNI_IN
+
+ class CM_7
+
+  set traffic-class 7
+
+ ! 
+
+ class CM_6
+
+  set traffic-class 6
+
+ ! 
+
+ class CM_5
+
+  set traffic-class 5
+
+ ! 
+
+ class CM_4
+
+  set traffic-class 4
+
+ ! 
+
+ class CM_3
+
+  set traffic-class 3
+
+ ! 
+
+ class CM_2
+
+  set traffic-class 2
+
+ ! 
+
+ class CM_1
+
+  set traffic-class 1
+
+ ! 
+
+ class class-default
+
+ ! 
+
+ end-policy-map
+
+! 
+
+policy-map PM_NNI_OUT
+
+ class TC_7
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_6
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_5
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_4
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_3
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ class TC_2
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class TC_1
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class class-default
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ end-policy-map
+
+! 
+
+interface Loopback0
+
+ ipv4 address 16.44.133.113 255.255.255.255
+!
+
+interface Loopback100
+
+ vrf 5G_RAN
+
+ ipv6 address AC86:90C:C899:98:8:3:088F:C889/126
+!
+
+interface MgmtEth0/RP0/CPU0/0
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/0
+
+  description for_FFY_EDPyDyLHP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/0.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:9/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/0.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:9/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/0.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.2 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/0.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.2 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/0.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:9/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/1
+
+  description for_FFY_KesCmrJFBP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/1.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:989/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/1.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:989/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/1.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.6 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/1.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.6 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/1.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:989/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/2
+
+  description for_FFY_KsrkNKWDHE
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/2.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:A89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/2.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:A89/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/2.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.16 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/2.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.16 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/2.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:A89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/3
+
+  description for_FFY_CmrkDyLJHR
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/3.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:B89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/3.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:B89/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/3.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.10 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/3.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.10 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/3.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:B89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/4
+
+  description for_FFY_FesDPDGlDP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/4.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:C89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/4.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:C89/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/4.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.14 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/4.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.14 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/4.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:C89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/5
+
+  description for_FFY_KCUEDByPmy
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/5.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:D89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/5.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:D89/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/5.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.28 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/5.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.28 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/5.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:D89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/6
+
+  description for_FFY_NmrDPDyFDP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/6.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:E89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/6.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:E89/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/6.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.22 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/6.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.22 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/6.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:E89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/7
+
+  description for_FFY_KCBPmyECFU
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/7.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:F89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/7.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:F89/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/7.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.36 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/7.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.36 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/7.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:F89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/8
+
+  description for_FFY_LyeKPDyNDP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/8.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:089/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/8.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:089/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/8.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.30 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/8.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.30 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/8.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:089/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/9
+
+  description for_FFY_WQJFByPmy
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/9.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:189/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/9.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:189/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/9.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.34 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/9.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.34 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/9.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:189/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/10
+
+  description for_FFY_CmrkDyLJCR
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/10.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:9889/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/10.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:9889/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/10.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.48 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/10.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.48 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/10.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:9889/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/11
+
+  description for_FFY_WQEDByPmmy
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/11.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88::3:088F:9989/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/11.895
+
+  description for_GYRV_RV
+ vrf 5G_OAM
+
+ ipv6 address AC80:09E8:0A88:777:8:3:088F:9989/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/11.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.274.42 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/11.1021
+
+  description for_GXRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 47.296.143.42 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/11.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899::3:088F:9989/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/12
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/13
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/14
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/15
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/16
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/17
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/18
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/19
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/21
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/22
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/23
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/24
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/25
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/26
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/27
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/28
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/29
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/30
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/31
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/32
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/33
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/34
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/35
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/36
+
+  description for_FFY_LyeKPDyNLP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/36.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88:8:7777:3:088F:BE89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/36.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.289.10 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/36.1020
+
+  description for_GYRV_RV
+ vrf 4G_OAM
+
+ ipv4 address 138.166.289.10 255.255.255.252
+ encapsulation dot1q 1020
+
+!
+
+interface TenGigE0/0/0/36.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899:8:7777:3:088F:BE89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/37
+
+  description for_FFY_FesDPDyNVP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/37.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88:8:7777:3:088F:BF89/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/37.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.289.16 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/37.1020
+
+  description for_GYRV_RV
+ vrf 4G_OAM
+
+ ipv4 address 138.166.289.16 255.255.255.252
+ encapsulation dot1q 1020
+
+!
+
+interface TenGigE0/0/0/37.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899:8:7777:3:088F:BF89/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/38
+
+  description for_FFY_JirFBPmyq2
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/38.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88:A:8:3:088F:B089/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/38.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.289.6 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/38.1020
+
+  description for_GYRV_RV
+ vrf 4G_OAM
+
+ ipv4 address 138.166.289.6 255.255.255.252
+ encapsulation dot1q 1020
+
+!
+
+interface TenGigE0/0/0/38.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899:98:8:3:088F:B089/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/39
+
+  description for_FFY_JirFBPmyq1
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/39.843
+
+  description for_GYRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC80:09E8:0A88:A:8:3:088F:B189/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/39.1019
+
+  description for_GYRV_RV
+ vrf 4G_RAN
+
+ ipv4 address 53.164.289.2 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/39.1020
+
+  description for_GYRV_RV
+ vrf 4G_OAM
+
+ ipv4 address 138.166.289.2 255.255.255.252
+ encapsulation dot1q 1020
+
+!
+
+interface TenGigE0/0/0/39.1843
+
+  description for_GXRV_RV
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address AC86:90C:C899:98:8:3:088F:B189/126
+ encapsulation dot1q 1843
+
+!
+
+interface HundredGigE0/0/1/0
+
+  description To_SHUH-KCGD-3J-RGW55E1-WQ-G1101_LyKmkI0/0/0/6_100K:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state slave-only
+
+  local-priority 10
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 138.13.146.30 255.255.255.252
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  selection input
+
+  priority 10
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/1/1
+
+  description To_SHUH-KCWQ-2J-RGW55E1-WQ-G1102_LyKmkI0/0/0/6_100K:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state slave-only
+
+  local-priority 10
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 138.13.147.30 255.255.255.252
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  selection input
+
+  priority 10
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/1/2
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/1/3
+
+ shutdown
+
+!
+
+!
+
+prefix-set ps_RING_RA_ROUTE
+
+  16.44.132.0/21 ge 32
+end-set
+
+!
+
+community-set cs_Core_Routes
+
+  64585:9999
+
+end-set
+
+!
+
+route-policy rp_RR_VPN_OUT
+
+  pass
+
+end-policy
+
+!
+
+route-policy rp_Set_Core_Routes
+
+  set community cs_Core_Routes
+
+end-policy
+
+!
+
+router static
+
+ vrf 4G_OAM
+
+  address-family ipv4 unicast
+
+   138.166.289.0/26 Null0
+  !
+
+ !
+
+ vrf 4G_RAN
+
+  address-family ipv4 unicast
+
+   47.296.143.0/25 Null0
+   53.164.274.0/25 Null0
+   53.164.289.0/26 Null0
+  !
+
+ !
+
+ vrf 5G_OAM
+
+  address-family ipv6 unicast
+
+   AC80:09E8:0A88:777:8:3:088F:8/112 Null0
+  !
+
+ !
+
+ vrf 5G_RAN
+
+  address-family ipv6 unicast
+
+   AC80:09E8:0A88::3:088F:8/112 Null0
+   AC80:09E8:0A88:8:7777:3:088F:8/112 Null0
+   AC86:90C:C899::3:088F:8/112 Null0
+   AC86:90C:C899:8:7777:3:088F:8/112 Null0
+  !
+
+ !
+
+!
+
+router isis 1000
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7157.00
+
+ distribute link-state instance-id 1000 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 100 level 2
+
+   prefix-sid index 726
+
+  !
+
+ !
+
+ interface HundredGigE0/0/1/0
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 841e15d3c63407ab1d6345140d9c5f2f
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/1/1
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 74760abf4df265f0b3a30f90123e162a
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+snmp-server traps isis database-overload authentication-type-failure authentication-failure area-mismatch rejected-adjacency adjacency-change
+
+snmp-server traps bgp
+
+router bgp 64585
+
+ nsr
+
+ bgp router-id 16.44.133.113
+ bgp log neighbor changes detail
+
+ ibgp policy out enforce-modifications
+
+ address-family vpnv4 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family vpnv6 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family l2vpn evpn
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family link-state link-state
+
+ !
+
+ neighbor-group RR
+
+  remote-as 64585
+
+   password encrypted 6ef111cdd35961793f200c5ad4c2d272
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RR_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RR_VPN_OUT out
+
+  !
+
+  address-family l2vpn evpn
+
+  !
+
+  address-family link-state link-state
+
+  !
+
+ !
+
+ neighbor-group RRC
+
+  remote-as 64585
+
+   password encrypted a1f16e8ad3a8d470d707aa0e4192fd7f
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-reflector-client
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-reflector-client
+
+  !
+
+  address-family l2vpn evpn
+
+   route-reflector-client
+
+  !
+
+ !
+
+ neighbor 16.44.132.1
+  use neighbor-group RR
+
+ !
+
+ neighbor 16.44.132.2
+  use neighbor-group RR
+
+ !
+
+ vrf 4G_OAM
+
+  rd 64585:20021
+
+  address-family ipv4 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network 138.166.289.0/26 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 4G_RAN
+
+  rd 64585:20011
+
+  address-family ipv4 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network 47.296.143.0/25 route-policy rp_Set_Core_Routes
+   network 53.164.274.0/25 route-policy rp_Set_Core_Routes
+   network 53.164.289.0/26 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 5G_OAM
+
+  rd 64585:10030
+
+  address-family ipv6 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network AC80:09E8:0A88:777:8:3:088F:8/112 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 5G_RAN
+
+  rd 64585:10010
+
+  address-family ipv6 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network AC80:09E8:0A88::3:088F:8/112 route-policy rp_Set_Core_Routes
+   network AC80:09E8:0A88:8:7777:3:088F:8/112 route-policy rp_Set_Core_Routes
+   network AC86:90C:C899::3:088F:8/112 route-policy rp_Set_Core_Routes
+   network AC86:90C:C899:8:7777:3:088F:8/112 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+!
+
+mpls oam
+
+!
+
+dhcp ipv6
+
+ profile autoonline proxy
+
+  helper-address vrf 5G_OAM AC80:09E8:0A88:777:8:76:98:C
+  helper-address vrf 5G_OAM AC80:09E8:0A88:777:8:76:98:D
+ !
+
+ interface TenGigE0/0/0/9.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/10.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/11.895 proxy profile autoonline
+
+!
+
+snmp-server traps mpls l3vpn all
+
+segment-routing
+
+ global-block 24000 43999
+
+!
+
+snmp-server traps fru-ctrl
+
+netconf agent tty
+
+!
+
+snmp-server traps ospf lsa lsa-maxage
+
+snmp-server traps ospf lsa lsa-originate
+
+snmp-server traps ospf errors bad-packet
+
+snmp-server traps ospf errors authentication-failure
+
+snmp-server traps ospf errors config-error
+
+snmp-server traps ospf errors virt-bad-packet
+
+snmp-server traps ospf errors virt-authentication-failure
+
+snmp-server traps ospf errors virt-config-error
+
+snmp-server traps ospf retransmit packets
+
+snmp-server traps ospf retransmit virt-packets
+
+snmp-server traps ospf state-change if-state-change
+
+snmp-server traps ospf state-change neighbor-state-change
+
+snmp-server traps ospf state-change virtif-state-change
+
+snmp-server traps ospf state-change virtneighbor-state-change
+
+lldp
+
+!
+
+ssh server rate-limit 600
+
+ssh server session-limit 10
+
+ssh server v2
+
+ssh server netconf vrf default
+
+ipsla
+
+ operation 101
+
+  type udp jitter
+
+   destination address 16.44.133.117
+   destination port 6000
+
+  !
+
+ !
+
+ operation 102
+
+  type udp jitter
+
+   destination address 16.44.133.118
+   destination port 6000
+
+  !
+
+ !
+
+ schedule operation 101
+
+  start-time now
+
+  life forever
+
+ !
+
+ schedule operation 102
+
+  start-time now
+
+  life forever
+
+ !
+
+!
+
+end
+
+
+

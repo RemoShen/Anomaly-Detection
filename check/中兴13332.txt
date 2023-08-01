@@ -1,0 +1,4311 @@
+show running-config
+
+!<mim>
+
+!configuration saved at 01:28:51 Thu Jan 14 2021 by write zdb
+
+!configuration saved at 10:10:50 Mon Jan 4 2021 by write txt
+
+!last configuration change at 10:08:51 Mon Jan 4 2021 by who
+
+commit-mode default automatic
+
+!</mim>
+
+!<system-config>
+
+hostname ZCNU-SH-3H-900018GC-UO-E001
+nvram boot-server 136.8.0.244
+nvram boot-server ipv6 8666::7
+nvram default-gateway 136.8.0.244
+nvram default-gateway ipv6 8666::7
+nvram boot-username upp
+
+nvram ftp-path /
+
+!</system-config>
+
+!<nsr-config>
+
+nsr service all
+
+!</nsr-config>
+
+!<vrf>
+
+ip vrf 5G_RAN
+
+  rd 65495:10010
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv6
+
+    route-target import 65495:10010
+
+    route-target export 65495:10010
+
+
+
+  $
+
+$
+
+ip vrf GPRS_Gn_C
+
+  rd 65495:10040
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 65495:10040
+
+    route-target import 65495:10040
+
+  $
+
+  address-family ipv6
+
+    route-target export 65495:10040
+
+    route-target import 65495:10040
+
+  $
+
+$
+
+ip vrf 5GC_MGMN
+
+  rd 65495:10050
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 65495:10050
+
+    route-target import 65495:10050
+
+  $
+
+  address-family ipv6
+
+    route-target export 65495:10050
+
+    route-target import 65495:10050
+
+  $
+
+$
+
+ip vrf 5G_MEC
+
+  rd 65495:10060
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 65495:10060
+
+    route-target import 65495:10060
+
+  $
+
+  address-family ipv6
+
+    route-target export 65495:10060
+
+    route-target import 65495:10060
+
+  $
+
+$
+
+ip vrf VoLTE_SGi
+
+  rd 65495:20000
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv6
+
+    route-target export 65495:20000
+
+    route-target import 65495:20000
+
+  $
+
+$
+
+ip vrf 4G_RAN
+
+  rd 65495:18020
+
+  mpls label mode per-vrf
+
+  address-family ipv4
+
+    route-target export 65495:18020
+
+    route-target import 65495:18020
+
+  $
+
+$
+
+ip vrf 5G_RAN_VIP
+
+  rd 65495:10020
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv6
+
+    route-target export 65495:10020
+
+    route-target import 65495:10020
+
+  $
+
+$
+
+ip vrf 5GC_WAP
+
+  rd 65495:18010
+
+  mpls label mode per-vrf
+
+  address-family ipv4
+
+    route-target export 65495:18010
+
+    route-target import 65495:18010
+
+  $
+
+$
+
+ip vrf NFVTT
+
+  rd 65495:10100
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 65495:10100
+
+    route-target import 65495:10100
+
+  $
+
+  address-family ipv6
+
+    route-target export 65495:10100
+
+    route-target import 65495:10100
+
+  $
+
+$
+
+!</vrf>
+
+!<if-intf>
+
+interface cgei-0/1/0/1
+
+  no shutdown
+
+$
+
+interface cgei-0/1/0/1.4002
+
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 46.102.0.1 255.255.255.252
+$
+
+interface cgei-0/1/0/1.4003
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:266E:A6::/127
+$
+
+interface cgei-0/1/0/1.4004
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:266E:A6::A/127
+$
+
+interface cgei-0/1/0/2
+
+  no shutdown
+
+$
+
+interface cgei-0/1/0/2.2191
+
+  mtu 9216
+
+  ip mtu 9216
+
+  ip address 14.271.2.283 255.255.255.252
+$
+
+interface cgei-0/1/0/3
+
+  no shutdown
+
+$
+
+interface cgei-0/1/0/4
+
+  no shutdown
+
+$
+
+interface spi-0/1/0/1
+
+$
+
+interface xgei-0/1/1/1
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/2
+
+   description to_IRD-CT2_vgpIk1/0/4
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/3
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/3.2189
+
+  mtu 9216
+
+  ip mtu 9216
+
+  ip address 14.271.2.286 255.255.255.252
+$
+
+interface xgei-0/1/1/4
+
+   description to_xcnu-nvfn-g-2_vgpIk0/0/1/2
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/5
+
+   description To_89UY
+  no shutdown
+
+$
+
+interface xgei-0/1/1/6
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/7
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/8
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/9
+
+   description to_jkcqjwcplkhcpi_10IG0/1/1/23
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/10
+
+   description to_jkcqjwcplkhcpi_10IG0/1/1/24
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/11
+
+  mtu 9600
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/11.301
+
+  ip vrf forwarding 5GC_MGMN
+
+  ip address 1.80.68.297 255.255.255.252
+$
+
+interface xgei-0/1/1/12
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/13
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/14
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/15
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/16
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/17
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/18
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/19
+
+  no shutdown
+
+$
+
+interface xgei-0/1/1/20
+
+  no shutdown
+
+$
+
+interface spi-0/1/1/1
+
+$
+
+interface cgei-0/6/0/1
+
+   description to_URH-GQT_100IG1/3/2
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/6/0/2
+
+   description to_URH-GQT1-YW_100IG
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/6/0/3
+
+   description to_URH-GQT2_100IG
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/6/0/4
+
+   description to_URH-GQT2-YW_100IG
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface spi-0/6/0/1
+
+$
+
+interface xgei-0/6/1/1
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/1.4002
+
+   description To_SVP_TMC_GT
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 46.102.0.11 255.255.255.252
+$
+
+interface xgei-0/6/1/1.4003
+
+   description To_SVP_TMC_GT
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2662:A6::/127
+$
+
+interface xgei-0/6/1/1.4004
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2662:A6::A/127
+$
+
+interface xgei-0/6/1/2
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/2.4002
+
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 46.102.0.37 255.255.255.252
+$
+
+interface xgei-0/6/1/2.4003
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2676:A6::/127
+$
+
+interface xgei-0/6/1/2.4004
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2676:A6::A/127
+$
+
+interface xgei-0/6/1/3
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/3.4002
+
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 46.102.0.43 255.255.255.252
+$
+
+interface xgei-0/6/1/3.4003
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:267A:A6::/127
+$
+
+interface xgei-0/6/1/3.4004
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:267A:A6::A/127
+$
+
+interface xgei-0/6/1/4
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/4.4002
+
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 46.102.0.69 255.255.255.252
+$
+
+interface xgei-0/6/1/4.4003
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2686:A6::/127
+$
+
+interface xgei-0/6/1/4.4004
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2686:A6::A/127
+$
+
+interface xgei-0/6/1/5
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/5.4002
+
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 46.102.0.85 255.255.255.252
+$
+
+interface xgei-0/6/1/5.4003
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:267E:A6::/127
+$
+
+interface xgei-0/6/1/5.4004
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:267E:A6::A/127
+$
+
+interface xgei-0/6/1/6
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/6.4002
+
+   description To_SVP_CN_GT
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 46.102.0.91 255.255.255.252
+$
+
+interface xgei-0/6/1/6.4003
+
+   description To_SVP_CN_GT
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2672:A6::/127
+$
+
+interface xgei-0/6/1/6.4004
+
+   description To_SVP_CN_GT
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 8A64:7E8:2672:A6::A/127
+$
+
+interface xgei-0/6/1/7
+
+   description to_xcnu-nvfn-g-2_vgpIk0/1/1/2
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/8
+
+   description to_IRD-CT2_vgpIk9/0/2
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/9
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/10
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/11
+
+   description to_LcHgp5N9000-8G-1
+  mtu 9216
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/12
+
+   description to_LcHgp5N9000-8G-1
+  mtu 9216
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/13
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/14
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/15
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/16
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/17
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/18
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/19
+
+  no shutdown
+
+$
+
+interface xgei-0/6/1/20
+
+  no shutdown
+
+$
+
+interface spi-0/6/1/1
+
+$
+
+interface ptp-0/10/0/1
+
+$
+
+interface ptp-0/10/0/2
+
+$
+
+interface extimer-0/10/0/1
+
+$
+
+interface extimer-0/10/0/2
+
+$
+
+interface extimer-0/10/0/3
+
+$
+
+interface gps-0/10/0/3
+
+$
+
+interface gps-0/10/0/4
+
+$
+
+interface qx_eth-0/10/0/1
+
+$
+
+interface ptp-0/11/0/1
+
+$
+
+interface ptp-0/11/0/2
+
+$
+
+interface extimer-0/11/0/1
+
+$
+
+interface extimer-0/11/0/2
+
+$
+
+interface extimer-0/11/0/3
+
+$
+
+interface gps-0/11/0/3
+
+$
+
+interface gps-0/11/0/4
+
+$
+
+interface qx_eth-0/11/0/1
+
+$
+
+interface mgmt_eth
+
+  ip address 136.102.0.1 255.255.255.0
+  ipv6 address 8666::E/64
+$
+
+interface loopback1
+
+  ip address 14.270.36.168 255.255.255.255
+$
+
+interface null1
+
+$
+
+interface smartgroup1
+
+   description to_xcnu-nvfn-g-2_uoctvitqwr
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+$
+
+interface smartgroup1.10
+
+   description to_xcnu-nvfn-g-2_uoctvitqwr.10
+  mtu 9050
+
+  ip mtu 9000
+
+  ip address 14.271.3.12 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup2
+
+   description to_IRD-CT2_uoctvitqwr
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+$
+
+interface smartgroup2.301
+
+   description to_IRD_KRD-CT1_UI.301
+  mtu 9050
+
+  ip vrf forwarding GPRS_Gn_C
+
+  ip mtu 9000
+
+  ip address 14.271.3.38 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E789:A766:8::7666/127
+$
+
+interface smartgroup2.837
+
+   description to_IRD_KRD-CT1_UI.837
+  mtu 9050
+
+  ip vrf forwarding 5GC_MGMN
+
+  ip mtu 9000
+
+  ip address 14.271.3.32 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E789:A766:8::7668/127
+$
+
+interface smartgroup2.839
+
+   description to_IRD_KRD-CT1_UI.839
+  mtu 9050
+
+  ip vrf forwarding 5G_MEC
+
+  ip mtu 9000
+
+  ip address 14.271.3.46 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E789:A766:8::766A/127
+$
+
+interface smartgroup2.843
+
+   description to_IRD_KRD-CT1_UI.843
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E789:A766:8::766C/127
+$
+
+interface smartgroup2.873
+
+   description to_IRD_KRD-CT1_UI.873
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E789:A766:8::767A/127
+$
+
+interface smartgroup2.909
+
+   description to_IRD_KRD-CT1_UI.909
+  mtu 9050
+
+  ip vrf forwarding 5GC_WAP
+
+  ip mtu 9000
+
+  ip address 14.168.47.2 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup2.1000
+
+   description to_IRD-CT1_uoctvitqwr.1000
+  mtu 9050
+
+  ip mtu 9000
+
+  ip address 14.271.3.40 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup2.3010
+
+   description to_IRD_KRD-CT1_UI.3010
+  mtu 9050
+
+  ip vrf forwarding VoLTE_SGi
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E789:A766:8::7676/127
+$
+
+interface smartgroup3
+
+   description to_URH-GQT_uoctvitqwr
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+$
+
+interface smartgroup3.2950
+
+   description to_URH-GQT_UI.2950
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 4.14.28.1 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup3.2952
+
+   description to_URH-GQT_UI.2952
+  mtu 9050
+
+  ip vrf forwarding 5GC_MGMN
+
+  ip mtu 9000
+
+  ip address 1.80.60.157 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup3.2954
+
+   description to_URH-GQT_UI.2954
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7566::876/127
+$
+
+interface smartgroup3.2956
+
+   description to_URH-GQT_UI.2956
+  mtu 9050
+
+  ip vrf forwarding GPRS_Gn_C
+
+  ip mtu 9000
+
+  ip address 14.298.298.29 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7266::876/127
+$
+
+interface smartgroup3.2958
+
+   description to_URH-GQT_UI.2958
+  mtu 9050
+
+  ip vrf forwarding VoLTE_SGi
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:EBC4:7666::/127
+$
+
+interface smartgroup3.2968
+
+   description to_URH-GQT_UI.2952
+  mtu 9050
+
+  ip vrf forwarding 5GC_WAP
+
+  ip mtu 9000
+
+  ip address 14.168.47.5 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup3.2971
+
+   description to_URH-GQT_UI.2971
+  mtu 9050
+
+  ip vrf forwarding NFVTT
+
+  ip mtu 9050
+
+  ip address 14.6.36.5 255.255.255.252
+  mpls mtu 9050
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7666::868/127
+$
+
+interface smartgroup4
+
+   description to_jkcqjwcplkhcpi_uoctvitqwr
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 14.271.3.71 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup5
+
+   description to_LcHgp5N9000-8G-1_uoctvitqwr
+  mtu 9600
+
+$
+
+interface smartgroup5.2217
+
+  ip vrf forwarding 4G_RAN
+
+  ip address 14.271.3.145 255.255.255.252
+$
+
+interface smartgroup6
+
+   description to_URH-GQT2_uoctvitqwr
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+$
+
+interface smartgroup6.2951
+
+   description to_URH-GQT_UI.2951
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 5.14.28.5 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup6.2953
+
+   description to_URH-GQT_UI.2953
+  mtu 9050
+
+  ip vrf forwarding 5GC_MGMN
+
+  ip mtu 9000
+
+  ip address 1.80.61.151 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup6.2955
+
+   description to_URH-GQT2_UI.2955
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7576::878/127
+$
+
+interface smartgroup6.2957
+
+   description to_URH-GQT_UI.2957
+  mtu 9050
+
+  ip vrf forwarding GPRS_Gn_C
+
+  ip mtu 9000
+
+  ip address 14.298.298.45 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7276::878/127
+$
+
+interface smartgroup6.2959
+
+   description to_URH-GQT_UI.2959
+  mtu 9050
+
+  ip vrf forwarding VoLTE_SGi
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:EBC4:8666::8/127
+$
+
+interface smartgroup6.2969
+
+   description to_URH-GQT_UI.2969
+  mtu 9050
+
+  ip vrf forwarding 5GC_WAP
+
+  ip mtu 9000
+
+  ip address 14.168.47.77 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup6.2972
+
+   description to_URH-GQT_UI.2972
+  mtu 9050
+
+  ip vrf forwarding NFVTT
+
+  ip mtu 9050
+
+  ip address 14.6.36.25 255.255.255.252
+  mpls mtu 9050
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7676::86A/127
+$
+
+interface smartgroup7
+
+   description to_URH-GQT1-YW_uoctvitqwr
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+$
+
+interface smartgroup7.2950
+
+   description to_URH-GQT1-YW_UI.2950
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 2.14.28.1 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup7.2952
+
+   description to_URH-GQT1-YW_UI.2952
+  mtu 9050
+
+  ip vrf forwarding 5GC_MGMN
+
+  ip mtu 9000
+
+  ip address 1.80.68.157 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup7.2954
+
+   description to_URH-GQT1-YW_UI.2954
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7566::766/127
+$
+
+interface smartgroup7.2956
+
+   description to_URH-GQT1-YW_UI.2956
+  mtu 9050
+
+  ip vrf forwarding GPRS_Gn_C
+
+  ip mtu 9000
+
+  ip address 14.298.298.1 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7266::766/127
+$
+
+interface smartgroup7.2958
+
+   description to_URH-GQT1-YW_UI.2958
+  mtu 9050
+
+  ip vrf forwarding VoLTE_SGi
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:EBC5:7666::/127
+$
+
+interface smartgroup7.2969
+
+   description to_URH-GQT_UI.2969
+  mtu 9050
+
+  ip vrf forwarding NFVTT
+
+  ip mtu 9050
+
+  ip address 14.10.36.5 255.255.255.252
+  mpls mtu 9050
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7666::8/127
+$
+
+interface smartgroup8
+
+   description to_URH-GQT2-YW_uoctvitqwr
+  mtu 9050
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+$
+
+interface smartgroup8.2951
+
+   description to_URH-GQT2-YW_UI.2951
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 3.14.28.5 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup8.2953
+
+   description to_URH-GQT2-YW_UI.2953
+  mtu 9050
+
+  ip vrf forwarding 5GC_MGMN
+
+  ip mtu 9000
+
+  ip address 1.80.69.151 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface smartgroup8.2955
+
+   description to_URH-GQT2-YW_UI.2955
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7576::768/127
+$
+
+interface smartgroup8.2957
+
+   description to_URH-GQT2-YW_UI.2957
+  mtu 9050
+
+  ip vrf forwarding GPRS_Gn_C
+
+  ip mtu 9000
+
+  ip address 14.298.298.11 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7276::768/127
+$
+
+interface smartgroup8.2959
+
+   description to_URH-GQT2-YW_UI.2959
+  mtu 9050
+
+  ip vrf forwarding VoLTE_SGi
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:EBC5:8666::8/127
+$
+
+interface smartgroup8.2970
+
+   description to_URH-GQT_UI.2970
+  mtu 9050
+
+  ip vrf forwarding NFVTT
+
+  ip mtu 9050
+
+  ip address 14.10.36.25 255.255.255.252
+  mpls mtu 9050
+
+  ipv6 enable
+
+  ipv6 mtu 9216
+
+  ipv6 address 8A6E:E7A9:A656:7676::A/127
+$
+
+interface qx1
+
+$
+
+!</if-intf>
+
+!<port-physical-config>
+
+interface xgei-0/1/1/2
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/1/1/4
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/1/1/9
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/1/1/10
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/1/1/11
+
+  link-delay-up 3000
+
+$
+
+interface cgei-0/6/0/1
+
+  link-delay-up 3000
+
+$
+
+interface cgei-0/6/0/2
+
+  link-delay-up 3000
+
+$
+
+interface cgei-0/6/0/3
+
+  link-delay-up 3000
+
+$
+
+interface cgei-0/6/0/4
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/6/1/7
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/6/1/8
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/6/1/11
+
+  link-delay-up 3000
+
+$
+
+interface xgei-0/6/1/12
+
+  link-delay-up 3000
+
+$
+
+!</port-physical-config>
+
+!<switchvlan>
+
+switchvlan-configuration
+
+  vlan 1
+
+  $
+
+$
+
+!</switchvlan>
+
+!<lacp>
+
+lacp
+
+  interface smartgroup1
+
+    lacp mode 802.3ad
+
+    lacp active limitation 1
+
+  $
+
+  interface smartgroup2
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup3
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup4
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup5
+
+    lacp mode 802.3ad
+
+    lacp restore non-revertive
+
+  $
+
+  interface smartgroup6
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup7
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup8
+
+    lacp mode 802.3ad
+
+  $
+
+  interface xgei-0/1/1/2
+
+    smartgroup 2 mode active
+
+    lacp timeout short
+
+  $
+
+  interface xgei-0/1/1/4
+
+    smartgroup 1 mode active
+
+    lacp port-priority 100
+
+    lacp timeout short
+
+  $
+
+  interface xgei-0/1/1/9
+
+    smartgroup 4 mode active
+
+    lacp timeout short
+
+  $
+
+  interface xgei-0/1/1/10
+
+    smartgroup 4 mode active
+
+    lacp timeout short
+
+  $
+
+  interface cgei-0/6/0/1
+
+    smartgroup 3 mode active
+
+    lacp timeout short
+
+  $
+
+  interface cgei-0/6/0/2
+
+    smartgroup 7 mode active
+
+    lacp timeout short
+
+  $
+
+  interface cgei-0/6/0/3
+
+    smartgroup 6 mode active
+
+    lacp timeout short
+
+  $
+
+  interface cgei-0/6/0/4
+
+    smartgroup 8 mode active
+
+    lacp timeout short
+
+  $
+
+  interface xgei-0/6/1/7
+
+    smartgroup 1 mode active
+
+    lacp port-priority 200
+
+    lacp timeout short
+
+  $
+
+  interface xgei-0/6/1/8
+
+    smartgroup 2 mode active
+
+    lacp timeout short
+
+  $
+
+  interface xgei-0/6/1/11
+
+    smartgroup 5 mode active
+
+  $
+
+  interface xgei-0/6/1/12
+
+    smartgroup 5 mode active
+
+  $
+
+$
+
+!</lacp>
+
+!<vlan>
+
+vlan-configuration
+
+  interface cgei-0/1/0/1.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface cgei-0/1/0/1.4003
+
+    encapsulation-dot1q 4003
+
+  $
+
+  interface cgei-0/1/0/1.4004
+
+    encapsulation-dot1q 4004
+
+  $
+
+  interface cgei-0/1/0/2.2191
+
+    encapsulation-dot1q 2191
+
+  $
+
+  interface xgei-0/1/1/3.2189
+
+    encapsulation-dot1q 2189
+
+  $
+
+  interface xgei-0/1/1/11.301
+
+    encapsulation-dot1q 301
+
+  $
+
+  interface xgei-0/6/1/1.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface xgei-0/6/1/1.4003
+
+    encapsulation-dot1q 4003
+
+  $
+
+  interface xgei-0/6/1/1.4004
+
+    encapsulation-dot1q 4004
+
+  $
+
+  interface xgei-0/6/1/2.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface xgei-0/6/1/2.4003
+
+    encapsulation-dot1q 4003
+
+  $
+
+  interface xgei-0/6/1/2.4004
+
+    encapsulation-dot1q 4004
+
+  $
+
+  interface xgei-0/6/1/3.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface xgei-0/6/1/3.4003
+
+    encapsulation-dot1q 4003
+
+  $
+
+  interface xgei-0/6/1/3.4004
+
+    encapsulation-dot1q 4004
+
+  $
+
+  interface xgei-0/6/1/4.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface xgei-0/6/1/4.4003
+
+    encapsulation-dot1q 4003
+
+  $
+
+  interface xgei-0/6/1/4.4004
+
+    encapsulation-dot1q 4004
+
+  $
+
+  interface xgei-0/6/1/5.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface xgei-0/6/1/5.4003
+
+    encapsulation-dot1q 4003
+
+  $
+
+  interface xgei-0/6/1/5.4004
+
+    encapsulation-dot1q 4004
+
+  $
+
+  interface xgei-0/6/1/6.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface xgei-0/6/1/6.4003
+
+    encapsulation-dot1q 4003
+
+  $
+
+  interface xgei-0/6/1/6.4004
+
+    encapsulation-dot1q 4004
+
+  $
+
+  interface smartgroup1.10
+
+    encapsulation-dot1q 10
+
+  $
+
+  interface smartgroup2.301
+
+    encapsulation-dot1q 301
+
+  $
+
+  interface smartgroup2.837
+
+    encapsulation-dot1q 837
+
+  $
+
+  interface smartgroup2.839
+
+    encapsulation-dot1q 839
+
+  $
+
+  interface smartgroup2.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface smartgroup2.873
+
+    encapsulation-dot1q 873
+
+  $
+
+  interface smartgroup2.909
+
+    encapsulation-dot1q 909
+
+  $
+
+  interface smartgroup2.1000
+
+    encapsulation-dot1q 1000
+
+  $
+
+  interface smartgroup2.3010
+
+    encapsulation-dot1q 3010
+
+  $
+
+  interface smartgroup3.2950
+
+    encapsulation-dot1q 2950
+
+  $
+
+  interface smartgroup3.2952
+
+    encapsulation-dot1q 2952
+
+  $
+
+  interface smartgroup3.2954
+
+    encapsulation-dot1q 2954
+
+  $
+
+  interface smartgroup3.2956
+
+    encapsulation-dot1q 2956
+
+  $
+
+  interface smartgroup3.2958
+
+    encapsulation-dot1q 2958
+
+  $
+
+  interface smartgroup3.2968
+
+    encapsulation-dot1q 2968
+
+  $
+
+  interface smartgroup3.2971
+
+    encapsulation-dot1q 2971
+
+  $
+
+  interface smartgroup5.2217
+
+    encapsulation-dot1q 2217
+
+  $
+
+  interface smartgroup6.2951
+
+    encapsulation-dot1q 2951
+
+  $
+
+  interface smartgroup6.2953
+
+    encapsulation-dot1q 2953
+
+  $
+
+  interface smartgroup6.2955
+
+    encapsulation-dot1q 2955
+
+  $
+
+  interface smartgroup6.2957
+
+    encapsulation-dot1q 2957
+
+  $
+
+  interface smartgroup6.2959
+
+    encapsulation-dot1q 2959
+
+  $
+
+  interface smartgroup6.2969
+
+    encapsulation-dot1q 2969
+
+  $
+
+  interface smartgroup6.2972
+
+    encapsulation-dot1q 2972
+
+  $
+
+  interface smartgroup7.2950
+
+    encapsulation-dot1q 2950
+
+  $
+
+  interface smartgroup7.2952
+
+    encapsulation-dot1q 2952
+
+  $
+
+  interface smartgroup7.2954
+
+    encapsulation-dot1q 2954
+
+  $
+
+  interface smartgroup7.2956
+
+    encapsulation-dot1q 2956
+
+  $
+
+  interface smartgroup7.2958
+
+    encapsulation-dot1q 2958
+
+  $
+
+  interface smartgroup7.2969
+
+    encapsulation-dot1q 2969
+
+  $
+
+  interface smartgroup8.2951
+
+    encapsulation-dot1q 2951
+
+  $
+
+  interface smartgroup8.2953
+
+    encapsulation-dot1q 2953
+
+  $
+
+  interface smartgroup8.2955
+
+    encapsulation-dot1q 2955
+
+  $
+
+  interface smartgroup8.2957
+
+    encapsulation-dot1q 2957
+
+  $
+
+  interface smartgroup8.2959
+
+    encapsulation-dot1q 2959
+
+  $
+
+  interface smartgroup8.2970
+
+    encapsulation-dot1q 2970
+
+  $
+
+$
+
+!</vlan>
+
+!<ipv4-acl>
+
+ipv4-access-list SmartMAN_NSM_SNMP
+
+  rule 10 permit 136.102.298.0 0.0.0.255
+$
+
+!</ipv4-acl>
+
+!<label-mgr>
+
+mpls label manage
+
+  static-label-range 262160 655359
+
+$
+
+!</label-mgr>
+
+!<route-map>
+
+route-map Host_MNG_IP permit 5
+
+  match ip address prefix-list Host_MNG_IP
+
+$
+
+route-map MCR-IPA-MNG-OUT permit 5
+
+  match ip address prefix-list MCR-IPA-MNG-OUT
+
+$
+
+route-map MCR-IPA-SDN-IN permit 5
+
+  match ip address prefix-list MCR-IPA-SDN-IN
+
+$
+
+route-map MCR-IPB-5GC_MGMN-OUT permit 5
+
+  match ip address prefix-list MCR-IPB-5GC_MGMN-OUT
+
+$
+
+route-map MCR-IPB-5G_RAN-IPv6-OUT permit 5
+
+  match ipv6 address prefix-list MCR-IPB-5G_RAN-IPv6-OUT
+
+$
+
+route-map MCR-IPB-5G_RAN_VIP-IPv6-OUT permit 5
+
+  match ipv6 address prefix-list MCR-IPB-5G_RAN_VIP-IPv6-OUT
+
+$
+
+route-map MCR-IPB-GPRS_Gn_C-IPv6-OUT permit 5
+
+  match ipv6 address prefix-list MCR-IPB-GPRS_Gn_C-IPv6-OUT
+
+$
+
+route-map MCR-IPB-GPRS_Gn_C-OUT permit 5
+
+  match ip address prefix-list MCR-IPB-GPRS_Gn_C-OUT
+
+$
+
+route-map MCR-IPB-JTMNG-IN permit 5
+
+  match ip address prefix-list MCR-IPB-JTMNG-IN
+
+$
+
+route-map MCR-IPB-MNG-OUT permit 5
+
+  match ip address prefix-list MCR-IPB-MNG-OUT
+
+$
+
+route-map MCR-IPB-WAP-OUT permit 10
+
+  match ip address prefix-list MCR-IPB-WAP-OUT
+
+$
+
+route-map MCR-IPRAN-5G-OUT permit 5
+
+  match ip address prefix-list MCR-IPRAN-5G-OUT
+
+$
+
+route-map MCR-IPRAN-EPC-IN permit 5
+
+  match ip address prefix-list MCR-IPRAN-EPC-IN
+
+  set as-path delete 65495
+
+$
+
+route-map MCR-UPF-4G_RAN-OUT permit 5
+
+  match ip address prefix-list MCR-UPF-4G_RAN-OUT
+
+$
+
+route-map MCR-UPF-5GC_MGMN-IN permit 5
+
+  match ip address prefix-list MCR-UPF-5GC_MGMN-IN
+
+$
+
+route-map MCR-UPF-5GC_MGMN-OUT permit 5
+
+  match ip address prefix-list MCR-UPF-5GC_MGMN-OUT
+
+$
+
+route-map MCR-UPF-5G_RAN-IPv6-OUT permit 5
+
+  match ipv6 address prefix-list MCR-UPF-5G_RAN-IPv6-OUT
+
+$
+
+route-map MCR-UPF-GPRS_Gn_C-IN permit 5
+
+  match ip address prefix-list MCR-UPF-GPRS_Gn_C-IN
+
+$
+
+route-map MCR-UPF-GPRS_Gn_C-IPv6-IN permit 5
+
+  match ipv6 address prefix-list MCR-UPF-GPRS_Gn_C-IPv6-IN
+
+$
+
+route-map MCR-UPF-GPRS_Gn_C-IPv6-OUT permit 5
+
+  match ipv6 address prefix-list MCR-UPF-GPRS_Gn_C-IPv6-OUT
+
+$
+
+route-map MCR-UPF-GPRS_Gn_C-OUT permit 5
+
+  match ip address prefix-list MCR-UPF-GPRS_Gn_C-OUT
+
+$
+
+route-map MCR-UPF-VoLTE_SGi-IPv6-IN permit 5
+
+  match ipv6 address prefix-list MCR-UPF-VoLTE_SGi-IPv6-IN
+
+$
+
+route-map MCR-UPF-VoLTE_SGi-IPv6-OUT permit 5
+
+  match ipv6 address prefix-list MCR-UPF-VoLTE_SGi-IPv6-OUT
+
+$
+
+route-map STN-4G-AL-IN permit 10
+
+  match ip address prefix-list STN-4G-AL-IN
+
+$
+
+route-map STN-4G-CD-IN permit 10
+
+  match ip address prefix-list STN-4G-CD-IN
+
+$
+
+route-map STN-4G-IN permit 10
+
+  match ip address prefix-list STN-4G-IN
+
+$
+
+route-map STN-4G-LZ-IN permit 10
+
+  match ip address prefix-list STN-4G-LZ-IN
+
+$
+
+route-map STN-4G-NQ-IN permit 10
+
+  match ip address prefix-list STN-4G-NQ-IN
+
+$
+
+route-map STN-4G-OUT permit 10
+
+  match ip address prefix-list STN-4G-OUT
+
+$
+
+route-map STN-4G-RKZ-IN permit 10
+
+  match ip address prefix-list STN-4G-RKZ-IN
+
+$
+
+route-map STN-4G-SN-IN permit 10
+
+  match ip address prefix-list STN-4G-SN-IN
+
+$
+
+route-map STN-5G-AL-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-AL-V6-IN
+
+$
+
+route-map STN-5G-AL-VIP-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-AL-VIP-V6-IN
+
+$
+
+route-map STN-5G-CD-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-CD-V6-IN
+
+$
+
+route-map STN-5G-LZ-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-LZ-V6-IN
+
+$
+
+route-map STN-5G-NQ-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-NQ-V6-IN
+
+$
+
+route-map STN-5G-RKZ-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-RKZ-V6-IN
+
+$
+
+route-map STN-5G-RKZ-VIP-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-RKZ-VIP-V6-IN
+
+$
+
+route-map STN-5G-SN-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-SN-V6-IN
+
+$
+
+route-map STN-5G-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-V6-IN
+
+$
+
+route-map STN-5G-V6-OUT permit 10
+
+  match ipv6 address prefix-list STN-5G-V6-OUT
+
+$
+
+route-map STN-5G-VIP-CD-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-VIP-CD-V6-IN
+
+$
+
+route-map STN-5G-VIP-LZ-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-VIP-LZ-V6-IN
+
+$
+
+route-map STN-5G-VIP-NQ-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-VIP-NQ-V6-IN
+
+$
+
+route-map STN-5G-VIP-SN-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-VIP-SN-V6-IN
+
+$
+
+route-map STN-5G-VIP-V6-IN permit 10
+
+  match ipv6 address prefix-list STN-5G-VIP-V6-IN
+
+$
+
+route-map STN-5G-VIP-V6-OUT permit 10
+
+  match ipv6 address prefix-list STN-5G-VIP-V6-OUT
+
+$
+
+!</route-map>
+
+!<system-user>
+
+system-user
+
+  authorization-template 1
+
+    bind aaa-authorization-template 2001
+
+  $
+
+  authentication-template 1
+
+    bind aaa-authentication-template 2001
+
+  $
+
+  default-privilege-level 15
+
+  user-name who
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted c743a023bedb1098512ef39e485afc2f
+b26bab639f
+
+  $
+
+  strong-password check disable
+
+$
+
+!</system-user>
+
+!<prefix-list>
+
+ip prefix-list Host_MNG_IP seq 5 permit 14.270.0.0 16 ge 32
+ip prefix-list MCR-IPA-MNG-OUT seq 5 permit 14.270.0.0 16
+ip prefix-list MCR-IPA-SDN-IN seq 5 permit 14.284.36.282 29 le 32
+ip prefix-list MCR-IPB-5GC_MGMN-OUT seq 5 permit 1.80.68.0 18
+ip prefix-list MCR-IPB-5GC_MGMN-OUT seq 10 permit 1.6.36.0 19
+ip prefix-list MCR-IPB-GPRS_Gn_C-OUT seq 5 permit 264.240.245.0 25
+ip prefix-list MCR-IPB-GPRS_Gn_C-OUT seq 10 permit 264.240.197.266 32
+ip prefix-list MCR-IPB-GPRS_Gn_C-OUT seq 15 permit 264.240.197.267 32
+ip prefix-list MCR-IPB-GPRS_Gn_C-OUT seq 20 permit 264.240.197.268 32
+ip prefix-list MCR-IPB-JTMNG-IN seq 5 permit 136.102.298.0 24 le 32
+ip prefix-list MCR-IPB-MNG-OUT seq 5 permit 14.270.0.0 16
+ip prefix-list MCR-IPB-WAP-OUT seq 5 permit 14.168.47.0 24
+ip prefix-list MCR-IPRAN-5G-OUT seq 5 permit 57.36.0.0 12
+ip prefix-list MCR-IPRAN-5G-OUT seq 10 permit 57.43.0.0 16
+ip prefix-list MCR-IPRAN-5G-OUT seq 15 permit 57.54.0.0 16
+ip prefix-list MCR-IPRAN-5G-OUT seq 20 permit 57.55.0.0 16
+ip prefix-list MCR-IPRAN-5G-OUT seq 25 permit 57.56.0.0 16
+ip prefix-list MCR-IPRAN-5G-OUT seq 30 permit 57.57.0.0 16
+ip prefix-list MCR-IPRAN-5G-OUT seq 35 permit 57.42.0.0 16
+ip prefix-list MCR-IPRAN-5G-OUT seq 40 permit 14.150.76.0 21
+ip prefix-list MCR-IPRAN-5G-OUT seq 45 permit 14.150.42.0 21
+ip prefix-list MCR-IPRAN-5G-OUT seq 50 permit 14.150.50.0 21
+ip prefix-list MCR-IPRAN-5G-OUT seq 55 permit 14.150.68.0 21
+ip prefix-list MCR-IPRAN-5G-OUT seq 60 permit 14.150.84.0 21
+ip prefix-list MCR-IPRAN-5G-OUT seq 65 permit 14.150.82.0 21
+ip prefix-list MCR-IPRAN-EPC-IN seq 5 permit 14.144.36.28 32
+ip prefix-list MCR-IPRAN-EPC-IN seq 10 permit 14.144.37.28 32
+ip prefix-list MCR-IPRAN-EPC-IN seq 15 permit 14.144.0.9 32
+ip prefix-list MCR-IPRAN-EPC-IN seq 20 permit 14.144.0.14 32
+ip prefix-list MCR-IPRAN-EPC-IN seq 25 permit 14.144.1.9 32
+ip prefix-list MCR-UPF-4G_RAN-OUT seq 5 permit 0.0.0.0 0
+ip prefix-list MCR-UPF-5GC_MGMN-IN seq 5 permit 1.80.68.0 18 le 32
+ip prefix-list MCR-UPF-5GC_MGMN-IN seq 10 permit 1.6.36.0 19 le 32
+ip prefix-list MCR-UPF-5GC_MGMN-OUT seq 5 permit 0.0.0.0 0
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 5 permit 264.240.245.0 25
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 10 permit 264.240.197.266 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 15 permit 264.240.197.267 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 20 permit 264.240.197.268 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 25 permit 264.240.197.262 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 30 permit 264.240.197.263 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 35 permit 264.240.197.274 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 40 permit 264.240.197.275 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 45 permit 264.240.197.276 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 50 permit 264.240.197.277 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 55 permit 264.240.197.269 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 60 permit 264.240.197.260 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-IN seq 65 permit 264.240.197.261 32
+ip prefix-list MCR-UPF-GPRS_Gn_C-OUT seq 5 permit 0.0.0.0 0
+ip prefix-list STN-4G-AL-IN seq 10 permit 57.56.0.0 16
+ip prefix-list STN-4G-AL-IN seq 20 permit 14.150.82.0 21
+ip prefix-list STN-4G-CD-IN seq 10 permit 57.54.0.0 16
+ip prefix-list STN-4G-CD-IN seq 20 permit 14.150.76.0 21
+ip prefix-list STN-4G-IN seq 10 permit 57.36.0.0 12
+ip prefix-list STN-4G-LZ-IN seq 10 permit 57.57.0.0 16
+ip prefix-list STN-4G-LZ-IN seq 20 permit 14.150.68.0 21
+ip prefix-list STN-4G-NQ-IN seq 10 permit 57.55.0.0 16
+ip prefix-list STN-4G-NQ-IN seq 20 permit 14.150.50.0 21
+ip prefix-list STN-4G-OUT seq 10 permit 14.144.0.9 32
+ip prefix-list STN-4G-OUT seq 20 permit 14.144.0.14 32
+ip prefix-list STN-4G-OUT seq 30 permit 14.144.36.28 32
+ip prefix-list STN-4G-OUT seq 40 permit 14.144.37.28 32
+ip prefix-list STN-4G-OUT seq 50 permit 14.144.1.9 32
+ip prefix-list STN-4G-RKZ-IN seq 10 permit 57.42.0.0 16
+ip prefix-list STN-4G-RKZ-IN seq 20 permit 14.150.84.0 21
+ip prefix-list STN-4G-SN-IN seq 10 permit 57.43.0.0 16
+ipv6 prefix-list MCR-IPB-5G_RAN-IPv6-OUT seq 5 permit 8A64:7E8:266F::/64
+ipv6 prefix-list MCR-IPB-5G_RAN_VIP-IPv6-OUT seq 10 permit 8A64:7E8:266F:76::/64
+ipv6 prefix-list MCR-IPB-GPRS_Gn_C-IPv6-OUT seq 5 permit 8A6E:E7A9:A656:7266::/5
+6
+
+ipv6 prefix-list MCR-UPF-5G_RAN-IPv6-OUT seq 5 permit ::/0
+ipv6 prefix-list MCR-UPF-GPRS_Gn_C-IPv6-IN seq 5 permit 8A6E:E7A9:A656:7266::/56
+ le 128
+
+ipv6 prefix-list MCR-UPF-GPRS_Gn_C-IPv6-IN seq 10 permit 5266:7666::/32 le 128
+ipv6 prefix-list MCR-UPF-GPRS_Gn_C-IPv6-OUT seq 5 permit ::/0
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-IN seq 5 permit 8A6E:EBC4:7666::/36
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-IN seq 10 permit 8A6E:EBC5:7666::/36
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-OUT seq 5 permit 8A6E:E7A9:A666::7F/128
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-OUT seq 10 permit 8A6E:E7A9:A666::7C/128
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-OUT seq 15 permit 8A6E:E7A9:A666::77/128
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-OUT seq 20 permit 8A6E:E7A9:A666::7E/128
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-OUT seq 25 permit 8A6E:E7A9:A666::76/128
+ipv6 prefix-list MCR-UPF-VoLTE_SGi-IPv6-OUT seq 30 permit 8A6E:E7A9:A666::7D/128
+ipv6 prefix-list STN-5G-AL-V6-IN seq 10 permit 8A64:7E8:2673::/64
+ipv6 prefix-list STN-5G-AL-VIP-V6-IN seq 10 permit 8A64:7E8:2673:76::/64
+ipv6 prefix-list STN-5G-CD-V6-IN seq 10 permit 8A64:7E8:267B::/64
+ipv6 prefix-list STN-5G-LZ-V6-IN seq 10 permit 8A64:7E8:2687::/64
+ipv6 prefix-list STN-5G-NQ-V6-IN seq 10 permit 8A64:7E8:267F::/64
+ipv6 prefix-list STN-5G-RKZ-V6-IN seq 10 permit 8A64:7E8:2663::/64
+ipv6 prefix-list STN-5G-RKZ-VIP-V6-IN seq 10 permit 8A64:7E8:2663:76::/64
+ipv6 prefix-list STN-5G-SN-V6-IN seq 10 permit 8A64:7E8:2677::/64
+ipv6 prefix-list STN-5G-V6-IN seq 10 permit 8A64:7E8:266F::/64
+ipv6 prefix-list STN-5G-V6-OUT seq 10 permit 8A6E:E7A9:A656:7566::866/128
+ipv6 prefix-list STN-5G-V6-OUT seq 20 permit 8A6E:E7A8:4655:5566::/60
+ipv6 prefix-list STN-5G-V6-OUT seq 30 permit 8A6E:E7A9:A656:7566::/56 le 128
+ipv6 prefix-list STN-5G-V6-OUT seq 40 permit 8A6E:E7A8:4655:55A6::/60
+ipv6 prefix-list STN-5G-VIP-CD-V6-IN seq 10 permit 8A64:7E8:267B:76::/64
+ipv6 prefix-list STN-5G-VIP-LZ-V6-IN seq 10 permit 8A64:7E8:2687:76::/64
+ipv6 prefix-list STN-5G-VIP-NQ-V6-IN seq 10 permit 8A64:7E8:267F:76::/64
+ipv6 prefix-list STN-5G-VIP-SN-V6-IN seq 10 permit 8A64:7E8:2677:76::/64
+ipv6 prefix-list STN-5G-VIP-V6-IN seq 10 permit 8A64:7E8:266F:76::/64
+ipv6 prefix-list STN-5G-VIP-V6-OUT seq 10 permit 8A6E:E7A9:A656:7566::7/128
+ipv6 prefix-list STN-5G-VIP-V6-OUT seq 20 permit 8A6E:E7A8:4655:5566::/60
+ipv6 prefix-list STN-5G-VIP-V6-OUT seq 40 permit 8A6E:E7A9:A656:7566::/56 le 128
+!</prefix-list>
+
+!<ptp>
+
+ptp
+
+  fixed-mode
+
+  $
+
+  free-mode
+
+  $
+
+$
+
+!</ptp>
+
+!<ssmclock>
+
+ssm
+
+  synchronization-clock line cgei-0/1/0/2
+
+  priority line cgei-0/1/0/2 1
+
+$
+
+!</ssmclock>
+
+!<aaa>
+
+aaa-authentication-template 2001
+
+  aaa-authentication-type local
+
+$
+
+aaa-authorization-template 2001
+
+  aaa-authorization-type none
+
+$
+
+!</aaa>
+
+!<stp>
+
+spantree
+
+$
+
+!</stp>
+
+!<nd>
+
+interface cgei-0/1/0/1.4003
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface cgei-0/1/0/1.4004
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/1.4003
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/1.4004
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/2.4003
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/2.4004
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/3.4003
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/3.4004
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/4.4003
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/4.4004
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/5.4003
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/5.4004
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/6.4003
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-0/6/1/6.4004
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup2.301
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup2.837
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup2.839
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup2.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup2.873
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup2.3010
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup3.2954
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup3.2956
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup3.2958
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup3.2971
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup6.2955
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup6.2957
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup6.2959
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup6.2972
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup7.2954
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup7.2956
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup7.2958
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup7.2969
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup8.2955
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup8.2957
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup8.2959
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface smartgroup8.2970
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+!</nd>
+
+!<oam_snetconf>
+
+snetconf server enable
+
+!</oam_snetconf>
+
+!<oam_netconf>
+
+netconf agent enable
+
+!</oam_netconf>
+
+!<ldp>
+
+mpls ldp instance 1
+
+  access-fec ip-prefix host-route-only
+
+  interface cgei-0/1/0/2.2191
+
+  $
+
+  router-id loopback1
+
+$
+
+!</ldp>
+
+!<alarm>
+
+alarm netconf-report informational
+
+logging file default almlog
+
+  accept on
+
+$
+
+logging file default cmdlog
+
+  buffer 1000
+
+$
+
+logging file default netclog
+
+  accept on
+
+$
+
+logging file default snmplog
+
+  accept on
+
+$
+
+logging file default srvlog
+
+  accept on
+
+  interval 10
+
+$
+
+logging file default weblog
+
+  accept on
+
+$
+
+logging trap-enable informational
+
+logging snmp
+
+  accept on
+
+  match cmdlog
+
+$
+
+!</alarm>
+
+!<snmp>
+
+snmp-server access-list ipv4 SmartMAN_NSM_SNMP
+
+snmp-server community encrypted d6ddeaa4dab74523b246fe346c94c31ae58b79ad47763964
+
+38ea1e9bb01a9ef3 view lldpview ro 
+
+snmp-server community encrypted 18dc5c0ac9ddc78ad8466907ed57a25f2b968fadbcbebe9b
+
+024814893ae08adc view lldpview rw 
+
+snmp-server enable inform snmp
+
+snmp-server enable inform bgp
+
+snmp-server enable inform mac
+
+snmp-server enable inform ospf
+
+snmp-server enable inform stp
+
+snmp-server enable inform ppp
+
+snmp-server enable inform arp
+
+snmp-server enable inform rmon
+
+snmp-server enable inform udld
+
+snmp-server enable inform cfm
+
+snmp-server enable inform efm
+
+snmp-server enable inform lacp
+
+snmp-server enable inform mc-elam
+
+snmp-server enable inform tcp
+
+snmp-server enable inform sctp
+
+snmp-server enable inform stalarm
+
+snmp-server enable inform cps
+
+snmp-server enable inform interface
+
+snmp-server enable inform acl
+
+snmp-server enable inform fib
+
+snmp-server enable inform pim
+
+snmp-server enable inform isis
+
+snmp-server enable inform rip
+
+snmp-server enable inform msdp
+
+snmp-server enable inform aps
+
+snmp-server enable inform config
+
+snmp-server enable inform am
+
+snmp-server enable inform um
+
+snmp-server enable inform system
+
+snmp-server enable inform ldp
+
+snmp-server enable inform pwe3
+
+snmp-server enable inform vpn
+
+snmp-server enable inform mpls-oam
+
+snmp-server enable inform ptp
+
+snmp-server enable inform tunnel-te
+
+snmp-server enable inform radius
+
+snmp-server enable inform dhcp
+
+snmp-server enable inform bfd
+
+snmp-server enable inform ippool
+
+snmp-server enable inform ntp
+
+snmp-server enable inform ssm
+
+snmp-server enable inform sqa
+
+snmp-server enable inform ipsec
+
+snmp-server enable inform cgn
+
+snmp-server enable inform vrrp
+
+snmp-server enable inform ftp_tftp
+
+snmp-server enable inform ping-trace
+
+snmp-server enable inform gm
+
+snmp-server enable trap snmp
+
+snmp-server enable trap bgp
+
+snmp-server enable trap mac
+
+snmp-server enable trap ospf
+
+snmp-server enable trap stp
+
+snmp-server enable trap ppp
+
+snmp-server enable trap arp
+
+snmp-server enable trap rmon
+
+snmp-server enable trap udld
+
+snmp-server enable trap cfm
+
+snmp-server enable trap efm
+
+snmp-server enable trap lacp
+
+snmp-server enable trap mc-elam
+
+snmp-server enable trap tcp
+
+snmp-server enable trap sctp
+
+snmp-server enable trap stalarm
+
+snmp-server enable trap cps
+
+snmp-server enable trap interface
+
+snmp-server enable trap acl
+
+snmp-server enable trap fib
+
+snmp-server enable trap pim
+
+snmp-server enable trap isis
+
+snmp-server enable trap rip
+
+snmp-server enable trap msdp
+
+snmp-server enable trap aps
+
+snmp-server enable trap config
+
+snmp-server enable trap am
+
+snmp-server enable trap um
+
+snmp-server enable trap system
+
+snmp-server enable trap ldp
+
+snmp-server enable trap pwe3
+
+snmp-server enable trap vpn
+
+snmp-server enable trap mpls-oam
+
+snmp-server enable trap ptp
+
+snmp-server enable trap tunnel-te
+
+snmp-server enable trap radius
+
+snmp-server enable trap dhcp
+
+snmp-server enable trap bfd
+
+snmp-server enable trap ippool
+
+snmp-server enable trap ntp
+
+snmp-server enable trap ssm
+
+snmp-server enable trap sqa
+
+snmp-server enable trap ipsec
+
+snmp-server enable trap cgn
+
+snmp-server enable trap vrrp
+
+snmp-server enable trap ftp_tftp
+
+snmp-server enable trap ping-trace
+
+snmp-server enable trap gm
+
+snmp-server host vrf dcn 135.101.299.297 trap version 2c encrypted d6ddeaa4dab74
+523b246fe346c94c31ae58b79ad4776396438ea1e9bb01a9ef3 udp-port 162 snmp bgp mac os
+
+pf stp ppp arp rmon udld cfm efm lacp mc-elam tcp sctp stalarm cps interface acl
+
+ fib pim isis rip msdp aps config am um system ldp pwe3 vpn mpls-oam ptp tunnel-
+
+te radius dhcp bfd
+
+snmp-server host vrf dcn 135.101.299.297 trap version 2c encrypted d6ddeaa4dab74
+523b246fe346c94c31ae58b79ad4776396438ea1e9bb01a9ef3 udp-port 162 ippool ntp ssm 
+
+sqa ipsec cgn vrrp ftp_tftp ping-trace gm
+
+snmp-server trap-source 14.270.29.101
+snmp-server view lldpview iso included
+
+snmp-server view n31view iso included
+
+snmp-server version v2c enable
+
+!</snmp>
+
+!<telnet>
+
+line telnet absolute-timeout 0
+
+line telnet idle-timeout 30
+
+!</telnet>
+
+!<hqos>
+
+policy-map queueCGE
+
+$
+
+diffserv domain unicom
+
+  ipv4-dscp 0 mapped to phb be green
+
+  ipv4-dscp 10 mapped to phb af2 green
+
+  ipv4-dscp 18 mapped to phb af2 green
+
+  ipv4-dscp 26 mapped to phb af3 green
+
+  ipv4-dscp 34 mapped to phb af4 green
+
+  ipv4-dscp 46 mapped to phb ef green
+
+  ipv4-dscp 48 mapped to phb cs6 green
+
+  ipv4-dscp 56 mapped to phb cs7 green
+
+$
+
+diffserv domain dscp
+
+  ipv4-dscp 0 mapped to phb be green
+
+  ipv4-dscp 10 mapped to phb af1 green
+
+  ipv4-dscp 18 mapped to phb af2 green
+
+  ipv4-dscp 46 mapped to phb ef green
+
+  ipv4-dscp 48 mapped to phb cs6 green
+
+  ipv4-dscp 56 mapped to phb cs7 green
+
+  ipv4-dscp 26 mapped to phb af3 green
+
+  ipv4-dscp 34 mapped to phb af4 green
+
+  phb af1 yellow mapped to ipv4-dscp 10
+
+  phb af1 red mapped to ipv4-dscp 10
+
+  phb af2 yellow mapped to ipv4-dscp 18
+
+  phb af2 red mapped to ipv4-dscp 18
+
+  phb af3 yellow mapped to ipv4-dscp 26
+
+  phb af3 red mapped to ipv4-dscp 26
+
+  phb af4 yellow mapped to ipv4-dscp 34
+
+  phb af4 red mapped to ipv4-dscp 34
+
+  phb ef yellow mapped to ipv4-dscp 46
+
+  phb ef red mapped to ipv4-dscp 46
+
+$
+
+qos diffserv-domain interface smartgroup1.10 apply unicom
+
+qos diffserv-domain interface cgei-0/1/0/1.4002 apply dscp
+
+qos diffserv-domain interface cgei-0/1/0/1.4003 apply dscp
+
+qos diffserv-domain interface cgei-0/1/0/1.4004 apply dscp
+
+!</hqos>
+
+!<bgp>
+
+router bgp 65495
+
+  synchronization disable
+
+  bgp router-id 14.270.36.168
+  bgp frr
+
+  bgp default route-target filter disable
+
+  maximum-paths 8
+
+  maximum-paths ibgp 8
+
+  aggregate-address 14.270.0.0 255.255.0.0 count 0
+  redistribute isis-2 1000 route-map Host_MNG_IP
+
+  redistribute connected
+
+  neighbor 14.270.36.169 remote-as 65495
+  neighbor 14.270.36.169 activate disable
+  neighbor 14.270.36.169 update-source loopback1
+  neighbor 14.271.3.11 remote-as 9929
+  neighbor 14.271.3.11 activate
+   neighbor 14.271.3.11 description to_xcnu-nvfn-g-2
+  neighbor 14.271.3.11 route-map MCR-IPA-SDN-IN in
+  neighbor 14.271.3.11 route-map MCR-IPA-MNG-OUT out
+  neighbor 14.271.3.49 remote-as 38351
+  neighbor 14.271.3.49 activate
+   neighbor 14.271.3.49 description to_IRD-CT2
+  neighbor 14.271.3.49 route-map MCR-IPB-JTMNG-IN in
+  neighbor 14.271.3.49 route-map MCR-IPB-MNG-OUT out
+  neighbor 14.298.298.20 remote-as 65125
+  neighbor 14.298.298.20 activate
+  neighbor 14.298.298.20 weight 100
+  neighbor 14.298.298.20 default-originate
+  neighbor 14.298.298.20 fall-over bfd interval 500 min-rx 500 multiplier 4
+  neighbor 14.298.298.20 timers 30 90
+  neighbor 14.298.298.20 route-map MCR-UPF-GPRS_Gn_C-IN in
+  neighbor 14.298.298.20 route-map MCR-UPF-GPRS_Gn_C-OUT out
+  address-family ipv4 vrf GPRS_Gn_C
+
+    bgp frr
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    aggregate-address 264.240.245.0 255.255.255.128
+    redistribute connected
+
+    neighbor 14.271.3.37 remote-as 38351
+    neighbor 14.271.3.37 activate
+     neighbor 14.271.3.37 description to_IRD_KRD-CT2_UI.301
+    neighbor 14.271.3.37 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 14.298.298.2 remote-as 65122
+    neighbor 14.298.298.2 activate
+    neighbor 14.298.298.2 weight 100
+    neighbor 14.298.298.2 soo 65122:2900
+    neighbor 14.298.298.2 as-override
+    neighbor 14.298.298.2 default-originate
+    neighbor 14.298.298.2 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.298.298.2 timers 30 90
+    neighbor 14.298.298.2 route-map MCR-UPF-GPRS_Gn_C-IN in
+    neighbor 14.298.298.2 route-map MCR-UPF-GPRS_Gn_C-OUT out
+    neighbor 14.298.298.12 remote-as 65124
+    neighbor 14.298.298.12 activate
+    neighbor 14.298.298.12 weight 100
+    neighbor 14.298.298.12 soo 65124:2900
+    neighbor 14.298.298.12 as-override
+    neighbor 14.298.298.12 default-originate
+    neighbor 14.298.298.12 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.298.298.12 timers 30 90
+    neighbor 14.298.298.12 route-map MCR-UPF-GPRS_Gn_C-IN in
+    neighbor 14.298.298.12 route-map MCR-UPF-GPRS_Gn_C-OUT out
+    neighbor 14.298.298.20 remote-as 65125
+    neighbor 14.298.298.20 activate
+    neighbor 14.298.298.20 weight 100
+    neighbor 14.298.298.20 soo 65125:2900
+    neighbor 14.298.298.20 as-override
+    neighbor 14.298.298.20 default-originate
+    neighbor 14.298.298.20 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.298.298.20 timers 30 90
+    neighbor 14.298.298.20 route-map MCR-UPF-GPRS_Gn_C-IN in
+    neighbor 14.298.298.20 route-map MCR-UPF-GPRS_Gn_C-OUT out
+    neighbor 14.298.298.46 remote-as 65127
+    neighbor 14.298.298.46 activate
+    neighbor 14.298.298.46 weight 100
+    neighbor 14.298.298.46 soo 65127:2900
+    neighbor 14.298.298.46 as-override
+    neighbor 14.298.298.46 default-originate
+    neighbor 14.298.298.46 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.298.298.46 timers 30 90
+    neighbor 14.298.298.46 route-map MCR-UPF-GPRS_Gn_C-IN in
+    neighbor 14.298.298.46 route-map MCR-UPF-GPRS_Gn_C-OUT out
+  $
+
+  address-family ipv4 vrf 5GC_MGMN
+
+    bgp frr
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    aggregate-address 1.6.36.0 255.255.224.0
+    aggregate-address 1.80.68.0 255.255.192.0
+    redistribute connected
+
+    neighbor 1.80.68.158 remote-as 65122
+    neighbor 1.80.68.158 activate
+    neighbor 1.80.68.158 weight 100
+    neighbor 1.80.68.158 soo 65122:2900
+    neighbor 1.80.68.158 as-override
+    neighbor 1.80.68.158 default-originate
+    neighbor 1.80.68.158 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 1.80.68.158 timers 30 90
+    neighbor 1.80.68.158 route-map MCR-UPF-5GC_MGMN-IN in
+    neighbor 1.80.68.158 route-map MCR-UPF-5GC_MGMN-OUT out
+    neighbor 1.80.68.298 remote-as 65101
+    neighbor 1.80.68.298 activate
+    neighbor 1.80.68.298 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 1.80.69.152 remote-as 65124
+    neighbor 1.80.69.152 activate
+    neighbor 1.80.69.152 weight 100
+    neighbor 1.80.69.152 soo 65124:2900
+    neighbor 1.80.69.152 as-override
+    neighbor 1.80.69.152 default-originate
+    neighbor 1.80.69.152 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 1.80.69.152 timers 30 90
+    neighbor 1.80.69.152 route-map MCR-UPF-5GC_MGMN-IN in
+    neighbor 1.80.69.152 route-map MCR-UPF-5GC_MGMN-OUT out
+    neighbor 1.80.60.158 remote-as 65125
+    neighbor 1.80.60.158 activate
+    neighbor 1.80.60.158 weight 100
+    neighbor 1.80.60.158 soo 65125:2900
+    neighbor 1.80.60.158 as-override
+    neighbor 1.80.60.158 default-originate
+    neighbor 1.80.60.158 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 1.80.60.158 timers 30 90
+    neighbor 1.80.60.158 route-map MCR-UPF-5GC_MGMN-OUT out
+    neighbor 1.80.61.152 remote-as 65127
+    neighbor 1.80.61.152 activate
+    neighbor 1.80.61.152 weight 100
+    neighbor 1.80.61.152 soo 65127:2900
+    neighbor 1.80.61.152 as-override
+    neighbor 1.80.61.152 default-originate
+    neighbor 1.80.61.152 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 1.80.61.152 timers 30 90
+    neighbor 1.80.61.152 route-map MCR-UPF-5GC_MGMN-IN in
+    neighbor 1.80.61.152 route-map MCR-UPF-5GC_MGMN-OUT out
+    neighbor 14.271.3.31 remote-as 38351
+    neighbor 14.271.3.31 activate
+     neighbor 14.271.3.31 description to_IRD_KRD-CT2_UI.837
+    neighbor 14.271.3.31 fall-over bfd interval 150 min-rx 150 multiplier 3
+  $
+
+  address-family ipv4 vrf 4G_RAN
+
+    bgp frr
+
+    bgp frr wtr 5
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    redistribute connected
+
+    neighbor 2.14.28.2 remote-as 65122
+    neighbor 2.14.28.2 activate
+    neighbor 2.14.28.2 weight 100
+    neighbor 2.14.28.2 soo 65122:2900
+    neighbor 2.14.28.2 as-override
+    neighbor 2.14.28.2 default-originate
+    neighbor 2.14.28.2 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 2.14.28.2 timers 30 90
+    neighbor 2.14.28.2 route-map MCR-UPF-4G_RAN-OUT out
+    neighbor 3.14.28.6 remote-as 65124
+    neighbor 3.14.28.6 activate
+    neighbor 3.14.28.6 weight 100
+    neighbor 3.14.28.6 soo 65124:2900
+    neighbor 3.14.28.6 as-override
+    neighbor 3.14.28.6 default-originate
+    neighbor 3.14.28.6 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 3.14.28.6 timers 30 90
+    neighbor 3.14.28.6 route-map MCR-UPF-4G_RAN-OUT out
+    neighbor 4.14.28.2 remote-as 65125
+    neighbor 4.14.28.2 activate
+    neighbor 4.14.28.2 weight 100
+    neighbor 4.14.28.2 soo 65125:2900
+    neighbor 4.14.28.2 as-override
+    neighbor 4.14.28.2 default-originate
+    neighbor 4.14.28.2 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 4.14.28.2 timers 30 90
+    neighbor 4.14.28.2 route-map MCR-UPF-4G_RAN-OUT out
+    neighbor 5.14.28.6 remote-as 65127
+    neighbor 5.14.28.6 activate
+    neighbor 5.14.28.6 weight 100
+    neighbor 5.14.28.6 soo 65127:2900
+    neighbor 5.14.28.6 as-override
+    neighbor 5.14.28.6 default-originate
+    neighbor 5.14.28.6 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 5.14.28.6 timers 30 90
+    neighbor 5.14.28.6 route-map MCR-UPF-4G_RAN-OUT out
+    neighbor 14.271.3.72 remote-as 65495
+    neighbor 14.271.3.72 local-as 100 no-prepend replace-as
+    neighbor 14.271.3.72 activate
+    neighbor 14.271.3.72 weight 100
+    neighbor 14.271.3.72 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 14.271.3.72 route-map MCR-IPRAN-EPC-IN in
+    neighbor 14.271.3.72 route-map MCR-IPRAN-5G-OUT out
+    neighbor 14.271.3.146 remote-as 65495
+    neighbor 14.271.3.146 local-as 100 no-prepend replace-as
+    neighbor 14.271.3.146 activate
+    neighbor 14.271.3.146 weight 100
+    neighbor 14.271.3.146 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 14.271.3.146 route-map MCR-IPRAN-EPC-IN in
+    neighbor 14.271.3.146 route-map MCR-IPRAN-5G-OUT out
+    neighbor 46.102.0.2 remote-as 65251
+    neighbor 46.102.0.2 activate
+    neighbor 46.102.0.2 weight 100
+    neighbor 46.102.0.2 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 46.102.0.2 route-map STN-4G-IN in
+    neighbor 46.102.0.2 route-map STN-4G-OUT out
+    neighbor 46.102.0.12 remote-as 65252
+    neighbor 46.102.0.12 activate
+    neighbor 46.102.0.12 weight 100
+    neighbor 46.102.0.12 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 46.102.0.12 route-map STN-4G-RKZ-IN in
+    neighbor 46.102.0.12 route-map STN-4G-OUT out
+    neighbor 46.102.0.38 remote-as 65253
+    neighbor 46.102.0.38 activate
+    neighbor 46.102.0.38 weight 100
+    neighbor 46.102.0.38 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 46.102.0.38 route-map STN-4G-SN-IN in
+    neighbor 46.102.0.38 route-map STN-4G-OUT out
+    neighbor 46.102.0.54 remote-as 65255
+    neighbor 46.102.0.54 activate
+    neighbor 46.102.0.54 weight 100
+    neighbor 46.102.0.54 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 46.102.0.54 route-map STN-4G-CD-IN in
+    neighbor 46.102.0.54 route-map STN-4G-OUT out
+    neighbor 46.102.0.60 remote-as 65254
+    neighbor 46.102.0.60 activate
+    neighbor 46.102.0.60 weight 100
+    neighbor 46.102.0.60 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 46.102.0.60 route-map STN-4G-LZ-IN in
+    neighbor 46.102.0.60 route-map STN-4G-OUT out
+    neighbor 46.102.0.86 remote-as 65256
+    neighbor 46.102.0.86 activate
+    neighbor 46.102.0.86 weight 100
+    neighbor 46.102.0.86 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 46.102.0.86 route-map STN-4G-NQ-IN in
+    neighbor 46.102.0.86 route-map STN-4G-OUT out
+    neighbor 46.102.0.92 remote-as 65257
+    neighbor 46.102.0.92 activate
+    neighbor 46.102.0.92 weight 100
+    neighbor 46.102.0.92 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 46.102.0.92 route-map STN-4G-AL-IN in
+    neighbor 46.102.0.92 route-map STN-4G-OUT out
+  $
+
+  address-family ipv4 vrf 5GC_WAP
+
+    bgp frr
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    network 14.168.47.0 255.255.255.0
+    redistribute connected
+
+    neighbor 14.168.47.1 remote-as 38351
+    neighbor 14.168.47.1 activate
+     neighbor 14.168.47.1 description to_IRD_KRD-CT1_UI.873
+    neighbor 14.168.47.1 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 14.168.47.1 route-map MCR-IPB-WAP-OUT out
+    neighbor 14.168.47.6 remote-as 65125
+    neighbor 14.168.47.6 activate
+    neighbor 14.168.47.6 weight 100
+    neighbor 14.168.47.6 soo 65125:2900
+    neighbor 14.168.47.6 as-override
+    neighbor 14.168.47.6 default-originate
+    neighbor 14.168.47.6 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.168.47.6 timers 30 90
+    neighbor 14.168.47.78 remote-as 65127
+    neighbor 14.168.47.78 activate
+    neighbor 14.168.47.78 weight 100
+    neighbor 14.168.47.78 soo 65127:2900
+    neighbor 14.168.47.78 as-override
+    neighbor 14.168.47.78 default-originate
+    neighbor 14.168.47.78 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.168.47.78 timers 30 90
+  $
+
+  address-family ipv4 vrf NFVTT
+
+    bgp frr
+
+    redistribute connected
+
+    neighbor 14.6.36.6 remote-as 65125
+    neighbor 14.6.36.6 activate
+    neighbor 14.6.36.6 weight 100
+    neighbor 14.6.36.6 soo 65125:2900
+    neighbor 14.6.36.6 as-override
+    neighbor 14.6.36.6 default-originate
+    neighbor 14.6.36.6 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.6.36.6 timers 30 90
+    neighbor 14.6.36.26 remote-as 65127
+    neighbor 14.6.36.26 activate
+    neighbor 14.6.36.26 weight 100
+    neighbor 14.6.36.26 soo 65127:2900
+    neighbor 14.6.36.26 as-override
+    neighbor 14.6.36.26 default-originate
+    neighbor 14.6.36.26 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.6.36.26 timers 30 90
+    neighbor 14.10.36.6 remote-as 65122
+    neighbor 14.10.36.6 activate
+    neighbor 14.10.36.6 weight 100
+    neighbor 14.10.36.6 soo 65122:2900
+    neighbor 14.10.36.6 as-override
+    neighbor 14.10.36.6 default-originate
+    neighbor 14.10.36.6 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.10.36.6 timers 30 90
+    neighbor 14.10.36.26 remote-as 65124
+    neighbor 14.10.36.26 activate
+    neighbor 14.10.36.26 weight 100
+    neighbor 14.10.36.26 soo 65124:2900
+    neighbor 14.10.36.26 as-override
+    neighbor 14.10.36.26 default-originate
+    neighbor 14.10.36.26 fall-over bfd interval 500 min-rx 500 multiplier 4
+    neighbor 14.10.36.26 timers 30 90
+  $
+
+  address-family vpnv4
+
+    neighbor 14.270.36.169 activate
+  $
+
+  address-family ipv6 vrf 5G_RAN
+
+    bgp frr
+
+    bgp frr wtr 5
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    aggregate-address 8A6E:E7A9:A656:7566::/56
+    aggregate-address 8A64:7E8:266F::/64
+    redistribute connected
+
+    neighbor 8A6E:E789:A766:8::766D remote-as 38351
+    neighbor 8A6E:E789:A766:8::766D activate
+     neighbor 8A6E:E789:A766:8::766D description to_IRD_KRD-CT2_UI.843
+    neighbor 8A6E:E789:A766:8::766D fall-over bfd interval 150 min-rx 150 multip
+lier 3
+
+    neighbor 8A6E:E7A9:A656:7566::767 remote-as 65122
+    neighbor 8A6E:E7A9:A656:7566::767 activate
+    neighbor 8A6E:E7A9:A656:7566::767 weight 100
+    neighbor 8A6E:E7A9:A656:7566::767 soo 65122:2900
+    neighbor 8A6E:E7A9:A656:7566::767 as-override
+    neighbor 8A6E:E7A9:A656:7566::767 default-originate
+    neighbor 8A6E:E7A9:A656:7566::767 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7566::767 timers 30 90
+    neighbor 8A6E:E7A9:A656:7566::877 remote-as 65125
+    neighbor 8A6E:E7A9:A656:7566::877 activate
+    neighbor 8A6E:E7A9:A656:7566::877 weight 100
+    neighbor 8A6E:E7A9:A656:7566::877 soo 65125:2900
+    neighbor 8A6E:E7A9:A656:7566::877 as-override
+    neighbor 8A6E:E7A9:A656:7566::877 default-originate
+    neighbor 8A6E:E7A9:A656:7566::877 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7566::877 timers 30 90
+    neighbor 8A6E:E7A9:A656:7576::769 remote-as 65124
+    neighbor 8A6E:E7A9:A656:7576::769 activate
+    neighbor 8A6E:E7A9:A656:7576::769 weight 100
+    neighbor 8A6E:E7A9:A656:7576::769 soo 65124:2900
+    neighbor 8A6E:E7A9:A656:7576::769 as-override
+    neighbor 8A6E:E7A9:A656:7576::769 default-originate
+    neighbor 8A6E:E7A9:A656:7576::769 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7576::769 timers 30 90
+    neighbor 8A6E:E7A9:A656:7576::769 route-map MCR-UPF-5G_RAN-IPv6-OUT out
+    neighbor 8A6E:E7A9:A656:7576::879 remote-as 65127
+    neighbor 8A6E:E7A9:A656:7576::879 activate
+    neighbor 8A6E:E7A9:A656:7576::879 weight 100
+    neighbor 8A6E:E7A9:A656:7576::879 soo 65127:2900
+    neighbor 8A6E:E7A9:A656:7576::879 as-override
+    neighbor 8A6E:E7A9:A656:7576::879 default-originate
+    neighbor 8A6E:E7A9:A656:7576::879 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7576::879 timers 30 90
+    neighbor 8A6E:E7A9:A656:7576::879 route-map MCR-UPF-5G_RAN-IPv6-OUT out
+    neighbor 8A64:7E8:266E:A6::7 remote-as 65251
+    neighbor 8A64:7E8:266E:A6::7 activate
+    neighbor 8A64:7E8:266E:A6::7 weight 100
+    neighbor 8A64:7E8:266E:A6::7 fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:266E:A6::7 route-map STN-5G-V6-IN in
+    neighbor 8A64:7E8:266E:A6::7 route-map STN-5G-V6-OUT out
+    neighbor 8A64:7E8:2662:A6::7 remote-as 65252
+    neighbor 8A64:7E8:2662:A6::7 activate
+    neighbor 8A64:7E8:2662:A6::7 weight 100
+    neighbor 8A64:7E8:2662:A6::7 fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2662:A6::7 route-map STN-5G-RKZ-V6-IN in
+    neighbor 8A64:7E8:2662:A6::7 route-map STN-5G-V6-OUT out
+    neighbor 8A64:7E8:2676:A6::7 remote-as 65253
+    neighbor 8A64:7E8:2676:A6::7 activate
+    neighbor 8A64:7E8:2676:A6::7 weight 100
+    neighbor 8A64:7E8:2676:A6::7 fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2676:A6::7 route-map STN-5G-SN-V6-IN in
+    neighbor 8A64:7E8:2676:A6::7 route-map STN-5G-V6-OUT out
+    neighbor 8A64:7E8:267A:A6::7 remote-as 65255
+    neighbor 8A64:7E8:267A:A6::7 activate
+    neighbor 8A64:7E8:267A:A6::7 weight 100
+    neighbor 8A64:7E8:267A:A6::7 fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:267A:A6::7 route-map STN-5G-CD-V6-IN in
+    neighbor 8A64:7E8:267A:A6::7 route-map STN-5G-V6-OUT out
+    neighbor 8A64:7E8:267E:A6::7 remote-as 65256
+    neighbor 8A64:7E8:267E:A6::7 activate
+    neighbor 8A64:7E8:267E:A6::7 weight 100
+    neighbor 8A64:7E8:267E:A6::7 fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:267E:A6::7 route-map STN-5G-NQ-V6-IN in
+    neighbor 8A64:7E8:267E:A6::7 route-map STN-5G-V6-OUT out
+    neighbor 8A64:7E8:2672:A6::7 remote-as 65257
+    neighbor 8A64:7E8:2672:A6::7 activate
+    neighbor 8A64:7E8:2672:A6::7 weight 100
+    neighbor 8A64:7E8:2672:A6::7 fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2672:A6::7 route-map STN-5G-AL-V6-IN in
+    neighbor 8A64:7E8:2672:A6::7 route-map STN-5G-V6-OUT out
+    neighbor 8A64:7E8:2686:A6::7 remote-as 65254
+    neighbor 8A64:7E8:2686:A6::7 activate
+    neighbor 8A64:7E8:2686:A6::7 weight 100
+    neighbor 8A64:7E8:2686:A6::7 fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2686:A6::7 route-map STN-5G-LZ-V6-IN in
+    neighbor 8A64:7E8:2686:A6::7 route-map STN-5G-V6-OUT out
+  $
+
+  address-family ipv6 vrf GPRS_Gn_C
+
+    bgp frr
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    aggregate-address 8A6E:E7A9:A656:7266::/56
+    redistribute connected
+
+    neighbor 8A6E:E789:A766:8::7667 remote-as 38351
+    neighbor 8A6E:E789:A766:8::7667 activate
+     neighbor 8A6E:E789:A766:8::7667 description to_IRD_KRD-CT2_UI.301
+    neighbor 8A6E:E789:A766:8::7667 fall-over bfd interval 150 min-rx 150 multip
+lier 3
+
+    neighbor 8A6E:E7A9:A656:7266::767 remote-as 65122
+    neighbor 8A6E:E7A9:A656:7266::767 activate
+    neighbor 8A6E:E7A9:A656:7266::767 weight 100
+    neighbor 8A6E:E7A9:A656:7266::767 soo 65122:2900
+    neighbor 8A6E:E7A9:A656:7266::767 as-override
+    neighbor 8A6E:E7A9:A656:7266::767 default-originate
+    neighbor 8A6E:E7A9:A656:7266::767 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7266::767 timers 30 90
+    neighbor 8A6E:E7A9:A656:7266::767 route-map MCR-UPF-GPRS_Gn_C-IPv6-OUT out
+    neighbor 8A6E:E7A9:A656:7266::877 remote-as 65125
+    neighbor 8A6E:E7A9:A656:7266::877 activate
+    neighbor 8A6E:E7A9:A656:7266::877 weight 100
+    neighbor 8A6E:E7A9:A656:7266::877 soo 65125:2900
+    neighbor 8A6E:E7A9:A656:7266::877 as-override
+    neighbor 8A6E:E7A9:A656:7266::877 default-originate
+    neighbor 8A6E:E7A9:A656:7266::877 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7266::877 timers 30 90
+    neighbor 8A6E:E7A9:A656:7266::877 route-map MCR-UPF-GPRS_Gn_C-IPv6-OUT out
+    neighbor 8A6E:E7A9:A656:7276::769 remote-as 65124
+    neighbor 8A6E:E7A9:A656:7276::769 activate
+    neighbor 8A6E:E7A9:A656:7276::769 weight 100
+    neighbor 8A6E:E7A9:A656:7276::769 soo 65124:2900
+    neighbor 8A6E:E7A9:A656:7276::769 as-override
+    neighbor 8A6E:E7A9:A656:7276::769 default-originate
+    neighbor 8A6E:E7A9:A656:7276::769 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7276::769 timers 30 90
+    neighbor 8A6E:E7A9:A656:7276::769 route-map MCR-UPF-GPRS_Gn_C-IPv6-OUT out
+    neighbor 8A6E:E7A9:A656:7276::879 remote-as 65127
+    neighbor 8A6E:E7A9:A656:7276::879 activate
+    neighbor 8A6E:E7A9:A656:7276::879 weight 100
+    neighbor 8A6E:E7A9:A656:7276::879 soo 65127:2900
+    neighbor 8A6E:E7A9:A656:7276::879 as-override
+    neighbor 8A6E:E7A9:A656:7276::879 default-originate
+    neighbor 8A6E:E7A9:A656:7276::879 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7276::879 timers 30 90
+    neighbor 8A6E:E7A9:A656:7276::879 route-map MCR-UPF-GPRS_Gn_C-IPv6-OUT out
+  $
+
+  address-family ipv6 vrf VoLTE_SGi
+
+    bgp frr
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    redistribute connected
+
+    neighbor 8A6E:E789:A766:8::7677 remote-as 38351
+    neighbor 8A6E:E789:A766:8::7677 activate
+     neighbor 8A6E:E789:A766:8::7677 description to_IRD_KRD-CT1_UI.3010
+    neighbor 8A6E:E789:A766:8::7677 fall-over bfd interval 150 min-rx 150 multip
+lier 3
+
+    neighbor 8A6E:EBC4:7666::7 remote-as 65125
+    neighbor 8A6E:EBC4:7666::7 activate
+    neighbor 8A6E:EBC4:7666::7 weight 100
+    neighbor 8A6E:EBC4:7666::7 soo 65125:2900
+    neighbor 8A6E:EBC4:7666::7 as-override
+    neighbor 8A6E:EBC4:7666::7 default-originate
+    neighbor 8A6E:EBC4:7666::7 fall-over bfd interval 500 min-rx 500 multiplier 
+4
+
+    neighbor 8A6E:EBC4:7666::7 timers 30 90
+    neighbor 8A6E:EBC4:7666::7 route-map MCR-UPF-VoLTE_SGi-IPv6-OUT out
+    neighbor 8A6E:EBC4:8666::9 remote-as 65127
+    neighbor 8A6E:EBC4:8666::9 activate
+    neighbor 8A6E:EBC4:8666::9 weight 100
+    neighbor 8A6E:EBC4:8666::9 soo 65127:2900
+    neighbor 8A6E:EBC4:8666::9 as-override
+    neighbor 8A6E:EBC4:8666::9 default-originate
+    neighbor 8A6E:EBC4:8666::9 fall-over bfd interval 500 min-rx 500 multiplier 
+4
+
+    neighbor 8A6E:EBC4:8666::9 timers 30 90
+    neighbor 8A6E:EBC4:8666::9 route-map MCR-UPF-VoLTE_SGi-IPv6-OUT out
+    neighbor 8A6E:EBC5:7666::7 remote-as 65122
+    neighbor 8A6E:EBC5:7666::7 activate
+    neighbor 8A6E:EBC5:7666::7 weight 100
+    neighbor 8A6E:EBC5:7666::7 soo 65122:2900
+    neighbor 8A6E:EBC5:7666::7 as-override
+    neighbor 8A6E:EBC5:7666::7 default-originate
+    neighbor 8A6E:EBC5:7666::7 fall-over bfd interval 500 min-rx 500 multiplier 
+4
+
+    neighbor 8A6E:EBC5:7666::7 timers 30 90
+    neighbor 8A6E:EBC5:7666::7 route-map MCR-UPF-VoLTE_SGi-IPv6-OUT out
+    neighbor 8A6E:EBC5:8666::9 remote-as 65124
+    neighbor 8A6E:EBC5:8666::9 activate
+    neighbor 8A6E:EBC5:8666::9 weight 100
+    neighbor 8A6E:EBC5:8666::9 soo 65124:2900
+    neighbor 8A6E:EBC5:8666::9 as-override
+    neighbor 8A6E:EBC5:8666::9 default-originate
+    neighbor 8A6E:EBC5:8666::9 fall-over bfd interval 500 min-rx 500 multiplier 
+4
+
+    neighbor 8A6E:EBC5:8666::9 timers 30 90
+    neighbor 8A6E:EBC5:8666::9 route-map MCR-UPF-VoLTE_SGi-IPv6-OUT out
+  $
+
+  address-family ipv6 vrf 5G_RAN_VIP
+
+    bgp frr
+
+    bgp frr wtr 5
+
+    maximum-paths 8
+
+    maximum-paths ibgp 8
+
+    aggregate-address 8A64:7E8:266F:76::/64
+    redistribute connected
+
+    neighbor 8A6E:E789:A766:8::767B remote-as 38351
+    neighbor 8A6E:E789:A766:8::767B activate
+     neighbor 8A6E:E789:A766:8::767B description to_IRD_KRD-CT1_UI.873
+    neighbor 8A6E:E789:A766:8::767B fall-over bfd interval 150 min-rx 150 multip
+lier 3
+
+    neighbor 8A64:7E8:266E:A6::B remote-as 65251
+    neighbor 8A64:7E8:266E:A6::B activate
+    neighbor 8A64:7E8:266E:A6::B weight 100
+    neighbor 8A64:7E8:266E:A6::B fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:266E:A6::B route-map STN-5G-VIP-V6-IN in
+    neighbor 8A64:7E8:266E:A6::B route-map STN-5G-VIP-V6-OUT out
+    neighbor 8A64:7E8:2662:A6::B remote-as 65252
+    neighbor 8A64:7E8:2662:A6::B activate
+    neighbor 8A64:7E8:2662:A6::B weight 100
+    neighbor 8A64:7E8:2662:A6::B fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2662:A6::B route-map STN-5G-VIP-RKZ-V6-IN in
+    neighbor 8A64:7E8:2662:A6::B route-map STN-5G-VIP-V6-OUT out
+    neighbor 8A64:7E8:2676:A6::B remote-as 65253
+    neighbor 8A64:7E8:2676:A6::B activate
+    neighbor 8A64:7E8:2676:A6::B weight 100
+    neighbor 8A64:7E8:2676:A6::B fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2676:A6::B route-map STN-5G-VIP-SN-V6-IN in
+    neighbor 8A64:7E8:2676:A6::B route-map STN-5G-VIP-V6-OUT out
+    neighbor 8A64:7E8:267A:A6::B remote-as 65255
+    neighbor 8A64:7E8:267A:A6::B activate
+    neighbor 8A64:7E8:267A:A6::B weight 100
+    neighbor 8A64:7E8:267A:A6::B fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:267A:A6::B route-map STN-5G-VIP-CD-V6-IN in
+    neighbor 8A64:7E8:267A:A6::B route-map STN-5G-VIP-V6-OUT out
+    neighbor 8A64:7E8:267E:A6::B remote-as 65256
+    neighbor 8A64:7E8:267E:A6::B activate
+    neighbor 8A64:7E8:267E:A6::B weight 100
+    neighbor 8A64:7E8:267E:A6::B fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:267E:A6::B route-map STN-5G-VIP-NQ-V6-IN in
+    neighbor 8A64:7E8:267E:A6::B route-map STN-5G-VIP-V6-OUT out
+    neighbor 8A64:7E8:2672:A6::B remote-as 65257
+    neighbor 8A64:7E8:2672:A6::B activate
+    neighbor 8A64:7E8:2672:A6::B weight 100
+    neighbor 8A64:7E8:2672:A6::B fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2672:A6::B route-map STN-5G-VIP-AL-V6-IN in
+    neighbor 8A64:7E8:2672:A6::B route-map STN-5G-VIP-V6-OUT out
+    neighbor 8A64:7E8:2686:A6::B remote-as 65254
+    neighbor 8A64:7E8:2686:A6::B activate
+    neighbor 8A64:7E8:2686:A6::B weight 100
+    neighbor 8A64:7E8:2686:A6::B fall-over bfd interval 150 min-rx 150 multiplie
+r 3
+
+    neighbor 8A64:7E8:2686:A6::B route-map STN-5G-VIP-LZ-V6-IN in
+    neighbor 8A64:7E8:2686:A6::B route-map STN-5G-VIP-V6-OUT out
+  $
+
+  address-family ipv6 vrf NFVTT
+
+    bgp frr
+
+    redistribute connected
+
+    neighbor 8A6E:E7A9:A656:7666::9 remote-as 65122
+    neighbor 8A6E:E7A9:A656:7666::9 activate
+    neighbor 8A6E:E7A9:A656:7666::9 weight 100
+    neighbor 8A6E:E7A9:A656:7666::9 soo 65122:2900
+    neighbor 8A6E:E7A9:A656:7666::9 as-override
+    neighbor 8A6E:E7A9:A656:7666::9 default-originate
+    neighbor 8A6E:E7A9:A656:7666::9 fall-over bfd interval 500 min-rx 500 multip
+lier 4
+
+    neighbor 8A6E:E7A9:A656:7666::9 timers 30 90
+    neighbor 8A6E:E7A9:A656:7666::869 remote-as 65125
+    neighbor 8A6E:E7A9:A656:7666::869 activate
+    neighbor 8A6E:E7A9:A656:7666::869 weight 100
+    neighbor 8A6E:E7A9:A656:7666::869 soo 65125:2900
+    neighbor 8A6E:E7A9:A656:7666::869 as-override
+    neighbor 8A6E:E7A9:A656:7666::869 default-originate
+    neighbor 8A6E:E7A9:A656:7666::869 fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7666::869 timers 30 90
+    neighbor 8A6E:E7A9:A656:7676::B remote-as 65124
+    neighbor 8A6E:E7A9:A656:7676::B activate
+    neighbor 8A6E:E7A9:A656:7676::B weight 100
+    neighbor 8A6E:E7A9:A656:7676::B soo 65124:2900
+    neighbor 8A6E:E7A9:A656:7676::B as-override
+    neighbor 8A6E:E7A9:A656:7676::B default-originate
+    neighbor 8A6E:E7A9:A656:7676::B fall-over bfd interval 500 min-rx 500 multip
+lier 4
+
+    neighbor 8A6E:E7A9:A656:7676::B timers 30 90
+    neighbor 8A6E:E7A9:A656:7676::86B remote-as 65127
+    neighbor 8A6E:E7A9:A656:7676::86B activate
+    neighbor 8A6E:E7A9:A656:7676::86B weight 100
+    neighbor 8A6E:E7A9:A656:7676::86B soo 65127:2900
+    neighbor 8A6E:E7A9:A656:7676::86B as-override
+    neighbor 8A6E:E7A9:A656:7676::86B default-originate
+    neighbor 8A6E:E7A9:A656:7676::86B fall-over bfd interval 500 min-rx 500 mult
+iplier 4
+
+    neighbor 8A6E:E7A9:A656:7676::86B timers 30 90
+  $
+
+  address-family vpnv6
+
+    neighbor 14.270.36.169 activate
+  $
+
+$
+
+!</bgp>
+
+!<isis>
+
+router isis 1000
+
+  area 86.4513.3000
+
+  system-id 0102.3603.2124
+
+  router-id 14.270.36.168
+  is-type level-2-only
+
+  metric-style wide
+
+  fast-flood 5
+
+  fast-reroute ti-lfa sr-mpls level-2
+
+  i-spf
+
+  lsp-gen-interval 1 50 50
+
+  spf-interval 1 50 50
+
+  maximum-paths 8
+
+  microloop-prevention frr delay-time 5000
+
+  microloop-prevention link-up enable
+
+  microloop-prevention segment-routing delay-time 20000
+
+  microloop-prevention segment-routing mpls enable
+
+  mpls ldp sync
+
+  mpls traffic-eng level-2
+
+  redistribute connected
+
+  restart enable
+
+  segment-routing mpls enable
+
+  set-overload-bit on-start-up 600
+
+  interface loopback1
+
+    ip router isis
+
+    circuit-type level-2-only
+
+    passive-mode
+
+  $
+
+  interface cgei-0/1/0/2.2191
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+  $
+
+$
+
+!</isis>
+
+!<static>
+
+ip route vrf 5GC_WAP 14.168.47.0 255.255.255.0 null1
+!</static>
+
+!<load-sharing>
+
+load-sharing hash-fields mpls ip-l4
+
+load-sharing hash-fields mpls l2
+
+!</load-sharing>
+

@@ -1,0 +1,1236 @@
+Building configuration...
+
+!! IOS XR Configuration 7.2.1
+
+!! Last configuration change at Wed Nov 11 22:41:49 2020 by admin_cisco
+
+!
+
+service unsupported-transceiver
+
+hostname TERE-MYXIB-1G-ODT55B1-TN-D1402
+usergroup readonly_grp
+
+ taskgroup read-only-tg
+
+!
+
+clock timezone CST Asia/Shanghai
+
+banner motd cWARNING!!! Authorised access only, all of your done will be recorded! Disconnect IMMEDIATELY if you are not an authorised user!c 
+
+logging trap debugging
+
+logging archive
+
+ device harddisk
+
+ severity debugging
+
+ file-size 10
+
+ frequency daily
+
+ archive-size 300
+
+ archive-length 4
+
+!
+
+logging console disable
+
+logging buffered 8192000
+
+logging facility local7
+
+logging source-interface Loopback0
+
+service timestamps log datetime
+
+service timestamps debug datetime
+
+logging events link-status software-interfaces
+
+domain lookup disable
+
+username admin_cisco
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$XzhqaTfh7OP0a...$U1ADE.J7jkl7sKvN/UqeaEC97piX8c1aDwtr1wEWn2Q8vnHK5U8ct3h0kIxfy5J20QuvS0rC/QLaDupa/liNm0
+!
+
+username SD-QD-SDNcontroler
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$aqptlRRSAb51l...$1M4vtkIcMrKMMcff.l3277nX.vOGXqu03jWzrlSUOVy9SeeNo0GCxCd4hwDPP/q5LhSjHDFgLUyz9tj7gQQ0C0
+!
+
+username SD-QD-Manager
+
+ group readonly_grp
+
+  secret d3d9446802a44259755d38e6d163e820 $6$dNX74qMW/aM4....$9zdhS8qyJqyoAGgHF2c7ec8nQLaG7NjExkL7O8w4HB3wkQfzs09VuR1Po2tZ85.CHmb7zpl2wb9nDhqI5MNT71
+!
+
+telemetry model-driven
+
+ destination-group Dest_Group1
+
+  address-family ipv4 125.191.287.48 port 8896
+   encoding self-describing-gpb
+
+   protocol grpc no-tls
+
+  !
+
+ !
+
+ sensor-group SGroup1
+
+  sensor-path Cisco-IOS-XR-pfi-im-cmd-oper:interfaces/interface-xr/interface
+
+  sensor-path Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+
+ !
+
+ sensor-group SGroup2
+
+  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization
+
+  sensor-path Cisco-IOS-XR-procmem-oper:processes-memory/nodes/node/process-ids/process-id
+
+ !
+
+ sensor-group SGroup3
+
+  sensor-path Cisco-IOS-XR-nto-misc-oper:memory-summary/nodes/node/summary
+
+ !
+
+ sensor-group SGroup4
+
+  sensor-path Cisco-IOS-XR-man-ipsla-oper:ipsla/operation-data/operations
+
+  sensor-path Cisco-IOS-XR-telemetry-model-driven-oper:telemetry-model-driven
+
+ !
+
+ subscription SUB1
+
+  sensor-group-id SGroup1 sample-interval 10000
+
+  sensor-group-id SGroup2 sample-interval 10000
+
+  sensor-group-id SGroup3 sample-interval 10000
+
+  sensor-group-id SGroup4 sample-interval 60000
+
+  destination-id Dest_Group1
+
+  source-interface Loopback0
+
+ !
+
+!
+
+ptp
+
+ clock
+
+  domain 24
+
+  profile g.8275.1 clock-type T-BC
+
+  priority2 100
+
+  clock-class 165
+
+ !
+
+ profile g82751_any
+
+  multicast
+
+  transport ethernet
+
+  sync frequency 16
+
+  announce frequency 8
+
+  delay-request frequency 16
+
+ !
+
+ time-of-day priority 99
+
+ physical-layer-frequency
+
+ log
+
+  servo events
+
+  best-master-clock changes
+
+ !
+
+!
+
+tcp selective-ack
+
+tcp path-mtu-discovery
+
+snmp-server ifindex persist
+
+snmp-server ifmib stats cache
+
+ snmp-server host 125.191.287.31 traps version 2c encrypted f6edc3bc6cc9f07ba5fcdae3fb9533ec udp-port 163
+snmp-server view netflowview 1.3.6.1.2.1 included
+
+snmp-server view netflowview 1.3.6.1.4.1.9.9 included
+
+snmp-server view netflowview 1.3.6.1.6.3.1.1.5 included
+
+snmp-server community SdqdspDC@2020 RO
+
+snmp-server community SdqdspDC@2020RW RW
+
+snmp-server traps snmp linkup
+
+snmp-server traps snmp linkdown
+
+snmp-server traps snmp coldstart
+
+snmp-server traps snmp warmstart
+
+snmp-server traps snmp authentication
+
+snmp-server traps power
+
+snmp-server traps entity
+
+snmp-server traps system
+
+snmp-server traps entity-redundancy all
+
+snmp-server traps entity-redundancy status
+
+snmp-server traps entity-redundancy switchover
+
+snmp-server trap-source Loopback0
+
+fpd auto-upgrade enable
+
+ntp
+
+  authentication-key 1 md5 encrypted b9393ced000d19faa1c969ccc1669da2
+ authenticate
+
+ trusted-key 1
+
+ server 13.41.109.1 prefer
+ server 13.41.109.2
+ access-group ipv4 peer ntp_acl
+
+ source Loopback0
+
+ update-calendar
+
+!
+
+frequency synchronization
+
+ quality itu-t option 1
+
+ log selection changes
+
+!
+
+call-home
+
+ service active
+
+ contact smart-licensing
+
+ profile CiscoTAC-1
+
+  active
+
+  destination transport-method http
+
+ !
+
+!
+
+control-plane
+
+ management-plane
+
+  inband
+
+   interface all
+
+    allow SSH peer
+
+     address ipv4 125.191.1.134
+     address ipv4 13.41.109.0/23
+     address ipv4 13.273.35.59/29
+     address ipv4 13.273.36.59/29
+     address ipv4 105.10.109.0/22
+     address ipv4 105.10.113.0/23
+     address ipv4 125.191.1.137/30
+     address ipv4 125.191.287.0/24
+    !
+
+    allow SNMP peer
+
+     address ipv4 125.191.1.137/30
+     address ipv4 125.191.287.0/24
+    !
+
+    allow Telnet peer
+
+     address ipv4 125.191.1.134
+     address ipv4 13.41.109.0/23
+     address ipv4 13.273.35.59/29
+     address ipv4 13.273.36.59/29
+     address ipv4 105.10.109.0/22
+     address ipv4 105.10.113.0/23
+     address ipv4 125.191.1.137/30
+    !
+
+   !
+
+  !
+
+ !
+
+!
+
+hw-module profile qos hqos-enable
+
+netconf-yang agent
+
+ ssh
+
+!
+
+ipv4 access-list ntp_acl
+
+ 10 permit ipv4 host 13.41.109.1 any
+ 20 permit ipv4 host 13.41.109.2 any
+!
+
+class-map match-any CM_1
+
+ match precedence 1 
+
+ match dscp 8-15 
+
+ match cos inner 1 
+
+ match mpls experimental topmost 1 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_2
+
+ match precedence 2 
+
+ match dscp 16-23 
+
+ match cos inner 2 
+
+ match mpls experimental topmost 2 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_3
+
+ match precedence 3 
+
+ match dscp 24-31 
+
+ match cos inner 3 
+
+ match mpls experimental topmost 3 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_4
+
+ match precedence 4 
+
+ match dscp 32-39 
+
+ match cos inner 4 
+
+ match mpls experimental topmost 4 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_5
+
+ match precedence 5 
+
+ match dscp 40-47 
+
+ match cos inner 5 
+
+ match mpls experimental topmost 5 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_6
+
+ match precedence 6 
+
+ match dscp 48-55 
+
+ match cos inner 6 
+
+ match mpls experimental topmost 6 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_7
+
+ match precedence 7 
+
+ match dscp 56-63 
+
+ match cos inner 7 
+
+ match mpls experimental topmost 7 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_1
+
+ match traffic-class 1 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_2
+
+ match traffic-class 2 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_3
+
+ match traffic-class 3 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_4
+
+ match traffic-class 4 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_5
+
+ match traffic-class 5 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_6
+
+ match traffic-class 6 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_7
+
+ match traffic-class 7 
+
+ end-class-map
+
+! 
+
+policy-map PM_NNI_IN
+
+ class CM_7
+
+  set traffic-class 7
+
+ ! 
+
+ class CM_6
+
+  set traffic-class 6
+
+ ! 
+
+ class CM_5
+
+  set traffic-class 5
+
+ ! 
+
+ class CM_4
+
+  set traffic-class 4
+
+ ! 
+
+ class CM_3
+
+  set traffic-class 3
+
+ ! 
+
+ class CM_2
+
+  set traffic-class 2
+
+ ! 
+
+ class CM_1
+
+  set traffic-class 1
+
+ ! 
+
+ class class-default
+
+ ! 
+
+ end-policy-map
+
+! 
+
+policy-map PM_NNI_OUT
+
+ class TC_7
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_6
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_5
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_4
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_3
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ class TC_2
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class TC_1
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class class-default
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ end-policy-map
+
+! 
+
+interface Loopback0
+
+ ipv4 address 13.41.100.245 255.255.255.255
+!
+
+interface MgmtEth0/RP0/CPU0/0
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/0
+
+  description To_SERE-Q00-MZE-ODT5508-TN-QD2_IvHjhF0/3/0/15_100H:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state slave-only
+
+  local-priority 10
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 105.10.100.183 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  selection input
+
+  priority 10
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/1
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/2
+
+  description To_SERE-Q14-MYCC-ODT5501-TN-SF1_IvHjhF0/0/1/1_100H:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 105.10.114.96 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/3
+
+  description To_SERE-Q14-MYCC-ODT5501-TN-SF2_IvHjhF0/0/1/1_100H:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 105.10.114.90 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/4
+
+  description To_SERE-Q14-MYXIB-ODT5501-TN-SF3_IvHjhF0/0/1/1_100H:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 105.10.114.134 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/5
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/6
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/7
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/8
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/9
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/10
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/11
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/12
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/13
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/14
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/15
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/16
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/17
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/18
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/19
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/20
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/21
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/22
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/23
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/24
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/25
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/26
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/27
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/28
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/29
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/30
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/31
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/32
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/33
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/34
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/35
+
+ shutdown
+
+!
+
+router isis 1000
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7212.00
+
+ distribute link-state instance-id 1000 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 100 level 2
+
+   prefix-sid index 751
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/0
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 41853881380ad83b083366670df90c1e
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/2
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted b9393ced000d19faa1c969ccc1669da2
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/3
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted b532302d02bdb01f561c2c6cb0e62ea2
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/4
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 41853881380ad83b083366670df90c1e
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+snmp-server traps isis adjacency-change
+
+snmp-server traps bgp
+
+router bgp 64585
+
+ nsr
+
+ bgp router-id 13.41.100.245
+ bgp log neighbor changes detail
+
+ ibgp policy out enforce-modifications
+
+ address-family vpnv4 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family vpnv6 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family l2vpn evpn
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ neighbor-group RR
+
+  remote-as 64585
+
+   password encrypted 9946fb8d3fe0d0ce99796f608cd2043b
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+  !
+
+  address-family vpnv6 unicast
+
+  !
+
+  address-family l2vpn evpn
+
+  !
+
+ !
+
+ neighbor 13.41.109.1
+  use neighbor-group RR
+
+ !
+
+ neighbor 13.41.109.2
+  use neighbor-group RR
+
+ !
+
+!
+
+mpls oam
+
+!
+
+segment-routing
+
+ global-block 24000 43999
+
+!
+
+netconf agent tty
+
+!
+
+snmp-server traps ospf state-change neighbor-state-change
+
+lldp
+
+!
+
+snmp-server traps fabric plane
+
+ssh server rate-limit 600
+
+ssh server session-limit 10
+
+ssh server v2
+
+ssh server netconf vrf default
+
+ipsla
+
+ operation 101
+
+  type udp jitter
+
+   destination address 13.41.109.2
+   destination port 6000
+
+  !
+
+ !
+
+ schedule operation 101
+
+  start-time now
+
+  life forever
+
+ !
+
+!
+
+end
+
+
+

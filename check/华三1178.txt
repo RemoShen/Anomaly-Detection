@@ -1,0 +1,2202 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 3606
+
+#
+
+mdc Admin id 1
+
+#
+
+  sysname RCWEW-ELP-3J-W12508V-WQ-G001
+
+#
+
+ip vpn-instance 5G_RAN
+
+ route-distinguisher 65245:10010
+
+ vpn-target 65245:10010 import-extcommunity
+
+ vpn-target 65245:10010 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65245:10010
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65245:10010
+
+#
+
+ip vpn-instance 5G_RAN_VIP
+
+ route-distinguisher 65245:10020
+
+ vpn-target 65245:10020 import-extcommunity
+
+ vpn-target 65245:10020 export-extcommunity
+
+ #
+
+
+
+               
+ address-family ipv4
+
+  route-distinguisher 65245:10020
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65245:10020
+
+#
+
+ telnet server enable
+
+ telnet server acl 3300
+
+#
+
+isis 100
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ mpls te enable
+
+ network-entity 86.5244.0100.0101.8505.1001.00
+
+#
+
+ mpls lsr-id 16.141.57.1
+
+#
+
+ lldp global enable
+
+#
+
+ system-working-mode standard
+
+ undo version auto-update enable
+
+
+
+               
+ version check ignore
+
+ password-recovery enable
+
+#
+
+vlan 1
+
+#
+
+vlan 875
+
+#
+
+vlan 1000
+
+#
+
+mpls ldp
+
+ lsr-id 16.141.57.1
+
+#
+
+interface Route-Aggregation2
+
+  description to_NCDG-OJU-3J-RI8OC8-WQ-G001_Ixl2_100K
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation2.10
+
+ mtu 9000
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 address AC80:09CB:4878:A798::CA/126
+
+#
+
+interface Route-Aggregation2.20
+
+ mtu 9000
+
+
+
+               
+ ip binding vpn-instance 5G_RAN_VIP
+
+ ipv6 address AC80:09CB:4878:A798::CE/126
+
+#
+
+interface Route-Aggregation10
+
+  description to_ITVER-WEW-EV1_PEK10_10K
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation10.875
+
+ mtu 9000
+
+ ip address 138.13.210.2 255.255.255.252
+
+#
+
+interface Route-Aggregation20
+
+  description to_NC-WEW-ECN-Q-1.QGR.GC600_wqevxkvsyt2_20K
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation20.53
+
+  description to_ NX-SZS-ZXJ-M-1.MCN.CX600_5G_RAN
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 address AC86:909:4990:A8::777A/126
+
+#
+
+interface Route-Aggregation20.55
+
+  description to_NC-WEW-ECN-Q-1.QGR.GC600_5K_VER_ZMT
+
+ ip binding vpn-instance 5G_RAN_VIP
+
+
+
+               
+ ipv6 address AC86:909:4990:B8::777A/126
+
+#
+
+interface Route-Aggregation1000
+
+  description to_NCWEW-DE-7J-W12508V-WQ-G002_FVK1000_100K
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation1000.1000
+
+ mtu 9000
+
+ ip address 138.13.219.1 255.255.255.252
+
+ isis enable 100
+
+ isis circuit-type p2p
+
+ isis bfd enable 
+
+ mpls enable
+
+ mpls ldp enable
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface NULL0
+
+#
+
+interface LoopBack0
+
+ ip address 16.141.57.1 255.255.255.255
+
+ isis enable 100
+
+
+
+               
+#
+
+interface FortyGigE4/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/6
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE4/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/18
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface FortyGigE4/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/5
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE5/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/17
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE5/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/29
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE5/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/7
+
+ port link-mode route
+
+  description to_NCDG-OJU-3J-RI8OC8-WQ-G001_100KI2/0/0_100KI
+
+ ip address 158.124.1.2 255.255.255.0
+
+ port link-aggregation group 2
+
+#
+
+interface HundredGigE4/0/8
+
+ port link-mode route
+
+#
+
+interface HundredGigE4/0/9
+
+ port link-mode route
+
+#
+
+interface HundredGigE4/0/10
+
+ port link-mode route
+
+#
+
+interface HundredGigE4/0/11
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface HundredGigE4/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/34
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface HundredGigE4/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/7
+
+ port link-mode route
+
+  description to_NCWEW-DE-7J-W12508V-WQ-G002_LKI5/0/7_100K
+
+ port link-aggregation group 1000
+
+#
+
+interface HundredGigE5/0/8
+
+ port link-mode route
+
+#
+
+interface HundredGigE5/0/9
+
+ port link-mode route
+
+#
+
+interface HundredGigE5/0/10
+
+ port link-mode route
+
+#
+
+
+
+               
+interface HundredGigE5/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/22
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface HundredGigE5/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/34
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE5/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE5/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface M-GigabitEthernet0/0/0
+
+#
+
+interface M-GigabitEthernet0/0/1
+
+#
+
+interface M-GigabitEthernet0/0/2
+
+#
+
+interface M-GigabitEthernet0/0/3
+
+ ip address 1.1.1.1 255.255.255.0
+
+#
+
+interface Ten-GigabitEthernet2/0/1
+
+ port link-mode route
+
+  description to_NC-WEW-ECN-Q-1.QGR.GC600_KmkefmxIxlivrix5/0/5_10K
+
+ port link-aggregation group 20
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet2/0/2
+
+ port link-mode route
+
+  description to_ITVER-WEW-EV1_PEK10_10K
+
+ port link-aggregation group 10
+
+#
+
+interface Ten-GigabitEthernet2/0/3
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/4
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/5
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/6
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/7
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/8
+
+ port link-mode route
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet2/0/9
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/10
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet2/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/20
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet2/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/26
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/32
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/37
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet2/0/38
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/39
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/40
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/41
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/42
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/43
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet2/0/44
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/45
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/46
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/47
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/48
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/1
+
+ port link-mode route
+
+
+
+               
+  description to_NC-WEW-ECN-Q-1.QGR.GC600_KmkefmxIxlivrix6/0/4_10K
+
+ port link-aggregation group 20
+
+#
+
+interface Ten-GigabitEthernet3/0/2
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/3
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/4
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/5
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/6
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/7
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/8
+
+ port link-mode route
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet3/0/9
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/10
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet3/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet3/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/20
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet3/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/26
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/32
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/37
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet3/0/38
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/39
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/40
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/41
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/42
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/43
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet3/0/44
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/45
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/46
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/47
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet3/0/48
+
+ port link-mode route
+
+ shutdown
+
+#
+
+bgp 65245
+
+ peer 16.141.57.2 as-number 65245
+
+
+
+               
+  peer 16.141.57.2 description NXSZW-DE-7J-W12508V-WQ-G002
+
+ peer 16.141.57.2 connect-interface LoopBack0
+
+ peer 138.13.210.1 as-number 38351
+
+  peer 138.13.210.1 description IPRAR-WEW-EV1
+
+ peer 138.13.210.1 bfd
+
+ peer 138.13.210.1 bfd parameters min-transmit-interval 150 min-receive-interval 150
+
+ #
+
+ address-family ipv4 unicast
+
+  aggregate 16.141.57.0 255.255.255.0
+
+  network 16.141.57.1 255.255.255.255
+
+  peer 16.141.57.2 enable
+
+  peer 16.141.57.2 route-policy rp_BNET_in import
+
+  peer 16.141.57.2 route-policy rp_BNET_out export
+
+  peer 138.13.210.1 enable
+
+  peer 138.13.210.1 route-policy rp_BNET_in import
+
+  peer 138.13.210.1 route-policy rp_BNET_out export
+
+ #
+
+ address-family vpnv4
+
+  peer 16.141.57.2 enable
+
+  peer 16.141.57.2 route-policy from_MCR import
+
+  peer 16.141.57.2 route-policy to_MCR export
+
+  peer 16.141.57.2 advertise-community
+
+ #
+
+
+
+               
+ address-family ipv6 unicast
+
+ #
+
+ address-family vpnv6
+
+  peer 16.141.57.2 enable
+
+  peer 16.141.57.2 route-policy from_MCR_v6 import
+
+  peer 16.141.57.2 route-policy to_MCR_v6 export
+
+  peer 16.141.57.2 advertise-community
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  peer AC80:09CB:4878:A798::C9 as-number 65244
+
+   peer AC80:09CB:4878:A798::C9 description NXYC-OJU-3J-RI8OC8-WQ-G001
+
+  peer AC80:09CB:4878:A798::C9 connect-interface Route-Aggregation2.10
+
+  peer AC86:909:4990:A8::7779 as-number 65369
+
+   peer AC86:909:4990:A8::7779 description NX-SEW-ECN-Q-1.QGR.GC600 
+
+  peer AC86:909:4990:A8::7779 connect-interface Route-Aggregation20.53
+
+  peer AC86:909:4990:A8::7779 bfd
+
+  peer AC86:909:4990:A8::7779 bfd parameters min-transmit-interval 150 min-receive-interval 150
+
+  #
+
+  address-family ipv6 unicast
+
+   peer AC80:09CB:4878:A798::C9 enable
+
+   peer AC80:09CB:4878:A798::C9 route-policy from_YC_5G_RAN_v6 import
+
+   peer AC80:09CB:4878:A798::C9 route-policy to_YC_5G_RAN_v6 export
+
+   peer AC80:09CB:4878:A798::C9 advertise-community
+
+
+
+               
+   peer AC86:909:4990:A8::7779 enable
+
+   peer AC86:909:4990:A8::7779 route-policy from_CT_5G_RAN_v6 import
+
+   peer AC86:909:4990:A8::7779 route-policy to_CT_5G_RAN_v6 export
+
+   peer AC86:909:4990:A8::7779 advertise-community
+
+ #
+
+ ip vpn-instance 5G_RAN_VIP
+
+  peer AC80:09CB:4878:A798::CD as-number 65244
+
+   peer AC80:09CB:4878:A798::CD description NXYC-OJU-3J-RI8OC8-WQ-G001
+
+  peer AC80:09CB:4878:A798::CD connect-interface Route-Aggregation2.20
+
+  peer AC86:909:4990:B8::7779 as-number 65369
+
+   peer AC86:909:4990:B8::7779 description NX-SEW-ECN-Q-1.QGR.GC600
+
+  peer AC86:909:4990:B8::7779 connect-interface Route-Aggregation20.55
+
+  peer AC86:909:4990:B8::7779 bfd
+
+  peer AC86:909:4990:B8::7779 bfd parameters min-transmit-interval 150 min-receive-interval 150
+
+  #
+
+  address-family ipv6 unicast
+
+   peer AC80:09CB:4878:A798::CD enable
+
+   peer AC80:09CB:4878:A798::CD route-policy from_YC_5G_RAN_VIP_v6 import
+
+   peer AC80:09CB:4878:A798::CD route-policy to_YC_5G_RAN_VIP_v6 export
+
+   peer AC80:09CB:4878:A798::CD advertise-community
+
+   peer AC86:909:4990:B8::7779 enable
+
+   peer AC86:909:4990:B8::7779 route-policy from_CT_5G_RAN_VIP_v6 import
+
+   peer AC86:909:4990:B8::7779 route-policy to_CT_5G_RAN_VIP_v6 export
+
+
+
+               
+   peer AC86:909:4990:B8::7779 advertise-community
+
+#
+
+route-policy from_CT_5G_RAN_VIP_v6 permit node 10
+
+ if-match ipv6 address prefix-list CT_5G_RAN_VIP_v6
+
+#
+
+route-policy from_CT_5G_RAN_v6 permit node 10
+
+ if-match ipv6 address prefix-list CT_5G_RAN_v6
+
+#
+
+route-policy from_MCR permit node 10
+
+ if-match ip address prefix-list nodefault
+
+#
+
+route-policy from_MCR_v6 permit node 10
+
+ if-match ipv6 address prefix-list nodefault-ipv6
+
+#
+
+route-policy from_YC_5G_RAN_VIP_v6 permit node 10
+
+ if-match ipv6 address prefix-list DC_5G_RAN_VIP_v6
+
+#
+
+route-policy from_YC_5G_RAN_v6 permit node 10
+
+ if-match ipv6 address prefix-list DC_5G_RAN_v6
+
+#
+
+route-policy rp_BNET_in permit node 1
+
+ if-match ip address prefix-list pl_BNET_in
+
+#
+
+
+
+               
+route-policy rp_BNET_out permit node 1
+
+ if-match ip address prefix-list pl_BNET_out
+
+#
+
+route-policy to_CT_5G_RAN_VIP_v6 permit node 10
+
+ if-match ipv6 address prefix-list DC_5G_RAN_VIP_v6
+
+#
+
+route-policy to_CT_5G_RAN_v6 permit node 10
+
+ if-match ipv6 address prefix-list DC_5G_RAN_v6
+
+#
+
+route-policy to_MCR permit node 10
+
+ if-match ip address prefix-list nodefault
+
+#
+
+route-policy to_MCR_v6 permit node 10
+
+ if-match ipv6 address prefix-list nodefault-ipv6
+
+#
+
+route-policy to_YC_5G_RAN_VIP_v6 permit node 10
+
+ if-match ipv6 address prefix-list SZS_5G_RAN_VIP_v6
+
+#
+
+route-policy to_YC_5G_RAN_v6 permit node 10
+
+ if-match ipv6 address prefix-list SZS_5G_RAN_v6
+
+#
+
+ ip prefix-list nodefault index 10 deny 0.0.0.0 0
+
+ ip prefix-list nodefault index 20 permit 0.0.0.0 0 less-equal 32
+
+
+
+               
+ ip prefix-list pl_BNET_in index 10 permit 158.124.210.0 24 less-equal 32
+
+ ip prefix-list pl_BNET_out index 10 permit 16.141.57.1 32
+
+ ip prefix-list pl_BNET_out index 20 permit 16.141.57.0 24 less-equal 32
+
+#
+
+ ipv6 prefix-list CT_5G_RAN_VIP_v6 index 10 permit AC80:09EB:4A88:9A:: 64
+
+ ipv6 prefix-list CT_5G_RAN_v6 index 10 permit AC80:09EB:4A88:98:: 64
+
+ ipv6 prefix-list DC_5G_RAN_VIP_v6 index 10 permit AC80:09CB:4878:9788:: 56
+
+ ipv6 prefix-list DC_5G_RAN_v6 index 10 permit AC80:09CB:4878:9788:: 56
+
+ ipv6 prefix-list DC_5G_RAN_v6 index 20 permit AC80:09CB:E877:7788:: 60
+
+ ipv6 prefix-list DC_5G_RAN_v6 index 30 permit AC80:09CB:E877:7798:: 60
+
+ ipv6 prefix-list DC_5G_RAN_v6 index 40 permit AC80:09CB:E877:7708:: 60
+
+ ipv6 prefix-list DC_5G_RAN_v6 index 50 permit AC80:09CB:E877:7718:: 60
+
+ ipv6 prefix-list SZS_5G_RAN_VIP_v6 index 10 permit AC80:09EB:4A88:9A:: 64
+
+ ipv6 prefix-list SZS_5G_RAN_v6 index 10 permit AC80:09EB:4A88:98:: 64
+
+ ipv6 prefix-list nodefault-ipv6 index 10 deny :: 0
+
+ ipv6 prefix-list nodefault-ipv6 index 20 permit :: 0 less-equal 128
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class aux
+
+ user-role network-admin
+
+#
+
+line class vty
+
+
+
+               
+ authentication-mode scheme
+
+ user-role level-15
+
+ user-role network-admin
+
+ user-role network-operator
+
+ idle-timeout 5 0
+
+#
+
+line aux 0 1
+
+ authentication-mode scheme
+
+ user-role network-admin
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+ user-role level-15
+
+ user-role network-admin
+
+ user-role network-operator
+
+ idle-timeout 5 0
+
+#
+
+ info-center loghost 1.1.1.2
+
+#
+
+ snmp-agent
+
+ snmp-agent local-engineid 800063A28078AA82CD0C0100000001
+
+ snmp-agent community read NXlt-read0950
+
+ snmp-agent community write NXlt-write0950
+
+
+
+               
+ snmp-agent acl 3200
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 158.124.210.32 params securityname NXlt-read0950 v2c
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+ snmp-agent trap source LoopBack0
+
+#
+
+ ssh server enable
+
+ ssh user h3c service-type stelnet authentication-type password
+
+ ssh user nxszsmcr service-type stelnet authentication-type password
+
+ ssh server acl 3300
+
+#
+
+acl advanced 3200
+
+ rule 5 permit ip source 158.124.210.32 0
+
+ rule 10 permit ip source 158.124.210.0 0.0.0.255
+
+#
+
+acl advanced 3300
+
+ rule 5 permit ip source 158.124.210.0 0.0.0.255
+
+ rule 10 permit ip source 1.1.1.0 0.0.0.255
+
+#
+
+domain name system
+
+#
+
+
+
+               
+ domain default enable system
+
+#
+
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+  description Predefined level-4 role
+
+#
+
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+role name level-6
+
+  description Predefined level-6 role
+
+#
+
+
+
+               
+role name level-7
+
+  description Predefined level-7 role
+
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+role name level-12
+
+  description Predefined level-12 role
+
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+#
+
+role name level-14
+
+  description Predefined level-14 role
+
+
+
+               
+#
+
+user-group system
+
+#
+
+local-user h3c class manage
+
+  password hash 2570c277e5c5bfbd9127f76eecc4d082
+
+ service-type ftp
+
+ service-type ssh telnet terminal
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role context-admin
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user nxszsmcr class manage
+
+  password hash 7247a7b567b73222b72fe814e00c4ac4
+
+ service-type ssh terminal
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+ ftp server enable
+
+#
+
+return
+

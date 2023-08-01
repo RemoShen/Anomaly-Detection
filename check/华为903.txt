@@ -1,0 +1,1364 @@
+display current-configuration
+!Software Version V800R011C00SPC700
+!Last configuration was updated at 2020-12-29 14:05:49+08:00 by linshi
+!Last configuration was saved at 2021-01-15 00:04:28+08:00 by linshi
+#
+clock timezone BJ add 08:00:00
+#
+sysname PFWX-TY-2B-XT600T8V-OI-Z072
+#
+set neid 73cf7a
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+info-center source default channel 0 log state off
+info-center source default channel 2 log level warning
+info-center source default channel 4 log level notification
+info-center loghost source LoopBack0
+info-center logbuffer size 1024
+#
+set service-mode forwarding-mode enhance
+#
+slave batch-backup self-healing-timeout 600
+#
+[16D                [16Dport-wred af4-cs7-pq-10G
+ queue-depth 1000
+#
+port-wred beaf3-10G
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2-10G
+ queue-depth 2000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af4-cs7-pq
+ queue-depth 2000
+#
+port-wred beaf3
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+[16D                [16Dport-wred af1-af2
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+service-template template-default0
+#
+service-template template-default1
+#
+service-template template-default2
+#
+service-template template-default3
+#
+service-template template-default4
+#
+ntp-service ipv6 server disable
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+ ntp-service authentication-keyid 1 authentication-mode md5 cipher 5d6e3ec7087bf4012e286a263591aad1
+ntp-service reliable authentication-keyid 1
+ntp-service unicast-server 19.13.0.1 authentication-keyid 1 source-interface LoopBack0
+ntp-service unicast-server 19.13.0.2 authentication-keyid 1 source-interface LoopBack0 preference
+[16D                [16Dntp-service authentication enable
+ntp-service server source-interface LoopBack0
+ntp-service source-interface LoopBack0
+#
+alarm
+ suppression alarm-name hwMplsTunnelHotstandbySwitch cause-period 60
+ suppression alarm-name hwBfdSessFaultDown cause-period 600
+ suppression alarm-name hwPortDown cause-period 5
+ suppression alarm-name hwLosAlarm cause-period 5
+ suppression alarm-name hwIfFlowDown cause-period 60
+ suppression alarm-name hwIfFlowDown clear-period 60
+ suppression alarm-name hwCposE1DownE1AisAlarm cause-period 60
+ suppression alarm-name hwPWVcDown cause-period 60
+ suppression alarm-name hwPWVcDown clear-period 60
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand cause-period 600
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand clear-period 600
+#
+rsa peer-public-key 19.13.180.3
+ public-key-code begin
+ 3082010A
+  02820101
+    00C341E6 892DA57D C3034DA7 4654385F 4A5683AD C9250AEF 9D855B39 CA82F778
+    A55669E5 352C19B0 5E4CE83E 4A34AFEA 836EDA72 A8BA3F96 3AC31A2A 2DF76D58
+[16D                [16D    370A59DA 5F481F6A 815126EC AECF9092 B10C523E 96B45A37 28DB01BB 74C4527F
+    50D23706 B582D0A6 C97AED9C C089D301 318FC239 E1D0767C 4D9EB118 A8B1D382
+    78F351A9 3BC4DC92 A99BF37B 26D8E871 83A276D6 727C52CC C69009F8 74DF336C
+    C645F788 51E8B431 C6378DDC 6A40C826 8331AA54 2596FE51 66A1248F AA2C8D88
+    A0C9B436 64953B85 54652D94 0A0C113A 1FECFF71 73027E4C 55AAD418 F9CF7860
+    D543DE74 CA96C6ED DA09CC9D 2BEBB10C 3D701B99 35C799A1 5C6685FD 714242B4
+    4B
+  0203
+    010001
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 19.13.180.3
+ public-key-code begin
+  049D259C 89190623 95B8DAAF 24E4F087 9A5A0A03 EC675D37 96D48105 2F04C6D8
+  604831B3 21801D1E 5C130CB1 342F3E63 AC99DBE4 AC8BD1C2 8C7C75ED B91BA9E4
+  77
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 117.298.139.117
+ public-key-code begin
+  0401C725 CD498DD4 59674533 68059131 75F67BF5 82E82F6F 36933739 8D1A9B2F
+[16D                [16D  62C9F632 9BDF0243 59682BFA EEE38F8E 7DAF1766 9972FFB2 F7FA3196 D392461A
+  C4FE9600 4E0070C0 8045284E 91861BA6 EF5308A9 42BE7EEC AF153C31 A3363B8B
+  AD5BC77F 698A19F1 A483D9D7 773C41C1 3B679871 98CD74A0 60A26BDA 38F63ECA
+  015B1A00 0E
+ public-key-code end
+ peer-public-key end
+#
+ipv6 route recursive-lookup inherit-label-route enable
+#
+undo telnet ipv6 server enable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+#
+diffserv domain 5p3d
+#
+soc
+#
+ip vpn-instance 3G_RAN
+ ipv4-family
+  route-distinguisher 64513:18040
+  vpn frr
+[16D                [16D  tnl-policy SmartMAN
+  apply-label per-instance
+  transit-vpn
+  vpn-target 64513:18040 export-extcommunity
+  vpn-target 64513:18040 import-extcommunity
+#
+ip vpn-instance 4G_RAN
+ ipv4-family
+  route-distinguisher 64513:120000
+  vpn frr
+  tnl-policy SmartMAN
+  apply-label per-instance
+  transit-vpn
+  vpn-target 64513:120000 export-extcommunity
+  vpn-target 64513:120000 import-extcommunity
+#
+ip vpn-instance 5G_OAM
+ ipv6-family
+  route-distinguisher 64513:120005
+  vpn frr
+  tnl-policy SmartMAN
+  apply-label per-instance
+  transit-vpn
+[16D                [16D  vpn-target 64513:120005 export-extcommunity
+  vpn-target 64513:120005 import-extcommunity
+#
+ip vpn-instance 5G_RAN
+ ipv6-family
+  route-distinguisher 64513:10010
+  vpn frr
+  tnl-policy SmartMAN
+  apply-label per-instance
+  transit-vpn
+  vpn-target 64513:10010 export-extcommunity
+  vpn-target 64513:10010 import-extcommunity
+#
+ip vpn-instance 5G_RAN_VIP
+ ipv6-family
+  route-distinguisher 64513:10020
+  vpn frr
+  tnl-policy SmartMAN
+  apply-label per-instance
+  transit-vpn
+  vpn-target 64513:10020 export-extcommunity
+  vpn-target 64513:10020 import-extcommunity
+#
+[16D                [16Dip dcn vpn-instance __dcn_vpn__
+ ipv4-family
+  route-distinguisher 64513:120010
+  apply-label per-route
+  vpn-target 64513:120010 export-extcommunity
+  vpn-target 64513:120010 import-extcommunity
+#
+tunnel-selector SmartMAN permit node 10
+ apply tunnel-policy SmartMAN
+#
+bfd
+ mpls-passive
+#
+mpls lsr-id 19.13.63.4
+#
+mpls
+#
+dhcp server request-packet all-interface disable
+#
+acl number 2000
+  description This acl is used in snmp
+ rule 10 permit source 19.13.180.3 0
+ rule 20 permit source 181.157.243.0 0.0.0.255
+[16D                [16D rule 1000 deny
+#
+acl number 2005
+ rule 10 permit source 19.13.180.0 0.0.0.255
+ rule 20 permit source 19.14.1.87 0.0.0.3
+ rule 30 permit source 19.14.1.91 0.0.0.3
+ rule 40 permit source 181.157.243.0 0.0.0.255
+ rule 50 permit source 19.239.31.8 0.0.0.7
+ rule 60 permit vpn-instance __dcn_vpn__ source 19.239.32.15 0.0.0.7
+ rule 70 permit vpn-instance __dcn_vpn__ source 19.239.32.31 0.0.0.7
+#
+security password
+ #
+ rule admin
+  forbidden word changeme_123
+#
+aaa
+  local-user linshi password irreversible-cipher $1c$MGO;Ixxe'7$F;4c5J{wK2TLsN,L96"%_]/.7*ojt&+ge1,Jmzu-$   local-user linshi password irreversible-cipher 0c4dc9cd1a8cb76e69f2f87abecf6acf
+ local-user linshi service-type terminal ssh
+ local-user linshi level 3
+ local-user linshi state block fail-times 3 interval 5
+ local-user linshi user-group manage-ug
+  local-user tj-tj-sdncontroler password irreversible-cipher $1c$qa%o@a51W6$q*.3Fj6jrVJWrzSZe+`FefDt<T5lkVE-t@=59"Y$$   local-user tj-tj-sdncontroler password irreversible-cipher a47125f0122e5f9a23727df60feaa5a4
+[16D                [16D local-user tj-tj-sdncontroler service-type terminal ssh
+ local-user tj-tj-sdncontroler level 3
+ local-user tj-tj-sdncontroler state block fail-times 3 interval 5
+ local-user tj-tj-sdncontroler user-group manage-ug
+  local-user tj-tj-manager password irreversible-cipher $1c$,!T\4&&q<.$gc"|PKRYZ"2PYUW4|[d(VPW0UXF,!)uD},(Uj\K&$   local-user tj-tj-manager password irreversible-cipher 3022671e11c68d6f026e330f8fc02dd4
+ local-user tj-tj-manager service-type terminal ssh
+ local-user tj-tj-manager level 3
+ local-user tj-tj-manager state block fail-times 3 interval 5
+ local-user tj-tj-manager user-group manage-ug
+  local-user support password irreversible-cipher $1c$W=IZW`g/5;$.i[4Z=FR|QW[a2LlEQ1A+)|eL,)ns:AiL]Ak,[*W$   local-user support password irreversible-cipher 43eaa457d52e87c9faf16bd5a3ece21f
+ local-user support service-type terminal ssh
+ local-user support level 3
+ local-user support state block fail-times 3 interval 5
+ local-user support user-group manage-ug
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+  authentication-mode local radius
+ #
+ authorization-scheme default
+[16D                [16D #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+#
+license
+#
+segment-routing
+ bfd enable mode tunnel filter-policy ip-prefix MCR-MER-Loopback
+ bfd tunnel min-tx-interval 50 min-rx-interval 50
+#
+isis 1
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+[16D                [16D bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.4513.0001.0100.1406.4004.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name PFWX-TY-2B-XT600T8V-OI-Z072-EOEO1
+ import-route isis 1000 cost 10000 route-policy MER-to-MAR-ISIS
+ preference route-policy Pref-ISIS
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ avoid-microloop segment-routing rib-update-delay 20000
+ set-overload on-startup allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+isis 2
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+[16D                [16D bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.4513.0002.0100.1406.4004.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name PFWX-TY-2B-XT600T8V-OI-Z072-EOEO2
+ import-route isis 1000 cost 10000 route-policy MER-to-MAR-ISIS
+ preference route-policy Pref-ISIS
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ avoid-microloop segment-routing rib-update-delay 20000
+ set-overload on-startup allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+isis 3
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+[16D                [16D flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.4513.0003.0100.1406.4004.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name PFWX-TY-2B-XT600T8V-OI-Z072-EOEO3
+ import-route isis 1000 cost 10000 route-policy MER-to-MAR-ISIS
+ preference route-policy Pref-ISIS
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ avoid-microloop segment-routing rib-update-delay 20000
+ set-overload on-startup allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+isis 4
+ is-level level-2
+ cost-style wide
+[16D                [16D timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.4513.0004.0100.1406.4004.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name PFWX-TY-2B-XT600T8V-OI-Z072-EOEO4
+ import-route isis 1000 cost 10000 route-policy MER-to-MAR-ISIS
+ preference route-policy Pref-ISIS
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ avoid-microloop segment-routing rib-update-delay 20000
+ set-overload on-startup allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+isis 16
+ is-level level-2
+[16D                [16D cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.4513.0016.0100.1406.4004.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name PFWX-TY-2B-XT600T8V-OI-Z072-EOEO16
+ import-route isis 1000 cost 10000 route-policy MER-to-MAR-ISIS
+ preference route-policy Pref-ISIS
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ avoid-microloop segment-routing rib-update-delay 20000
+ set-overload on-startup allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+isis 1000
+[16D                [16D is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.4513.1000.0100.1406.4004.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name PFWX-TY-2B-XT600T8V-OI-Z072-EOEO1000
+ import-route isis 1 cost 10000 no-sid route-policy MAR-to-MER-ISIS
+ import-route isis 2 cost 10000 no-sid route-policy MAR-to-MER-ISIS
+ import-route isis 3 cost 10000 no-sid route-policy MAR-to-MER-ISIS
+ import-route isis 4 cost 10000 no-sid route-policy MAR-to-MER-ISIS
+ import-route isis 16 cost 10000 no-sid route-policy MAR-to-MER-ISIS
+ preference route-policy Pref-ISIS
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ avoid-microloop segment-routing rib-update-delay 20000
+ set-overload on-startup allow external
+[16D                [16D frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+interface GigabitEthernet0/0/0
+ speed auto
+ duplex auto
+ shutdown
+#
+interface GigabitEthernet1/0/0
+ carrier up-hold-time 2000
+  description To_TFWX-TY-2B-980X-OI-V1-TevkYevj-10CZ0/2/0
+ undo shutdown
+ trust upstream default
+ dcn
+ port-queue be wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af3 wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+[16D                [16D qos phb disable
+#
+interface GigabitEthernet1/0/0.16
+ vlan-type dot1q 16
+ mtu 9000
+  description To_TFWX-TY-2B-980X-OI-V1-TevkYevj-10CZ0/2/0.16
+ ip address 19.14.75.6 255.255.255.252
+ statistic enable
+ isis enable 16
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher ba593033453e3797864623c4a965eda4
+ isis cost 100
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface GigabitEthernet1/0/1
+ carrier up-hold-time 2000
+  description To_TFWX-TY-2B-980X-OI-V2-TevkYevj-10CZ0/2/0
+ undo shutdown
+ trust upstream default
+ dcn
+ port-queue be wfq weight 30 port-wred beaf3-10G outbound
+[16D                [16D port-queue af1 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af3 wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ qos phb disable
+#
+interface GigabitEthernet1/0/1.3
+ vlan-type dot1q 3
+ mtu 9000
+  description To_TFWX-TY-2B-980X-OI-V2-TevkYevj-10CZ0/2/0.3
+ ip address 19.14.75.17 255.255.255.252
+ statistic enable
+ isis enable 3
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 3b690a60e15b3eff2a31f7df3dc61f2e
+ isis cost 100
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+[16D                [16Dinterface GigabitEthernet1/0/2
+ carrier up-hold-time 2000
+  description To_TFWX-TY-2B-980X-OI-V3-TevkYevj-10CZ0/2/0
+ undo shutdown
+ trust upstream default
+ dcn
+ port-queue be wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af3 wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ qos phb disable
+#
+interface GigabitEthernet1/0/2.4
+ vlan-type dot1q 4
+ mtu 9000
+  description To_TFWX-TY-2B-980X-OI-V3-TevkYevj-10CZ0/2/0.4
+ ip address 19.14.75.39 255.255.255.252
+ statistic enable
+ isis enable 4
+[16D                [16D isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 6db1322596f665d9cfcc5a6156595a05
+ isis cost 100
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface GigabitEthernet1/0/3
+ shutdown
+ dcn
+#
+interface GigabitEthernet1/0/4
+ shutdown
+#
+interface GigabitEthernet1/0/5
+ shutdown
+#
+interface GigabitEthernet1/0/6
+ shutdown
+#
+interface GigabitEthernet1/0/7
+ shutdown
+#
+[16D                [16Dinterface GigabitEthernet1/0/8
+ shutdown
+#
+interface GigabitEthernet1/0/9
+ shutdown
+#
+interface GigabitEthernet1/0/10
+ shutdown
+#
+interface GigabitEthernet1/0/11
+ shutdown
+#
+interface GigabitEthernet1/0/12
+ shutdown
+#
+interface GigabitEthernet1/0/13
+ shutdown
+#
+interface GigabitEthernet1/0/14
+ shutdown
+#
+interface GigabitEthernet1/0/15
+ shutdown
+[16D                [16D#
+interface GigabitEthernet1/0/16
+ shutdown
+#
+interface GigabitEthernet1/0/17
+ shutdown
+#
+interface GigabitEthernet1/0/18
+ shutdown
+#
+interface GigabitEthernet1/0/19
+ shutdown
+#
+interface GigabitEthernet1/0/20
+ carrier up-hold-time 2000
+  description To_TFWX-JSL-1B-980X-OI-V1-JvjSvjcLejc-10CZ0/2/0
+ undo shutdown
+ trust upstream default
+ dcn
+ port-queue be wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af3 wfq weight 30 port-wred beaf3-10G outbound
+[16D                [16D port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ qos phb disable
+#
+interface GigabitEthernet1/0/20.1
+ vlan-type dot1q 1
+ mtu 9000
+  description To_TFWX-JSL-1B-980X-OI-V1-JvjSvjcLejc-10CZ0/2/0.1
+ ip address 19.14.75.77 255.255.255.252
+ statistic enable
+ isis enable 1
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 071f28fb3373b24ac462104773c30a28
+ isis cost 100
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface GigabitEthernet1/0/21
+ carrier up-hold-time 2000
+  description To_TFWX-OFF-2B-980X-OI-V3-OdqvjcFezFq-10CZ0/2/0
+[16D                [16D undo shutdown
+ trust upstream default
+ dcn
+ port-queue be wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10G outbound
+ port-queue af3 wfq weight 30 port-wred beaf3-10G outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10G outbound
+ qos phb disable
+#
+interface GigabitEthernet1/0/21.2
+ vlan-type dot1q 2
+ mtu 9000
+  description To_TFWX-OFF-2B-980X-OI-V3-OdqvjcFezFq-10CZ0/2/0.2
+ ip address 19.14.75.143 255.255.255.252
+ statistic enable
+ isis enable 2
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 02849e70ff095db0ced2cb83603ae2d3
+[16D                [16D isis cost 100
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface GigabitEthernet1/0/22
+ shutdown
+#
+interface GigabitEthernet1/0/23
+ shutdown
+#
+interface GigabitEthernet1/0/24
+ shutdown
+#
+interface GigabitEthernet1/0/25
+ shutdown
+#
+interface GigabitEthernet1/0/26
+ shutdown
+#
+interface GigabitEthernet1/0/27
+ shutdown
+#
+interface GigabitEthernet1/0/28
+[16D                [16D shutdown
+#
+interface GigabitEthernet1/0/29
+ shutdown
+#
+interface GigabitEthernet1/0/30
+ shutdown
+#
+interface GigabitEthernet1/0/31
+ shutdown
+#
+interface GigabitEthernet1/0/32
+ shutdown
+#
+interface GigabitEthernet1/0/33
+ shutdown
+#
+interface GigabitEthernet1/0/34
+ shutdown
+#
+interface GigabitEthernet1/0/35
+ shutdown
+#
+[16D                [16Dinterface GigabitEthernet1/0/36
+ shutdown
+#
+interface GigabitEthernet1/0/37
+ shutdown
+#
+interface GigabitEthernet1/0/38
+ shutdown
+#
+interface GigabitEthernet1/0/39
+ shutdown
+#
+interface 50|100GE4/0/0
+ port-speed 100GE
+ carrier up-hold-time 2000
+  description To_TFDW-TOH-3B-VT9G18ZV-OI-X002-xcze-0/5/0/3
+ undo shutdown
+ trust upstream default
+ undo dcn
+ port-queue be wfq weight 30 port-wred beaf3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred beaf3 outbound
+[16D                [16D port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+#
+interface 50|100GE4/0/0.1000
+ vlan-type dot1q 1000
+ mtu 9000
+  description To_TFDW-TOH-3B-VT9G18ZV-OI-X002-xcze-0/5/0/3.1000
+ ip address 19.14.1.88 255.255.255.252
+ statistic enable
+ isis enable 1000
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 64bbc3de8bfd5e35e7fe7a3f53a994ff
+ isis cost 100
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface 50|100GE4/0/2
+ port-speed 100GE
+ shutdown
+[16D                [16D dcn
+#
+interface 50|100GE4/0/4
+ port-speed 100GE
+ shutdown
+#
+interface 50|100GE4/0/6
+ port-speed 100GE
+ shutdown
+#
+interface 50|100GE5/0/0
+ port-speed 100GE
+ carrier up-hold-time 2000
+  description To_TPFWX-TY-2B-XT600T8V-OI-Z071
+ undo shutdown
+ trust upstream default
+ dcn
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred beaf3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+[16D                [16D port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+#
+interface 50|100GE5/0/0.1
+ vlan-type dot1q 1
+ mtu 9000
+  description To_TPFWX-TY-2B-XT600T8V-OI-Z071-50|100CZ5/0/0.1
+ ip address 19.14.75.80 255.255.255.252
+ statistic enable
+ isis enable 1
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 096b673adaebec44f4d3c64a6e02d458
+ isis cost 2000
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface 50|100GE5/0/0.2
+ vlan-type dot1q 2
+ mtu 9000
+  description To_TPFWX-TY-2B-XT600T8V-OI-Z071-50|100CZ5/0/0.2
+ ip address 19.14.75.130 255.255.255.252
+ statistic enable
+[16D                [16D isis enable 2
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 5cd1a96bf24133be2d9af50335d68df9
+ isis cost 2000
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface 50|100GE5/0/0.3
+ vlan-type dot1q 3
+ mtu 9000
+  description To_TFWX-TY-2B-XT600T8V-OI-Z071-50|100CZ5/0/0.3
+ ip address 19.14.75.20 255.255.255.252
+ statistic enable
+ isis enable 3
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher b4cbf4a015caf45627f4e15c3fce0431
+ isis cost 2000
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface 50|100GE5/0/0.4
+[16D                [16D vlan-type dot1q 4
+ mtu 9000
+  description To_TFWX-TY-2B-XT600T8V-OI-Z071-50|100CZ5/0/0.4
+ ip address 19.14.75.32 255.255.255.252
+ statistic enable
+ isis enable 4
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 254fed7597646683b7fa47d5287ee4a0
+ isis cost 2000
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface 50|100GE5/0/0.16
+ vlan-type dot1q 16
+ mtu 9000
+  description To_TPFWX-TY-2B-XT600T8V-OI-Z071-50|100CZ5/0/0.16
+ ip address 19.14.75.9 255.255.255.252
+ statistic enable
+ isis enable 16
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher 989f452d7c27acde4d94120ac77c2b7b
+[16D                [16D isis cost 2000
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface 50|100GE5/0/0.1000
+ vlan-type dot1q 1000
+ mtu 9000
+  description To_TPFWX-TY-2B-XT600T8V-OI-Z071-50|100CZ5/0/0.1000
+ ip address 19.14.1.93 255.255.255.252
+ statistic enable
+ isis enable 1000
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher ee6e749e4076382b5d316cf013f70973
+ isis cost 50
+ isis peer hold-max-cost timer 60000
+ mpls
+#
+interface 50|100GE5/0/2
+ port-speed 100GE
+ shutdown
+ dcn
+#
+[16D                [16Dinterface 50|100GE5/0/4
+ port-speed 100GE
+ shutdown
+#
+interface 50|100GE5/0/6
+ port-speed 100GE
+ shutdown
+#
+interface LoopBack0
+  description for_Ivjvczizjp
+ ip address 19.13.63.4 255.255.255.255
+ isis enable 1000
+ isis prefix-sid index 204
+#
+interface LoopBack2147483647
+  description DCN loopback interface
+ ip binding vpn-instance __dcn_vpn__
+ ip address 117.104.296.111 255.255.0.0
+#
+interface NULL0
+#
+bgp 64513
+ router-id 19.13.63.4
+[16D                [16D graceful-restart
+ graceful-restart peer-reset
+ group MCR internal
+ peer MCR connect-interface LoopBack0
+  peer MCR password cipher 6efa3379ac84fb1359c3f0f2fc64bf65
+ peer 19.13.0.3 as-number 64513
+ peer 19.13.0.3 group MCR
+ peer 19.13.0.4 as-number 64513
+ peer 19.13.0.4 group MCR
+ group TJBC-SM-R17 internal
+ peer TJBC-SM-R17 connect-interface LoopBack0
+  peer TJBC-SM-R17 password cipher 586921a2398c4c43b8bc25b6f55aa827
+ peer 19.13.68.15 as-number 64513
+ peer 19.13.68.15 group TJBC-SM-R17
+ peer 19.13.68.16 as-number 64513
+ peer 19.13.68.16 group TJBC-SM-R17
+ peer 19.13.68.17 as-number 64513
+ peer 19.13.68.17 group TJBC-SM-R17
+ peer 19.13.68.18 as-number 64513
+ peer 19.13.68.18 group TJBC-SM-R17
+ peer 19.13.68.29 as-number 64513
+ peer 19.13.68.29 group TJBC-SM-R17
+ group TJBC-SM-R4 internal
+[16D                [16D peer TJBC-SM-R4 connect-interface LoopBack0
+  peer TJBC-SM-R4 password cipher 0db30700777182da88932513d653f01c
+ peer 19.13.68.31 as-number 64513
+ peer 19.13.68.31 group TJBC-SM-R4
+ peer 19.13.68.32 as-number 64513
+ peer 19.13.68.32 group TJBC-SM-R4
+ peer 19.13.68.33 as-number 64513
+ peer 19.13.68.33 group TJBC-SM-R4
+ peer 19.13.68.34 as-number 64513
+ peer 19.13.68.34 group TJBC-SM-R4
+ peer 19.13.68.35 as-number 64513
+ peer 19.13.68.35 group TJBC-SM-R4
+ group TJBCXD-XIAGUA-1 internal
+ peer TJBCXD-XIAGUA-1 connect-interface LoopBack0
+  peer TJBCXD-XIAGUA-1 password cipher f8816e71c868649ba44ed352bd8dd5e3
+ peer 19.13.68.1 as-number 64513
+ peer 19.13.68.1 group TJBCXD-XIAGUA-1
+ group TJBCXD-XIAGUA-2 internal
+ peer TJBCXD-XIAGUA-2 connect-interface LoopBack0
+  peer TJBCXD-XIAGUA-2 password cipher 74089597367a33c53d5531491e0eaf13
+ peer 19.13.68.2 as-number 64513
+ peer 19.13.68.2 group TJBCXD-XIAGUA-2
+ group TJBCXD-XIAGUA-3 internal
+[16D                [16D peer TJBCXD-XIAGUA-3 connect-interface LoopBack0
+  peer TJBCXD-XIAGUA-3 password cipher 3723a0b5087de50e4a332bec7da08280
+ peer 19.13.68.3 as-number 64513
+ peer 19.13.68.3 group TJBCXD-XIAGUA-3
+ #
+ ipv4-family unicast
+  undo synchronization
+  undo peer MCR enable
+  undo peer TJBCXD-XIAGUA-1 enable
+  undo peer TJBC-SM-R17 enable
+  undo peer TJBC-SM-R4 enable
+  undo peer TJBCXD-XIAGUA-2 enable
+  undo peer TJBCXD-XIAGUA-3 enable
+  undo peer 19.13.0.3 enable
+  undo peer 19.13.0.4 enable
+  undo peer 19.13.68.1 enable
+  undo peer 19.13.68.2 enable
+  undo peer 19.13.68.3 enable
+  undo peer 19.13.68.15 enable
+  undo peer 19.13.68.16 enable
+  undo peer 19.13.68.17 enable
+  undo peer 19.13.68.18 enable
+  undo peer 19.13.68.29 enable
+[16D                [16D  undo peer 19.13.68.31 enable
+  undo peer 19.13.68.32 enable
+  undo peer 19.13.68.33 enable
+  undo peer 19.13.68.34 enable
+  undo peer 19.13.68.35 enable
+ #
+ ipv4-family vpnv4
+  reflect change-path-attribute
+  policy vpn-target
+  auto-frr
+  tunnel-selector SmartMAN
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  label-free delay 5
+  peer MCR enable
+  peer MCR route-policy to-MCR-BGP export
+  peer MCR next-hop-local
+  peer MCR advertise-community
+  peer MCR route-update-interval 0
+  peer MCR capability-advertise add-path receive
+  peer 19.13.0.3 enable
+  peer 19.13.0.3 group MCR
+  peer 19.13.0.4 enable
+[16D                [16D  peer 19.13.0.4 group MCR
+  peer TJBC-SM-R17 enable
+  peer TJBC-SM-R17 route-policy from-MAR-BGP import
+  peer TJBC-SM-R17 route-policy TO_MAR_OUT_IPv4_1 export
+  peer TJBC-SM-R17 reflect-client
+  peer TJBC-SM-R17 route-update-interval 0
+  peer 19.13.68.15 enable
+  peer 19.13.68.15 group TJBC-SM-R17
+  peer 19.13.68.16 enable
+  peer 19.13.68.16 group TJBC-SM-R17
+  peer 19.13.68.17 enable
+  peer 19.13.68.17 group TJBC-SM-R17
+  peer 19.13.68.18 enable
+  peer 19.13.68.18 group TJBC-SM-R17
+  peer 19.13.68.29 enable
+  peer 19.13.68.29 group TJBC-SM-R17
+  peer TJBC-SM-R4 enable
+  peer TJBC-SM-R4 route-policy from-MAR-BGP import
+  peer TJBC-SM-R4 route-policy TO_MAR_OUT_IPv4_2 export
+  peer TJBC-SM-R4 reflect-client
+  peer TJBC-SM-R4 route-update-interval 0
+  peer 19.13.68.31 enable
+  peer 19.13.68.31 group TJBC-SM-R4
+[16D                [16D  peer 19.13.68.32 enable
+  peer 19.13.68.32 group TJBC-SM-R4
+  peer 19.13.68.33 enable
+  peer 19.13.68.33 group TJBC-SM-R4
+  peer 19.13.68.34 enable
+  peer 19.13.68.34 group TJBC-SM-R4
+  peer 19.13.68.35 enable
+  peer 19.13.68.35 group TJBC-SM-R4
+  peer TJBCXD-XIAGUA-1 enable
+  peer TJBCXD-XIAGUA-1 route-policy from-MAR-BGP import
+  peer TJBCXD-XIAGUA-1 route-policy TO_MAR_OUT_IPv4_16 export
+  peer TJBCXD-XIAGUA-1 reflect-client
+  peer TJBCXD-XIAGUA-1 route-update-interval 0
+  peer 19.13.68.1 enable
+  peer 19.13.68.1 group TJBCXD-XIAGUA-1
+  peer TJBCXD-XIAGUA-2 enable
+  peer TJBCXD-XIAGUA-2 route-policy from-MAR-BGP import
+  peer TJBCXD-XIAGUA-2 route-policy TO_MAR_OUT_IPv4_3 export
+  peer TJBCXD-XIAGUA-2 reflect-client
+  peer TJBCXD-XIAGUA-2 route-update-interval 0
+  peer 19.13.68.2 enable
+  peer 19.13.68.2 group TJBCXD-XIAGUA-2
+  peer TJBCXD-XIAGUA-3 enable
+[16D                [16D  peer TJBCXD-XIAGUA-3 route-policy from-MAR-BGP import
+  peer TJBCXD-XIAGUA-3 route-policy TO_MAR_OUT_IPv4_4 export
+  peer TJBCXD-XIAGUA-3 reflect-client
+  peer TJBCXD-XIAGUA-3 route-update-interval 0
+  peer 19.13.68.3 enable
+  peer 19.13.68.3 group TJBCXD-XIAGUA-3
+ #
+ ipv4-family vpn-instance 3G_RAN
+  network 0.0.0.0 route-policy SET_DEF_ROUTE_v4
+  maximum load-balancing ibgp 2
+ #
+ ipv4-family vpn-instance 4G_RAN
+  network 0.0.0.0 route-policy SET_DEF_ROUTE_v4
+  maximum load-balancing ibgp 2
+ #
+ ipv4-family vpn-instance __dcn_vpn__
+  import-route direct
+  import-route ospf 65534
+ #
+ ipv6-family vpnv6
+  reflect change-path-attribute
+  policy vpn-target
+  auto-frr
+[16D                [16D  tunnel-selector SmartMAN
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  label-free delay 5
+  peer MCR enable
+  peer MCR route-policy to-MCR-v6-BGP export
+  peer MCR next-hop-local
+  peer MCR advertise-community
+  peer MCR route-update-interval 0
+  peer MCR capability-advertise add-path receive
+  peer 19.13.0.3 enable
+  peer 19.13.0.3 group MCR
+  peer 19.13.0.4 enable
+  peer 19.13.0.4 group MCR
+  peer TJBC-SM-R17 enable
+  peer TJBC-SM-R17 route-policy from-MAR-v6-BGP import
+  peer TJBC-SM-R17 route-policy TO_MAR_OUT_IPv6_1 export
+  peer TJBC-SM-R17 reflect-client
+  peer TJBC-SM-R17 route-update-interval 0
+  peer 19.13.68.15 enable
+  peer 19.13.68.15 group TJBC-SM-R17
+  peer 19.13.68.16 enable
+  peer 19.13.68.16 group TJBC-SM-R17
+[16D                [16D  peer 19.13.68.17 enable
+  peer 19.13.68.17 group TJBC-SM-R17
+  peer 19.13.68.18 enable
+  peer 19.13.68.18 group TJBC-SM-R17
+  peer 19.13.68.29 enable
+  peer 19.13.68.29 group TJBC-SM-R17
+  peer TJBC-SM-R4 enable
+  peer TJBC-SM-R4 route-policy from-MAR-v6-BGP import
+  peer TJBC-SM-R4 route-policy TO_MAR_OUT_IPv6_2 export
+  peer TJBC-SM-R4 reflect-client
+  peer TJBC-SM-R4 route-update-interval 0
+  peer 19.13.68.31 enable
+  peer 19.13.68.31 group TJBC-SM-R4
+  peer 19.13.68.32 enable
+  peer 19.13.68.32 group TJBC-SM-R4
+  peer 19.13.68.33 enable
+  peer 19.13.68.33 group TJBC-SM-R4
+  peer 19.13.68.34 enable
+  peer 19.13.68.34 group TJBC-SM-R4
+  peer 19.13.68.35 enable
+  peer 19.13.68.35 group TJBC-SM-R4
+  peer TJBCXD-XIAGUA-1 enable
+  peer TJBCXD-XIAGUA-1 route-policy from-MAR-v6-BGP import
+[16D                [16D  peer TJBCXD-XIAGUA-1 route-policy TO_MAR_OUT_IPv6_16 export
+  peer TJBCXD-XIAGUA-1 reflect-client
+  peer TJBCXD-XIAGUA-1 route-update-interval 0
+  peer 19.13.68.1 enable
+  peer 19.13.68.1 group TJBCXD-XIAGUA-1
+  peer TJBCXD-XIAGUA-2 enable
+  peer TJBCXD-XIAGUA-2 route-policy from-MAR-v6-BGP import
+  peer TJBCXD-XIAGUA-2 route-policy TO_MAR_OUT_IPv6_3 export
+  peer TJBCXD-XIAGUA-2 reflect-client
+  peer TJBCXD-XIAGUA-2 route-update-interval 0
+  peer 19.13.68.2 enable
+  peer 19.13.68.2 group TJBCXD-XIAGUA-2
+  peer TJBCXD-XIAGUA-3 enable
+  peer TJBCXD-XIAGUA-3 route-policy from-MAR-v6-BGP import
+  peer TJBCXD-XIAGUA-3 route-policy TO_MAR_OUT_IPv6_4 export
+  peer TJBCXD-XIAGUA-3 reflect-client
+  peer TJBCXD-XIAGUA-3 route-update-interval 0
+  peer 19.13.68.3 enable
+  peer 19.13.68.3 group TJBCXD-XIAGUA-3
+ #
+ ipv6-family vpn-instance 5G_OAM
+  network :: 0 route-policy SET_DEF_ROUTE_v6
+  maximum load-balancing ibgp 2
+[16D                [16D #
+ ipv6-family vpn-instance 5G_RAN
+  network :: 0 route-policy SET_DEF_ROUTE_v6
+  maximum load-balancing ibgp 2
+ #
+ ipv6-family vpn-instance 5G_RAN_VIP
+  network :: 0 route-policy SET_DEF_ROUTE_v6
+  maximum load-balancing ibgp 2
+#
+ospf 65534 vpn-instance __dcn_vpn__
+  description DCN ospf create by default
+ import-route bgp permit-ibgp route-policy AUTO_CONFIG-TOOL
+ opaque-capability enable
+ hostname
+ vpn-instance-capability simple
+ area 0.0.0.0
+  network 0.0.0.0 255.255.255.255
+#
+!The DCN function implements the capability of plug-and-play for this device.
+!A NE IP address based on the unique NE ID is automatically generated in VPN
+!of DCN. It is recommended that the NE IP address be changed to the planned
+!one by running the ne-ip X.X.X.X <MASK> command after the device being online.
+dcn
+[16D                [16D#
+route-policy AUTO_CONFIG-TOOL permit node 10
+ if-match ip-prefix AUTO_TOOL_HW
+#
+route-policy AUTO_CONFIG-TOOL permit node 20
+ if-match ip-prefix AUTO_TOOL_ZX
+#
+route-policy MAR-to-MER-ISIS deny node 10
+ if-match ip-prefix NMS
+#
+route-policy MAR-to-MER-ISIS permit node 20
+ if-match ip-prefix 30-32WeiLuYou
+ apply tag 2
+#
+route-policy MER-to-MAR-ISIS permit node 15
+ if-match ip-prefix MER-Loopback
+#
+route-policy MER-to-MAR-ISIS permit node 20
+ if-match ip-prefix NMS
+ apply tag 2
+#
+route-policy Pref-ISIS permit node 10
+ if-match tag 2
+[16D                [16D apply preference 255
+#
+route-policy SET_DEF_ROUTE_v4 permit node 10
+ apply preferred-value 32768
+#
+route-policy SET_DEF_ROUTE_v6 permit node 10
+ apply community 64500:1000 additive
+ apply preferred-value 32768
+#
+route-policy TO_MAR_OUT_IPv4_1 permit node 10
+ if-match ip-prefix default
+#
+route-policy TO_MAR_OUT_IPv4_1 permit node 20
+ if-match extcommunity-filter 5G_RT2_1
+#
+route-policy TO_MAR_OUT_IPv4_16 permit node 10
+ if-match ip-prefix default
+#
+route-policy TO_MAR_OUT_IPv4_16 permit node 20
+ if-match extcommunity-filter 5G_RT2_16
+#
+route-policy TO_MAR_OUT_IPv4_2 permit node 10
+ if-match ip-prefix default
+[16D                [16D#
+route-policy TO_MAR_OUT_IPv4_2 permit node 20
+ if-match extcommunity-filter 5G_RT2_2
+#
+route-policy TO_MAR_OUT_IPv4_3 permit node 10
+ if-match ip-prefix default
+#
+route-policy TO_MAR_OUT_IPv4_3 permit node 20
+ if-match extcommunity-filter 5G_RT2_3
+#
+route-policy TO_MAR_OUT_IPv4_4 permit node 10
+ if-match ip-prefix default
+#
+route-policy TO_MAR_OUT_IPv4_4 permit node 20
+ if-match extcommunity-filter 5G_RT2_4
+#
+route-policy TO_MAR_OUT_IPv6_1 permit node 10
+ if-match ipv6 address prefix-list default-ipv6
+#
+route-policy TO_MAR_OUT_IPv6_1 permit node 20
+ if-match extcommunity-filter 5G_RT2_1
+#
+route-policy TO_MAR_OUT_IPv6_16 permit node 10
+[16D                [16D if-match ipv6 address prefix-list default-ipv6
+#
+route-policy TO_MAR_OUT_IPv6_16 permit node 20
+ if-match extcommunity-filter 5G_RT2_16
+#
+route-policy TO_MAR_OUT_IPv6_2 permit node 10
+ if-match ipv6 address prefix-list default-ipv6
+#
+route-policy TO_MAR_OUT_IPv6_2 permit node 20
+ if-match extcommunity-filter 5G_RT2_2
+#
+route-policy TO_MAR_OUT_IPv6_3 permit node 10
+ if-match ipv6 address prefix-list default-ipv6
+#
+route-policy TO_MAR_OUT_IPv6_3 permit node 20
+ if-match extcommunity-filter 5G_RT2_3
+#
+route-policy TO_MAR_OUT_IPv6_4 permit node 10
+ if-match ipv6 address prefix-list default-ipv6
+#
+route-policy TO_MAR_OUT_IPv6_4 permit node 20
+ if-match extcommunity-filter 5G_RT2_4
+#
+[16D                [16Droute-policy from-MAR-BGP permit node 10
+ apply preferred-value 10
+#
+route-policy from-MAR-v6-BGP permit node 10
+ apply preferred-value 10
+#
+route-policy to-MCR-BGP permit node 10
+ if-match ip-prefix nodefault
+#
+route-policy to-MCR-v6-BGP permit node 10
+ if-match ipv6 address prefix-list nodefault-ipv6
+#
+ip ip-prefix 30-32WeiLuYou index 10 permit 0.0.0.0 0 greater-equal 30 less-equal 32
+ip ip-prefix AUTO_TOOL_HW index 10 permit 19.239.32.15 29
+ip ip-prefix AUTO_TOOL_ZX index 10 permit 19.239.32.31 29
+ip ip-prefix MCR-MER-Loopback index 10 permit 19.13.0.0 24 greater-equal 32 less-equal 32
+ip ip-prefix MCR-MER-Loopback index 20 permit 19.13.1.0 24 greater-equal 32 less-equal 32
+ip ip-prefix MCR-MER-Loopback index 30 permit 19.13.63.0 24 greater-equal 32 less-equal 32
+ip ip-prefix MCR-MER-Loopback index 40 permit 19.13.64.0 24 greater-equal 32 less-equal 32
+ip ip-prefix MER-Loopback index 10 permit 19.13.63.4 32
+ip ip-prefix NMS index 10 permit 19.13.180.0 24
+ip ip-prefix NMS index 20 permit 181.157.243.0 24
+ip ip-prefix NMS index 30 permit 19.239.31.8 29
+[16D                [16Dip ip-prefix default index 10 permit 0.0.0.0 0
+ip ip-prefix nodefault index 10 deny 0.0.0.0 0
+ip ip-prefix nodefault index 20 permit 0.0.0.0 0 less-equal 32
+ip extcommunity-filter basic 5G_RT2_1 index 10 permit rt 64513:1071001
+ip extcommunity-filter basic 5G_RT2_16 index 10 permit rt 64513:1071016
+ip extcommunity-filter basic 5G_RT2_2 index 10 permit rt 64513:1071002
+ip extcommunity-filter basic 5G_RT2_3 index 10 permit rt 64513:1071003
+ip extcommunity-filter basic 5G_RT2_4 index 10 permit rt 64513:1071004
+#
+ip route-static vpn-instance 4G_RAN 0.0.0.0 0.0.0.0 19.13.0.15
+ip route-static vpn-instance 3G_RAN 0.0.0.0 0.0.0.0 19.13.0.15
+#
+ipv6 route-static vpn-instance 5G_RAN :: 0 573B:B453:9334::
+ipv6 route-static vpn-instance 5G_OAM :: 0 573B:B453:9334::
+ipv6 route-static vpn-instance 5G_RAN_VIP :: 0 573B:B453:9334::
+#
+ip ipv6-prefix default-ipv6 index 10 permit :: 0
+ip ipv6-prefix nodefault-ipv6 index 10 deny :: 0
+ip ipv6-prefix nodefault-ipv6 index 20 permit :: 0 less-equal 128
+#
+snmp-agent
+snmp-agent local-engineid 800007DB035413102A1C30
+ snmp-agent community read cipher 4c28cb707eb78292ee4d523b6c5400ae mib-view iso-view acl 2000
+ [16D                [16Dsnmp-agent community write cipher 9e9ac4a6dcd4f92cc7e66a5f1253c575 mib-view iso-view acl 2000
+#
+snmp-agent sys-info version v2c
+undo snmp-agent sys-info version v3
+ snmp-agent target-host host-name __targetHost_1_841 trap address udp-domain 19.13.180.3 params securityname cipher 837807ae91585e250fb7a9307d85ac7a v2c private-netmanager ext-vb
+ snmp-agent target-host host-name __targetHost_3_61163 trap address udp-domain 181.157.243.35 params securityname cipher ed8c3ebfabaf6f9ce4c553b4da8ea0d9 v2c private-netmanager ext-vb
+#
+snmp-agent mib-view included iso-view iso
+#
+snmp-agent trap source LoopBack0
+#
+snmp-agent extend error-code enable
+#
+snmp-agent protocol source-status all-interface
+snmp-agent protocol source-status ipv6 all-interface
+#
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+snmp-agent trap enable
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfConfigError
+[16D                [16Dundo snmp-agent trap enable feature-name ospf trap-name ospfTxRetransmit
+undo snmp-agent trap enable feature-name ospf trap-name ospfOriginateLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfMaxAgeLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfTxRetransmit
+undo snmp-agent trap enable feature-name isis trap-name isisIDLenMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationTypeFailure
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationFailure
+undo snmp-agent trap enable feature-name isis trap-name isisVersionSkew
+undo snmp-agent trap enable feature-name isis trap-name isisAreaMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisRejectedAdjacency
+undo snmp-agent trap enable feature-name isis trap-name isisOrigLSPBuffSizeMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisProtocolsSupportedMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisMaxAreaAddressesMismatch
+#
+lldp enable
+#
+stelnet server enable
+sftp server enable
+snetconf server enable
+ssh user linshi
+[16D                [16Dssh user linshi authentication-type password
+ssh user linshi service-type all
+ssh user support
+ssh user support authentication-type password
+ssh user support service-type all
+ssh user TJ-TJ-Manager
+ssh user TJ-TJ-Manager authentication-type password
+ssh user TJ-TJ-Manager service-type all
+ssh user TJ-TJ-SDNcontroler
+ssh user TJ-TJ-SDNcontroler authentication-type password
+ssh user TJ-TJ-SDNcontroler service-type all
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh server acl 2005
+ssh authorization-type default aaa
+#
+ ssh server cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa
+#
+ssh server dh-exchange min-len 2048
+[16D                [16D#
+ssh client first-time enable
+ssh client peer 19.13.180.3 assign rsa-key 19.13.180.3
+ssh client peer 19.13.180.3 assign ecc-key 19.13.180.3
+ssh client peer 117.298.139.117 assign ecc-key 117.298.139.117
+sftp client-source -i LoopBack0
+#
+ssh client publickey ecc rsa
+#
+ ssh client cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+tunnel-policy SmartMAN
+ tunnel select-seq sr-te te sr-lsp ldp load-balance-number 1
+#
+user-interface maximum-vty 10
+#
+user-interface con 0
+ authentication-mode aaa
+#
+user-interface aux 0
+#
+[16D                [16Duser-interface vty 0 9
+ authentication-mode aaa
+ protocol inbound ssh
+#
+netconf
+ activate module huawei-ip
+#
+local-aaa-server
+#
+telemetry
+ #
+ sensor-group SmartMANSensor1
+  sensor-path huawei-debug:debug/cpu-infos/cpu-info
+  sensor-path huawei-debug:debug/memory-infos/memory-info
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity[class="chassis"]
+  sensor-path huawei-ifm:ifm/interfaces/interface
+  sensor-path huawei-ifm:ifm/interfaces/interface/mib-statistics
+ #
+ destination-group SmartMANGroup1
+  ipv4-address 181.157.243.42 port 8895 protocol grpc no-tls
+ #
+ subscription SmartMANSubscription1
+[16D                [16D  sensor-group SmartMANSensor1 sample-interval 10000
+  destination-group SmartMANGroup1
+#
+evpn srv6 next-header-field 59 
+#
+return

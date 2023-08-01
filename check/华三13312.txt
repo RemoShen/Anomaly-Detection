@@ -1,0 +1,3101 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 3606
+
+#
+
+mdc Admin id 1
+
+#
+
+  sysname COHT-HPYO-2B-O12508N-OI-X002
+
+#
+
+ip vpn-instance 2H
+
+ route-distinguisher 65523:10070
+
+ vpn-target 65523:10070 import-extcommunity
+
+ vpn-target 65523:10070 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:10070
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10070
+
+  vpn-target 65523:10070 import-extcommunity
+
+  vpn-target 65523:10070 export-extcommunity
+
+#
+
+ip vpn-instance 3G_CE_NMS
+
+ route-distinguisher 65523:20010
+
+ vpn-target 65523:20010 import-extcommunity
+
+
+
+               
+ vpn-target 65523:20010 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:20010
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:20010
+
+#
+
+ip vpn-instance 5GC_MGMN
+
+ route-distinguisher 65523:10050
+
+ vpn-target 65523:10050 import-extcommunity
+
+ vpn-target 65523:10050 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:10050
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10050
+
+#
+
+ip vpn-instance 5G_MEC
+
+ route-distinguisher 65523:10060
+
+
+
+               
+ vpn-target 65523:10060 import-extcommunity
+
+ vpn-target 65523:10060 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:10060
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10060
+
+  vpn-target 65523:10060 import-extcommunity
+
+  vpn-target 65523:10060 export-extcommunity
+
+#
+
+ip vpn-instance 5G_OAM
+
+ route-distinguisher 65523:10030
+
+ vpn-target 65523:10030 import-extcommunity
+
+ vpn-target 65523:10030 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:10030
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10030
+
+  vpn-target 65523:10030 import-extcommunity
+
+  vpn-target 65523:10030 export-extcommunity
+
+
+
+               
+#
+
+ip vpn-instance 5G_RAN
+
+ route-distinguisher 65523:10010
+
+ vpn-target 65523:10010 import-extcommunity
+
+ vpn-target 65523:10010 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:10010
+
+  vpn-target 65523:10010 import-extcommunity
+
+  vpn-target 65523:10010 export-extcommunity
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10010
+
+  vpn-target 65523:10010 import-extcommunity
+
+  vpn-target 65523:10010 export-extcommunity
+
+#
+
+ip vpn-instance 5G_RAN_VIP
+
+ route-distinguisher 65523:10020
+
+ vpn-target 65523:10020 import-extcommunity
+
+ vpn-target 65523:10020 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:10020
+
+
+
+               
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10020
+
+  vpn-target 65523:10020 import-extcommunity
+
+  vpn-target 65523:10020 export-extcommunity
+
+#
+
+ip vpn-instance GPRS_Gn_C
+
+ route-distinguisher 65523:10040
+
+ tnl-policy ZNCYW
+
+ vpn-target 65523:10040 import-extcommunity
+
+ vpn-target 65523:10040 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:10040
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10040
+
+#
+
+ip vpn-instance LTE_RAN
+
+ route-distinguisher 65523:18020
+
+ vpn-target 65523:18020 import-extcommunity
+
+
+
+               
+ vpn-target 65523:18020 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:18020
+
+  vpn-target 65523:18020 import-extcommunity
+
+  vpn-target 65523:18020 export-extcommunity
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:18020
+
+  vpn-target 65523:18020 import-extcommunity
+
+  vpn-target 65523:18020 export-extcommunity
+
+#
+
+ip vpn-instance LTE_RAN_OAM
+
+ route-distinguisher 65523:18030
+
+ vpn-target 65523:18030 import-extcommunity
+
+ vpn-target 65523:18030 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65523:18030
+
+  vpn-target 65523:18030 import-extcommunity
+
+  vpn-target 65523:18030 export-extcommunity
+
+ #
+
+ address-family ipv6
+
+
+
+               
+  route-distinguisher 65523:18030
+
+  vpn-target 65523:18030 import-extcommunity
+
+  vpn-target 65523:18030 export-extcommunity
+
+#
+
+ip vpn-instance SMAN_NMS_JT2
+
+ route-distinguisher 9929:92101
+
+ vpn-target 9929:92101 import-extcommunity
+
+ vpn-target 9929:92101 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 9929:92101
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 9929:92101
+
+  vpn-target 9929:92101 import-extcommunity
+
+  vpn-target 9929:92101 export-extcommunity
+
+#
+
+ip vpn-instance SmartMAN_AUTO_ONLINE
+
+ route-distinguisher 65523:10080
+
+ vpn-target 65523:10080 import-extcommunity
+
+ vpn-target 65523:10080 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+
+
+               
+  route-distinguisher 65523:10080
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65523:10080
+
+  vpn-target 65523:10080 import-extcommunity
+
+  vpn-target 65523:10080 export-extcommunity
+
+#
+
+bfd template 10
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+bfd template 50
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+ bfd multi-hop min-transmit-interval 10
+
+ bfd multi-hop min-receive-interval 10
+
+ bfd multi-hop detect-multiplier 3
+
+ undo bfd ip-router-alert
+
+#
+
+isis 1000
+
+
+
+               
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 180 
+
+  is-name COHT-HPYO-2B-O12508N-OI-X002
+
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.5523.1000.0101.7924.8002.00
+
+#
+
+ mpls lsr-id 19.168.237.2
+
+ mpls label advertise non-null
+
+#
+
+ lldp global enable
+
+#
+
+ active port basic-license slot 2 subslot 0 phy-port 7 to 10
+
+ active port basic-license slot 3 subslot 0 phy-port 7 to 10
+
+ active port basic-license slot 4 subslot 0 phy-port 1 to 24
+
+ active port basic-license slot 5 subslot 0 phy-port 1 to 24
+
+#
+
+
+
+               
+ system-working-mode bridgee
+
+ undo version auto-update enable
+
+ version check ignore
+
+ hardware-resource tcam mix
+
+ password-recovery enable
+
+#
+
+vlan 1
+
+#
+
+vlan 2
+
+#
+
+vlan 10
+
+#
+
+interface Route-Aggregation1
+
+  description to-GOHT-VTFB-7750-V2_hvc-10
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation1.817
+
+  description to-GOHT-VTFB-7750-V2_hvc-30.817
+
+ ip address 19.168.244.53 255.255.255.252
+
+ vlan-type dot1q vid 817
+
+#
+
+interface Route-Aggregation1.837
+
+  description to-GOHT-VTFB-7750-V2_hvc-10.837
+
+
+
+               
+ ip binding vpn-instance 5GC_MGMN
+
+ ip address 1.6.116.53 255.255.255.252
+
+ vlan-type dot1q vid 837
+
+ ipv6 address 573B:B476:B322:2222:F333::2/127
+
+ ipv6 address auto link-local
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1.839
+
+  description to-GOHT-VTFB-7750-V2_hvc-10.839
+
+ ip binding vpn-instance 5G_MEC
+
+ ip address 1.69.244.53 255.255.255.252
+
+ vlan-type dot1q vid 839
+
+ ipv6 address 573B:B476:B322:2222:F333::46/127
+
+ ipv6 address auto link-local
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1.843
+
+  description to-GOHT-VTFB-7750-V2_hvc-10.843
+
+ ip binding vpn-instance 5G_RAN
+
+
+
+               
+ vlan-type dot1q vid 843
+
+ ipv6 address 573B:B476:B322:2222:F333::6/127
+
+ ipv6 address auto link-local
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1.873
+
+  description to-GOHT-VTFB-7750-V2_hvc-10.873
+
+ ip binding vpn-instance 5G_RAN_VIP
+
+ vlan-type dot1q vid 873
+
+ ipv6 address 573B:B476:B322:2222:F333::A/127
+
+ ipv6 address auto link-local
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1.895
+
+  description to-GOHT-VTFB-7750-V2_hvc-10.895
+
+ ip binding vpn-instance 5G_OAM
+
+ vlan-type dot1q vid 895
+
+ ipv6 address 573B:B476:B322:2222:F333::E/127
+
+ ipv6 address auto link-local
+
+
+
+               
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation2
+
+  description to-GOHT-HPYO-V-2-zpd100
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation2.10
+
+  description to-GOHT-HPYO-V-2-zpd100.10
+
+ ip address 19.168.238.129 255.255.255.252
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 10
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation4
+
+  description to-LT.ELNVJ.DTX.DTD.HPYH-L2.XT600-T16V_hvc5
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation4.300
+
+
+
+               
+  description to-LT.ELNVJ.DTX.DTD.HPYH-L2.XT600-T16V_HPZ_NVJ_KVI
+
+ ip binding vpn-instance LTE_RAN_OAM
+
+ ip address 19.168.238.126 255.255.255.252
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 300
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation4.400
+
+  description to-LT.ELNVJ.DTX.DTD.HPYH-L2.XT600-T16V_HPZ_NVJ
+
+ ip binding vpn-instance LTE_RAN
+
+ ip address 19.168.238.130 255.255.255.252
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 400
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation6
+
+  description to-GO-HTYT-ZN2-ZPD3
+
+
+
+               
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation6.300
+
+  description to-GO-HTYT-ZN2-ZPD3.300
+
+ ip binding vpn-instance LTE_RAN_OAM
+
+ ip address 52.116.244.294 255.255.255.252
+
+ vlan-type dot1q vid 300
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation6.400
+
+  description to-GO-HTYT-ZN2-ZPD3.400
+
+ ip binding vpn-instance LTE_RAN
+
+ ip address 52.116.244.290 255.255.255.252
+
+ vlan-type dot1q vid 400
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation6.500
+
+  description to-CJIZN2-ZPD3.500
+
+ ip binding vpn-instance 5G_RAN
+
+
+
+               
+ vlan-type dot1q vid 500
+
+ ipv6 address 5731:4B6:746B::4338/127
+
+ ipv6 address auto link-local
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation10
+
+  description to-GOHT-HPYO-2B-O12508N-OI-X002_Nkqpz10
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation10.1000
+
+  description to-GOHT-HPYO-2B-O12508N-OI-X002_Nkqpz10.1000
+
+ ip address 19.168.238.17 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-level level-2
+
+ isis circuit-type p2p
+
+ isis cost 150
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ ip mtu 9000
+
+
+
+               
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 1000
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation20
+
+  description to-GOHV-IP-5B-JZ8GT8-OI-X002_ZPD-pnqjg24
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation20.10
+
+  description to-GOHV-IP-5B-JZ8GT8-OI-X002_ZPD-pnqjg24.10_5C_NVJ
+
+ ip binding vpn-instance 5G_RAN
+
+ vlan-type dot1q vid 10
+
+ ipv6 address 573B:B456:B433:5333::58/127
+
+ ipv6 address auto link-local
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation20.30
+
+ ip binding vpn-instance 3G_CE_NMS
+
+ ip address 19.168.182.147 255.255.255.252
+
+
+
+               
+ vlan-type dot1q vid 30
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface NULL0
+
+#
+
+interface LoopBack0
+
+ ip address 19.168.237.2 255.255.255.255
+
+ isis enable 1000
+
+ isis circuit-level level-2
+
+#
+
+interface LoopBack100
+
+ ip binding vpn-instance 3G_CE_NMS
+
+ ip address 181.157.0.58 255.255.255.255
+
+#
+
+interface LoopBack101
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 address 573B:B456:BF33::4/128
+
+#
+
+interface FortyGigE2/0/1
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE2/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/13
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE2/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/25
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface FortyGigE3/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/6
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE3/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/18
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE3/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/30
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/7
+
+ port link-mode route
+
+  description to-GOHT-HPYO-2B-O12508N-OI-X001_CZ2/0/7_100C
+
+ port link-aggregation group 10
+
+#
+
+interface HundredGigE2/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/11
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface HundredGigE2/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/23
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE2/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/35
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/7
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/8
+
+ port link-mode route
+
+  description to-GOHV-ZOJ-2B-JZ8GT8-OI-X002_CZ2/0/3_100C
+
+ duplex full
+
+ speed 100000 
+
+ port link-aggregation group 20
+
+#
+
+interface HundredGigE3/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/10
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface HundredGigE3/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/33
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface HundredGigE3/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface M-GigabitEthernet0/0/0
+
+#
+
+interface M-GigabitEthernet0/0/1
+
+#
+
+interface M-GigabitEthernet0/0/2
+
+ ip address 181.157.0.2 255.255.255.0
+
+#
+
+interface M-GigabitEthernet0/0/3
+
+#
+
+interface Ten-GigabitEthernet4/0/1
+
+
+
+               
+ port link-mode route
+
+  description to-GOHT-VTFB-7750-V2_CZ5/1/1_10C
+
+ port link-aggregation group 1
+
+#
+
+interface Ten-GigabitEthernet4/0/2
+
+ port link-mode route
+
+  description to-GOHT-HPYO-V-2_3/0/1-10CZ
+
+ port link-aggregation group 2
+
+#
+
+interface Ten-GigabitEthernet4/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/4
+
+ port link-mode route
+
+  description to-LT.ELNVJ.DTX.DTD.HPYH-L2.XT600-T16V_CZ_1/1/2_10C
+
+ port link-aggregation group 4
+
+#
+
+interface Ten-GigabitEthernet4/0/5
+
+ port link-mode route
+
+  description to-NZ5000-169
+
+#
+
+interface Ten-GigabitEthernet4/0/6
+
+
+
+               
+ port link-mode route
+
+  description to-GO-HTYT-ZN2
+
+ duplex full
+
+ speed 10000 
+
+ port link-aggregation group 6
+
+#
+
+interface Ten-GigabitEthernet4/0/7
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/11
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet4/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/22
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/28
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/34
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/37
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/38
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/39
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet4/0/40
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/41
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/42
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/43
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/44
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/45
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/46
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/47
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/48
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/2
+
+ port link-mode route
+
+  description to-GOHT-HPYO-V-2_3/0/2-10CZ
+
+ port link-aggregation group 2
+
+#
+
+interface Ten-GigabitEthernet5/0/3
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/7
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet5/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/14
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet5/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/20
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/26
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet5/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/37
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet5/0/38
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/39
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/40
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/41
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/42
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/43
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/44
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/45
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/46
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/47
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet5/0/48
+
+ port link-mode route
+
+ shutdown
+
+#
+
+bgp 65523
+
+
+
+               
+ router-id 19.168.237.2
+
+ peer 19.168.237.1 as-number 65523
+
+  peer 19.168.237.1 description MCR-1
+
+ peer 19.168.237.1 connect-interface LoopBack0
+
+ peer 19.168.237.1 route-update-interval 5
+
+  peer 19.168.237.1 password cipher 4a31c1319c78bcb837d9c10a5baf5ba7
+
+ peer 19.168.238.118 as-number 9929
+
+  peer 19.168.238.118 description to-GOHT-HPYO-V-2_OIVJ_JIO_FP2
+
+ peer 19.168.238.118 bfd
+
+  peer 19.168.238.118 password cipher 0f83b52580e2adf23d82862197ad7e0f
+
+ peer 19.168.244.52 as-number 38351
+
+  peer 19.168.244.52 description to-GOHT-VTFB-7750-V2_817
+
+ peer 19.168.244.52 route-update-interval 5
+
+ peer 19.168.244.52 bfd
+
+  peer 19.168.244.52 password cipher 1329dc1c96e6ca7cb6c1a9c97a13315c
+
+ #
+
+ address-family ipv4 unicast
+
+  aggregate 19.168.237.0 255.255.255.0 detail-suppressed
+
+  import-route isis 1000
+
+  peer 19.168.237.1 enable
+
+  peer 19.168.238.118 enable
+
+  peer 19.168.244.52 enable
+
+  peer 19.168.244.52 route-policy MCR_TO_B_NET export
+
+
+
+               
+ #
+
+ ip vpn-instance 3G_CE_NMS
+
+  peer 19.168.182.146 as-number 65516
+
+   peer 19.168.182.146 description to-LVIZN2-JI
+
+  peer 19.168.182.146 route-update-interval 5
+
+  peer 19.168.182.146 bfd
+
+   peer 19.168.182.146 password cipher d382485089130c19e6e85300c34a72bd
+
+  #
+
+  address-family ipv4 unicast
+
+   import-route direct
+
+   peer 19.168.182.146 enable
+
+   peer 19.168.182.146 advertise-community
+
+ #
+
+ ip vpn-instance 5GC_MGMN
+
+  peer 1.6.116.52 as-number 38351
+
+   peer 1.6.116.52 description descnelpekj to-GSLX-ZXJF-7750-A2_5GC_MGMN 
+
+  peer 1.6.116.52 route-update-interval 5
+
+  peer 1.6.116.52 bfd
+
+   peer 1.6.116.52 password cipher 156cafea56e2ef2ad53f686fdcd693e2
+
+  peer 573B:B476:B322:2222:F333::1 as-number 38351
+
+   peer 573B:B476:B322:2222:F333::1 description to-GOHT-VTFB-7750-V2_5CX_ICIJ 
+
+  peer 573B:B476:B322:2222:F333::1 route-update-interval 5
+
+  peer 573B:B476:B322:2222:F333::1 bfd
+
+
+
+               
+   peer 573B:B476:B322:2222:F333::1 password cipher 6b31430e8cdd432b357ae9b7f8ec8d49
+
+  #
+
+  address-family ipv4 unicast
+
+   peer 1.6.116.52 enable
+
+  #
+
+  address-family ipv6 unicast
+
+   peer 573B:B476:B322:2222:F333::1 enable
+
+ #
+
+ ip vpn-instance 5G_MEC
+
+  peer 1.69.244.52 as-number 38351
+
+   peer 1.69.244.52 description to-GOHT-VTFB-7750-V2_5C_IZX
+
+  peer 1.69.244.52 route-update-interval 5
+
+  peer 1.69.244.52 bfd
+
+   peer 1.69.244.52 password cipher cf66ebbf40500016964483e058f2ca75
+
+  peer 573B:B476:B322:2222:F333::45 as-number 38351
+
+   peer 573B:B476:B322:2222:F333::45 description to-GOHT-VTFB-7750-V2_5C_IZX
+
+  peer 573B:B476:B322:2222:F333::45 route-update-interval 5
+
+  peer 573B:B476:B322:2222:F333::45 bfd
+
+   peer 573B:B476:B322:2222:F333::45 password cipher fe309037e7a52510cde957986e6fb8f4
+
+  #
+
+  address-family ipv4 unicast
+
+   peer 1.69.244.52 enable
+
+  #
+
+
+
+               
+  address-family ipv6 unicast
+
+   peer 573B:B476:B322:2222:F333::45 enable
+
+ #
+
+ ip vpn-instance 5G_OAM
+
+  peer 573B:B476:B322:2222:F333::D as-number 38351
+
+   peer 573B:B476:B322:2222:F333::D description to-GOHT-VTFB-7750-V2_5C_KVI
+
+  peer 573B:B476:B322:2222:F333::D route-update-interval 5
+
+  peer 573B:B476:B322:2222:F333::D bfd
+
+   peer 573B:B476:B322:2222:F333::D password cipher c0e4f6c4d582eb66246d9051c331407e
+
+  #
+
+  address-family ipv6 unicast
+
+   peer 573B:B476:B322:2222:F333::D enable
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  peer 573B:B456:B433:5333::57 as-number 65516
+
+   peer 573B:B456:B433:5333::57 description to-GOHV-IP-5B-JZ8GT8-OI-X002
+
+  peer 573B:B456:B433:5333::57 route-update-interval 5
+
+  peer 573B:B456:B433:5333::57 bfd
+
+   peer 573B:B456:B433:5333::57 password cipher 5f86b59d693d4b409ebbd4627a01114e
+
+  peer 573B:B476:B322:2222:F333::5 as-number 38351
+
+   peer 573B:B476:B322:2222:F333::5 description to-GOHT-VTFB-7750-V2_5C_NVJ
+
+  peer 573B:B476:B322:2222:F333::5 route-update-interval 5
+
+  peer 573B:B476:B322:2222:F333::5 bfd
+
+
+
+               
+   peer 573B:B476:B322:2222:F333::5 password cipher 9a43bc4c3080d74fefc136fb88ee8ff8
+
+  peer 5731:4B6:746B::4337 as-number 64985
+
+   peer 5731:4B6:746B::4337 description to-GO-HTYT-ZN2-5C_NVJ
+
+  peer 5731:4B6:746B::4337 route-update-interval 5
+
+  peer 5731:4B6:746B::4337 bfd
+
+   peer 5731:4B6:746B::4337 password cipher 410385f08f4189d38c4ae54903246661
+
+  #
+
+  address-family ipv6 unicast
+
+   import-route direct
+
+   import-route static
+
+   peer 573B:B456:B433:5333::57 enable
+
+   peer 573B:B476:B322:2222:F333::5 enable
+
+   peer 5731:4B6:746B::4337 enable
+
+   peer 5731:4B6:746B::4337 route-policy Form-CT-5G_RAN import
+
+   peer 5731:4B6:746B::4337 route-policy To-CT-5G_RAN export
+
+   peer 5731:4B6:746B::4337 advertise-community
+
+ #
+
+ ip vpn-instance 5G_RAN_VIP
+
+  peer 573B:B476:B322:2222:F333::9 as-number 38351
+
+   peer 573B:B476:B322:2222:F333::9 description to-GOHT-VTFB-7750-V2-5CX_REL
+
+  peer 573B:B476:B322:2222:F333::9 route-update-interval 5
+
+  peer 573B:B476:B322:2222:F333::9 bfd
+
+   peer 573B:B476:B322:2222:F333::9 password cipher a43c9f4bc72fa764e33fe4cfd3e199c2
+
+
+
+               
+  #
+
+  address-family ipv6 unicast
+
+   peer 573B:B476:B322:2222:F333::9 enable
+
+ #
+
+ ip vpn-instance LTE_RAN
+
+  peer 19.168.238.131 as-number 65523.200
+
+   peer 19.168.238.131 description LX.ILNVJ.DTX.DTD.HPYH-L2.XT600-T16V-HPZ_NVJ
+
+  peer 19.168.238.131 fake-as 65523.100
+
+  peer 19.168.238.131 route-update-interval 5
+
+  peer 19.168.238.131 bfd parameters min-transmit-interval 150 min-receive-interval 150
+
+  peer 52.116.244.291 as-number 64985
+
+   peer 52.116.244.291 description to-CJIZN2-HPZ_NVJ
+
+  peer 52.116.244.291 route-update-interval 5
+
+  peer 52.116.244.291 bfd parameters min-transmit-interval 150 min-receive-interval 150
+
+  #
+
+  address-family ipv4 unicast
+
+   import-route static
+
+   peer 19.168.238.131 enable
+
+   peer 52.116.244.291 enable
+
+   peer 52.116.244.291 route-policy Form-CT-LTE_RAN import
+
+   peer 52.116.244.291 route-policy To-CT-LTE_RAN export
+
+   peer 52.116.244.291 advertise-community
+
+ #
+
+
+
+               
+ ip vpn-instance LTE_RAN_OAM
+
+  peer 19.168.238.127 as-number 65523.200
+
+   peer 19.168.238.127 description to-LT.ELNVJ.DTX.DTD.HPYH-L2.XT600-T16V-HPZ_NVJ_KVI
+
+  peer 19.168.238.127 fake-as 65523.100
+
+  peer 19.168.238.127 route-update-interval 5
+
+  peer 19.168.238.127 bfd parameters min-transmit-interval 150 min-receive-interval 150
+
+  peer 52.116.244.295 as-number 64985
+
+   peer 52.116.244.295 description to-CJIZN2-HPZ_NVJ_KVI
+
+  peer 52.116.244.295 route-update-interval 5
+
+  peer 52.116.244.295 bfd parameters min-transmit-interval 150 min-receive-interval 150
+
+  #
+
+  address-family ipv4 unicast
+
+   import-route static
+
+   peer 19.168.238.127 enable
+
+   peer 52.116.244.295 enable
+
+   peer 52.116.244.295 route-policy Form-CT-RAN_OAM import
+
+   peer 52.116.244.295 route-policy To-CT-RAN_OAM export
+
+   peer 52.116.244.295 advertise-community
+
+#
+
+route-policy Form-CT-5G_RAN permit node 5
+
+ if-match ipv6 address prefix-list Form-CT-5G_RAN
+
+#
+
+route-policy Form-CT-LTE_RAN permit node 5
+
+
+
+               
+ if-match ip address prefix-list Form-CT-LTE_RAN
+
+#
+
+route-policy Form-CT-RAN_OAM permit node 5
+
+ if-match ip address prefix-list Form-CT-RAN_OAM
+
+#
+
+route-policy MCR_TO_B_NET permit node 10
+
+ if-match ip address prefix-list jyg_MCR_TO_B_NET
+
+#
+
+route-policy To-CT-5G_RAN permit node 5
+
+ if-match ipv6 address prefix-list To-CT-5G_RAN
+
+#
+
+route-policy To-CT-LTE_RAN permit node 5
+
+ if-match ip address prefix-list To-CT-LTE_RAN
+
+#
+
+route-policy To-CT-RAN_OAM permit node 5
+
+ if-match ip address prefix-list To-CT-RAN_OAM
+
+#
+
+ ip prefix-list Form-CT-LTE_RAN index 5 permit 6.54.1.0 24 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 10 permit 6.54.2.0 24 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 15 permit 6.54.8.0 24 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 20 permit 6.54.9.0 24 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 25 permit 19.106.118.0 26 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 30 permit 52.191.0.0 16 less-equal 32
+
+
+
+               
+ ip prefix-list Form-CT-LTE_RAN index 35 permit 41.187.0.0 16 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 40 permit 19.106.147.0 24 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 45 permit 19.106.148.0 24 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 50 permit 9.144.63.0 19 less-equal 32
+
+ ip prefix-list Form-CT-LTE_RAN index 55 permit 19.106.133.0 20 less-equal 32
+
+ ip prefix-list Form-CT-RAN_OAM index 5 permit 19.97.87.0 21 less-equal 32
+
+ ip prefix-list Form-CT-RAN_OAM index 10 permit 6.54.0.0 25 less-equal 32
+
+ ip prefix-list MCR_TO_B_NET index 10 permit 19.168.237.0 24
+
+ ip prefix-list To-CT-LTE_RAN index 5 permit 19.199.0.0 24
+
+ ip prefix-list To-CT-LTE_RAN index 10 permit 19.199.4.0 24
+
+ ip prefix-list To-CT-LTE_RAN index 15 permit 19.199.31.0 24
+
+ ip prefix-list To-CT-LTE_RAN index 20 permit 19.199.35.0 24
+
+ ip prefix-list To-CT-LTE_RAN index 25 permit 10.54.297.0 20
+
+ ip prefix-list To-CT-LTE_RAN index 30 permit 19.192.117.0 17
+
+ ip prefix-list To-CT-LTE_RAN index 35 permit 19.199.8.0 24
+
+ ip prefix-list To-CT-LTE_RAN index 40 permit 19.199.49.0 24
+
+ ip prefix-list To-CT-RAN_OAM index 5 permit 19.98.29.0 24
+
+ ip prefix-list To-CT-RAN_OAM index 10 permit 19.98.30.0 26
+
+ ip prefix-list To-CT-RAN_OAM index 15 permit 19.98.30.117 26
+
+ ip prefix-list To-CT-RAN_OAM index 20 permit 19.98.62.0 27
+
+#
+
+ ipv6 prefix-list Form-CT-5G_RAN index 5 permit 573B:B496:B033:43:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 5 permit 573B:B476:B323:423B:: 64
+
+
+
+               
+ ipv6 prefix-list To-CT-5G_RAN index 10 permit 573B:B476:B323:423C:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 15 permit 573B:B476:B323:483B:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 20 permit 573B:B476:B323:483C:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 25 permit 573B:B476:B323:423F:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 30 permit 573B:B476:B323:4230:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 35 permit 573B:B476:B323:483F:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 40 permit 573B:B476:B323:4830:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 45 permit 573B:B476:B323:423D:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 50 permit 573B:B476:B323:423E:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 55 permit 573B:B476:B323:483D:: 64
+
+ ipv6 prefix-list To-CT-5G_RAN index 60 permit 573B:B476:9322:2233:: 60
+
+ ipv6 prefix-list To-CT-5G_RAN index 65 permit 573B:B476:9322:2243:: 60
+
+ ipv6 prefix-list To-CT-5G_RAN index 70 permit 573B:B476:9322:22B3:: 60
+
+ ipv6 prefix-list To-CT-5G_RAN index 75 permit 573B:B476:9322:22C3:: 60
+
+ ipv6 prefix-list To-CT-5G_RAN index 80 permit 573B:B476:B323:483E:: 64
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class aux
+
+ authentication-mode password
+
+ user-role network-admin
+
+#
+
+line class vty
+
+
+
+               
+ user-role network-operator
+
+#
+
+line aux 0 1
+
+ user-role network-admin
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+ user-role network-operator
+
+#
+
+ snmp-agent
+
+ snmp-agent local-engineid 800063A28078AA82C5680100000001
+
+ snmp-agent community read LZMCR@2020r
+
+ snmp-agent community write LZMCR@2020w
+
+ snmp-agent acl name SNMP_ACL
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 181.157.243.48 params securityname public v2c
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable mpls 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+ snmp-agent trap source LoopBack0
+
+#
+
+ ssh server enable
+
+
+
+               
+#
+
+acl basic name SNMP_ACL
+
+ rule 5 permit source 181.157.243.0 0.0.0.255
+
+ rule 10 permit source 181.157.106.4 0
+
+#
+
+acl advanced 3000
+
+  description to-Tzhjzp_OOD
+
+ rule 1000 permit ip
+
+#
+
+acl advanced name anti-virus
+
+#
+
+domain name system
+
+#
+
+ aaa session-limit telnet 10
+
+ aaa session-limit ssh 10
+
+ domain default enable system
+
+#
+
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+
+
+               
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+  description Predefined level-4 role
+
+#
+
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+role name level-6
+
+  description Predefined level-6 role
+
+#
+
+role name level-7
+
+  description Predefined level-7 role
+
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+
+
+               
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+role name level-12
+
+  description Predefined level-12 role
+
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+#
+
+role name level-14
+
+  description Predefined level-14 role
+
+#
+
+user-group system
+
+#
+
+local-user GS-LX-Manager class manage
+
+  password hash 64c0fb13daeb1f68c390b4aede93ca62
+
+ service-type ssh
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+
+
+               
+#
+
+local-user GS-LX-SDNcontroler class manage
+
+  password hash 64c0fb13daeb1f68c390b4aede93ca62
+
+ service-type ssh
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user manager class manage
+
+  password hash f871610329d675786831460942c0d55c
+
+ service-type ssh telnet
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user wgzx class manage
+
+  password hash 5aa2221bc3042ed262aeeb33910c9faf
+
+ service-type ftp
+
+ service-type ssh
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user wgzx_sungb class manage
+
+  password hash e92ff44e2e17a8cb17ee7c742c52f461
+
+ service-type ssh
+
+
+
+               
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+ ftp server enable
+
+#
+
+return
+

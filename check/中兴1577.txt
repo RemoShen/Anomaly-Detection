@@ -1,0 +1,2752 @@
+show running-config
+
+!<mim>
+
+!configuration saved at 19:18:16 Fri Jan 15 2021 by write zdb
+
+!configuration saved at 16:32:57 Mon Dec 28 2020 by write txt
+
+!last configuration change at 00:34:21 Thu Dec 31 2020 by who
+
+commit-mode default automatic
+
+!</mim>
+
+!<offbrd>
+
+insert-card shelf 1 slot 3 funcid 731 port-max 5 version 100/100
+
+insert-card shelf 1 slot 11 funcid 599 port-max 0 version 100/100
+
+insert-card shelf 1 slot 12 funcid 599 port-max 0 version 100/100
+
+insert-card shelf 1 slot 13 funcid 5147 port-max 0 version 100/100
+
+insert-card shelf 1 slot 4 funcid 731 port-max 5 version 100/100
+
+insert-card shelf 1 slot 2 funcid 687 port-max 4 version 400/100
+
+insert-card shelf 1 slot 8 funcid 687 port-max 4 version 400/100
+
+insert-card shelf 1 slot 5 funcid 749 port-max 10 version 200/100
+
+insert-port shelf 1 slot 3 port 3 type mgmt_eth
+
+insert-port shelf 1 slot 3 port 4 type qx
+
+insert-port shelf 1 slot 3 port 5 type extimer
+
+insert-port shelf 1 slot 3 port 6 type gps
+
+insert-port shelf 1 slot 3 port 7 type gps
+
+insert-port shelf 1 slot 4 port 3 type mgmt_eth
+
+insert-port shelf 1 slot 4 port 4 type qx
+
+insert-port shelf 1 slot 4 port 5 type extimer
+
+insert-port shelf 1 slot 4 port 6 type gps
+
+insert-port shelf 1 slot 4 port 7 type gps
+
+insert-port shelf 1 slot 2 port 1 type xgei
+
+insert-port shelf 1 slot 2 port 2 type xgei
+
+insert-port shelf 1 slot 2 port 3 type xgei
+
+insert-port shelf 1 slot 2 port 4 type xgei
+
+insert-port shelf 1 slot 8 port 1 type xgei
+
+insert-port shelf 1 slot 8 port 2 type xgei
+
+insert-port shelf 1 slot 8 port 3 type xgei
+
+insert-port shelf 1 slot 8 port 4 type xgei
+
+insert-port shelf 1 slot 5 port 1 type xgei
+
+insert-port shelf 1 slot 5 port 2 type xgei
+
+insert-port shelf 1 slot 5 port 3 type xgei
+
+insert-port shelf 1 slot 5 port 4 type xgei
+
+insert-port shelf 1 slot 5 port 5 type xgei
+
+insert-port shelf 1 slot 5 port 6 type xgei
+
+insert-port shelf 1 slot 5 port 7 type xgei
+
+insert-port shelf 1 slot 5 port 8 type xgei
+
+insert-port shelf 1 slot 5 port 9 type xgei
+
+insert-port shelf 1 slot 5 port 10 type xgei
+
+!</offbrd>
+
+!<system-config>
+
+hostname SDYT-KFQJ6MKJ-1F-ZX6180H-SM-Z1
+login authentication
+
+load-mode txt
+
+!</system-config>
+
+!<nsr-config>
+
+nsr service all
+
+!</nsr-config>
+
+!<vrf>
+
+ip vrf 4G_OAM
+
+  rd 64586:20021
+
+  mpls label mode per-vrf
+
+  address-family ipv4
+
+    route-target export 64586:20021
+
+    route-target import 64586:20021
+
+  $
+
+$
+
+ip vrf 4G_RAN
+
+  rd 64586:20011
+
+  mpls label mode per-vrf
+
+  address-family ipv4
+
+    route-target export 64586:20011
+
+    route-target import 64586:20011
+
+  $
+
+$
+
+ip vrf 5G_OAM
+
+  rd 64586:10030
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 64586:10030
+
+    route-target import 64586:10030
+
+  $
+
+  address-family ipv6
+
+    route-target export 64586:10030
+
+    route-target import 64586:10030
+
+  $
+
+$
+
+ip vrf 5G_RAN
+
+  rd 64586:10010
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv6
+
+    route-target export 64586:10010
+
+    route-target import 64586:10010
+
+    route-target import 64586:1019004
+
+    route-target export 64586:1019004
+
+  $
+
+$
+
+!</vrf>
+
+!<if-intf>
+
+interface xgei-1/2/0/1
+
+   description to_SDYT-KFQXJ-ZX6180H-SM-Z43_xgei-1/2/0/1_10G
+  mtu 9050
+
+$
+
+interface xgei-1/2/0/1.4
+
+   description to_SDYT-KFQXJ-ZX6180H-SM-Z43_xgei-1/2/0/1_10G
+  mtu 9050
+
+  ip address 183.21.99.35 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface xgei-1/2/0/2
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/2/0/2.843
+
+   description terrz commited at 1606873662389
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:538/126
+$
+
+interface xgei-1/2/0/2.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.176.9 255.255.255.252
+$
+
+interface xgei-1/2/0/2.1843
+
+   description terrz commited at 1609141562088
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:538/126
+$
+
+interface xgei-1/2/0/3
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/2/0/3.843
+
+   description terrz commited at 1609143916694
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:548/126
+$
+
+interface xgei-1/2/0/3.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.176.26 255.255.255.252
+$
+
+interface xgei-1/2/0/3.1843
+
+   description terrz commited at 1609123954270
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:548/126
+$
+
+interface xgei-1/2/0/4
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/2/0/4.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:584/126
+$
+
+interface xgei-1/2/0/4.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.176.86 255.255.255.252
+$
+
+interface xgei-1/2/0/4.1019
+
+  mtu 9050
+
+  ip vrf forwarding 4G_RAN
+
+  ip address 58.131.175.172 255.255.255.252
+$
+
+interface xgei-1/2/0/4.1843
+
+   description terrz commited at 1609141562088
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:584/126
+$
+
+interface xgei-1/5/0/1
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/5/0/1.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:880/126
+$
+
+interface xgei-1/5/0/1.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.186.104 255.255.255.252
+$
+
+interface xgei-1/5/0/1.1843
+
+   description terrz commited at 1608259754338
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:880/126
+$
+
+interface xgei-1/5/0/2
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/5/0/2.843
+
+   description terrz commited at 1609143916694
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:4D0/126
+$
+
+interface xgei-1/5/0/2.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.175.188 255.255.255.252
+$
+
+interface xgei-1/5/0/2.1843
+
+   description terrz commited at 1609123954270
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:4D0/126
+$
+
+interface xgei-1/5/0/3
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/5/0/3.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:514/126
+$
+
+interface xgei-1/5/0/3.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.176.230 255.255.255.252
+$
+
+interface xgei-1/5/0/3.1843
+
+   description terrz commited at 1609141562088
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:514/126
+$
+
+interface xgei-1/5/0/4
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/5/0/4.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:7DC/126
+$
+
+interface xgei-1/5/0/4.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.184.144 255.255.255.252
+$
+
+interface xgei-1/5/0/4.1843
+
+   description terrz commited at 1609141562088
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:7DC/126
+$
+
+interface xgei-1/5/0/5
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/5/0/5.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:2360/126
+$
+
+interface xgei-1/5/0/5.895
+
+  mtu 9050
+
+  ip vrf forwarding 5G_OAM
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933:222:3:C:3:2360/126
+$
+
+interface xgei-1/5/0/5.1843
+
+   description terrz commited at 1609141562088
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:2360/126
+$
+
+interface xgei-1/5/0/6
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/5/0/6.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:2378/126
+$
+
+interface xgei-1/5/0/6.895
+
+  mtu 9050
+
+  ip vrf forwarding 5G_OAM
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933:222:3:C:3:2378/126
+$
+
+interface xgei-1/5/0/6.1843
+
+   description terrz commited at 1609141562087
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:2378/126
+$
+
+interface xgei-1/5/0/7
+
+$
+
+interface xgei-1/5/0/8
+
+$
+
+interface xgei-1/5/0/9
+
+$
+
+interface xgei-1/5/0/10
+
+$
+
+interface xgei-1/8/0/1
+
+   description to_SDYT_KFQWYWX_6180H_-SM-Z41_xgei-1/1/0/1_10G
+  mtu 9050
+
+$
+
+interface xgei-1/8/0/1.4
+
+   description to_SDYT_KFQWYWX_6180H_-SM-Z41_xgei-1/1/0/1_10G
+  mtu 9050
+
+  ip address 183.21.99.38 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface xgei-1/8/0/2
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/8/0/2.843
+
+   description terrz commited at 1609143916694
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:498/126
+$
+
+interface xgei-1/8/0/2.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.175.116 255.255.255.252
+$
+
+interface xgei-1/8/0/2.1843
+
+   description terrz commited at 1609123954270
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:498/126
+$
+
+interface xgei-1/8/0/3
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/8/0/3.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:404/126
+$
+
+interface xgei-1/8/0/3.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.175.224 255.255.255.252
+$
+
+interface xgei-1/8/0/3.1843
+
+   description terrz commited at 1609141562088
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:404/126
+$
+
+interface xgei-1/8/0/4
+
+  mtu 9050
+
+  ipv6 mtu 9000
+
+$
+
+interface xgei-1/8/0/4.843
+
+   description terrz commited at 1609223120998
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 573B:B493:B933::C:3:408/126
+$
+
+interface xgei-1/8/0/4.1004
+
+  mtu 9050
+
+  ip vrf forwarding 4G_OAM
+
+  ip address 183.99.175.228 255.255.255.252
+$
+
+interface xgei-1/8/0/4.1843
+
+   description terrz commited at 1609141562088
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 5731:4B7:7358::C:3:408/126
+$
+
+interface mgmt_eth
+
+  ip address 103.103.103.12 255.255.255.0
+$
+
+interface loopback1
+
+   description For-2CService
+  ip address 11.51.51.6 255.255.255.255
+$
+
+interface null1
+
+$
+
+interface qx1
+
+$
+
+!</if-intf>
+
+!<port-physical-config>
+
+interface xgei-1/2/0/1
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-1/8/0/1
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+!</port-physical-config>
+
+!<clock-mgr>
+
+clock timezone Beijing 8
+
+!</clock-mgr>
+
+!<switchvlan>
+
+switchvlan-configuration
+
+  vlan 1
+
+  $
+
+$
+
+!</switchvlan>
+
+!<vlan>
+
+vlan-configuration
+
+  interface xgei-1/2/0/1.4
+
+    encapsulation-dot1q 4
+
+  $
+
+  interface xgei-1/2/0/2.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/2/0/2.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/2/0/2.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/2/0/3.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/2/0/3.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/2/0/3.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/2/0/4.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/2/0/4.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/2/0/4.1019
+
+    encapsulation-dot1q 1019
+
+  $
+
+  interface xgei-1/2/0/4.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/5/0/1.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/5/0/1.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/5/0/1.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/5/0/2.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/5/0/2.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/5/0/2.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/5/0/3.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/5/0/3.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/5/0/3.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/5/0/4.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/5/0/4.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/5/0/4.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/5/0/5.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/5/0/5.895
+
+    encapsulation-dot1q 895
+
+  $
+
+  interface xgei-1/5/0/5.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/5/0/6.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/5/0/6.895
+
+    encapsulation-dot1q 895
+
+  $
+
+  interface xgei-1/5/0/6.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/8/0/1.4
+
+    encapsulation-dot1q 4
+
+  $
+
+  interface xgei-1/8/0/2.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/8/0/2.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/8/0/2.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/8/0/3.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/8/0/3.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/8/0/3.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+  interface xgei-1/8/0/4.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface xgei-1/8/0/4.1004
+
+    encapsulation-dot1q 1004
+
+  $
+
+  interface xgei-1/8/0/4.1843
+
+    encapsulation-dot1q 1843
+
+  $
+
+$
+
+!</vlan>
+
+!<ipv4-acl>
+
+ipv4-access-list SmartMAN_NSM_SNMP
+
+  rule 10 permit 11.16.16.1 0.0.0.0
+  rule 20 permit 11.56.264.1 0.0.0.255
+  rule 30 permit 103.179.265.0 0.0.0.255
+$
+
+ipv4-access-list SmartMAN_SSH_TELNET
+
+  rule 10 permit 103.179.265.0 0.0.0.255
+  rule 15 permit 11.25.33.57 0.0.0.7
+  rule 20 permit 11.251.34.33 0.0.0.7
+  rule 25 permit 11.251.34.57 0.0.0.7
+  rule 50 permit 11.16.16.1 0.0.0.255
+  rule 55 permit 11.56.264.1 0.0.0.255
+  rule 60 permit 11.51.0.0 0.0.255.255
+  rule 70 permit 183.21.0.0 0.0.255.255
+  rule 80 permit 145.0.0.0 0.0.0.255
+$
+
+ipv4-access-list anti-virus
+
+  rule 1000 permit any
+
+$
+
+ipv4-access-list snmp
+
+  rule 10 permit 11.16.16.1 0.0.0.0
+  rule 20 permit 11.56.264.1 0.0.0.255
+  rule 30 permit 103.179.265.0 0.0.0.255
+$
+
+!</ipv4-acl>
+
+!<label-mgr>
+
+mpls label range global 16 1048575 static 16 23999 ldp 205824 209919 pwe3 209920
+
+ 218111 rsvp 218112 226303 bgp 226304 622591 bgpv6 622592 720895 ac-label 100000
+
+0 1048575 srgb-label 24000 43999 srlb-label 965536 981919
+
+!</label-mgr>
+
+!<system-user>
+
+system-user
+
+  authorization-template 1
+
+    bind aaa-authorization-template 1
+
+    local-privilege-level 15
+
+    login-sametime-max 60
+
+  $
+
+  authentication-template 1
+
+    bind aaa-authentication-template 1
+
+  $
+
+  user-default
+
+    enable-type local
+
+  $
+
+  user-name SD-YT-Manager
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted e7d46f383c4982ea539a9c78a1593284
+d5bb8ec678
+
+  $
+
+  user-name SD-YT-SDNcontroler
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted d3eb05a14bb9af2496942a9d444744d0
+2c8cb63d24
+
+  $
+
+  user-name who
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted d604f9ad411ac2ea73ac35752504e56c
+d127acb
+
+  $
+
+  user-name yantai
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted 107a43015a1da95ea5a4bdf1c155e7af
+7d87895
+
+  $
+
+  strong-password check disable
+
+$
+
+!</system-user>
+
+!<dhcp>
+
+ip dhcp relay server group 1
+
+  server 1 183.18.137.13 master
+$
+
+dhcp
+
+  enable
+
+  relay forward reply unrestricted
+
+  relay update arp
+
+  interface xgei-1/8/0/4.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.175.228
+    relay source-ip 183.99.175.228
+  $
+
+  interface xgei-1/2/0/2.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.176.9
+    relay source-ip 183.99.176.9
+  $
+
+  interface xgei-1/2/0/3.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.176.26
+    relay source-ip 183.99.176.26
+  $
+
+  interface xgei-1/2/0/4.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.176.86
+    relay source-ip 183.99.176.86
+  $
+
+  interface xgei-1/5/0/1.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.186.104
+    relay source-ip 183.99.186.104
+  $
+
+  interface xgei-1/5/0/2.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.175.188
+    relay source-ip 183.99.175.188
+  $
+
+  interface xgei-1/8/0/2.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.175.116
+    relay source-ip 183.99.175.116
+  $
+
+  interface xgei-1/8/0/3.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.175.224
+    relay source-ip 183.99.175.224
+  $
+
+  interface xgei-1/5/0/3.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.176.230
+    relay source-ip 183.99.176.230
+  $
+
+  interface xgei-1/5/0/4.1004
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 183.99.184.144
+    relay source-ip 183.99.184.144
+  $
+
+$
+
+!</dhcp>
+
+!<dhcpv6>
+
+dhcp ipv6
+
+  relay intfid-format china-tel
+
+  relay policy 201
+
+    default server-group 1
+
+  $
+
+  relay server group 1
+
+    server 1 573B:B493:B533:222:3:21:43:7
+  $
+
+  interface xgei-1/5/0/5.895
+
+    mode relay
+
+    relay agent 573B:B493:B933:222:3:C:3:2360
+    relay policy 201
+
+    relay source-ip 573B:B493:B933:222:3:C:3:2360
+  $
+
+  interface xgei-1/5/0/6.895
+
+    mode relay
+
+    relay agent 573B:B493:B933:222:3:C:3:2378
+    relay policy 201
+
+    relay source-ip 573B:B493:B933:222:3:C:3:2378
+  $
+
+  enable
+
+$
+
+!</dhcpv6>
+
+!<ptp>
+
+ptp
+
+  announce-timeout 6
+
+  domain 24
+
+  state-algorithm alternate-bmc
+
+  clock-class 248
+
+  clock-accuracy 33
+
+  free-mode
+
+    port interface xgei-1/8/0/1 portnum 2
+
+      enable
+
+    $
+
+    port interface xgei-1/2/0/1 portnum 3
+
+      enable
+
+    $
+
+    port interface xgei-1/2/0/2 portnum 1202
+
+      enable
+
+    $
+
+    port interface xgei-1/2/0/3 portnum 1203
+
+      enable
+
+    $
+
+    port interface xgei-1/2/0/4 portnum 1204
+
+      enable
+
+    $
+
+    port interface xgei-1/5/0/1 portnum 1501
+
+      enable
+
+    $
+
+    port interface xgei-1/5/0/2 portnum 1502
+
+      enable
+
+    $
+
+    port interface xgei-1/5/0/3 portnum 1503
+
+      enable
+
+    $
+
+    port interface xgei-1/5/0/4 portnum 1504
+
+      enable
+
+    $
+
+    port interface xgei-1/8/0/2 portnum 1802
+
+      enable
+
+    $
+
+    port interface xgei-1/8/0/3 portnum 1803
+
+      enable
+
+    $
+
+    port interface xgei-1/8/0/4 portnum 1804
+
+      enable
+
+    $
+
+    port interface xgei-1/5/0/5 portnum 1505
+
+      enable
+
+    $
+
+    port interface xgei-1/5/0/6 portnum 1506
+
+      enable
+
+    $
+
+  $
+
+$
+
+interface xgei-1/5/0/5
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/5/0/1
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/5/0/6
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/5/0/3
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/8/0/2
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/2/0/3
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/8/0/3
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/5/0/2
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/5/0/4
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/2/0/2
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/2/0/4
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+interface xgei-1/8/0/4
+
+  ptp enable
+
+  ptp accuracy-mode normal
+
+  ptp pdelay-req-interval -4
+
+  ptp unsymmetrical-offset 0 negative
+
+$
+
+!</ptp>
+
+!<ssmclock>
+
+ssm
+
+  usessm
+
+  synchronization-clock line xgei-1/2/0/1
+
+  synchronization-clock line xgei-1/8/0/1
+
+  priority line xgei-1/2/0/1 2
+
+  priority line xgei-1/8/0/1 1
+
+$
+
+!</ssmclock>
+
+!<aaa>
+
+aaa-authentication-template 1
+
+  aaa-authentication-type local
+
+$
+
+aaa-authorization-template 1
+
+  aaa-authorization-type local
+
+$
+
+!</aaa>
+
+!<lldp>
+
+lldp
+
+  maxneighbor 128
+
+$
+
+!</lldp>
+
+!<arp>
+
+arp
+
+  interface xgei-1/2/0/1.4
+
+    timeout 600
+
+  $
+
+  interface xgei-1/8/0/1.4
+
+    timeout 600
+
+  $
+
+$
+
+!</arp>
+
+!<nd>
+
+interface xgei-1/2/0/2.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/2/0/2.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/2/0/3.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/2/0/3.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/2/0/4.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/2/0/4.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/1.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/1.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/2.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/2.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/3.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/3.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/4.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/4.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/5.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/5.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/6.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/5/0/6.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/8/0/2.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/8/0/2.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/8/0/3.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/8/0/3.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/8/0/4.843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+interface xgei-1/8/0/4.1843
+
+  ipv6 nd reachable-time 3600000
+
+  ipv6 nd stale-switch
+
+$
+
+!</nd>
+
+!<mpls-te>
+
+mpls traffic-eng
+
+  bind-sid-allocate
+
+  router-id 11.51.51.6
+$
+
+!</mpls-te>
+
+!<segment-routing>
+
+segment-routing
+
+  traffic-eng
+
+  $
+
+  ipv4-mpls prefix-sid 11.51.51.6/32 index 2367 node-flag
+$
+
+!</segment-routing>
+
+!<alarm>
+
+alarm preload-mode interface xgei-1/5/0/7 autorecover
+
+logging file default almlog
+
+  accept on
+
+$
+
+logging file default cmdlog
+
+  buffer 1000
+
+$
+
+logging file default netclog
+
+  accept on
+
+$
+
+logging file default snmplog
+
+  accept on
+
+$
+
+logging file default srvlog
+
+  accept on
+
+  interval 10
+
+$
+
+logging file default weblog
+
+  accept on
+
+$
+
+logging trap-enable informational
+
+logging snmp
+
+  accept on
+
+  match cmdlog
+
+$
+
+!</alarm>
+
+!<ftp>
+
+ftp-client source-ip ipv4 11.51.51.6
+!</ftp>
+
+!<snmp>
+
+snmp-server access-list ipv4 SmartMAN_NSM_SNMP
+
+snmp-server community encrypted *21*Cd9FBNz0tjJfcP3wQS0QXEEtEFxBLRBcQS0QXHoDRjLl
+
+tQ4H+K03gMouamcY6vUDH1jmmzwjB771esZWdu8ialpR7pHa86xmplc0AQ== view lldpview ro 
+
+snmp-server enable inform snmp
+
+snmp-server enable inform bgp
+
+snmp-server enable inform mac
+
+snmp-server enable inform ospf
+
+snmp-server enable inform stp
+
+snmp-server enable inform ppp
+
+snmp-server enable inform arp
+
+snmp-server enable inform rmon
+
+snmp-server enable inform udld
+
+snmp-server enable inform cfm
+
+snmp-server enable inform efm
+
+snmp-server enable inform lacp
+
+snmp-server enable inform mc-elam
+
+snmp-server enable inform tcp
+
+snmp-server enable inform sctp
+
+snmp-server enable inform stalarm
+
+snmp-server enable inform cps
+
+snmp-server enable inform interface
+
+snmp-server enable inform acl
+
+snmp-server enable inform fib
+
+snmp-server enable inform pim
+
+snmp-server enable inform isis
+
+snmp-server enable inform rip
+
+snmp-server enable inform msdp
+
+snmp-server enable inform aps
+
+snmp-server enable inform config
+
+snmp-server enable inform am
+
+snmp-server enable inform um
+
+snmp-server enable inform system
+
+snmp-server enable inform ldp
+
+snmp-server enable inform pwe3
+
+snmp-server enable inform vpn
+
+snmp-server enable inform mpls-oam
+
+snmp-server enable inform ptp
+
+snmp-server enable inform tunnel-te
+
+snmp-server enable inform radius
+
+snmp-server enable inform dhcp
+
+snmp-server enable inform bfd
+
+snmp-server enable inform ippool
+
+snmp-server enable inform ntp
+
+snmp-server enable inform ssm
+
+snmp-server enable inform sqa
+
+snmp-server enable inform ipsec
+
+snmp-server enable inform cgn
+
+snmp-server enable inform vrrp
+
+snmp-server enable inform ftp_tftp
+
+snmp-server enable inform ping-trace
+
+snmp-server enable inform gm
+
+snmp-server enable trap snmp
+
+snmp-server enable trap bgp
+
+snmp-server enable trap mac
+
+snmp-server enable trap ospf
+
+snmp-server enable trap stp
+
+snmp-server enable trap ppp
+
+snmp-server enable trap arp
+
+snmp-server enable trap rmon
+
+snmp-server enable trap udld
+
+snmp-server enable trap cfm
+
+snmp-server enable trap efm
+
+snmp-server enable trap lacp
+
+snmp-server enable trap mc-elam
+
+snmp-server enable trap tcp
+
+snmp-server enable trap sctp
+
+snmp-server enable trap stalarm
+
+snmp-server enable trap cps
+
+snmp-server enable trap interface
+
+snmp-server enable trap acl
+
+snmp-server enable trap fib
+
+snmp-server enable trap pim
+
+snmp-server enable trap isis
+
+snmp-server enable trap rip
+
+snmp-server enable trap msdp
+
+snmp-server enable trap aps
+
+snmp-server enable trap config
+
+snmp-server enable trap am
+
+snmp-server enable trap um
+
+snmp-server enable trap system
+
+snmp-server enable trap ldp
+
+snmp-server enable trap pwe3
+
+snmp-server enable trap vpn
+
+snmp-server enable trap mpls-oam
+
+snmp-server enable trap ptp
+
+snmp-server enable trap tunnel-te
+
+snmp-server enable trap radius
+
+snmp-server enable trap dhcp
+
+snmp-server enable trap bfd
+
+snmp-server enable trap ippool
+
+snmp-server enable trap ntp
+
+snmp-server enable trap ssm
+
+snmp-server enable trap sqa
+
+snmp-server enable trap ipsec
+
+snmp-server enable trap cgn
+
+snmp-server enable trap vrrp
+
+snmp-server enable trap ftp_tftp
+
+snmp-server enable trap ping-trace
+
+snmp-server enable trap gm
+
+snmp-server host 11.56.264.1 trap version 2c encrypted *21*Cd9FBNz0tjJfcP3wnN9yf
+Jzfcnyc33J8nN9yfFpvhhcIp12VcwvvqKCIxmHmoPU4+Il5NrbQ3dJPMUq8rtPYG5Qz52HhtlKBHx4wH
+
+w== udp-port 162 snmp bgp mac ospf stp ppp arp rmon udld cfm efm lacp mc-elam tc
+
+p sctp stalarm cps interface acl fib pim isis rip msdp aps config am um system l
+
+dp pwe3 vpn mpls-oam ptp tunnel-te radius dhcp bfd ippool ntp
+
+snmp-server host 11.56.264.1 trap version 2c encrypted *21*Cd9FBNz0tjJfcP3wnN9yf
+Jzfcnyc33J8nN9yfFpvhhcIp12VcwvvqKCIxmHmoPU4+Il5NrbQ3dJPMUq8rtPYG5Qz52HhtlKBHx4wH
+
+w== udp-port 162 ssm sqa ipsec cgn vrrp ftp_tftp ping-trace gm
+
+snmp-server host 11.16.16.1 trap version 2c encrypted *21*Cd9FBNz0tjJfcP3wGmTdGB
+pk3RgaZN0YGmTdGIFMhju3Fe+RdwpkFoNhk19edET4rOXTgEkMvKJoKAy8Gz9CvTXsBi//QkFk3OEdpQ
+
+== udp-port 162 snmp bgp mac ospf stp ppp arp rmon udld cfm efm lacp mc-elam tcp
+
+ sctp stalarm cps interface acl fib pim isis rip msdp aps config am um system ld
+
+p pwe3 vpn mpls-oam ptp tunnel-te radius dhcp bfd ippool ntp
+
+snmp-server host 11.16.16.1 trap version 2c encrypted *21*Cd9FBNz0tjJfcP3wGmTdGB
+pk3RgaZN0YGmTdGIFMhju3Fe+RdwpkFoNhk19edET4rOXTgEkMvKJoKAy8Gz9CvTXsBi//QkFk3OEdpQ
+
+== udp-port 162 ssm sqa ipsec cgn vrrp ftp_tftp ping-trace gm
+
+snmp-server host 103.179.265.39 inform version 2c encrypted *21*Cd9FBNz0tjJfcP3w
+mPBHNZjwRzWY8Ec1mPBHNQ7uFyunMviugIXN0ZfXnlPk4JyKQmSEMADEkMFcK1LmvmM56RkuZdcrAmla
+
+UeeK5A== udp-port 165 snmp bgp mac ospf stp ppp arp rmon udld cfm efm lacp mc-el
+
+am tcp sctp stalarm cps interface acl fib pim isis rip msdp aps config am um sys
+
+tem ldp pwe3 vpn mpls-oam ptp tunnel-te radius dhcp bfd ippool ntp
+
+snmp-server host 103.179.265.39 inform version 2c encrypted *21*Cd9FBNz0tjJfcP3w
+mPBHNZjwRzWY8Ec1mPBHNQ7uFyunMviugIXN0ZfXnlPk4JyKQmSEMADEkMFcK1LmvmM56RkuZdcrAmla
+
+UeeK5A== udp-port 165 ssm sqa ipsec cgn vrrp ftp_tftp ping-trace gm
+
+snmp-server trap-source 11.51.51.6
+snmp-server view lldpview iso included
+
+snmp-server view n31view iso included
+
+snmp-server view ALLView iso included
+
+snmp-server version v2c enable
+
+!</snmp>
+
+!<telnet>
+
+line telnet absolute-timeout 0
+
+line telnet idle-timeout 30
+
+line telnet access-class ipv4 SmartMAN_SSH_TELNET
+
+!</telnet>
+
+!<bgp>
+
+router bgp 64586
+
+  synchronization disable
+
+  bgp router-id 11.51.51.6
+  neighbor MAR-MER-4 peer-group
+
+  neighbor MAR-MER-4 remote-as 64586
+
+  neighbor MAR-MER-4 activate disable
+
+  neighbor MAR-MER-4 update-source loopback1
+
+  neighbor MAR-MER-4 fall-over bfd interval 100 min-rx 100 multiplier 3
+
+  neighbor 11.51.7.10 remote-as 64586
+  neighbor 11.51.7.10 peer-group MAR-MER-4
+  neighbor 11.51.7.21 remote-as 64586
+  neighbor 11.51.7.21 peer-group MAR-MER-4
+  address-family ipv4 vrf 5G_OAM
+
+    bgp frr
+
+    redistribute connected
+
+  $
+
+  address-family ipv4 vrf 4G_OAM
+
+    bgp frr
+
+    redistribute connected
+
+  $
+
+  address-family ipv4 vrf 4G_RAN
+
+    bgp frr
+
+    redistribute connected
+
+  $
+
+  address-family vpnv4
+
+    neighbor MAR-MER-4 activate
+
+  $
+
+  address-family ipv6 vrf 5G_OAM
+
+    bgp frr
+
+    redistribute connected
+
+  $
+
+  address-family ipv6 vrf 5G_RAN
+
+    bgp frr
+
+    bgp frr wtr 5
+
+    redistribute connected
+
+  $
+
+  address-family vpnv6
+
+    neighbor MAR-MER-4 activate
+
+  $
+
+$
+
+!</bgp>
+
+!<isis>
+
+router isis 4
+
+  area 86.4586.0004
+
+  system-id 0100.5005.0006
+
+  router-id 11.51.51.6
+  is-type level-2-only
+
+  metric-style wide
+
+  fast-flood 5
+
+  fast-reroute ti-lfa sr-mpls
+
+  i-spf
+
+  lsp-gen-interval 1 50 50
+
+  spf-interval 1 50 50
+
+  maximum-paths 8
+
+  microloop-prevention link-up enable
+
+  microloop-prevention link-up delay-time 30000
+
+  microloop-prevention segment-routing delay-time 30000
+
+  microloop-prevention segment-routing mpls enable
+
+  mpls traffic-eng level-2
+
+  restart enable
+
+  segment-routing mpls enable
+
+  set-overload-bit on-start-up 300
+
+  interface xgei-1/2/0/1.4
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+  $
+
+  interface xgei-1/8/0/1.4
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+  $
+
+  interface loopback1
+
+    ip router isis
+
+    circuit-type level-2-only
+
+    passive-mode
+
+  $
+
+$
+
+!</isis>
+
+!<qos>
+
+cfg-ds-field default
+
+  cfg-ds-egress 802.1p<->phb PHB BE 0
+
+  cfg-ds-egress 802.1p<->phb PHB AF11 1
+
+  cfg-ds-egress 802.1p<->phb PHB AF12 1
+
+  cfg-ds-egress 802.1p<->phb PHB AF21 2
+
+  cfg-ds-egress 802.1p<->phb PHB AF22 2
+
+  cfg-ds-egress 802.1p<->phb PHB AF31 3
+
+  cfg-ds-egress 802.1p<->phb PHB AF32 3
+
+  cfg-ds-egress 802.1p<->phb PHB AF41 4
+
+  cfg-ds-egress 802.1p<->phb PHB AF42 4
+
+  cfg-ds-egress 802.1p<->phb PHB CS6 6
+
+  cfg-ds-egress 802.1p<->phb PHB CS7 7
+
+  cfg-ds-egress 802.1p<->phb PHB EF 5
+
+  cfg-ds-egress exp<->phb PHB BE 0
+
+  cfg-ds-egress exp<->phb PHB AF11 1
+
+  cfg-ds-egress exp<->phb PHB AF12 1
+
+  cfg-ds-egress exp<->phb PHB AF21 2
+
+  cfg-ds-egress exp<->phb PHB AF22 2
+
+  cfg-ds-egress exp<->phb PHB AF31 3
+
+  cfg-ds-egress exp<->phb PHB AF32 3
+
+  cfg-ds-egress exp<->phb PHB AF41 4
+
+  cfg-ds-egress exp<->phb PHB AF42 4
+
+  cfg-ds-egress exp<->phb PHB CS6 6
+
+  cfg-ds-egress exp<->phb PHB CS7 7
+
+  cfg-ds-egress exp<->phb PHB EF 5
+
+  cfg-ds-egress dscp<->phb PHB BE 0
+
+  cfg-ds-egress dscp<->phb PHB AF11 10
+
+  cfg-ds-egress dscp<->phb PHB AF12 12
+
+  cfg-ds-egress dscp<->phb PHB AF21 18
+
+  cfg-ds-egress dscp<->phb PHB AF22 20
+
+  cfg-ds-egress dscp<->phb PHB AF31 26
+
+  cfg-ds-egress dscp<->phb PHB AF32 28
+
+  cfg-ds-egress dscp<->phb PHB AF41 34
+
+  cfg-ds-egress dscp<->phb PHB AF42 36
+
+  cfg-ds-egress dscp<->phb PHB CS6 48
+
+  cfg-ds-egress dscp<->phb PHB CS7 56
+
+  cfg-ds-egress dscp<->phb PHB EF 46
+
+  cfg-ds-ingress 802.1p<->phb PHB BE 0
+
+  cfg-ds-ingress 802.1p<->phb PHB AF11 1
+
+  cfg-ds-ingress 802.1p<->phb PHB AF21 2
+
+  cfg-ds-ingress 802.1p<->phb PHB AF31 3
+
+  cfg-ds-ingress 802.1p<->phb PHB AF41 4
+
+  cfg-ds-ingress 802.1p<->phb PHB EF 5
+
+  cfg-ds-ingress 802.1p<->phb PHB CS6 6
+
+  cfg-ds-ingress 802.1p<->phb PHB CS7 7
+
+  cfg-ds-ingress exp<->phb PHB BE 0
+
+  cfg-ds-ingress exp<->phb PHB AF11 1
+
+  cfg-ds-ingress exp<->phb PHB AF21 2
+
+  cfg-ds-ingress exp<->phb PHB AF31 3
+
+  cfg-ds-ingress exp<->phb PHB AF41 4
+
+  cfg-ds-ingress exp<->phb PHB EF 5
+
+  cfg-ds-ingress exp<->phb PHB CS6 6
+
+  cfg-ds-ingress exp<->phb PHB CS7 7
+
+  cfg-ds-ingress dscp<->phb PHB BE 0
+
+  cfg-ds-ingress dscp<->phb PHB BE 1
+
+  cfg-ds-ingress dscp<->phb PHB BE 2
+
+  cfg-ds-ingress dscp<->phb PHB BE 3
+
+  cfg-ds-ingress dscp<->phb PHB BE 4
+
+  cfg-ds-ingress dscp<->phb PHB BE 5
+
+  cfg-ds-ingress dscp<->phb PHB BE 6
+
+  cfg-ds-ingress dscp<->phb PHB BE 7
+
+  cfg-ds-ingress dscp<->phb PHB AF11 8
+
+  cfg-ds-ingress dscp<->phb PHB BE 9
+
+  cfg-ds-ingress dscp<->phb PHB AF11 10
+
+  cfg-ds-ingress dscp<->phb PHB BE 11
+
+  cfg-ds-ingress dscp<->phb PHB AF12 12
+
+  cfg-ds-ingress dscp<->phb PHB BE 13
+
+  cfg-ds-ingress dscp<->phb PHB AF11 14
+
+  cfg-ds-ingress dscp<->phb PHB BE 15
+
+  cfg-ds-ingress dscp<->phb PHB AF21 16
+
+  cfg-ds-ingress dscp<->phb PHB BE 17
+
+  cfg-ds-ingress dscp<->phb PHB AF21 18
+
+  cfg-ds-ingress dscp<->phb PHB BE 19
+
+  cfg-ds-ingress dscp<->phb PHB AF22 20
+
+  cfg-ds-ingress dscp<->phb PHB BE 21
+
+  cfg-ds-ingress dscp<->phb PHB AF21 22
+
+  cfg-ds-ingress dscp<->phb PHB BE 23
+
+  cfg-ds-ingress dscp<->phb PHB AF31 24
+
+  cfg-ds-ingress dscp<->phb PHB BE 25
+
+  cfg-ds-ingress dscp<->phb PHB AF31 26
+
+  cfg-ds-ingress dscp<->phb PHB BE 27
+
+  cfg-ds-ingress dscp<->phb PHB AF32 28
+
+  cfg-ds-ingress dscp<->phb PHB BE 29
+
+  cfg-ds-ingress dscp<->phb PHB AF31 30
+
+  cfg-ds-ingress dscp<->phb PHB BE 31
+
+  cfg-ds-ingress dscp<->phb PHB AF41 32
+
+  cfg-ds-ingress dscp<->phb PHB BE 33
+
+  cfg-ds-ingress dscp<->phb PHB AF41 34
+
+  cfg-ds-ingress dscp<->phb PHB BE 35
+
+  cfg-ds-ingress dscp<->phb PHB AF42 36
+
+  cfg-ds-ingress dscp<->phb PHB BE 37
+
+  cfg-ds-ingress dscp<->phb PHB AF41 38
+
+  cfg-ds-ingress dscp<->phb PHB BE 39
+
+  cfg-ds-ingress dscp<->phb PHB EF 40
+
+  cfg-ds-ingress dscp<->phb PHB BE 41
+
+  cfg-ds-ingress dscp<->phb PHB BE 42
+
+  cfg-ds-ingress dscp<->phb PHB BE 43
+
+  cfg-ds-ingress dscp<->phb PHB BE 44
+
+  cfg-ds-ingress dscp<->phb PHB BE 45
+
+  cfg-ds-ingress dscp<->phb PHB EF 46
+
+  cfg-ds-ingress dscp<->phb PHB BE 47
+
+  cfg-ds-ingress dscp<->phb PHB CS6 48
+
+  cfg-ds-ingress dscp<->phb PHB BE 49
+
+  cfg-ds-ingress dscp<->phb PHB BE 50
+
+  cfg-ds-ingress dscp<->phb PHB BE 51
+
+  cfg-ds-ingress dscp<->phb PHB BE 52
+
+  cfg-ds-ingress dscp<->phb PHB BE 53
+
+  cfg-ds-ingress dscp<->phb PHB BE 54
+
+  cfg-ds-ingress dscp<->phb PHB BE 55
+
+  cfg-ds-ingress dscp<->phb PHB CS7 56
+
+  cfg-ds-ingress dscp<->phb PHB BE 57
+
+  cfg-ds-ingress dscp<->phb PHB BE 58
+
+  cfg-ds-ingress dscp<->phb PHB BE 59
+
+  cfg-ds-ingress dscp<->phb PHB BE 60
+
+  cfg-ds-ingress dscp<->phb PHB BE 61
+
+  cfg-ds-ingress dscp<->phb PHB BE 62
+
+  cfg-ds-ingress dscp<->phb PHB BE 63
+
+$
+
+cfg-unknown-unicast-rsp restr-time 10
+
+!</qos>
+
+!<pm_protect>
+
+protocol_receive_rate 2000
+
+ptp-time-check disable
+
+set-protocol-pkt-shape pir 2000 pbs 500
+
+ptp-frequency-check disable
+
+set-ptp-freq-rec-para loop-close arith1 lock-thres 50 pdv-rep-min 5 pdv-rep-max 
+
+20 phase-cycle 10 ptp-direction forward
+
+!</pm_protect>
+
+!<pm_if_mainten>
+
+gps-attribute
+
+  gps istodmonitorptp disable
+
+  gps direction gps-1/3/0/6 1
+
+  gps direction gps-1/3/0/7 1
+
+  gps direction gps-1/4/0/6 1
+
+  gps direction gps-1/4/0/7 1
+
+  gps portenable gps-1/3/0/6 0
+
+  gps portenable gps-1/3/0/7 0
+
+  gps portenable gps-1/4/0/6 0
+
+  gps portenable gps-1/4/0/7 0
+
+  gps protocol gps-1/3/0/6 1
+
+  gps protocol gps-1/3/0/7 1
+
+  gps protocol gps-1/4/0/6 1
+
+  gps protocol gps-1/4/0/7 1
+
+  gps inputoffset gps-1/3/0/6 0
+
+  gps inputoffset gps-1/3/0/7 0
+
+  gps inputoffset gps-1/4/0/6 0
+
+  gps inputoffset gps-1/4/0/7 0
+
+  gps outputoffset gps-1/3/0/6 0
+
+  gps outputoffset gps-1/3/0/7 0
+
+  gps outputoffset gps-1/4/0/6 0
+
+  gps outputoffset gps-1/4/0/7 0
+
+  gps speed gps-1/3/0/6 2
+
+  gps speed gps-1/3/0/7 2
+
+  gps speed gps-1/4/0/6 2
+
+  gps speed gps-1/4/0/7 2
+
+  gps statusflag gps-1/3/0/6 2
+
+  gps statusflag gps-1/3/0/7 2
+
+  gps statusflag gps-1/4/0/6 2
+
+  gps statusflag gps-1/4/0/7 2
+
+  gps tod gps-1/3/0/6 0
+
+  gps tod gps-1/3/0/7 0
+
+  gps tod gps-1/4/0/6 0
+
+  gps tod gps-1/4/0/7 0
+
+  gps 1ppsout gps-1/3/0/6 1
+
+  gps 1ppsout gps-1/3/0/7 1
+
+  gps 1ppsout gps-1/4/0/6 1
+
+  gps 1ppsout gps-1/4/0/7 1
+
+$
+
+!</pm_if_mainten>
+

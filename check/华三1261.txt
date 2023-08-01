@@ -1,0 +1,5005 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 3606
+
+#
+
+ clock timezone CST add 08:00:00
+
+ clock protocol none
+
+#
+
+mdc Admin id 1
+
+#
+
+  sysname PZZV-PK-1C-P12504O-PJ-B007
+
+#
+
+ip vpn-instance 3G_OAM
+
+ route-distinguisher 64591:18050
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:18050 import-extcommunity
+
+ vpn-target 64591:18050 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:18050
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:18050
+
+
+
+               
+  apply-label per-instance
+
+#
+
+ip vpn-instance 3G_RAN
+
+ route-distinguisher 64591:18040
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:18040 import-extcommunity
+
+ vpn-target 64591:18040 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:18040
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:18040
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 4G_OAM
+
+ route-distinguisher 64591:20021
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:20021 import-extcommunity
+
+ vpn-target 64591:20021 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+
+
+               
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:20021
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:20021
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 4G_RAN
+
+ route-distinguisher 64591:20011
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:20011 import-extcommunity
+
+ vpn-target 64591:20011 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:20011
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:20011
+
+  apply-label per-instance
+
+
+
+               
+#
+
+ip vpn-instance 5GC_MGMN
+
+ route-distinguisher 64591:10050
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:10050 import-extcommunity
+
+ vpn-target 64591:10050 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:10050
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:10050
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_MEC
+
+ route-distinguisher 64591:10060
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:10060 import-extcommunity
+
+ vpn-target 64591:10060 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+
+
+               
+ address-family ipv4
+
+  route-distinguisher 64591:10060
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:10060
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_OAM
+
+ route-distinguisher 64591:10030
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:10030 import-extcommunity
+
+ vpn-target 64591:10030 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:10030
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:10030
+
+  apply-label per-instance
+
+#
+
+
+
+               
+ip vpn-instance 5G_RAN
+
+ route-distinguisher 64591:10010
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:10010 import-extcommunity
+
+ vpn-target 64591:10010 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:10010
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:10010
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_RAN_VIP
+
+ route-distinguisher 64591:10020
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 64591:10020 import-extcommunity
+
+ vpn-target 64591:10020 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+
+
+               
+  route-distinguisher 64591:10020
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:10020
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance __mgnt_vpn__
+
+ route-distinguisher 64591:10080
+
+ vpn-target 64591:10080 import-extcommunity
+
+ vpn-target 64591:10080 export-extcommunity
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 64591:10080
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 64591:10080
+
+#
+
+bfd template 10
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+
+
+               
+#
+
+bfd template 50
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+ packet-filter 3001 global inbound
+
+#
+
+ bfd multi-hop min-transmit-interval 10
+
+ bfd multi-hop min-receive-interval 10
+
+ bfd multi-hop min-echo-receive-interval 10
+
+ bfd multi-hop detect-multiplier 3
+
+ undo bfd ip-router-alert
+
+#
+
+isis 1
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 allow external
+
+  is-name PZZV-PK-1C-P12504O-PJ-B007
+
+
+
+               
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.4591.0001.0200.5311.8017.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+  maximum load-balancing 16
+
+  import-route isis 1000 allow-direct route-policy TO_MAR_ISIS
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+isis 2
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 allow external
+
+  is-name PZZV-PK-1C-P12504O-PJ-B007
+
+
+
+               
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.4591.0002.0300.5311.8017.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+  maximum load-balancing 16
+
+  import-route isis 1000 allow-direct route-policy TO_MAR_ISIS
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+isis 3
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 allow external
+
+  is-name PZZV-PK-1C-P12504O-PJ-B007
+
+
+
+               
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.4591.0003.0400.5311.8017.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+  maximum load-balancing 16
+
+  import-route isis 1000 allow-direct route-policy TO_MAR_ISIS
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+isis 1000
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 allow external
+
+  is-name PZZV-PK-1C-P12504O-PJ-B007
+
+
+
+               
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.4591.1000.0100.5311.8017.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+  maximum load-balancing 16
+
+  import-route isis 1 route-policy FROM_MAR_ISIS
+
+  import-route isis 2 route-policy FROM_MAR_ISIS
+
+  import-route isis 3 route-policy FROM_MAR_ISIS
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+ospf 65535 vpn-instance __mgnt_vpn__
+
+ non-stop-routing
+
+ import-route bgp 64591 allow-ibgp
+
+ area 0.0.0.0
+
+  network 0.0.0.0 255.255.255.255
+
+#
+
+ mpls lsr-id 18.51.196.15
+
+
+
+               
+ mpls label advertise non-null
+
+#
+
+ ip unreachables enable
+
+ ip ttl-expires enable
+
+#
+
+ dhcp enable
+
+#
+
+ lldp global enable
+
+#
+
+ ptp profile 1588v2
+
+ ptp mode bc
+
+ ptp domain 24
+
+ ptp clock-state enable 
+
+#
+
+ active port basic-license slot 0 subslot 0 phy-port 7 to 12
+
+ active port basic-license slot 1 subslot 0 phy-port 1 to 48
+
+#
+
+ system-working-mode bridgee
+
+ undo version auto-update enable
+
+ version check ignore
+
+ hardware-resource tcam mix
+
+ password-recovery enable
+
+ network-clock ssmcontrol on
+
+
+
+               
+ network-clock source lpuport HundredGigE0/0/7 forcessm off 
+
+ network-clock source lpuport HundredGigE0/0/7 priority 1 
+
+ network-clock source lpuport HundredGigE0/0/8 forcessm off 
+
+ network-clock source lpuport HundredGigE0/0/8 priority 10 
+
+#
+
+vlan 1
+
+#
+
+qos map-table dot1p-lp
+
+ import 0 export 0
+
+ import 1 export 1
+
+ import 2 export 2
+
+#
+
+qos wred queue table 100GE
+
+ queue 0 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+
+
+               
+ queue 2 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+
+
+               
+qos wred queue table 10GE
+
+ queue 0 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+
+
+               
+ queue 5 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+mpls te
+
+#
+
+tunnel-policy SRBE_TUNNEL
+
+ select-seq sr-lsp load-balance-number 32
+
+#
+
+ l2vpn enable
+
+#
+
+ mpls bfd enable
+
+#
+
+interface Route-Aggregation999
+
+  description to_SZZV-GKI-2C-WU9H8BW-PJ-Y001_QORKH4
+
+ mtu 9000
+
+
+
+               
+ ip address 150.24.159.12 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode md5 cipher 52677f6f79912e985e196289e9b7cf4b
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ link-aggregation bfd ipv4 source 18.51.196.15 destination 18.51.196.1
+
+ link-aggregation bfd-compatible enable
+
+ link-aggregation mode dynamic
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1000
+
+  description to_SZZV-PW-5C-P12504O-PJ-B008_QORKH1000_100D
+
+ link-aggregation bfd ipv4 source 150.24.159.83 destination 150.24.159.84
+
+ link-aggregation bfd-compatible enable
+
+
+
+               
+ link-aggregation mode dynamic
+
+ lldp agent nearest-nontpmr admin-status txrx
+
+ lldp agent nearest-nontpmr management-address arp-learning vlan 4094
+
+ lldp agent nearest-nontpmr tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1000.1
+
+  description to_SZZV-PW-5C-P12504O-PJ-B008_QORKH1000.1
+
+ mtu 9000
+
+ ip address 150.24.179.35 255.255.255.252
+
+ isis enable 1
+
+ isis circuit-type p2p
+
+ isis cost 2000
+
+  isis authentication-mode md5 cipher 3914b1465295fd21acbd1b1ae6f25adf
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+
+
+               
+ vlan-type dot1q vid 1
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1000.2
+
+  description to_SZZV-PW-5C-P12504O-PJ-B008_QORKH1000.2
+
+ mtu 9000
+
+ ip address 150.24.179.49 255.255.255.252
+
+ isis enable 2
+
+ isis circuit-type p2p
+
+ isis cost 2000
+
+  isis authentication-mode md5 cipher f157723f20c5ddd584d35640b594c127
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 2
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+
+
+               
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1000.3
+
+  description to_SZZV-PW-5C-P12504O-PJ-B008_QORKH1000.3
+
+ mtu 9000
+
+ ip address 150.24.179.43 255.255.255.252
+
+ isis enable 3
+
+ isis circuit-type p2p
+
+ isis cost 2000
+
+  isis authentication-mode md5 cipher 536c61b32d6c19b925e52911f9fa38b9
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 3
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1000.1000
+
+
+
+               
+  description to_SZZV-PW-5C-P12504O-PJ-B008_QORKH1000.1000
+
+ mtu 9000
+
+ ip address 150.24.159.83 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode md5 cipher 34611e882538284a7eb3b5b26135dcac
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 1000
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation1000.4094
+
+  description to_SZZV-PW-5C-P12504O-PJ-B008_QORKH1000.4094
+
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address unnumbered interface LoopBack1023
+
+
+
+               
+ ospf network-type p2p
+
+ vlan-type dot1q vid 4094
+
+#
+
+interface NULL0
+
+#
+
+interface LoopBack0
+
+  description for_Jwkwdbjbkq
+
+ ip address 18.51.196.15 255.255.255.255
+
+ isis enable 1000
+
+ isis prefix-sid index 107 no-php
+
+#
+
+interface LoopBack1023
+
+  description for_Jwkwdbjbkq
+
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address 107.288.104.0 255.255.255.255
+
+#
+
+interface FortyGigE0/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE0/0/2
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE0/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE0/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE0/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE0/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE0/0/7
+
+ port link-mode route
+
+ link-delay down msec 200
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+
+
+               
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ port link-aggregation group 999
+
+#
+
+interface HundredGigE0/0/8
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+
+
+               
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ port link-aggregation group 1000
+
+#
+
+interface HundredGigE0/0/9
+
+ port link-mode route
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+
+
+               
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+#
+
+interface HundredGigE0/0/10
+
+ port link-mode route
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+
+
+               
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+#
+
+interface HundredGigE0/0/11
+
+ port link-mode route
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+#
+
+
+
+               
+interface HundredGigE0/0/12
+
+ port link-mode route
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+#
+
+interface M-GigabitEthernet0/0/0
+
+#
+
+interface M-GigabitEthernet0/0/1
+
+ ip address 170.146.1.2 255.255.255.0
+
+#
+
+interface Ten-GigabitEthernet1/0/1
+
+
+
+               
+ port link-mode route
+
+ mtu 9000
+
+ ip address 150.24.164.63 255.255.255.252
+
+ isis enable 1
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode md5 cipher a155a93a86669bc9459a7c285a4d8785
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+
+
+               
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+interface Ten-GigabitEthernet1/0/1.4094
+
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address unnumbered interface LoopBack1023
+
+ ospf network-type p2p
+
+ vlan-type dot1q vid 4094
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet1/0/2
+
+ port link-mode route
+
+ mtu 9000
+
+ ip address 150.24.164.11 255.255.255.252
+
+ isis enable 2
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode md5 cipher 75008646979ece1cc0b66f3834396c85
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+
+
+               
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+interface Ten-GigabitEthernet1/0/2.4094
+
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address unnumbered interface LoopBack1023
+
+
+
+               
+ ospf network-type p2p
+
+ vlan-type dot1q vid 4094
+
+#
+
+interface Ten-GigabitEthernet1/0/3
+
+ port link-mode route
+
+ mtu 9000
+
+ ip address 150.24.164.47 255.255.255.252
+
+ isis enable 3
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode md5 cipher 442f4fa31a4d8fe25d53b6d59fd77846
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+
+
+               
+ synchronous mode
+
+ esmc enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+interface Ten-GigabitEthernet1/0/3.4094
+
+
+
+               
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address unnumbered interface LoopBack1023
+
+ ospf network-type p2p
+
+ vlan-type dot1q vid 4094
+
+#
+
+interface Ten-GigabitEthernet1/0/4
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/5
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/6
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/7
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet1/0/8
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet1/0/9
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/10
+
+
+
+               
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/11
+
+ port link-mode route
+
+
+
+               
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/12
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/13
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+
+
+               
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/14
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+
+
+               
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/15
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+
+
+               
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/16
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+
+
+               
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/17
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+
+
+               
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/18
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+
+
+               
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/19
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+
+
+               
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/20
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+
+
+               
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/21
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+
+
+               
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/22
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+
+
+               
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/23
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+
+
+               
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/24
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+
+
+               
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/25
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+
+
+               
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/26
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+
+
+               
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/27
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/28
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/29
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/30
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet1/0/31
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet1/0/32
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/33
+
+
+
+               
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/34
+
+ port link-mode route
+
+
+
+               
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/35
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+
+
+               
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/36
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+
+
+               
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/37
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+
+
+               
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/38
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+
+
+               
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/39
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+
+
+               
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/40
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+
+
+               
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/41
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+
+
+               
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/42
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+
+
+               
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/43
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+
+
+               
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/44
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+
+
+               
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/45
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+
+
+               
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/46
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+
+
+               
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/47
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+
+
+               
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet1/0/48
+
+ port link-mode route
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+
+
+               
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+bgp 64591
+
+ bgp update-delay on-startup 600
+
+ non-stop-routing
+
+ retain local-label 5
+
+ labeled-route ignore-no-tunnel
+
+ router-id 18.51.196.15
+
+ group MARRing1 internal
+
+ peer MARRing1 connect-interface LoopBack0
+
+ peer MARRing1 route-update-interval 0
+
+  peer MARRing1 password cipher 1553af2b96ca09ddc82a120bed1cb2dd
+
+ group MARRing2 internal
+
+ peer MARRing2 connect-interface LoopBack0
+
+ peer MARRing2 route-update-interval 0
+
+  peer MARRing2 password cipher 1553af2b96ca09ddc82a120bed1cb2dd
+
+ group MARRing3 internal
+
+ peer MARRing3 connect-interface LoopBack0
+
+ peer MARRing3 route-update-interval 0
+
+
+
+               
+  peer MARRing3 password cipher 1553af2b96ca09ddc82a120bed1cb2dd
+
+ group MCR internal
+
+ peer MCR connect-interface LoopBack0
+
+ peer MCR route-update-interval 0
+
+  peer MCR password cipher 49514ed82e01bfb5bff7f75194ede9ed
+
+ peer 18.51.196.1 group MCR
+
+ peer 18.51.196.2 group MCR
+
+ peer 18.51.102.99 group MARRing1
+
+ peer 18.51.102.90 group MARRing1
+
+ peer 18.51.102.91 group MARRing1
+
+ peer 18.51.102.189 group MARRing2
+
+ peer 18.51.102.180 group MARRing2
+
+ peer 18.51.102.181 group MARRing2
+
+ peer 18.51.102.182 group MARRing2
+
+ peer 18.51.102.183 group MARRing2
+
+ peer 18.51.102.184 group MARRing2
+
+ peer 18.51.102.185 group MARRing2
+
+ peer 18.51.102.186 group MARRing2
+
+ peer 18.51.102.199 group MARRing3
+
+ peer 18.51.102.190 group MARRing3
+
+ peer 18.51.102.191 group MARRing3
+
+ #
+
+ address-family vpnv4
+
+
+
+               
+  pic
+
+  route-select delay 180
+
+  reflect change-path-attribute
+
+  peer MARRing1 enable
+
+  peer MARRing1 route-policy TO_MARRing1_OUT_IPv4 export
+
+  peer MARRing1 reflect-client
+
+  peer MARRing1 preferred-value 10
+
+  peer MARRing2 enable
+
+  peer MARRing2 route-policy TO_MARRing2_OUT_IPv4 export
+
+  peer MARRing2 reflect-client
+
+  peer MARRing2 preferred-value 10
+
+  peer MARRing3 enable
+
+  peer MARRing3 route-policy TO_MARRing3_OUT_IPv4 export
+
+  peer MARRing3 reflect-client
+
+  peer MARRing3 preferred-value 10
+
+  peer MCR enable
+
+  peer MCR route-policy FROM_MCR import
+
+  peer MCR route-policy TO_MCR export
+
+  peer MCR advertise-community
+
+  peer MCR next-hop-local
+
+ #
+
+ address-family vpnv6
+
+  pic
+
+
+
+               
+  route-select delay 180
+
+  reflect change-path-attribute
+
+  peer MARRing1 enable
+
+  peer MARRing1 route-policy TO_MARRing1_OUT_IPv6 export
+
+  peer MARRing1 reflect-client
+
+  peer MARRing1 preferred-value 10
+
+  peer MARRing2 enable
+
+  peer MARRing2 route-policy TO_MARRing2_OUT_IPv6 export
+
+  peer MARRing2 reflect-client
+
+  peer MARRing2 preferred-value 10
+
+  peer MARRing3 enable
+
+  peer MARRing3 route-policy TO_MARRing3_OUT_IPv6 export
+
+  peer MARRing3 reflect-client
+
+  peer MARRing3 preferred-value 10
+
+  peer MCR enable
+
+  peer MCR route-policy FROM_MCR_IPV6 import
+
+  peer MCR route-policy TO_MCR_IPV6 export
+
+  peer MCR advertise-community
+
+  peer MCR next-hop-local
+
+ #
+
+ address-family l2vpn evpn
+
+  undo policy vpn-target
+
+  pic
+
+
+
+               
+  route-select delay 180
+
+  reflect change-path-attribute
+
+  peer MARRing1 enable
+
+  peer MARRing1 next-hop-local
+
+  peer MARRing1 reflect-client
+
+  peer MARRing1 advertise encap-type mpls
+
+  peer MARRing2 enable
+
+  peer MARRing2 next-hop-local
+
+  peer MARRing2 reflect-client
+
+  peer MARRing2 advertise encap-type mpls
+
+  peer MARRing3 enable
+
+  peer MARRing3 next-hop-local
+
+  peer MARRing3 reflect-client
+
+  peer MARRing3 advertise encap-type mpls
+
+  peer MCR enable
+
+  peer MCR next-hop-local
+
+  peer MCR advertise encap-type mpls
+
+ #
+
+ ip vpn-instance 3G_OAM
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+
+
+               
+   network 0.0.0.0 0.0.0.0
+
+ #
+
+ ip vpn-instance 3G_RAN
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0 route-policy SET_DEF_ROUTE_v4
+
+ #
+
+ ip vpn-instance 4G_OAM
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0
+
+ #
+
+ ip vpn-instance 4G_RAN
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0 route-policy SET_DEF_ROUTE_v4
+
+ #
+
+
+
+               
+ ip vpn-instance 5GC_MGMN
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+   network :: 0
+
+ #
+
+ ip vpn-instance 5G_MEC
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+   network :: 0
+
+
+
+               
+ #
+
+ ip vpn-instance 5G_OAM
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+   network :: 0
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0 route-policy SET_DEF_ROUTE_v4
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+
+
+               
+   network :: 0 route-policy SET_DEF_ROUTE_v6
+
+ #
+
+ ip vpn-instance 5G_RAN_VIP
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+   network 0.0.0.0 0.0.0.0 route-policy SET_DEF_ROUTE_v4
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+   network :: 0 route-policy SET_DEF_ROUTE_v6
+
+ #
+
+ ip vpn-instance __mgnt_vpn__
+
+  #
+
+  address-family ipv4 unicast
+
+   import-route direct
+
+   import-route ospf 65535
+
+#
+
+dcn
+
+ auto-report
+
+#
+
+
+
+               
+route-policy FROM_MAR_ISIS deny node 10
+
+ if-match ip address prefix-list nms_ip
+
+#
+
+route-policy FROM_MAR_ISIS permit node 20
+
+ if-match ip address prefix-list mar_ip
+
+ apply cost 10000
+
+#
+
+route-policy FROM_MCR permit node 10
+
+ if-match community name fromMCR_A
+
+ apply local-preference 100
+
+#
+
+route-policy FROM_MCR permit node 20
+
+ if-match community name fromMCR_B
+
+ apply local-preference 50
+
+#
+
+route-policy FROM_MCR permit node 30
+
+#
+
+route-policy FROM_MCR_IPV6 permit node 10
+
+ if-match community name fromMCR_A
+
+ apply local-preference 100
+
+#
+
+route-policy FROM_MCR_IPV6 permit node 20
+
+ if-match community name fromMCR_B
+
+
+
+               
+ apply local-preference 50
+
+#
+
+route-policy FROM_MCR_IPV6 permit node 30
+
+#
+
+route-policy SET_DEF_ROUTE_v4 permit node 10
+
+ apply community 64591:1000 
+
+#
+
+route-policy SET_DEF_ROUTE_v6 permit node 10
+
+ apply community 64591:1000 
+
+#
+
+route-policy TO_MAR permit node 10
+
+ if-match ip address prefix-list default
+
+#
+
+route-policy TO_MAR deny node 20
+
+ if-match community name fromMCR_A name fromMCR_B
+
+#
+
+route-policy TO_MAR permit node 30
+
+#
+
+route-policy TO_MARRing1_OUT_IPv4 permit node 10
+
+ if-match community name SET_DEF_ROUTE
+
+#
+
+route-policy TO_MARRing1_OUT_IPv4 permit node 20
+
+ if-match extcommunity list RING_001_EXCOMMUNITY
+
+
+
+               
+#
+
+route-policy TO_MARRing1_OUT_IPv6 permit node 10
+
+ if-match community name SET_DEF_ROUTE
+
+#
+
+route-policy TO_MARRing1_OUT_IPv6 permit node 20
+
+ if-match extcommunity list RING_001_EXCOMMUTITY
+
+#
+
+route-policy TO_MARRing2_OUT_IPv4 permit node 10
+
+ if-match community name SET_DEF_ROUTE
+
+#
+
+route-policy TO_MARRing2_OUT_IPv4 permit node 20
+
+ if-match extcommunity list RING_002_EXCOMMUNITY
+
+#
+
+route-policy TO_MARRing2_OUT_IPv6 permit node 10
+
+ if-match community name SET_DEF_ROUTE
+
+#
+
+route-policy TO_MARRing2_OUT_IPv6 permit node 20
+
+ if-match extcommunity list RING_002_EXCOMMUTITY
+
+#
+
+route-policy TO_MARRing3_OUT_IPv4 permit node 10
+
+ if-match community name SET_DEF_ROUTE
+
+#
+
+route-policy TO_MARRing3_OUT_IPv4 permit node 20
+
+
+
+               
+ if-match extcommunity list RING_003_EXCOMMUNITY
+
+#
+
+route-policy TO_MARRing3_OUT_IPv6 permit node 10
+
+ if-match community name SET_DEF_ROUTE
+
+#
+
+route-policy TO_MARRing3_OUT_IPv6 permit node 20
+
+ if-match extcommunity list RING_003_EXCOMMUTITY
+
+#
+
+route-policy TO_MAR_IPV6 permit node 10
+
+ if-match ipv6 address prefix-list default_ipv6
+
+#
+
+route-policy TO_MAR_IPV6 deny node 20
+
+ if-match community name fromMCR_A name fromMCR_B
+
+#
+
+route-policy TO_MAR_IPV6 permit node 30
+
+#
+
+route-policy TO_MAR_ISIS permit node 10
+
+ if-match ip address prefix-list loopback_ip
+
+ apply label-index 107
+
+#
+
+route-policy TO_MAR_ISIS permit node 30
+
+ if-match ip address prefix-list nms_ip
+
+ apply cost 10000
+
+
+
+               
+#
+
+route-policy TO_MCR permit node 10
+
+ if-match ip address prefix-list nodefault
+
+ apply community 64591:100 additive 
+
+#
+
+route-policy TO_MCR_IPV6 permit node 10
+
+ if-match ipv6 address prefix-list nodefault_ipv6
+
+ apply community 64591:100 additive 
+
+#
+
+ ip prefix-list default index 10 permit 0.0.0.0 0
+
+ ip prefix-list loopback_ip index 10 permit 18.51.196.15 32
+
+ ip prefix-list mar_ip index 10 permit 0.0.0.0 0 greater-equal 30
+
+ ip prefix-list nms_ip index 10 permit 170.146.232.0 24 less-equal 32
+
+ ip prefix-list nms_ip index 20 permit 18.228.30.54 29 less-equal 32
+
+ ip prefix-list nms_ip index 30 permit 18.228.31.0 24 less-equal 32
+
+ ip prefix-list nms_ip index 100 permit 18.51.209.0 24
+
+ ip prefix-list nodefault index 10 deny 0.0.0.0 0
+
+ ip prefix-list nodefault index 20 permit 0.0.0.0 0 less-equal 32
+
+#
+
+ ipv6 prefix-list default_ipv6 index 10 permit :: 0
+
+ ipv6 prefix-list nodefault_ipv6 index 10 deny :: 0
+
+ ipv6 prefix-list nodefault_ipv6 index 20 permit :: 0 less-equal 128
+
+#
+
+
+
+               
+ ip community-list advanced SET_DEF_ROUTE permit 64591:1000
+
+ ip community-list basic fromMCR_A permit 64591:100
+
+ ip community-list basic fromMCR_B permit 64591:200
+
+#
+
+ ip extcommunity-list RING_002_EXCOMMUTITY permit rt 64591:1007001
+
+ ip extcommunity-list RING_002_EXCOMMUTITY permit rt 64591:1007002
+
+ ip extcommunity-list RING_003_EXCOMMUTITY permit rt 64591:1007003
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class aux
+
+ user-role network-admin
+
+#
+
+line class vty
+
+ user-role network-operator
+
+#
+
+line aux 0 1
+
+ authentication-mode password
+
+ user-role network-admin
+
+  set authentication password hash 38da2433f4819109af1c9628427aa77e
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+
+
+               
+ user-role network-operator
+
+ protocol inbound ssh
+
+#
+
+ ip route-static vpn-instance 3G_OAM 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 3G_RAN 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 4G_OAM 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 4G_RAN 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 5GC_MGMN 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 5G_MEC 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 5G_OAM 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 5G_RAN 0.0.0.0 0 NULL0
+
+ ip route-static vpn-instance 5G_RAN_VIP 0.0.0.0 0 NULL0
+
+ ipv6 route-static vpn-instance 5GC_MGMN :: 0 NULL0
+
+ ipv6 route-static vpn-instance 5G_MEC :: 0 NULL0
+
+ ipv6 route-static vpn-instance 5G_OAM :: 0 NULL0
+
+ ipv6 route-static vpn-instance 5G_RAN :: 0 NULL0
+
+ ipv6 route-static vpn-instance 5G_RAN_VIP :: 0 NULL0
+
+#
+
+ info-center logbuffer size 1024
+
+ info-center loghost source LoopBack0
+
+ info-center loghost 18.51.209.100
+
+ info-center source default console level informational
+
+#
+
+
+
+               
+ snmp-agent
+
+ snmp-agent local-engineid 800063A28078AA82C87E0100000001
+
+  snmp-agent community read cipher 788884eca50d3f4d2a110ec713019ca1 acl 2000
+
+  snmp-agent community write cipher 8a520e6bbc4b00859402e1a2a541a604 acl 2000
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 18.51.209.100 params securityname public v2c
+
+ snmp-agent target-host trap address udp-domain 170.146.232.36 udp-port 166 params securityname public v2c
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable mpls 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+ snmp-agent trap enable te 
+
+ snmp-agent trap source LoopBack0
+
+#
+
+ mpls tunnel-bfd 18.51.196.1 32 template 50
+
+ mpls tunnel-bfd 18.51.196.16 32 template 50
+
+ mpls tunnel-bfd 18.51.102.99 32 template 50
+
+ mpls tunnel-bfd 18.51.102.90 32 template 50
+
+ mpls tunnel-bfd 18.51.102.91 32 template 50
+
+ mpls tunnel-bfd 18.51.102.189 32 template 50
+
+ mpls tunnel-bfd 18.51.102.180 32 template 50
+
+ mpls tunnel-bfd 18.51.102.181 32 template 50
+
+ mpls tunnel-bfd 18.51.102.182 32 template 50
+
+
+
+               
+ mpls tunnel-bfd 18.51.102.183 32 template 50
+
+ mpls tunnel-bfd 18.51.102.184 32 template 50
+
+ mpls tunnel-bfd 18.51.102.185 32 template 50
+
+ mpls tunnel-bfd 18.51.102.186 32 template 50
+
+ mpls tunnel-bfd 18.51.102.199 32 template 50
+
+ mpls tunnel-bfd 18.51.102.190 32 template 50
+
+ mpls tunnel-bfd 18.51.102.191 32 template 50
+
+#
+
+ ssh server enable
+
+#
+
+ ftp client source interface LoopBack0
+
+#
+
+ sftp client source interface LoopBack0
+
+#
+
+ ntp-service enable
+
+ ntp-service authentication enable
+
+ ntp-service source LoopBack0
+
+ ntp-service peer acl 2001
+
+ ntp-service ipv6 peer acl 2001
+
+  ntp-service authentication-keyid 1 authentication-mode md5 cipher d31b55c004041dbf9fb466fbdeb47df8
+
+ ntp-service reliable authentication-keyid 1 
+
+ ntp-service unicast-server 18.51.196.1 authentication-keyid 1 priority
+
+ ntp-service unicast-server 18.51.196.2 authentication-keyid 1
+
+
+
+               
+#
+
+acl basic 2000
+
+  description for_PKJM-WYI
+
+ rule 5 permit source 170.146.232.0 0.0.0.255
+
+ rule 10 permit source 18.51.209.108 0.0.0.7
+
+#
+
+acl basic 2001
+
+  description for_KQM-WYI
+
+ rule 5 permit source 18.51.196.1 0
+
+ rule 10 permit source 18.51.196.2 0
+
+ rule 15 permit source 18.51.108.0 0.0.7.255
+
+#
+
+acl basic 2002
+
+  description for_Ildfk-WYI
+
+ rule 5 permit source 18.228.30.54 0.0.0.7
+
+ rule 10 permit source 18.228.31.48 0.0.0.7
+
+ rule 15 permit source 18.51.209.108 0.0.0.7
+
+#
+
+acl basic 2003
+
+  description for_Kbqylkc-WYI
+
+ rule 5 permit source 18.228.30.54 0.0.0.7
+
+#
+
+acl advanced 3001
+
+
+
+               
+  description for_wkqf-sforp
+
+ rule 5 deny udp destination-port eq 135
+
+ rule 10 deny udp destination-port eq 136
+
+ rule 15 deny udp destination-port eq netbios-ns
+
+ rule 20 deny udp destination-port eq netbios-dgm
+
+ rule 25 deny udp destination-port eq netbios-ssn
+
+ rule 30 deny udp destination-port eq 445
+
+ rule 35 deny udp destination-port eq 1433
+
+ rule 40 deny udp destination-port eq 1434
+
+ rule 45 deny udp destination-port eq 3333
+
+ rule 50 deny udp destination-port eq 4444
+
+ rule 55 deny udp destination-port eq 5554
+
+ rule 60 deny udp destination-port eq 9995
+
+ rule 65 deny udp destination-port eq 9996
+
+ rule 105 deny tcp destination-port eq 135
+
+ rule 110 deny tcp destination-port eq 136
+
+ rule 115 deny tcp destination-port eq 137
+
+ rule 120 deny tcp destination-port eq 138
+
+ rule 125 deny tcp destination-port eq 139
+
+ rule 130 deny tcp destination-port eq 593
+
+ rule 135 deny tcp destination-port eq 901
+
+ rule 140 deny tcp destination-port eq 1068
+
+ rule 145 deny tcp destination-port eq 2745
+
+
+
+               
+ rule 150 deny tcp destination-port eq 3127
+
+ rule 155 deny tcp destination-port eq 3128
+
+ rule 160 deny tcp destination-port eq 3333
+
+ rule 165 deny tcp destination-port eq 5800
+
+ rule 170 deny tcp destination-port eq 5900
+
+ rule 175 deny tcp destination-port eq 6129
+
+ rule 180 deny tcp destination-port eq 6667
+
+ rule 185 deny tcp destination-port eq 8998
+
+ rule 190 deny tcp destination-port eq 9996
+
+ rule 1000 permit ip
+
+#
+
+ tftp client source interface LoopBack0
+
+#
+
+ header login %
+
+WARNING!!! Authorised access only, all of your done will be recorded! Disconnect IMMEDIATELY if you are not an authorised user!%
+
+ header shell %
+
+WARNING!!! Authorised access only, all of your done will be recorded! Disconnect IMMEDIATELY if you are not an authorised user!%
+
+#
+
+domain name system
+
+#
+
+ aaa session-limit ssh 10
+
+ domain default enable system
+
+#
+
+
+
+               
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+  description Predefined level-4 role
+
+#
+
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+role name level-6
+
+  description Predefined level-6 role
+
+#
+
+role name level-7
+
+  description Predefined level-7 role
+
+
+
+               
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+role name level-12
+
+  description Predefined level-12 role
+
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+#
+
+role name level-14
+
+  description Predefined level-14 role
+
+#
+
+user-group system
+
+
+
+               
+#
+
+local-user SD-DY-Manager class manage
+
+  password hash f7d16d2e6d95d0942bad27ff2b3fba83
+
+ service-type ssh http https
+
+ authorization-attribute user-role level-1
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user SD-DY-SDNcontroler class manage
+
+  password hash 89848f044908b77f11d7f4ff70e07b52
+
+ service-type ssh http https
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user admin class manage
+
+  password hash 77dec68c5c2cd56338cb3ce2376c8354
+
+ service-type ftp
+
+ service-type ssh telnet
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+ ftp server enable
+
+#
+
+ netconf soap https enable
+
+
+
+               
+ netconf soap https acl 2003
+
+ netconf ssh server enable
+
+#
+
+return
+

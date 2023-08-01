@@ -1,0 +1,5741 @@
+Building configuration...
+
+!! IOS XR Configuration 7.0.2
+
+!! Last configuration change at Sat Jan 16 12:13:07 2021 by admin_cisco
+
+!
+
+service unsupported-transceiver
+
+hostname XIVI-LDHE-3K-SHX5501-XR-J1101
+usergroup readonly_grp
+
+ taskgroup read-only-tg
+
+!
+
+clock timezone CST Asia/Shanghai
+
+banner motd cWARNING!!! Authorised access only, all of your done will be recorded! Disconnect IMMEDIATELY if you are not an authorised user!c 
+
+logging trap debugging
+
+logging archive
+
+ device harddisk
+
+ severity debugging
+
+ file-size 10
+
+ frequency daily
+
+ archive-size 300
+
+ archive-length 4
+
+!
+
+logging console disable
+
+logging buffered 8192000
+
+logging facility local7
+
+logging source-interface Loopback0
+
+service timestamps log datetime
+
+service timestamps debug datetime
+
+logging events link-status software-interfaces
+
+domain lookup disable
+
+username admin_cisco
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret e4da3b7fbbce2345d7772b0674a318d5 $1$NgSA$jI4oQqZxKJDKewC.ZtnK61
+!
+
+username SD-QD-SDNcontroler
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$7jscA09C8XXm6A0.$cW/rukAmwcZKjFkDZVY2I95LnPT.1pgvEzOIz9PWd13z9le.2tydT48F1EW5otWc4N.i8VSwzuhtd3anEdOAv1
+!
+
+username SD-QD-Manager
+
+ group readonly_grp
+
+  secret d3d9446802a44259755d38e6d163e820 $6$iv1151ykklAQA51.$9bPg6d1sOa5Bzdu7lkmo3XNxW7Ab1MJlx1bGiTWhyJWfr7viDNOhzEBmMNC8RdbJHp0cDATuMA0wlMW5/ngqT1
+!
+
+username jxy
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$NbivN/dvSKib3N/.$EmTJNNYdZlKKo2BBDXGj.6FVLTNttzGyOH99wXLV7IqW4/or5FYI2bGHFr7x6bcxkpWqMw2qFrZvhuKpZUaod.
+!
+
+telemetry model-driven
+
+ destination-group Dest_Group1
+
+  address-family ipv4 169.135.221.42 port 8896
+   encoding self-describing-gpb
+
+   protocol grpc no-tls
+
+  !
+
+ !
+
+ sensor-group SGroup1
+
+  sensor-path Cisco-IOS-XR-pfi-im-cmd-oper:interfaces/interface-xr/interface
+
+  sensor-path Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+
+ !
+
+ sensor-group SGroup2
+
+  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization
+
+  sensor-path Cisco-IOS-XR-procmem-oper:processes-memory/nodes/node/process-ids/process-id
+
+ !
+
+ sensor-group SGroup3
+
+  sensor-path Cisco-IOS-XR-nto-misc-oper:memory-summary/nodes/node/summary
+
+ !
+
+ sensor-group SGroup4
+
+  sensor-path Cisco-IOS-XR-man-ipsla-oper:ipsla/operation-data/operations
+
+  sensor-path Cisco-IOS-XR-telemetry-model-driven-oper:telemetry-model-driven
+
+ !
+
+ subscription SUB1
+
+  sensor-group-id SGroup1 sample-interval 10000
+
+  sensor-group-id SGroup2 sample-interval 10000
+
+  sensor-group-id SGroup3 sample-interval 10000
+
+  sensor-group-id SGroup4 sample-interval 60000
+
+  destination-id Dest_Group1
+
+  source-interface Loopback0
+
+ !
+
+!
+
+ptp
+
+ clock
+
+  domain 24
+
+  profile g.8275.1 clock-type T-BC
+
+  priority2 100
+
+  clock-class 165
+
+ !
+
+ profile g82751_any
+
+  multicast
+
+  transport ethernet
+
+  sync frequency 16
+
+  announce frequency 8
+
+  delay-request frequency 16
+
+ !
+
+ time-of-day priority 99
+
+ physical-layer-frequency
+
+ log
+
+  servo events
+
+  best-master-clock changes
+
+ !
+
+!
+
+vrf 3G_OAM
+
+ address-family ipv4 unicast
+
+  import route-target
+
+   64585:18050
+
+  !
+
+  export route-target
+
+   64585:18050
+
+  !
+
+ !
+
+!
+
+vrf 3G_RAN
+
+ address-family ipv4 unicast
+
+  import route-target
+
+   64585:18040
+
+  !
+
+  export route-target
+
+   64585:18040
+
+  !
+
+ !
+
+!
+
+vrf 4G_OAM
+
+ address-family ipv4 unicast
+
+  import route-target
+
+   64585:20021
+
+  !
+
+  export route-target
+
+   64585:20021
+
+  !
+
+ !
+
+!
+
+vrf 4G_RAN
+
+ address-family ipv4 unicast
+
+  import route-target
+
+   64585:20011
+
+  !
+
+  export route-target
+
+   64585:20011
+
+  !
+
+ !
+
+!
+
+vrf 5G_OAM
+
+ address-family ipv6 unicast
+
+  import route-target
+
+   64585:10030
+
+  !
+
+  export route-target
+
+   64585:10030
+
+  !
+
+ !
+
+!
+
+vrf 5G_RAN
+
+ address-family ipv6 unicast
+
+  import route-target
+
+   64585:10010
+
+  !
+
+  export route-target
+
+   64585:10010
+
+  !
+
+ !
+
+!
+
+vrf SmartMAN_AUTO_ONLINE
+
+ address-family ipv4 unicast
+
+  import route-target
+
+   64585:10080
+
+  !
+
+  export route-target
+
+   64585:10080
+
+  !
+
+ !
+
+!
+
+tcp selective-ack
+
+tcp path-mtu-discovery
+
+snmp-server ifindex persist
+
+snmp-server ifmib stats cache
+
+snmp-server trap link ietf
+
+ snmp-server host 169.135.2.2 traps version 2c encrypted df1a6e418c25363620bf6cad4db59cb3 udp-port 163
+ snmp-server host 169.135.221.35 traps version 2c encrypted 8fecba3fea99918028df77af7d8e8d9e udp-port 163
+snmp-server community SdqdspDC@2020 RO
+
+snmp-server community SdqdspDC@2020RW RW
+
+snmp-server traps rf
+
+snmp-server traps bfd
+
+snmp-server traps ntp
+
+snmp-server traps snmp linkup
+
+snmp-server traps snmp linkdown
+
+snmp-server traps snmp coldstart
+
+snmp-server traps snmp warmstart
+
+snmp-server traps snmp authentication
+
+snmp-server traps flash removal
+
+snmp-server traps flash insertion
+
+snmp-server traps config
+
+snmp-server traps syslog
+
+snmp-server traps system
+
+snmp-server traps entity-redundancy all
+
+snmp-server trap-source Loopback0
+
+fpd auto-upgrade enable
+
+ntp
+
+  authentication-key 1 md5 encrypted a328596a31f457ebd10a35a8738e7644
+ authenticate
+
+ trusted-key 1
+
+ server 17.45.143.1 prefer
+ server 17.45.143.2
+ access-group ipv4 peer ntp_acl
+
+ source Loopback0
+
+ update-calendar
+
+!
+
+frequency synchronization
+
+ quality itu-t option 1
+
+ log selection changes
+
+!
+
+call-home
+
+ service active
+
+ contact smart-licensing
+
+ profile CiscoTAC-1
+
+  active
+
+  destination transport-method http
+
+ !
+
+!
+
+control-plane
+
+ management-plane
+
+  inband
+
+   interface all
+
+    allow SSH peer
+
+     address ipv4 169.135.1.178
+     address ipv4 17.45.143.0/23
+     address ipv4 17.217.39.53/29
+     address ipv4 17.217.30.53/29
+     address ipv4 149.14.143.0/22
+     address ipv4 149.14.157.0/23
+     address ipv4 169.135.1.171/30
+     address ipv4 169.135.221.0/24
+    !
+
+    allow SNMP peer
+
+     address ipv4 169.135.1.171/30
+     address ipv4 169.135.2.0/30
+     address ipv4 169.135.221.0/24
+    !
+
+    allow Telnet peer
+
+     address ipv4 169.135.1.178
+     address ipv4 17.45.143.0/23
+     address ipv4 17.217.39.53/29
+     address ipv4 17.217.30.53/29
+     address ipv4 149.14.143.0/22
+     address ipv4 149.14.157.0/23
+     address ipv4 169.135.1.171/30
+    !
+
+   !
+
+  !
+
+ !
+
+!
+
+hw-module profile qos hqos-enable
+
+netconf-yang agent
+
+ ssh
+
+!
+
+ipv4 access-list ntp_acl
+
+ 10 permit ipv4 host 17.45.143.1 any
+ 20 permit ipv4 host 17.45.143.2 any
+!
+
+class-map match-any CM_1
+
+ match precedence 1 
+
+ match dscp 8-15 
+
+ match cos inner 1 
+
+ match mpls experimental topmost 1 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_2
+
+ match precedence 2 
+
+ match dscp 16-23 
+
+ match cos inner 2 
+
+ match mpls experimental topmost 2 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_3
+
+ match precedence 3 
+
+ match dscp 24-31 
+
+ match cos inner 3 
+
+ match mpls experimental topmost 3 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_4
+
+ match precedence 4 
+
+ match dscp 32-39 
+
+ match cos inner 4 
+
+ match mpls experimental topmost 4 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_5
+
+ match precedence 5 
+
+ match dscp 40-47 
+
+ match cos inner 5 
+
+ match mpls experimental topmost 5 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_6
+
+ match precedence 6 
+
+ match dscp 48-55 
+
+ match cos inner 6 
+
+ match mpls experimental topmost 6 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_7
+
+ match precedence 7 
+
+ match dscp 56-63 
+
+ match cos inner 7 
+
+ match mpls experimental topmost 7 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_1
+
+ match traffic-class 1 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_2
+
+ match traffic-class 2 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_3
+
+ match traffic-class 3 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_4
+
+ match traffic-class 4 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_5
+
+ match traffic-class 5 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_6
+
+ match traffic-class 6 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_7
+
+ match traffic-class 7 
+
+ end-class-map
+
+! 
+
+policy-map PM_NNI_IN
+
+ class CM_7
+
+  set traffic-class 7
+
+ ! 
+
+ class CM_6
+
+  set traffic-class 6
+
+ ! 
+
+ class CM_5
+
+  set traffic-class 5
+
+ ! 
+
+ class CM_4
+
+  set traffic-class 4
+
+ ! 
+
+ class CM_3
+
+  set traffic-class 3
+
+ ! 
+
+ class CM_2
+
+  set traffic-class 2
+
+ ! 
+
+ class CM_1
+
+  set traffic-class 1
+
+ ! 
+
+ class class-default
+
+ ! 
+
+ end-policy-map
+
+! 
+
+policy-map PM_NNI_OUT
+
+ class TC_7
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_6
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_5
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_4
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_3
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ class TC_2
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class TC_1
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class class-default
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ end-policy-map
+
+! 
+
+interface Loopback0
+
+ ipv4 address 17.45.144.120 255.255.255.255
+!
+
+interface Loopback4094
+
+  description For_FZYTTSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 address 17.45.144.120 255.255.255.255
+!
+
+interface MgmtEth0/RP0/CPU0/0
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/0
+
+  description for_GGZ_FXXmjPtzCL
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/0.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/0.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/0.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.2 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/0.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.2 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/0.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/1
+
+  description for_GGZ_LDVYfslPzD
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/1.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:A9A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/1.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:A9A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/1.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.6 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/1.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.6 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/1.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:A9A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/2
+
+  description for_GGZ_DnsEzsQzQP
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/2.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:B9A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/2.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:B9A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/2.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.17 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/2.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.17 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/2.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:B9A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/3
+
+  description for_GGZ_FmnQnIftFQ
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/3.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:C9A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/3.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:C9A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/3.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.11 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/3.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.11 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/3.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:C9A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/4
+
+  description for_GGZ_OzDnfsVnft
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/4.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:D9A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/4.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:D9A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/4.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.15 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/4.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.15 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/4.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:D9A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/5
+
+  description for_GGZ_FnOnslEzfs
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/5.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:E9A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/5.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:E9A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/5.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.29 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/5.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.29 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/5.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:E9A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/6
+
+  description for_GGZ_MztOzQEMFV
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/6.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:F9A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/6.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:F9A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/6.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.23 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/6.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.23 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/6.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:F9A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/7
+
+  description for_GGZ_VIGfspPOFM
+ ptp
+
+  profile g82751_any
+
+ !
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/7.843
+
+  description for_HZSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD91:1AF9:1B99::4:199A:09A/126
+ encapsulation dot1q 843
+
+!
+
+interface TenGigE0/0/0/7.895
+
+  description for_HZSW_SW
+ vrf 5G_OAM
+
+ ipv6 address BD91:1AF9:1B99:888:9:4:199A:09A/126
+ encapsulation dot1q 895
+
+!
+
+interface TenGigE0/0/0/7.1019
+
+  description for_HZSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 54.175.283.37 255.255.255.252
+ encapsulation dot1q 1019
+
+!
+
+interface TenGigE0/0/0/7.1021
+
+  description for_HYSW_SW
+ vrf 4G_RAN
+
+ ipv4 address 48.207.152.37 255.255.255.252
+ encapsulation dot1q 1021
+
+!
+
+interface TenGigE0/0/0/7.1843
+
+  description for_HYSW_SW
+ vrf 5G_RAN
+
+ ipv6 mtu 9000
+
+ ipv6 address BD97:A1D:D9AA::4:199A:09A/126
+ encapsulation dot1q 1843
+
+!
+
+interface TenGigE0/0/0/20
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20_10L:1
+ mtu 9000
+
+ ipv4 address 149.14.159.50 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+!
+
+interface TenGigE0/0/0/20.1
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.1_10L:1
+ ipv4 address 149.14.277.140 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 1
+
+!
+
+interface TenGigE0/0/0/20.2
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.2_10L:1
+ ipv4 address 149.14.277.66 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 2
+
+!
+
+interface TenGigE0/0/0/20.3
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.3_10L:1
+ ipv4 address 149.14.277.144 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 3
+
+!
+
+interface TenGigE0/0/0/20.4
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.4_10L:1
+ ipv4 address 149.14.277.158 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 4
+
+!
+
+interface TenGigE0/0/0/20.5
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.5_10L:1
+ ipv4 address 149.14.277.70 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 5
+
+!
+
+interface TenGigE0/0/0/20.6
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.6_10L:1
+ ipv4 address 149.14.277.74 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 6
+
+!
+
+interface TenGigE0/0/0/20.7
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.7_10L:1
+ ipv4 address 149.14.277.88 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 7
+
+!
+
+interface TenGigE0/0/0/20.8
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.8_10L:1
+ ipv4 address 149.14.277.82 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 8
+
+!
+
+interface TenGigE0/0/0/20.9
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.9_10L:1
+ ipv4 address 149.14.277.86 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 9
+
+!
+
+interface TenGigE0/0/0/20.10
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.10_10L:1
+ ipv4 address 149.14.277.68 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 10
+
+!
+
+interface TenGigE0/0/0/20.11
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.11_10L:1
+ ipv4 address 149.14.277.62 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 11
+
+!
+
+interface TenGigE0/0/0/20.12
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.12_10L:1
+ ipv4 address 149.14.277.212 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 12
+
+!
+
+interface TenGigE0/0/0/20.13
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.13_10L:1
+ ipv4 address 149.14.277.216 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 13
+
+!
+
+interface TenGigE0/0/0/20.14
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.14_10L:1
+ ipv4 address 149.14.277.220 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 14
+
+!
+
+interface TenGigE0/0/0/20.15
+
+  description To_SIVI-LDXR-2K-SHX5501-XR-J1102_YjsLnlJ0/0/0/20.15_10L:1
+ ipv4 address 149.14.165.1 255.255.255.252
+ ipv4 unreachables disable
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ encapsulation dot1q 15
+
+!
+
+interface TenGigE0/0/0/21
+
+ shutdown
+
+!
+
+interface TenGigE0/0/0/22
+
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/23
+
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/24
+
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/25
+
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.141.136 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/26
+
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.141.54 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ shutdown
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/27
+
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.141.178 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/28
+
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.141.118 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/29
+
+  description To_SIVI-LDVMMRPO-1K-FD6180M-XR-F1-U11_Dljn-1/7/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.296 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/29.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/30
+
+  description To_SIVI-LDVXF-1K-FD6180M-XR-F1-U11_Dljn-1/1/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.276 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/30.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/31
+
+  description To_SIVI-VIFD-1K-FD6180M-XR-F1-U11_Dljn-1/1/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.156 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/31.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/32
+
+  description To_SIVI-LDVKGCQ-1K-FD6180M-XR-F2-U11_Dljn-1/1/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.136 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/32.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/33
+
+  description To_SIVI-LDVDIE-1K-FD6180M-XR-F1-U11_Dljn-1/1/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.112 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/33.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/34
+
+  description To_SIVI-LDVHLF-1K-FD6180M-XR-F1-U11_Dljn-1/7/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.192 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/34.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/35
+
+  description To_SIVI-XMCDS-1K-FD6180M-XR-F1-U11_Dljn-1/6/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.178 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/35.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/36
+
+  description To_SIVI-LDVMFFD-1K-FD6180M-XR-F1-U11_dljn-1/1/0/1_10L:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.74 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/36.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/37
+
+  description To_SIVI-LDVXGLEE-1K-FD6180M-XR-F1-U11_Dljn-1/1/0/1_10L:1 
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.54 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/37.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/38
+
+  description T0_SIVI-EMEFOH-1K-FD6180M-XR-F1-U11_dljn-1/6/0/1_10L:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.26 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/38.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface TenGigE0/0/0/39
+
+  description To_SIVI-LDVKGCQ-1K-FD6180M-XR-F1-U11_dljn-1/7/0/1_10L:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+ !
+
+ ipv4 address 149.14.271.1 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface TenGigE0/0/0/39.4094
+
+  description SmaryRFS_FZYT_TSQNSJ
+ vrf SmartMAN_AUTO_ONLINE
+
+ ipv4 point-to-point
+
+ ipv4 unnumbered Loopback4094
+
+ encapsulation dot1q 4094
+
+!
+
+interface HundredGigE0/0/1/0
+
+  description To_SIVI-LDHE-3K-SHX55F1-XR-H1101_MzLnlJ0/0/0/2_100L:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state slave-only
+
+  local-priority 10
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 149.14.157.15 255.255.255.252
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  selection input
+
+  priority 10
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/1/1
+
+  description To_SIVI-LDXR-2K-SHX55F1-XR-H1102_MzLnlJ0/0/0/2_100L:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state slave-only
+
+  local-priority 20
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 149.14.158.15 255.255.255.252
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  selection input
+
+  priority 20
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface preconfigure GigabitEthernet0/0/0/26
+
+!
+
+interface preconfigure GigabitEthernet0/0/0/27
+
+!
+
+!
+
+prefix-set ps_IPRAN_NMS
+
+  17.52.220.0/27,
+  149.14.221.0/28
+end-set
+
+!
+
+prefix-set ps_NMS_ROUTE
+
+  169.135.221.0/24,
+  17.217.39.53/29,
+  17.45.0.13/28,
+  17.217.39.21/29
+end-set
+
+!
+
+prefix-set ps_RING_RA_ROUTE
+
+  17.45.143.0/21 ge 32
+end-set
+
+!
+
+community-set cs_Core_Routes
+
+  64585:9999
+
+end-set
+
+!
+
+community-set cs_Ring_Routes
+
+  64585:1111
+
+end-set
+
+!
+
+community-set cs_Default_Routes
+
+  64585:1000
+
+end-set
+
+!
+
+route-policy rp_RRC_VPN_IN
+
+  set community cs_Ring_Routes
+
+end-policy
+
+!
+
+route-policy rp_RR_VPN_OUT
+
+  if community matches-any cs_Ring_Routes then
+
+    drop
+
+  endif
+
+  if community matches-any cs_Default_Routes then
+
+    drop
+
+  endif
+
+  pass
+
+end-policy
+
+!
+
+route-policy rp_NMS_TO_RING
+
+  if destination in ps_NMS_ROUTE then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_RING_TO_CORE
+
+  if destination in ps_RING_RA_ROUTE then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_Set_Core_Routes
+
+  set community cs_Core_Routes
+
+end-policy
+
+!
+
+route-policy TO_MARRing1_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110101) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing2_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110102) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing3_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110103) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing4_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110104) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing5_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110105) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing6_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110106) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing7_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110107) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing8_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110108) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing9_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110109) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing10_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110110) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing11_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110111) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing12_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110112) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing13_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110113) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing14_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110114) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy TO_MARRing15_VPN_OUT
+
+  if community matches-any cs_Default_Routes then
+
+    pass
+
+  endif
+
+  if extcommunity rt matches-any (64585:1110115) then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_IPRAN_NMS_TO_RING
+
+  if destination in ps_IPRAN_NMS then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_Set_Default_Routes
+
+  set community cs_Default_Routes
+
+end-policy
+
+!
+
+router static
+
+ vrf 3G_OAM
+
+  address-family ipv4 unicast
+
+   0.0.0.0/0 Null0
+   149.192.271.39/27 Null0
+  !
+
+ !
+
+ vrf 3G_RAN
+
+  address-family ipv4 unicast
+
+   0.0.0.0/0 Null0
+   149.186.271.39/27 Null0
+  !
+
+ !
+
+ vrf 4G_OAM
+
+  address-family ipv4 unicast
+
+   0.0.0.0/0 Null0
+   149.170.271.39/27 Null0
+  !
+
+ !
+
+ vrf 4G_RAN
+
+  address-family ipv4 unicast
+
+   0.0.0.0/0 Null0
+   48.207.152.0/25 Null0
+   54.175.283.0/25 Null0
+   54.180.271.39/27 Null0
+  !
+
+ !
+
+ vrf 5G_OAM
+
+  address-family ipv6 unicast
+
+   ::/0 Null0
+   BD91:1AF9:1B99:888:9:4:199A:9/112 Null0
+  !
+
+ !
+
+ vrf 5G_RAN
+
+  address-family ipv6 unicast
+
+   ::/0 Null0
+   BD91:1AF9:1B99::4:199A:9/112 Null0
+   BD97:A1D:D9AA::4:199A:9/112 Null0
+  !
+
+ !
+
+!
+
+router isis 1
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1001 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.1
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 39dc0a3ab89d2c8d7920158f2ede704f
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/39
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted fbc2f5140aa2269c7f02be472ddf60d7
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 2
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1002 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.2
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 1ba34b5e5d90b4fd0c6d349dcf6dd1a3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/38
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted f93d10489c3d68d35e85ec39cf48b29f
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 3
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1003 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.3
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 0af2fc1cf597699ae155c27416a45ce4
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/37
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted fbc2f5140aa2269c7f02be472ddf60d7
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 4
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1004 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.4
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted fbc2f5140aa2269c7f02be472ddf60d7
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/36
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 0c4df9ed644b6ff0b9fd5abdbc05d006
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 5
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1005 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.5
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 6979fb981fabbecee54f636da8dcf5ea
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/35
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 86670663e5639921cfdd73df54c90863
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 6
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1006 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.6
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 1ba34b5e5d90b4fd0c6d349dcf6dd1a3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/34
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted fbc2f5140aa2269c7f02be472ddf60d7
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 7
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1007 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.7
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 1ba34b5e5d90b4fd0c6d349dcf6dd1a3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/33
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 0af2fc1cf597699ae155c27416a45ce4
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 8
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1008 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.8
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted f93d10489c3d68d35e85ec39cf48b29f
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/32
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 85b2158e2a2635abf4690a90140974f2
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 9
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1009 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.9
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 0af2fc1cf597699ae155c27416a45ce4
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/31
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted ad686b3c27fde2150fadee852d35c496
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 10
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1010 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.10
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 7ddcff64b6a94ecca7fc05714fdb963c
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/30
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted ca4f79bb898307c1e4ad8fd502a4f289
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 11
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1011 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.11
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 111ed01f451466035a1d3b150bd58377
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/29
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 85b2158e2a2635abf4690a90140974f2
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 12
+
+ is-type level-2-only
+
+ net 86.4585.0012.0100.4817.7153.00
+
+ distribute link-state instance-id 1012 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.12
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 111ed01f451466035a1d3b150bd58377
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/28
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 8bc8c4f7c77d4f630fc5c66e97c3503b
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 13
+
+ is-type level-2-only
+
+ net 86.4585.0013.0100.4817.7153.00
+
+ distribute link-state instance-id 1013 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.13
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 1ba34b5e5d90b4fd0c6d349dcf6dd1a3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/27
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 86670663e5639921cfdd73df54c90863
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 14
+
+ is-type level-2-only
+
+ net 86.4585.0014.0100.4817.7153.00
+
+ distribute link-state instance-id 1014 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.14
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 1ba34b5e5d90b4fd0c6d349dcf6dd1a3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/26
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 7ddcff64b6a94ecca7fc05714fdb963c
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 15
+
+ is-type level-2-only
+
+ net 86.4585.0015.0100.4817.7153.00
+
+ distribute link-state instance-id 1015 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1000 level-2 metric 10000 route-policy rp_NMS_TO_RING
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 1000 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20.15
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 1ba34b5e5d90b4fd0c6d349dcf6dd1a3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 2000 level 2
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/25
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 7ddcff64b6a94ecca7fc05714fdb963c
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+router isis 1000
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.7153.00
+
+ distribute link-state instance-id 1000 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  redistribute isis 1 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 2 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 3 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 4 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 5 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 6 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 7 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 8 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 9 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 10 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 11 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 12 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 13 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 14 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  redistribute isis 15 level-2 metric 10000 route-policy rp_RING_TO_CORE
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 100 level 2
+
+   prefix-sid index 722
+
+  !
+
+ !
+
+ interface TenGigE0/0/0/20
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 841e15d3c63407ab1d6345140d9c5f2f
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/1/0
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted a740d639699366b662083bccc82af4b3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/1/1
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted a328596a31f457ebd10a35a8738e7644
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+!
+
+snmp-server traps isis database-overload authentication-type-failure authentication-failure area-mismatch rejected-adjacency adjacency-change
+
+router ospf SmartMAN_AUTO_ONLINE
+
+ vrf SmartMAN_AUTO_ONLINE
+
+  log adjacency changes
+
+  router-id 17.45.144.120
+  snmp trap
+
+  redistribute bgp 64585 metric-type 1 route-policy rp_IPRAN_NMS_TO_RING
+
+  address-family ipv4 unicast
+
+  area 0
+
+   network point-to-point
+
+   interface Loopback4094
+
+   !
+
+   interface TenGigE0/0/0/29.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/30.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/31.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/32.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/33.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/34.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/35.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/36.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/37.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/38.4094
+
+    mtu-ignore enable
+
+   !
+
+   interface TenGigE0/0/0/39.4094
+
+    mtu-ignore enable
+
+   !
+
+  !
+
+ !
+
+!
+
+snmp-server traps bgp
+
+router bgp 64585
+
+ nsr
+
+ bgp router-id 17.45.144.120
+ bgp log neighbor changes detail
+
+ ibgp policy out enforce-modifications
+
+ address-family vpnv4 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family vpnv6 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family l2vpn evpn
+
+  additional-paths receive
+
+  additional-paths send
+
+ !
+
+ address-family link-state link-state
+
+ !
+
+ neighbor-group RR
+
+  remote-as 64585
+
+   password encrypted a1f16e8ad3a8d470d707aa0e4192fd7f
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RR_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RR_VPN_OUT out
+
+  !
+
+  address-family l2vpn evpn
+
+  !
+
+  address-family link-state link-state
+
+  !
+
+ !
+
+ neighbor-group PEER
+
+  remote-as 64585
+
+   password encrypted 74760abf4df265f0b3a30f90123e162a
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+  !
+
+  address-family vpnv6 unicast
+
+  !
+
+  address-family l2vpn evpn
+
+  !
+
+  address-family link-state link-state
+
+  !
+
+ !
+
+ neighbor-group MARRing1
+
+  remote-as 64585
+
+   password encrypted 41429a68e0a8db269c6206dc4b23d516
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing1_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing1_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing2
+
+  remote-as 64585
+
+   password encrypted 41429a68e0a8db269c6206dc4b23d516
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing2_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing2_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing3
+
+  remote-as 64585
+
+   password encrypted ca4f79bb898307c1e4ad8fd502a4f289
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing3_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing3_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing4
+
+  remote-as 64585
+
+   password encrypted 7ddcff64b6a94ecca7fc05714fdb963c
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing4_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing4_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing5
+
+  remote-as 64585
+
+   password encrypted 8bc8c4f7c77d4f630fc5c66e97c3503b
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing5_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing5_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing6
+
+  remote-as 64585
+
+   password encrypted 0c4df9ed644b6ff0b9fd5abdbc05d006
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing6_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing6_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing7
+
+  remote-as 64585
+
+   password encrypted 0af2fc1cf597699ae155c27416a45ce4
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing7_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing7_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing8
+
+  remote-as 64585
+
+   password encrypted ca4f79bb898307c1e4ad8fd502a4f289
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing8_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing8_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing9
+
+  remote-as 64585
+
+   password encrypted ca4f79bb898307c1e4ad8fd502a4f289
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing9_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing9_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing10
+
+  remote-as 64585
+
+   password encrypted 7ddcff64b6a94ecca7fc05714fdb963c
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing10_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing10_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing11
+
+  remote-as 64585
+
+   password encrypted ca4f79bb898307c1e4ad8fd502a4f289
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing11_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing11_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing12
+
+  remote-as 64585
+
+   password encrypted 07a00c0f929f757cf2a4884c033aa334
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing12_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing12_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing13
+
+  remote-as 64585
+
+   password encrypted 85b2158e2a2635abf4690a90140974f2
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing13_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing13_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing14
+
+  remote-as 64585
+
+   password encrypted 0c4df9ed644b6ff0b9fd5abdbc05d006
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing14_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing14_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor-group MARRing15
+
+  remote-as 64585
+
+   password encrypted 1ba34b5e5d90b4fd0c6d349dcf6dd1a3
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing15_VPN_OUT out
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-policy rp_RRC_VPN_IN in
+
+   route-reflector-client
+
+   route-policy TO_MARRing15_VPN_OUT out
+
+  !
+
+ !
+
+ neighbor 17.45.143.1
+  use neighbor-group RR
+
+ !
+
+ neighbor 17.45.143.2
+  use neighbor-group RR
+
+ !
+
+ neighbor 17.45.144.121
+  use neighbor-group PEER
+
+ !
+
+ neighbor 17.45.158.283
+  use neighbor-group MARRing14
+
+ !
+
+ neighbor 17.45.158.284
+  use neighbor-group MARRing14
+
+ !
+
+ neighbor 17.45.158.285
+  use neighbor-group MARRing14
+
+ !
+
+ neighbor 17.45.158.286
+  use neighbor-group MARRing14
+
+ !
+
+ neighbor 17.45.158.297
+  use neighbor-group MARRing14
+
+ !
+
+ neighbor 17.45.158.292
+  use neighbor-group MARRing13
+
+ !
+
+ neighbor 17.45.158.293
+  use neighbor-group MARRing13
+
+ !
+
+ neighbor 17.45.158.294
+  use neighbor-group MARRing13
+
+ !
+
+ neighbor 17.45.158.295
+  use neighbor-group MARRing13
+
+ !
+
+ neighbor 17.45.158.200
+  use neighbor-group MARRing12
+
+ !
+
+ neighbor 17.45.158.201
+  use neighbor-group MARRing12
+
+ !
+
+ neighbor 17.45.158.202
+  use neighbor-group MARRing12
+
+ !
+
+ neighbor 17.45.158.203
+  use neighbor-group MARRing12
+
+ !
+
+ neighbor 17.45.158.204
+  use neighbor-group MARRing12
+
+ !
+
+ neighbor 17.45.158.205
+  use neighbor-group MARRing12
+
+ !
+
+ neighbor 17.45.158.206
+  use neighbor-group MARRing15
+
+ !
+
+ neighbor 17.45.158.217
+  use neighbor-group MARRing15
+
+ !
+
+ neighbor 17.45.158.218
+  use neighbor-group MARRing15
+
+ !
+
+ neighbor 17.45.158.219
+  use neighbor-group MARRing15
+
+ !
+
+ neighbor 17.45.159.135
+  use neighbor-group MARRing2
+
+ !
+
+ neighbor 17.45.159.136
+  use neighbor-group MARRing2
+
+ !
+
+ neighbor 17.45.159.147
+  use neighbor-group MARRing2
+
+ !
+
+ neighbor 17.45.159.148
+  use neighbor-group MARRing3
+
+ !
+
+ neighbor 17.45.159.149
+  use neighbor-group MARRing3
+
+ !
+
+ neighbor 17.45.159.140
+  use neighbor-group MARRing3
+
+ !
+
+ neighbor 17.45.159.141
+  use neighbor-group MARRing4
+
+ !
+
+ neighbor 17.45.159.142
+  use neighbor-group MARRing4
+
+ !
+
+ neighbor 17.45.159.143
+  use neighbor-group MARRing4
+
+ !
+
+ neighbor 17.45.159.144
+  use neighbor-group MARRing4
+
+ !
+
+ neighbor 17.45.159.145
+  use neighbor-group MARRing5
+
+ !
+
+ neighbor 17.45.159.146
+  use neighbor-group MARRing5
+
+ !
+
+ neighbor 17.45.159.157
+  use neighbor-group MARRing5
+
+ !
+
+ neighbor 17.45.159.158
+  use neighbor-group MARRing5
+
+ !
+
+ neighbor 17.45.159.159
+  use neighbor-group MARRing6
+
+ !
+
+ neighbor 17.45.159.150
+  use neighbor-group MARRing6
+
+ !
+
+ neighbor 17.45.159.151
+  use neighbor-group MARRing6
+
+ !
+
+ neighbor 17.45.159.152
+  use neighbor-group MARRing7
+
+ !
+
+ neighbor 17.45.159.153
+  use neighbor-group MARRing7
+
+ !
+
+ neighbor 17.45.159.154
+  use neighbor-group MARRing7
+
+ !
+
+ neighbor 17.45.159.155
+  use neighbor-group MARRing7
+
+ !
+
+ neighbor 17.45.159.156
+  use neighbor-group MARRing8
+
+ !
+
+ neighbor 17.45.159.167
+  use neighbor-group MARRing8
+
+ !
+
+ neighbor 17.45.159.168
+  use neighbor-group MARRing8
+
+ !
+
+ neighbor 17.45.159.169
+  use neighbor-group MARRing9
+
+ !
+
+ neighbor 17.45.159.160
+  use neighbor-group MARRing9
+
+ !
+
+ neighbor 17.45.159.161
+  use neighbor-group MARRing9
+
+ !
+
+ neighbor 17.45.159.162
+  use neighbor-group MARRing10
+
+ !
+
+ neighbor 17.45.159.163
+  use neighbor-group MARRing10
+
+ !
+
+ neighbor 17.45.159.164
+  use neighbor-group MARRing10
+
+ !
+
+ neighbor 17.45.159.165
+  use neighbor-group MARRing11
+
+ !
+
+ neighbor 17.45.159.166
+  use neighbor-group MARRing11
+
+ !
+
+ neighbor 17.45.159.277
+  use neighbor-group MARRing11
+
+ !
+
+ neighbor 17.45.159.217
+  use neighbor-group MARRing1
+
+ !
+
+ neighbor 17.45.159.218
+  use neighbor-group MARRing1
+
+ !
+
+ neighbor 17.45.159.219
+  use neighbor-group MARRing1
+
+ !
+
+ neighbor 17.45.159.210
+  use neighbor-group MARRing1
+
+ !
+
+ neighbor 17.45.159.212
+  use neighbor-group MARRing1
+
+ !
+
+ neighbor 17.45.159.213
+  use neighbor-group MARRing2
+
+ !
+
+ neighbor 17.45.159.214
+  use neighbor-group MARRing2
+
+ !
+
+ vrf 3G_OAM
+
+  rd 64585:18050
+
+  address-family ipv4 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network 0.0.0.0/0 route-policy rp_Set_Default_Routes
+   network 149.192.271.39/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.103.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.103.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.103.169/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.104.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.104.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.104.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.104.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.105.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.105.169/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.105.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.105.275/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.105.217/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.195/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.275/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.283/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.291/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.106.217/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.163.0/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.163.39/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.192.163.61/27 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 3G_RAN
+
+  rd 64585:18040
+
+  address-family ipv4 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network 0.0.0.0/0 route-policy rp_Set_Default_Routes
+   network 149.186.271.39/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.103.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.103.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.103.169/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.104.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.104.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.104.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.104.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.105.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.105.169/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.105.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.105.275/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.105.217/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.195/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.275/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.283/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.291/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.106.217/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.163.0/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.163.39/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.186.163.61/27 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 4G_OAM
+
+  rd 64585:20021
+
+  address-family ipv4 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network 0.0.0.0/0 route-policy rp_Set_Default_Routes
+   network 149.170.271.39/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.286.0/25 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.286.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.286.169/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.297.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.297.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.297.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.298.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.298.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.298.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.299.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.177.299.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.192.169/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.103.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.103.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.103.169/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.104.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.104.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.104.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.104.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.105.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.105.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.105.275/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.105.217/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.195/27 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.275/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.283/29 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.291/28 route-policy rp_Set_Core_Routes
+   aggregate-address 149.170.106.217/28 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 4G_RAN
+
+  rd 64585:20011
+
+  address-family ipv4 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network 0.0.0.0/0 route-policy rp_Set_Default_Routes
+   network 48.207.152.0/25 route-policy rp_Set_Core_Routes
+   network 54.175.283.0/25 route-policy rp_Set_Core_Routes
+   network 54.180.271.39/27 route-policy rp_Set_Core_Routes
+   aggregate-address 17.174.0.61/28 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.155.0/25 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.155.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.155.169/26 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.270.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.270.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.270.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.275.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.275.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.289.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.289.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 48.207.289.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.286.0/25 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.286.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.286.169/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.297.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.297.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.297.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.298.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.298.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.298.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.299.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.175.299.61/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.192.169/29 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.103.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.103.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.103.169/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.104.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.104.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.104.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.104.195/25 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.105.195/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.105.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.105.275/28 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.105.217/28 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.0/26 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.61/27 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.93/27 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.195/27 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.277/29 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.275/29 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.283/29 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.291/28 route-policy rp_Set_Core_Routes
+   aggregate-address 54.180.106.217/28 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 5G_OAM
+
+  rd 64585:10030
+
+  address-family ipv6 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network ::/0 route-policy rp_Set_Default_Routes
+   network BD91:1AF9:1B99:888:9:4:199A:9/112 route-policy rp_Set_Core_Routes
+   aggregate-address BD91:1AF9:1B99:888:9:4:A99:9/104 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf 5G_RAN
+
+  rd 64585:10010
+
+  address-family ipv6 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+   network ::/0 route-policy rp_Set_Default_Routes
+   network BD91:1AF9:1B99::4:199A:9/112 route-policy rp_Set_Core_Routes
+   network BD97:A1D:D9AA::4:199A:9/112 route-policy rp_Set_Core_Routes
+   aggregate-address BD91:1AF9:1B99::4:A99:9/104 route-policy rp_Set_Core_Routes
+   aggregate-address BD91:1AF9:1B99:9:8888:4:A99:9/104 route-policy rp_Set_Core_Routes
+   aggregate-address BD97:A1D:D9AA::4:A99:9/104 route-policy rp_Set_Core_Routes
+   aggregate-address BD97:A1D:D9AA:9:8888:4:A99:9/104 route-policy rp_Set_Core_Routes
+  !
+
+ !
+
+ vrf SmartMAN_AUTO_ONLINE
+
+  rd 64585:10080
+
+  address-family ipv4 unicast
+
+   label mode per-vrf
+
+   redistribute ospf SmartMAN_AUTO_ONLINE
+
+  !
+
+ !
+
+!
+
+mpls oam
+
+!
+
+dhcp ipv6
+
+ profile autoonline proxy
+
+  helper-address vrf 5G_OAM BD91:1AF9:1B99:888:9:87:A9:D
+  helper-address vrf 5G_OAM BD91:1AF9:1B99:888:9:87:A9:E
+ !
+
+ interface TenGigE0/0/0/0.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/1.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/2.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/3.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/4.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/5.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/6.895 proxy profile autoonline
+
+ interface TenGigE0/0/0/7.895 proxy profile autoonline
+
+!
+
+snmp-server traps mpls l3vpn all
+
+segment-routing
+
+ global-block 24000 43999
+
+!
+
+snmp-server traps fru-ctrl
+
+netconf agent tty
+
+!
+
+snmp-server traps ospf lsa lsa-maxage
+
+snmp-server traps ospf lsa lsa-originate
+
+snmp-server traps ospf errors bad-packet
+
+snmp-server traps ospf errors authentication-failure
+
+snmp-server traps ospf errors config-error
+
+snmp-server traps ospf errors virt-bad-packet
+
+snmp-server traps ospf errors virt-authentication-failure
+
+snmp-server traps ospf errors virt-config-error
+
+snmp-server traps ospf retransmit packets
+
+snmp-server traps ospf retransmit virt-packets
+
+snmp-server traps ospf state-change if-state-change
+
+snmp-server traps ospf state-change neighbor-state-change
+
+snmp-server traps ospf state-change virtif-state-change
+
+snmp-server traps ospf state-change virtneighbor-state-change
+
+lldp
+
+!
+
+ssh server rate-limit 600
+
+ssh server session-limit 10
+
+ssh server v2
+
+ssh server netconf vrf default
+
+ipsla
+
+ operation 101
+
+  type udp jitter
+
+   destination address 17.45.144.128
+   destination port 6000
+
+  !
+
+ !
+
+ operation 102
+
+  type udp jitter
+
+   destination address 17.45.144.129
+   destination port 6000
+
+  !
+
+ !
+
+ schedule operation 101
+
+  start-time now
+
+  life forever
+
+ !
+
+ schedule operation 102
+
+  start-time now
+
+  life forever
+
+ !
+
+!
+
+end
+
+
+

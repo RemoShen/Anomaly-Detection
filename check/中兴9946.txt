@@ -1,0 +1,2841 @@
+show running-config
+
+!<mim>
+
+!configuration saved at 16:39:02 Thu Jan 7 2021 by write zdb
+
+!configuration saved at 11:44:59 Tue Dec 29 2020 by write txt
+
+!last configuration change at 11:44:53 Tue Dec 29 2020 by who
+
+commit-mode default automatic
+
+!</mim>
+
+!<system-config>
+
+hostname ZJLS-DYBL-2F-ZX9K8EA-SM-C002
+load-mode txt
+
+nvram boot-server 114.180.0.2
+nvram boot-server ipv6 6444::5
+nvram default-gateway 114.180.0.2
+nvram default-gateway ipv6 6444::5
+nvram boot-username ztetest
+
+nvram ftp-path /
+
+!</system-config>
+
+!<nsr-config>
+
+nsr service all
+
+!</nsr-config>
+
+!<vrf>
+
+ip vrf NMS_4G_ZJ
+
+  rd 38351:220030
+
+  mpls label mode per-vrf
+
+  address-family ipv4
+
+    maximum routes 4294967295 warning-only
+
+    protection local-prefixes
+
+    route-target import 38351:220030
+
+    route-target export 38351:220030
+
+  $
+
+$
+
+ip vrf 4G_RAN
+
+  rd 38351:220090
+
+  mpls label mode per-vrf
+
+  address-family ipv4
+
+    route-target import 38351:220090
+
+    route-target export 38351:220090
+
+  $
+
+$
+
+ip vrf 5G_OAM
+
+  rd 65341:21515
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 65341:21515
+
+    route-target import 65341:21515
+
+  $
+
+  address-family ipv6
+
+    route-target export 65341:21515
+
+    route-target import 65341:21515
+
+  $
+
+$
+
+ip vrf 5G_RAN
+
+  rd 65341:21158
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 65341:11158
+
+    route-target import 65341:11158
+
+  $
+
+  address-family ipv6
+
+    route-target export 65341:11158
+
+    route-target import 65341:11158
+
+    route-target import 65341:10010
+
+    route-target export 65341:10010
+
+  $
+
+$
+
+ip vrf SmartMAN_AUTO_ONLINE
+
+  rd 65341:10080
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target export 65341:10080
+
+    route-target import 65341:10080
+
+  $
+
+$
+
+!</vrf>
+
+!<if-intf>
+
+interface xgei-0/0/0/1
+
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/0/0/2
+
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/0/0/3
+
+   description to_ZJLS-DYBL-AR2_10GE4/0/0:1(B)
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/0/0/4
+
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/0/0/5
+
+   description to_ZJLS-DYBL-RSG_10G1/0/4:1(IPRAN)
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/0/0/6
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/7
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/8
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/9
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/10
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/11
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/12
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/13
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/14
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/15
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/16
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/17
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/18
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/19
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/20
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/21
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/22
+
+  mtu 9000
+
+$
+
+interface xgei-0/0/0/23
+
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/0/0/23.902
+
+  ip vrf forwarding NMS_4G_ZJ
+
+  ip address 194.14.183.1 255.255.255.252
+$
+
+interface xgei-0/0/0/23.3002
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 address 684C:C5A5:EF44::5/126
+$
+
+interface xgei-0/0/0/23.4002
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 address 6842:5CB:F5::5:4:59/126
+$
+
+interface xgei-0/0/0/24
+
+   description to H3C 5500-D WG xgei-49
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface xgei-0/0/0/24.300
+
+  mtu 9000
+
+  ip mtu 9000
+
+  ip address 12.81.152.169 255.255.255.240
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface spi-0/0/0/1
+
+$
+
+interface cgei-0/0/1/1
+
+   description to_LS-LD-CD-M-1.STN.RX8800_G9/1/2_100G:1(telecom)
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/0/1/1.4000
+
+  mtu 9000
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 43.196.0.16 255.255.255.252
+  shutdown
+
+$
+
+interface cgei-0/0/1/1.4006
+
+  mtu 9000
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 6842:5CB:F4::A/126
+$
+
+interface cgei-0/0/1/2
+
+   description to_ZJLS-YX-2F-ZX9K3EA-SM-MER_100GE-0/0/0/1:1
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/0/1/3
+
+   description to_ZJLS-DYBL-2F-ZX9K3EA-SM-E001_GE-0/0/0/1_100G:1
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/0/1/4
+
+  mtu 9000
+
+$
+
+interface spi-0/0/1/1
+
+$
+
+interface cgei-0/2/0/1
+
+   description to_ZJHZ-BJ2-3F-NE8KX8-SM-C1_100GE8/0/11:1:HZLS-W-640N0001WG
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/2/0/2
+
+   description to_ZJLS-QTBGL-2F-ZX9K3EA-SM-E001_GE-0/0/0/1_100G:1
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/2/0/3
+
+   description to_ZJLS-JNSHG-1F-9K3EA-SM-E001_100GE-0/0/0/1:1
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/2/0/4
+
+  mtu 9000
+
+$
+
+interface spi-0/2/0/1
+
+$
+
+interface cgei-0/2/1/1
+
+   description to_ZJLS-DYL-2F-ZX9K8EA-SM-C1_100G-0/2/1/1:1
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/2/1/2
+
+   description to_ZJLS-JYSW-1F-9K3EA-SM-E001_100GE-0/0/0/1:1
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/2/1/3
+
+   description to_ZJLS-YHGYY-1F-9K3EA-SM-E001_100GE-0/0/0/1:1
+  mtu 9000
+
+  no shutdown
+
+$
+
+interface cgei-0/2/1/4
+
+  mtu 9000
+
+$
+
+interface spi-0/2/1/1
+
+$
+
+interface xgei-0/5/0/1
+
+$
+
+interface xgei-0/5/0/2
+
+$
+
+interface xgei-0/5/0/3
+
+$
+
+interface xgei-0/5/0/4
+
+$
+
+interface xgei-0/5/0/5
+
+$
+
+interface xgei-0/5/0/6
+
+$
+
+interface xgei-0/5/0/7
+
+$
+
+interface xgei-0/5/0/8
+
+$
+
+interface xgei-0/5/0/9
+
+$
+
+interface xgei-0/5/0/10
+
+$
+
+interface xgei-0/5/0/11
+
+$
+
+interface xgei-0/5/0/12
+
+$
+
+interface xgei-0/5/0/13
+
+$
+
+interface xgei-0/5/0/14
+
+$
+
+interface xgei-0/5/0/15
+
+$
+
+interface xgei-0/5/0/16
+
+$
+
+interface xgei-0/5/0/17
+
+$
+
+interface xgei-0/5/0/18
+
+$
+
+interface xgei-0/5/0/19
+
+$
+
+interface xgei-0/5/0/20
+
+$
+
+interface spi-0/5/0/1
+
+$
+
+interface spi-0/5/1/1
+
+$
+
+interface ptp-0/10/0/1
+
+$
+
+interface ptp-0/10/0/2
+
+$
+
+interface extimer-0/10/0/1
+
+$
+
+interface extimer-0/10/0/2
+
+$
+
+interface extimer-0/10/0/3
+
+$
+
+interface gps-0/10/0/3
+
+$
+
+interface gps-0/10/0/4
+
+$
+
+interface qx_eth-0/10/0/1
+
+$
+
+interface ptp-0/11/0/1
+
+$
+
+interface ptp-0/11/0/2
+
+$
+
+interface extimer-0/11/0/1
+
+$
+
+interface extimer-0/11/0/2
+
+$
+
+interface extimer-0/11/0/3
+
+$
+
+interface gps-0/11/0/3
+
+$
+
+interface gps-0/11/0/4
+
+$
+
+interface qx_eth-0/11/0/1
+
+$
+
+interface mgmt_eth
+
+  ip address 114.180.0.1 255.255.255.0
+  ipv6 address 6444::C/64
+$
+
+interface loopback0
+
+  ip address 12.94.182.2 255.255.255.255
+$
+
+interface loopback11
+
+  ip vrf forwarding 4G_RAN
+
+  ip address 53.178.277.276 255.255.255.255
+$
+
+interface loopback101
+
+  ip vrf forwarding 5G_RAN
+
+  ipv6 enable
+
+  ipv6 address 684C:C5A5:EF44:333::3:5/128
+$
+
+interface loopback102
+
+  ip vrf forwarding 5G_OAM
+
+  ip address 12.94.182.276 255.255.255.255
+$
+
+interface loopback103
+
+  ip vrf forwarding 4G_RAN
+
+  ip address 12.94.182.276 255.255.255.255
+$
+
+interface loopback104
+
+  ip vrf forwarding NMS_4G_ZJ
+
+  ip address 12.94.182.276 255.255.255.255
+$
+
+interface null1
+
+$
+
+interface smartgroup1
+
+   description to_ZJHZ-BJ2-3F-NE8KX8-SM-C1
+$
+
+interface smartgroup1.843
+
+  mtu 9000
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 684C:C585:E434:F333::B/127
+$
+
+interface smartgroup1.902
+
+  mtu 9000
+
+  ip vrf forwarding NMS_4G_ZJ
+
+  ip mtu 9000
+
+  ip address 194.0.0.88 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup1.3002
+
+  mtu 9000
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 12.128.140.10 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup2
+
+   description to_ZJLS-DYBL-AR2
+$
+
+interface smartgroup2.843
+
+  mtu 9000
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  mpls mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 684C:C585:E434:F333::7/127
+$
+
+interface smartgroup2.875
+
+   description to_ ZJQZ-XQ-N40E-A1_Eth-trunk50.875
+  mtu 9050
+
+  ip mtu 9000
+
+  ip address 12.97.274.88 255.255.255.252
+$
+
+interface smartgroup3
+
+   description to_ZJLS-DYL-2F-ZX9K8EA-SM-C1_SG3
+  ip mtu 9000
+
+  ip address 194.12.141.2 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup4
+
+   description to_ZJLS-DYL-RSG(IPRAN1.0)
+$
+
+interface smartgroup4.3002
+
+  mtu 9000
+
+  ip vrf forwarding 4G_RAN
+
+  ip mtu 9000
+
+  ip address 12.128.140.27 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup10
+
+$
+
+interface smartgroup10.10
+
+   description to_ zjls-dybl-z-2_Eth-Trunk100.10
+  mtu 9050
+
+  ip mtu 9000
+
+  ip address 12.97.275.150 255.255.255.252
+$
+
+interface smartgroup10.11
+
+   description to_ zjls-dybl-z-2 _Eth-Trunk100.11
+  mtu 9050
+
+  ip vrf forwarding SmartMAN_AUTO_ONLINE
+
+  ip mtu 9000
+
+  ip address 12.97.275.164 255.255.255.252
+$
+
+interface smartgroup11
+
+   description to_ZJLS-YX-2F-ZX9K3EA-SM-MER_SG1
+  ip mtu 9000
+
+  ip address 194.12.141.27 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup12
+
+   description to_ZJLS-DYBL-2F-ZX9K3EA-SM-E001_SG1
+  ip mtu 9000
+
+  ip address 194.12.141.19 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup13
+
+   description to_ZJLS-JYSW-1F-9K3EA-SM-E001_SG1
+  ip mtu 9000
+
+  ip address 194.12.141.67 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup14
+
+   description to_ZJLS-QTBGL-2F-9K3EA-SM-E001_SG1
+  ip mtu 9000
+
+  ip address 194.12.141.41 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup15
+
+   description to_ZJLS-YHGYY-1F-9K3EA-SM-E001_SG1
+  ip mtu 9000
+
+  ip address 194.12.141.81 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface smartgroup16
+
+   description to_ZJLS-JNSHG-1F-9K3EA-SM-E001_SG1
+  ip mtu 9000
+
+  ip address 194.12.141.75 255.255.255.252
+  mpls mtu 9000
+
+  ipv6 mtu 9000
+
+$
+
+interface qx1
+
+$
+
+!</if-intf>
+
+!<port-physical-config>
+
+interface xgei-0/0/0/1
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/2
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/3
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/4
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/5
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/6
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/7
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/8
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/9
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/10
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/11
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/12
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/13
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/14
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/15
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/16
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/17
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/18
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/19
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/20
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/21
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/22
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/23
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface xgei-0/0/0/24
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/0/1/1
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/0/1/2
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/0/1/3
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/0/1/4
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/0/1
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/0/2
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/0/3
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/0/4
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/1/1
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/1/2
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/1/3
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+interface cgei-0/2/1/4
+
+  link-delay-down 200
+
+  link-delay-up 2000
+
+$
+
+!</port-physical-config>
+
+!<clock-mgr>
+
+clock timezone GMT 8
+
+!</clock-mgr>
+
+!<switchvlan>
+
+switchvlan-configuration
+
+  vlan 1
+
+  $
+
+$
+
+!</switchvlan>
+
+!<lacp>
+
+lacp
+
+  interface smartgroup1
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup2
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup3
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup4
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup10
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup11
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup12
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup13
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup14
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup15
+
+    lacp mode 802.3ad
+
+  $
+
+  interface smartgroup16
+
+    lacp mode 802.3ad
+
+  $
+
+  interface xgei-0/0/0/1
+
+    smartgroup 10 mode active
+
+  $
+
+  interface xgei-0/0/0/2
+
+    smartgroup 10 mode active
+
+  $
+
+  interface xgei-0/0/0/3
+
+    smartgroup 2 mode active
+
+  $
+
+  interface xgei-0/0/0/5
+
+    smartgroup 4 mode active
+
+  $
+
+  interface cgei-0/0/1/2
+
+    smartgroup 11 mode active
+
+  $
+
+  interface cgei-0/0/1/3
+
+    smartgroup 12 mode active
+
+  $
+
+  interface cgei-0/2/0/1
+
+    smartgroup 1 mode active
+
+  $
+
+  interface cgei-0/2/0/2
+
+    smartgroup 14 mode active
+
+  $
+
+  interface cgei-0/2/0/3
+
+    smartgroup 16 mode active
+
+  $
+
+  interface cgei-0/2/1/1
+
+    smartgroup 3 mode active
+
+  $
+
+  interface cgei-0/2/1/2
+
+    smartgroup 13 mode active
+
+  $
+
+  interface cgei-0/2/1/3
+
+    smartgroup 15 mode active
+
+  $
+
+$
+
+!</lacp>
+
+!<vlan>
+
+vlan-configuration
+
+  interface xgei-0/0/0/23.902
+
+    encapsulation-dot1q 902
+
+  $
+
+  interface xgei-0/0/0/23.3002
+
+    encapsulation-dot1q 3002
+
+  $
+
+  interface xgei-0/0/0/23.4002
+
+    encapsulation-dot1q 4002
+
+  $
+
+  interface xgei-0/0/0/24.300
+
+    encapsulation-dot1q 300
+
+  $
+
+  interface cgei-0/0/1/1.4000
+
+    encapsulation-dot1q 4000
+
+  $
+
+  interface cgei-0/0/1/1.4006
+
+    encapsulation-dot1q 4006
+
+  $
+
+  interface smartgroup1.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface smartgroup1.902
+
+    encapsulation-dot1q 902
+
+  $
+
+  interface smartgroup1.3002
+
+    encapsulation-dot1q 3002
+
+  $
+
+  interface smartgroup2.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface smartgroup2.875
+
+    encapsulation-dot1q 875
+
+  $
+
+  interface smartgroup4.3002
+
+    encapsulation-dot1q 3002
+
+  $
+
+  interface smartgroup10.10
+
+    encapsulation-dot1q 10
+
+  $
+
+  interface smartgroup10.11
+
+    encapsulation-dot1q 11
+
+  $
+
+$
+
+!</vlan>
+
+!<label-mgr>
+
+mpls label manage
+
+  srgb-label-range 24000 43999
+
+  static-label-range 16 23999
+
+  static-label-range 262160 655359
+
+$
+
+!</label-mgr>
+
+!<route-map>
+
+route-map SmartMAN_AUTO_ONLINE_IN permit 5
+
+  match ip address prefix-list SmartMAN_AUTO_ONLINE_IN
+
+$
+
+route-map SmartMAN_AUTO_ONLINE_OUT permit 5
+
+  match ip address prefix-list SmartMAN_AUTO_ONLINE_OUT
+
+  match ip address prefix-list SmartMAN_OUT
+
+$
+
+route-map SmartMAN_OUT permit 5
+
+  match ip address prefix-list SmartMAN_OUT
+
+$
+
+route-map SmartMAN_SDN_SNMP_IN permit 5
+
+  match ip address prefix-list SmartMAN_NSM_SNMP_IN
+
+  match ip address prefix-list SmartMAN_SDN_IN
+
+$
+
+route-map rp_4G_OAM_LS_OUT permit 10
+
+  match ip address prefix-list pl_4G_OAM_LS
+
+$
+
+route-map rp_4G_RAN_CT_LS_in permit 100
+
+  match ip address prefix-list pl_4G_RAN_CT_LS_in
+
+$
+
+route-map rp_4G_RAN_CU_LS_out permit 100
+
+  match ip address prefix-list pl_4G_RAN_CU_LS_out
+
+$
+
+route-map rp_4G_RAN_IPRAN1.0_lsYW_in permit 100
+
+  match ip address prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in
+
+  set as-path delete 65341
+
+$
+
+route-map rp_4G_RAN_SM_lsMCR_out permit 100
+
+  match ip address prefix-list pl_4G_RAN_SM_lsMCR_out
+
+$
+
+route-map rp_4G_RAN_SM_lsYW_out permit 100
+
+  match ip address prefix-list pl_4G_RAN_SM_lsYW_out
+
+$
+
+route-map rp_4G_RAN_zjEPC_in permit 100
+
+  match ip address prefix-list pl_4G_RAN_zjEPC_in
+
+$
+
+route-map rp_5G_RAN_CT_LS_in permit 100
+
+  match ipv6 address prefix-list pl_5G_RAN_CT_LS_in
+
+$
+
+route-map rp_5G_RAN_CU_LS_out permit 100
+
+  match ipv6 address prefix-list pl_5G_RAN_CU_LS_out
+
+$
+
+route-map rp_5G_RAN_LS_OUT permit 10
+
+  match ipv6 address prefix-list pl_5G_RAN_LS
+
+$
+
+route-map rp_5G_RAN_v6_hz_in permit 10
+
+  match ipv6 address prefix-list pl_5G_RAN_v6_hz
+
+$
+
+route-map rp_5G_RAN_v6_nj_in permit 10
+
+  match ipv6 address prefix-list pl_5G_RAN_v6_nj
+
+$
+
+!</route-map>
+
+!<system-user>
+
+system-user
+
+  authorization-template 1
+
+    bind aaa-authorization-template 2001
+
+  $
+
+  authentication-template 1
+
+    bind aaa-authentication-template 2001
+
+  $
+
+  default-privilege-level 15
+
+  user-name ZJ-LS-Manager
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted 04b49999588c6b6e1b8f720c0c7811db
+47a9169a1f
+
+  $
+
+  user-name ZJ-LS-SDNcontroler
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted 04b49999588c6b6e1b8f720c0c7811db
+47a9169a1f
+
+  $
+
+  user-name who
+
+    bind authentication-template 1
+
+    bind authorization-template 1
+
+     password encrypted 850b6455c32b57fbe8d4bb223ec01575
+057cd7c123
+
+  $
+
+$
+
+!</system-user>
+
+!<dhcp>
+
+ip dhcp relay server group 1
+
+  server 1 194.25.5.18 master
+$
+
+dhcp
+
+  enable
+
+  relay forward reply unrestricted
+
+  relay update arp
+
+  interface xgei-0/0/0/23.902
+
+    mode relay
+
+    relay server group 1
+
+    relay agent 194.14.183.1
+  $
+
+$
+
+!</dhcp>
+
+!<prefix-list>
+
+ip prefix-list SmartMAN_AUTO_ONLINE_IN seq 5 permit 12.262.35.0 24 ge 29 le 32
+ip prefix-list SmartMAN_AUTO_ONLINE_OUT seq 5 permit 153.0.0.0 8 le 32
+ip prefix-list SmartMAN_NSM_SNMP_IN seq 5 permit 114.180.276.0 24
+ip prefix-list SmartMAN_OUT seq 5 permit 12.94.182.0 19
+ip prefix-list SmartMAN_OUT seq 10 permit 12.94.140.0 18
+ip prefix-list SmartMAN_SDN_IN seq 5 permit 12.262.34.98 29
+ip prefix-list pl_4G_OAM_EPC seq 10 permit 194.25.0.0 16 le 32
+ip prefix-list pl_4G_OAM_LS seq 10 permit 194.14.0.0 16
+ip prefix-list pl_4G_RAN_CT_LS_in seq 5 permit 7.162.0.0 22
+ip prefix-list pl_4G_RAN_CT_LS_in seq 10 permit 43.191.0.18 28 ge 32 le 32
+ip prefix-list pl_4G_RAN_CT_LS_in seq 15 permit 43.191.8.18 28 ge 32 le 32
+ip prefix-list pl_4G_RAN_CT_LS_in seq 20 permit 7.162.26.0 21
+ip prefix-list pl_4G_RAN_CT_LS_in seq 25 permit 7.163.66.0 18
+ip prefix-list pl_4G_RAN_CT_LS_in seq 30 permit 7.150.66.0 18
+ip prefix-list pl_4G_RAN_CT_LS_in seq 35 permit 43.196.0.0 17
+ip prefix-list pl_4G_RAN_CT_LS_in seq 40 permit 53.162.140.0 17
+ip prefix-list pl_4G_RAN_CU_LS_out seq 5 permit 53.178.0.0 16
+ip prefix-list pl_4G_RAN_CU_LS_out seq 10 permit 43.196.140.0 17 ge 30 le 30
+ip prefix-list pl_4G_RAN_CU_LS_out seq 15 permit 7.160.114.0 19 ge 30 le 30
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 5 permit 12.128.140.0 17
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 10 permit 43.196.140.0 17
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 15 permit 53.162.0.0 17
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 20 permit 7.160.114.0 19
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 25 permit 7.162.0.0 22
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 30 permit 7.162.26.0 21
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 35 permit 7.163.66.0 18
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 40 permit 7.150.66.0 18
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 50 permit 43.196.0.0 17
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 55 permit 53.162.140.0 17
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 60 permit 43.191.0.18 28 ge 32 le 
+32
+
+ip prefix-list pl_4G_RAN_IPRAN1.0_lsYW_in seq 65 permit 43.191.8.18 28 ge 32 le 
+32
+
+ip prefix-list pl_4G_RAN_SM_lsMCR_out seq 5 permit 53.178.0.0 16
+ip prefix-list pl_4G_RAN_SM_lsYW_out seq 5 permit 53.178.0.0 16
+ip prefix-list pl_4G_RAN_SM_lsYW_out seq 10 permit 43.196.140.0 17 ge 30 le 30
+ip prefix-list pl_4G_RAN_zjEPC_in seq 5 permit 12.122.1.0 24 ge 24 le 32
+ip prefix-list pl_4G_RAN_zjEPC_in seq 10 permit 12.122.35.0 24 ge 24 le 32
+ipv6 prefix-list pl_5G_RAN_CT_LS_in seq 5 permit 6842:5CB:4:4:5::/60 ge 112 le 1
+12
+
+ipv6 prefix-list pl_5G_RAN_CT_LS_in seq 25 permit 6842:5CB:F4::/48 ge 64 le 64
+ipv6 prefix-list pl_5G_RAN_CT_LS_in seq 30 permit 684C:C5A5:EF44:54::/64
+ipv6 prefix-list pl_5G_RAN_CU_LS_out seq 5 permit 684C:C585:C433:3344::/56 ge 56
+ le 128
+
+ipv6 prefix-list pl_5G_RAN_CU_LS_out seq 10 permit 684C:C585:E544:3344::/120 ge 
+128 le 128
+
+ipv6 prefix-list pl_5G_RAN_CU_LS_out seq 15 permit 684C:C585:E434:5344::/64 ge 1
+28 le 128
+
+ipv6 prefix-list pl_5G_RAN_CU_LS_out seq 20 permit 684C:C585:E434:F344::/64 ge 1
+28 le 128
+
+ipv6 prefix-list pl_5G_RAN_CU_LS_out seq 40 permit 684C:C5A5:EF44::/64
+ipv6 prefix-list pl_5G_RAN_CU_LS_out seq 45 permit 6842:5CB:F5::/48 ge 64 le 64
+ipv6 prefix-list pl_5G_RAN_LS seq 10 permit 684C:C5A5:EF44::/64
+ipv6 prefix-list pl_5G_RAN_LS seq 15 permit 684C:C5A5:EF44:54::/64
+ipv6 prefix-list pl_5G_RAN_v6_hz seq 10 permit 684C:C585:E544:3344::/56 ge 56 le
+ 128
+
+ipv6 prefix-list pl_5G_RAN_v6_hz seq 15 permit 684C:C585:E544:3344::/128
+ipv6 prefix-list pl_5G_RAN_v6_hz seq 20 permit 684C:C585:E544:3344::5/128
+ipv6 prefix-list pl_5G_RAN_v6_hz seq 25 permit 684C:C585:E544:3344::6/128
+ipv6 prefix-list pl_5G_RAN_v6_hz seq 30 permit 684C:C585:E544:3344::7/128
+ipv6 prefix-list pl_5G_RAN_v6_nj seq 10 permit 684C:C585:C433:3344::/56 ge 56 le
+ 128
+
+!</prefix-list>
+
+!<ptp>
+
+ptp
+
+  fixed-mode
+
+  $
+
+  free-mode
+
+  $
+
+$
+
+!</ptp>
+
+!<aaa>
+
+aaa-authentication-template 2001
+
+  aaa-authentication-type local
+
+$
+
+aaa-authorization-template 2001
+
+  aaa-authorization-type none
+
+$
+
+!</aaa>
+
+!<arp>
+
+arp
+
+  interface xgei-0/0/0/23.902
+
+    gratuitous-learn
+
+  $
+
+$
+
+!</arp>
+
+!<stp>
+
+spantree
+
+$
+
+!</stp>
+
+!<cps>
+
+control-plane-security
+
+  interface xgei-0/0/0/3
+
+    flow limit flowtype ftp-known rate-limit 10000 quota-limit 10000
+
+  $
+
+  interface xgei-0/0/0/24
+
+    flow limit flowtype ftp-known rate-limit 10000 quota-limit 10000
+
+  $
+
+  interface cgei-0/0/1/2
+
+    flow limit flowtype ftp-known rate-limit 10000 quota-limit 10000
+
+  $
+
+$
+
+!</cps>
+
+!<oam_snetconf>
+
+snetconf server enable
+
+!</oam_snetconf>
+
+!<oam_netconf>
+
+netconf agent enable
+
+!</oam_netconf>
+
+!<segment-routing>
+
+segment-routing
+
+  ipv4-mpls prefix-sid 12.94.182.2/32 index 2701 node-flag
+$
+
+!</segment-routing>
+
+!<alarm>
+
+alarm netconf-report informational
+
+logging file default almlog
+
+  accept on
+
+$
+
+logging file default cmdlog
+
+  buffer 1000
+
+$
+
+logging file default netclog
+
+  accept on
+
+$
+
+logging file default snmplog
+
+  accept on
+
+$
+
+logging file default srvlog
+
+  accept on
+
+  interval 10
+
+$
+
+logging file default weblog
+
+  accept on
+
+$
+
+logging trap-enable informational
+
+logging snmp
+
+  accept on
+
+  match cmdlog
+
+$
+
+!</alarm>
+
+!<interface-performance>
+
+intf-statistics
+
+  interface smartgroup1.843
+
+    traffic-statistics enable
+
+  $
+
+  interface smartgroup1.902
+
+    traffic-statistics enable
+
+  $
+
+  interface smartgroup1.3002
+
+    traffic-statistics enable
+
+  $
+
+$
+
+!</interface-performance>
+
+!<snmp>
+
+snmp-server community encrypted d6ddeaa4dab74523b246fe346c94c31ae58b79ad47763964
+
+38ea1e9bb01a9ef3 view lldpview ro 
+
+snmp-server community encrypted 18dc5c0ac9ddc78ad8466907ed57a25f2b968fadbcbebe9b
+
+024814893ae08adc view lldpview rw 
+
+snmp-server community encrypted e2f3d843eb248d743855b5ab7265753b8b4b62912008ac9b
+
+d6ab6de463d02ff0 view lldpview rw 
+
+snmp-server enable inform snmp
+
+snmp-server enable inform bgp
+
+snmp-server enable inform mac
+
+snmp-server enable inform ospf
+
+snmp-server enable inform stp
+
+snmp-server enable inform ppp
+
+snmp-server enable inform arp
+
+snmp-server enable inform rmon
+
+snmp-server enable inform udld
+
+snmp-server enable inform cfm
+
+snmp-server enable inform efm
+
+snmp-server enable inform lacp
+
+snmp-server enable inform mc-elam
+
+snmp-server enable inform tcp
+
+snmp-server enable inform sctp
+
+snmp-server enable inform stalarm
+
+snmp-server enable inform cps
+
+snmp-server enable inform interface
+
+snmp-server enable inform acl
+
+snmp-server enable inform fib
+
+snmp-server enable inform pim
+
+snmp-server enable inform isis
+
+snmp-server enable inform rip
+
+snmp-server enable inform msdp
+
+snmp-server enable inform aps
+
+snmp-server enable inform config
+
+snmp-server enable inform am
+
+snmp-server enable inform um
+
+snmp-server enable inform system
+
+snmp-server enable inform ldp
+
+snmp-server enable inform pwe3
+
+snmp-server enable inform vpn
+
+snmp-server enable inform mpls-oam
+
+snmp-server enable inform ptp
+
+snmp-server enable inform tunnel-te
+
+snmp-server enable inform radius
+
+snmp-server enable inform dhcp
+
+snmp-server enable inform bfd
+
+snmp-server enable inform ippool
+
+snmp-server enable inform ntp
+
+snmp-server enable inform ssm
+
+snmp-server enable inform sqa
+
+snmp-server enable inform ipsec
+
+snmp-server enable inform cgn
+
+snmp-server enable inform vrrp
+
+snmp-server enable inform ftp_tftp
+
+snmp-server enable inform ping-trace
+
+snmp-server enable inform gm
+
+snmp-server enable trap snmp
+
+snmp-server enable trap bgp
+
+snmp-server enable trap mac
+
+snmp-server enable trap ospf
+
+snmp-server enable trap stp
+
+snmp-server enable trap ppp
+
+snmp-server enable trap arp
+
+snmp-server enable trap rmon
+
+snmp-server enable trap udld
+
+snmp-server enable trap cfm
+
+snmp-server enable trap efm
+
+snmp-server enable trap lacp
+
+snmp-server enable trap mc-elam
+
+snmp-server enable trap tcp
+
+snmp-server enable trap sctp
+
+snmp-server enable trap stalarm
+
+snmp-server enable trap cps
+
+snmp-server enable trap interface
+
+snmp-server enable trap acl
+
+snmp-server enable trap fib
+
+snmp-server enable trap pim
+
+snmp-server enable trap isis
+
+snmp-server enable trap rip
+
+snmp-server enable trap msdp
+
+snmp-server enable trap aps
+
+snmp-server enable trap config
+
+snmp-server enable trap am
+
+snmp-server enable trap um
+
+snmp-server enable trap system
+
+snmp-server enable trap ldp
+
+snmp-server enable trap pwe3
+
+snmp-server enable trap vpn
+
+snmp-server enable trap mpls-oam
+
+snmp-server enable trap ptp
+
+snmp-server enable trap tunnel-te
+
+snmp-server enable trap radius
+
+snmp-server enable trap dhcp
+
+snmp-server enable trap bfd
+
+snmp-server enable trap ippool
+
+snmp-server enable trap ntp
+
+snmp-server enable trap ssm
+
+snmp-server enable trap sqa
+
+snmp-server enable trap ipsec
+
+snmp-server enable trap cgn
+
+snmp-server enable trap vrrp
+
+snmp-server enable trap ftp_tftp
+
+snmp-server enable trap ping-trace
+
+snmp-server enable trap gm
+
+snmp-server host 114.180.276.39 trap version 2c encrypted e2f3d843eb248d743855b5
+ab7265753b8b4b62912008ac9bd6ab6de463d02ff0 udp-port 165 snmp bgp mac ospf stp pp
+
+p arp rmon udld cfm efm lacp mc-elam tcp sctp stalarm cps interface acl fib pim 
+
+isis rip msdp aps config am um system ldp pwe3 vpn mpls-oam ptp tunnel-te radius
+
+ dhcp bfd ippool ntp
+
+snmp-server host 114.180.276.39 trap version 2c encrypted e2f3d843eb248d743855b5
+ab7265753b8b4b62912008ac9bd6ab6de463d02ff0 udp-port 165 ssm sqa ipsec cgn vrrp f
+
+tp_tftp ping-trace gm
+
+snmp-server host 114.180.276.39 inform version 2c encrypted e2f3d843eb248d743855
+b5ab7265753b8b4b62912008ac9bd6ab6de463d02ff0 udp-port 165 snmp bgp mac ospf stp 
+
+ppp arp rmon udld cfm efm lacp mc-elam tcp sctp stalarm cps interface acl fib pi
+
+m isis rip msdp aps config am um system ldp pwe3 vpn mpls-oam ptp tunnel-te radi
+
+us dhcp bfd ippool ntp
+
+snmp-server host 114.180.276.39 inform version 2c encrypted e2f3d843eb248d743855
+b5ab7265753b8b4b62912008ac9bd6ab6de463d02ff0 udp-port 165 ssm sqa ipsec cgn vrrp
+
+ ftp_tftp ping-trace gm
+
+snmp-server trap-source 12.94.182.2
+snmp-server view lldpview iso included
+
+snmp-server view n31view iso included
+
+snmp-server version v2c enable
+
+!</snmp>
+
+!<telnet>
+
+line telnet absolute-timeout 0
+
+line telnet idle-timeout 30
+
+!</telnet>
+
+!<bfd>
+
+bfd
+
+  default destination 246.0.0.106
+  session T0_ZJLS-DYL-N40E-A2 l2-bfd interface xgei-0/0/0/3 source 12.94.182.2
+    discriminator ld 1000 rd 1100
+
+  $
+
+  session to_ZJLS-DYBL-RSG(IPRAN1.0) l2-bfd interface xgei-0/0/0/5 source 10.92.
+
+160.2
+
+    discriminator ld 1150 rd 1155
+
+  $
+
+  session to_ZJHZ-BJ2-3F-NE8KX8-SM-C1 l2-bfd interface cgei-0/2/0/1 source 10.92
+
+.160.2
+
+    discriminator ld 1208 rd 1008
+
+  $
+
+  session sr-be-to-dyl-mcr1 sr-be-bfd ipv4 12.94.182.1 mask-length 32 source 10.
+92.160.2
+
+  $
+
+  session sr-be-to-jyfgs-mer1 sr-be-bfd ipv4 12.94.182.9 mask-length 32 source 1
+0.94.182.2
+  $
+
+  session sr-be-to-dyl-mer sr-be-bfd ipv4 12.94.182.3 mask-length 32 source 10.9
+2.160.2
+
+  $
+
+  session sr-be-to-dybl-mer sr-be-bfd ipv4 12.94.182.4 mask-length 32 source 10.
+92.160.2
+
+  $
+
+  session sr-be-to-lsyx-mer sr-be-bfd ipv4 12.94.182.5 mask-length 32 source 10.
+92.160.2
+
+  $
+
+  session sr-be-to-lssg-mer sr-be-bfd ipv4 12.94.182.6 mask-length 32 source 10.
+92.160.2
+
+  $
+
+  session sr-be-to-qtwx-mer sr-be-bfd ipv4 12.94.182.7 mask-length 32 source 10.
+92.160.2
+
+  $
+
+  session sr-be-to-qtfgs-mer sr-be-bfd ipv4 12.94.182.8 mask-length 32 source 10
+.92.160.2
+
+  $
+
+  session sr-be-to-jysw-mer sr-be-bfd ipv4 12.94.182.12 mask-length 32 source 10
+.92.160.2
+
+  $
+
+  session sr-be-to-jnhgs-mer sr-be-bfd ipv4 12.94.182.13 mask-length 32 source 1
+0.94.182.2
+  $
+
+  session sr-be-to-jnsw-mer sr-be-bfd ipv4 12.94.182.14 mask-length 32 source 10
+.92.160.2
+
+  $
+
+  session sr-be-to-yhgyy-mer sr-be-bfd ipv4 12.94.182.15 mask-length 32 source 1
+0.94.182.2
+  $
+
+  session sr-be-to-yhtxxc-mer sr-be-bfd ipv4 12.94.182.16 mask-length 32 source 
+12.94.182.2
+  $
+
+$
+
+!</bfd>
+
+!<bgp>
+
+router bgp 65341
+
+  synchronization disable
+
+  bgp router-id 12.94.182.2
+  bgp bestpath virtual-spoke
+
+  bgp cluster-id 12.94.182.1
+  bgp default route-target filter disable
+
+  network 12.94.140.0 255.255.192.0
+  network 12.94.182.0 255.255.224.0
+  neighbor 12.94.182.1 remote-as 65341
+  neighbor 12.94.182.1 activate
+  neighbor 12.94.182.1 update-source loopback0
+   neighbor 12.94.182.1 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.3 remote-as 65341
+  neighbor 12.94.182.3 activate
+  neighbor 12.94.182.3 update-source loopback0
+   neighbor 12.94.182.3 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.4 remote-as 65341
+  neighbor 12.94.182.4 activate
+  neighbor 12.94.182.4 update-source loopback0
+   neighbor 12.94.182.4 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.5 remote-as 65341
+  neighbor 12.94.182.5 activate
+  neighbor 12.94.182.5 update-source loopback0
+   neighbor 12.94.182.5 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.6 remote-as 65341
+  neighbor 12.94.182.6 activate
+  neighbor 12.94.182.6 update-source loopback0
+   neighbor 12.94.182.6 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.7 remote-as 65341
+  neighbor 12.94.182.7 activate
+  neighbor 12.94.182.7 update-source loopback0
+   neighbor 12.94.182.7 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.8 remote-as 65341
+  neighbor 12.94.182.8 activate
+  neighbor 12.94.182.8 update-source loopback0
+   neighbor 12.94.182.8 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.9 remote-as 65341
+  neighbor 12.94.182.9 activate
+  neighbor 12.94.182.9 update-source loopback0
+   neighbor 12.94.182.9 password encrypted ffd291beb540def547ed888a6131927a
+xKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.12 remote-as 65341
+  neighbor 12.94.182.12 activate
+  neighbor 12.94.182.12 update-source loopback0
+   neighbor 12.94.182.12 password encrypted b716ad4d8237962cf44ffa74a25a2b53
+ZxKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.13 remote-as 65341
+  neighbor 12.94.182.13 activate
+  neighbor 12.94.182.13 update-source loopback0
+   neighbor 12.94.182.13 password encrypted b716ad4d8237962cf44ffa74a25a2b53
+ZxKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.14 remote-as 65341
+  neighbor 12.94.182.14 activate
+  neighbor 12.94.182.14 update-source loopback0
+   neighbor 12.94.182.14 password encrypted b716ad4d8237962cf44ffa74a25a2b53
+ZxKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.15 remote-as 65341
+  neighbor 12.94.182.15 activate
+  neighbor 12.94.182.15 update-source loopback0
+   neighbor 12.94.182.15 password encrypted b716ad4d8237962cf44ffa74a25a2b53
+ZxKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.94.182.16 remote-as 65341
+  neighbor 12.94.182.16 activate
+  neighbor 12.94.182.16 update-source loopback0
+   neighbor 12.94.182.16 password encrypted b716ad4d8237962cf44ffa74a25a2b53
+ZxKISUyWUCXhebnngQACmTcOVNy61R7xUlRQn/cPJCho2xbs7XatMQcf3ZAtx6fJBHQv+c=
+
+  neighbor 12.97.274.87 remote-as 38351
+  neighbor 12.97.274.87 activate
+  neighbor 12.97.274.87 route-map SmartMAN_SDN_SNMP_IN in
+  neighbor 12.97.274.87 route-map SmartMAN_OUT out
+  neighbor 12.97.275.159 remote-as 9929
+  neighbor 12.97.275.159 activate
+  neighbor 12.97.275.159 route-map SmartMAN_SDN_SNMP_IN in
+  neighbor 12.97.275.159 route-map SmartMAN_OUT out
+  address-family ipv4 vrf 4G_RAN
+
+    maximum-paths ibgp 2
+
+    aggregate-address 53.178.0.0 255.255.0.0
+    redistribute connected
+
+    neighbor 12.128.140.19 remote-as 65336
+    neighbor 12.128.140.19 activate
+    neighbor 12.128.140.19 weight 100
+    neighbor 12.128.140.19 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 12.128.140.19 route-map rp_4G_RAN_zjEPC_in in
+    neighbor 12.128.140.19 route-map rp_4G_RAN_SM_lsMCR_out out
+    neighbor 12.128.140.28 remote-as 65341.200
+    neighbor 12.128.140.28 local-as 65341.100 no-prepend replace-as
+    neighbor 12.128.140.28 activate
+    neighbor 12.128.140.28 weight 100
+    neighbor 12.128.140.28 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 12.128.140.28 route-map rp_4G_RAN_IPRAN1.0_lsYW_in in
+    neighbor 12.128.140.28 route-map rp_4G_RAN_SM_lsYW_out out
+    neighbor 43.196.0.15 remote-as 2.9424
+    neighbor 43.196.0.15 activate
+    neighbor 43.196.0.15 weight 100
+    neighbor 43.196.0.15 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 43.196.0.15 route-map rp_4G_RAN_CT_LS_in in
+    neighbor 43.196.0.15 route-map rp_4G_RAN_CU_LS_out out
+  $
+
+  address-family ipv4 vrf NMS_4G_ZJ
+
+    maximum-paths ibgp 2
+
+    aggregate-address 194.14.0.0 255.255.0.0
+    redistribute static
+
+    redistribute connected
+
+    neighbor 194.0.0.87 remote-as 65336
+    neighbor 194.0.0.87 activate
+    neighbor 194.0.0.87 advertisement-interval 30
+    neighbor 194.0.0.87 originate-interval 15
+    neighbor 194.0.0.87 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 194.0.0.87 maximum-prefix 4294967295
+    neighbor 194.0.0.87 route-map rp_4G_OAM_LS_OUT out
+  $
+
+  address-family ipv4 vrf 5G_OAM
+
+    maximum-paths ibgp 2
+
+    redistribute connected
+
+  $
+
+  address-family ipv4 vrf 5G_RAN
+
+    maximum-paths ibgp 2
+
+    redistribute connected
+
+  $
+
+  address-family ipv4 vrf SmartMAN_AUTO_ONLINE
+
+    aggregate-address 12.94.182.0 255.255.224.0
+    neighbor 12.97.275.163 remote-as 9929
+    neighbor 12.97.275.163 activate
+    neighbor 12.97.275.163 route-map SmartMAN_AUTO_ONLINE_IN in
+    neighbor 12.97.275.163 route-map SmartMAN_AUTO_ONLINE_OUT out
+  $
+
+  address-family vpnv4
+
+    neighbor 12.94.182.1 activate
+    neighbor 12.94.182.1 route-reflector-client
+    neighbor 12.94.182.1 additional-paths receive
+    neighbor 12.94.182.1 additional-paths send 4
+    neighbor 12.94.182.3 activate
+    neighbor 12.94.182.3 route-reflector-client
+    neighbor 12.94.182.3 additional-paths receive
+    neighbor 12.94.182.3 additional-paths send 4
+    neighbor 12.94.182.4 activate
+    neighbor 12.94.182.4 route-reflector-client
+    neighbor 12.94.182.4 additional-paths receive
+    neighbor 12.94.182.4 additional-paths send 4
+    neighbor 12.94.182.5 activate
+    neighbor 12.94.182.5 route-reflector-client
+    neighbor 12.94.182.5 additional-paths receive
+    neighbor 12.94.182.5 additional-paths send 4
+    neighbor 12.94.182.6 activate
+    neighbor 12.94.182.6 route-reflector-client
+    neighbor 12.94.182.6 additional-paths receive
+    neighbor 12.94.182.6 additional-paths send 4
+    neighbor 12.94.182.7 activate
+    neighbor 12.94.182.7 route-reflector-client
+    neighbor 12.94.182.7 additional-paths receive
+    neighbor 12.94.182.7 additional-paths send 4
+    neighbor 12.94.182.8 activate
+    neighbor 12.94.182.8 route-reflector-client
+    neighbor 12.94.182.8 additional-paths receive
+    neighbor 12.94.182.8 additional-paths send 4
+    neighbor 12.94.182.9 activate
+    neighbor 12.94.182.9 route-reflector-client
+    neighbor 12.94.182.9 additional-paths receive
+    neighbor 12.94.182.9 additional-paths send 4
+    neighbor 12.94.182.12 activate
+    neighbor 12.94.182.12 route-reflector-client
+    neighbor 12.94.182.12 additional-paths receive
+    neighbor 12.94.182.12 additional-paths send 4
+    neighbor 12.94.182.13 activate
+    neighbor 12.94.182.13 route-reflector-client
+    neighbor 12.94.182.13 additional-paths receive
+    neighbor 12.94.182.13 additional-paths send 4
+    neighbor 12.94.182.14 activate
+    neighbor 12.94.182.14 route-reflector-client
+    neighbor 12.94.182.14 additional-paths receive
+    neighbor 12.94.182.14 additional-paths send 4
+    neighbor 12.94.182.15 activate
+    neighbor 12.94.182.15 route-reflector-client
+    neighbor 12.94.182.15 additional-paths receive
+    neighbor 12.94.182.15 additional-paths send 4
+    neighbor 12.94.182.16 activate
+    neighbor 12.94.182.16 route-reflector-client
+    neighbor 12.94.182.16 additional-paths receive
+    neighbor 12.94.182.16 additional-paths send 4
+  $
+
+  address-family ipv6 vrf 5G_RAN
+
+    maximum-paths ibgp 2
+
+    aggregate-address 684C:C5A5:EF44::/64
+    aggregate-address 6842:5CB:F5::/64
+    redistribute connected
+
+    redistribute static
+
+    neighbor 684C:C585:E434:F333::6 remote-as 38351
+    neighbor 684C:C585:E434:F333::6 activate
+    neighbor 684C:C585:E434:F333::6 fall-over bfd interval 150 min-rx 150 multip
+lier 3
+
+    neighbor 684C:C585:E434:F333::6 route-map rp_5G_RAN_v6_nj_in in
+    neighbor 684C:C585:E434:F333::6 route-map rp_5G_RAN_LS_OUT out
+    neighbor 684C:C585:E434:F333::A remote-as 65336
+    neighbor 684C:C585:E434:F333::A activate
+    neighbor 684C:C585:E434:F333::A fall-over bfd interval 150 min-rx 150 multip
+lier 3
+
+    neighbor 684C:C585:E434:F333::A route-map rp_5G_RAN_v6_hz_in in
+    neighbor 684C:C585:E434:F333::A route-map rp_5G_RAN_LS_OUT out
+    neighbor 6842:5CB:F4::9 remote-as 2.9424
+    neighbor 6842:5CB:F4::9 activate
+    neighbor 6842:5CB:F4::9 weight 100
+    neighbor 6842:5CB:F4::9 fall-over bfd interval 150 min-rx 150 multiplier 3
+    neighbor 6842:5CB:F4::9 route-map rp_5G_RAN_CT_LS_in in
+    neighbor 6842:5CB:F4::9 route-map rp_5G_RAN_CU_LS_out out
+  $
+
+  address-family vpnv6
+
+    neighbor 12.94.182.1 activate
+    neighbor 12.94.182.1 route-reflector-client
+    neighbor 12.94.182.1 additional-paths receive
+    neighbor 12.94.182.1 additional-paths send 4
+    neighbor 12.94.182.3 activate
+    neighbor 12.94.182.3 route-reflector-client
+    neighbor 12.94.182.3 additional-paths receive
+    neighbor 12.94.182.3 additional-paths send 4
+    neighbor 12.94.182.4 activate
+    neighbor 12.94.182.4 route-reflector-client
+    neighbor 12.94.182.4 additional-paths receive
+    neighbor 12.94.182.4 additional-paths send 4
+    neighbor 12.94.182.5 activate
+    neighbor 12.94.182.5 route-reflector-client
+    neighbor 12.94.182.5 additional-paths receive
+    neighbor 12.94.182.5 additional-paths send 4
+    neighbor 12.94.182.6 activate
+    neighbor 12.94.182.6 route-reflector-client
+    neighbor 12.94.182.6 additional-paths receive
+    neighbor 12.94.182.6 additional-paths send 4
+    neighbor 12.94.182.7 activate
+    neighbor 12.94.182.7 route-reflector-client
+    neighbor 12.94.182.7 additional-paths receive
+    neighbor 12.94.182.7 additional-paths send 4
+    neighbor 12.94.182.8 activate
+    neighbor 12.94.182.8 route-reflector-client
+    neighbor 12.94.182.8 additional-paths receive
+    neighbor 12.94.182.8 additional-paths send 4
+    neighbor 12.94.182.9 activate
+    neighbor 12.94.182.9 route-reflector-client
+    neighbor 12.94.182.9 additional-paths receive
+    neighbor 12.94.182.9 additional-paths send 4
+    neighbor 12.94.182.12 activate
+    neighbor 12.94.182.12 route-reflector-client
+    neighbor 12.94.182.12 additional-paths receive
+    neighbor 12.94.182.12 additional-paths send 4
+    neighbor 12.94.182.13 activate
+    neighbor 12.94.182.13 route-reflector-client
+    neighbor 12.94.182.13 additional-paths receive
+    neighbor 12.94.182.13 additional-paths send 4
+    neighbor 12.94.182.14 activate
+    neighbor 12.94.182.14 route-reflector-client
+    neighbor 12.94.182.14 additional-paths receive
+    neighbor 12.94.182.14 additional-paths send 4
+    neighbor 12.94.182.15 activate
+    neighbor 12.94.182.15 route-reflector-client
+    neighbor 12.94.182.15 additional-paths receive
+    neighbor 12.94.182.15 additional-paths send 4
+    neighbor 12.94.182.16 activate
+    neighbor 12.94.182.16 route-reflector-client
+    neighbor 12.94.182.16 additional-paths receive
+    neighbor 12.94.182.16 additional-paths send 4
+  $
+
+$
+
+!</bgp>
+
+!<isis>
+
+router isis 1000
+
+  area 86.5341.1000
+
+  system-id 0100.9216.0002
+
+  router-id 12.94.182.2
+  is-type level-2-only
+
+  metric-style wide
+
+  fast-flood 5
+
+  fast-reroute lfa enable
+
+  fast-reroute ti-lfa sr-mpls level-2
+
+  i-spf
+
+  lsp-gen-interval 1 50 50
+
+  spf-interval 1 50 50
+
+  microloop-prevention frr delay-time 60000
+
+  microloop-prevention link-up enable
+
+  microloop-prevention link-up delay-time 30000
+
+  microloop-prevention segment-routing delay-time 60000
+
+  microloop-prevention segment-routing mpls enable
+
+  mpls traffic-eng level-2
+
+  redistribute connected
+
+  redistribute bgp route-map SmartMAN_SDN_SNMP_IN
+
+  restart enable
+
+  segment-routing mpls enable
+
+  set-overload-bit on-start-up 600
+
+  interface loopback0
+
+    ip router isis
+
+    circuit-type level-2-only
+
+  $
+
+  interface smartgroup3
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    authentication-type hmac-md5
+
+    authentication encrypted OuOANaXapS/DB/Gt/z+2eA==
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+    link-damped revert-interval 3600 120000 300000
+
+  $
+
+  interface smartgroup11
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    authentication-type hmac-md5
+
+    authentication encrypted OuOANaXapS/DB/Gt/z+2eA==
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+    link-damped revert-interval 3600 120000 300000
+
+  $
+
+  interface smartgroup12
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    authentication-type hmac-md5
+
+    authentication encrypted OuOANaXapS/DB/Gt/z+2eA==
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+    link-damped revert-interval 3600 120000 300000
+
+  $
+
+  interface smartgroup13
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    authentication-type hmac-md5
+
+    authentication encrypted OuOANaXapS/DB/Gt/z+2eA==
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+    link-damped revert-interval 3600 120000 300000
+
+  $
+
+  interface smartgroup14
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    authentication-type hmac-md5
+
+    authentication encrypted OuOANaXapS/DB/Gt/z+2eA==
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+    link-damped revert-interval 3600 120000 300000
+
+  $
+
+  interface smartgroup15
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    authentication-type hmac-md5
+
+    authentication encrypted OuOANaXapS/DB/Gt/z+2eA==
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+    link-damped revert-interval 3600 120000 300000
+
+  $
+
+  interface smartgroup16
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 100 level-2
+
+    network point-to-point
+
+    authentication-type hmac-md5
+
+    authentication encrypted OuOANaXapS/DB/Gt/z+2eA==
+
+    link-damped adj-establish enable
+
+    link-damped metric increase 3000
+
+    link-damped revert-interval 3600 120000 300000
+
+  $
+
+$
+
+!</isis>
+
+!<static>
+
+ip route vrf NMS_4G_ZJ 194.14.0.0 255.255.0.0 null1
+ip route 12.94.182.0 255.255.224.0 null1
+ip route 12.94.140.0 255.255.192.0 null1
+!</static>
+
+!<load-sharing>
+
+load-sharing hash-fields mpls ip-l4
+
+load-sharing hash-fields mpls l2
+
+!</load-sharing>
+

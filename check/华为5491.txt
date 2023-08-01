@@ -1,0 +1,1812 @@
+display current-configuration
+!Software Version V800R012C00SPC700
+!Last configuration was updated at 2021-01-15 02:26:55+08:00 by JS-XZ-Manager
+!Last configuration was saved at 2021-01-15 02:39:42+08:00 by JS-XZ-Manager
+#
+clock timezone BeiJing add 08:00:00
+#
+sysname FOTV-OX-8B-JZ8GT8-OI-X001
+#
+set neid 7edc3f
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+undo user-security-policy enable
+#
+port-wred af4-cs7-pq
+ queue-depth 2000
+#
+port-wred be-af3
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+[16D                [16Dport-wred af1-af2
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+service-template template-default0
+#
+service-template template-default1
+#
+service-template template-default2
+#
+service-template template-default3
+#
+service-template template-default4
+#
+ntp-service server disable
+ntp-service ipv6 server disable
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+ntp-service unicast-server 121.214.187.191 preference
+#
+alarm
+[16D                [16D suppression alarm-name hwMplsTunnelHotstandbySwitch cause-period 60
+ suppression alarm-name hwBfdSessFaultDown cause-period 600
+ suppression alarm-name hwPortDown cause-period 5
+ suppression alarm-name hwLosAlarm cause-period 5
+ suppression alarm-name hwIfFlowDown cause-period 60
+ suppression alarm-name hwIfFlowDown clear-period 60
+ suppression alarm-name hwPWVcDown cause-period 60
+ suppression alarm-name hwPWVcDown clear-period 60
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand cause-period 600
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand clear-period 600
+#
+rsa peer-public-key 19.89.217.2
+ public-key-code begin
+ 3082018A
+  02820181
+    00C4BE77 2BB23B33 FD897003 6513DCB0 32F31D1B A84280EC 8DE04709 C7B9D509
+    B61EC485 1CE34F83 F6368F9F 38498BEC E25D4AC2 1E00AAD0 1D9A400B 38693208
+    78F8CD67 519084A2 94473D65 947CA895 E8E48D08 D6B7F303 3702BF2F 4E52D634
+    BCD3253B BC4D3ECF 8D65E88F F3FEA723 A3BF682E 3C9C6894 1BC361E2 FA6FBAAD
+    D7620221 4A45A67E 340682EB F8F105FB A0AB2587 9DF6E2A5 6C3AD507 17A5074A
+    BE3074B9 258FC51A 55FFD30F F3A9922D 13EC4594 17BF52BA 748659C9 6B66123A
+    027688E4 99CDF019 2502F607 5259D8AC 86C00982 EC3BE361 DB59DC40 8F17BE83
+    1FF84935 80B4580A EBE469CA B63C0F91 4F214D07 B19DC377 748BBF9B 3144E618
+[16D                [16D    CE05C0A3 B0513E06 690BB7D7 FA856EE8 23AB81EF 57B9F31C DF6449C2 5248BF69
+    42670630 B38B3717 64187F0D 3B9EB87D BD56AE2A ACA78692 86315D20 4DC8D887
+    3502E99B C80C3952 5A721DA7 666FDD5F 2196EB64 8E1C1CF6 137674D1 A52FEB4E
+    EC850760 C8CAE001 FC1C8703 579B6371 ECDE1DDA 92166654 A086D100 0B69C15E
+    9B
+  0203
+    010001
+ public-key-code end
+ peer-public-key end
+#
+undo icmp name timestamp-reply send
+#
+router id 19.89.217.1
+#
+ipv6 frr
+#
+set flow-stat interval 10
+#
+undo telnet ipv6 server enable
+telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+[16D                [16D#
+diffserv domain 5p3d
+#
+ptp profile g-8275-1 enable
+ptp enable
+ptp device-type t-bc
+ptp passive-measure enable
+ptp clock-source local priority2 124
+#
+clock ssm-control on
+clock ethernet-synchronization enable
+#
+soc
+#
+ip vpn-instance 5GC_MGMN
+  description for_5CX_ICIJ
+ ipv4-family
+  route-distinguisher 65334:10050
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10050 export-extcommunity
+  vpn-target 65334:10050 import-extcommunity
+[16D                [16D ipv6-family
+  route-distinguisher 65334:10050
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10050 export-extcommunity
+  vpn-target 65334:10050 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+#
+ip vpn-instance 5G_MEC
+  description for_5C_IZX
+ ipv4-family
+  route-distinguisher 65334:10060
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10060 export-extcommunity
+  vpn-target 65334:10060 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+ ipv6-family
+  route-distinguisher 65334:10060
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+[16D                [16D  apply-label per-instance
+  vpn-target 65334:10060 export-extcommunity
+  vpn-target 65334:10060 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+#
+ip vpn-instance 5G_RAN
+  description for_5C_NVJ
+ ipv4-family
+  route-distinguisher 65334:10010
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10010 export-extcommunity
+  vpn-target 65334:10010 import-extcommunity
+ ipv6-family
+  route-distinguisher 65334:10010
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10010 export-extcommunity
+  vpn-target 65334:10010 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+#
+ip vpn-instance 5G_RAN_VIP
+ [16D                [16D description for_5C_NVJ_REL
+ ipv4-family
+  route-distinguisher 65334:10020
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10020 export-extcommunity
+  vpn-target 65334:10020 import-extcommunity
+ ipv6-family
+  route-distinguisher 65334:10020
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10020 export-extcommunity
+  vpn-target 65334:10020 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+#
+ip vpn-instance GPRS_Gn_C
+  description for_CLNO_Cj_X
+ ipv4-family
+  route-distinguisher 65334:10040
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+[16D                [16D  vpn-target 65334:10040 export-extcommunity
+  vpn-target 65334:10040 import-extcommunity
+ ipv6-family
+  route-distinguisher 65334:10040
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10040 export-extcommunity
+  vpn-target 65334:10040 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+#
+ip vpn-instance LTE-VPN
+  description for_HPZ-RLJ
+ ipv4-family
+  route-distinguisher 65334:2000
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:2000 export-extcommunity
+  vpn-target 65334:2000 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+ ipv6-family
+  route-distinguisher 65334:2000
+[16D                [16D  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:2000 export-extcommunity
+  vpn-target 65334:2000 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+#
+ip vpn-instance SmartMAN_AUTO_ONLINE
+  description for_OivnpIVJ_VQPK_KJHEJZ
+ ipv4-family
+  route-distinguisher 65334:10080
+  vpn frr
+  tnl-policy SRBE_TUNNEL
+  apply-label per-instance
+  vpn-target 65334:10080 export-extcommunity
+  vpn-target 65334:10080 import-extcommunity
+  diffserv-mode ingress uniform egress pipe
+#
+bfd
+ mpls-passive
+#
+mpls lsr-id 19.89.217.1
+#
+[16D                [16Dmpls
+ label advertise non-null
+ mpls te
+ mpls bfd enable
+ mpls bfd-trigger-tunnel host
+ mpls bfd-tunnel min-tx-interval 50 min-rx-interval 50
+#
+mpls ldp
+ accept target-hello all
+ send-message address all-loopback
+ #
+ ipv4-family
+#
+dhcp server request-packet all-interface disable
+#
+dot1x-template 1
+#
+acl number 2001
+  description telnzp nd snmp
+ rule 5 permit source 161.15.0.0 0.3.244.244
+ rule 10 permit source 19.89.0.0 0.0.255.255
+ rule 15 permit source 161.23.0.0 0.7.244.244
+ rule 20 permit source 121.214.153.0 0.0.0.255
+[16D                [16D rule 25 permit source 19.143.22.26 0
+ rule 30 permit source 19.143.22.35 0
+ rule 40 permit source 19.143.29.32 0
+ rule 45 permit source 121.214.241.0 0.0.0.63
+ rule 50 permit source 181.157.243.0 0.0.0.255
+ rule 55 permit vpn-instance SmartMAN_AUTO_ONLINE source 19.239.32.49 0.0.0.7
+ rule 60 permit source 121.214.197.191 0
+ rule 100 deny
+#
+acl number 2002
+  description for JTCJ
+ rule 5 permit source 121.214.121.157 0
+ rule 10 permit source 121.214.121.158 0
+ rule 15 permit source 121.214.121.169 0
+ rule 20 permit source 121.214.121.161 0
+ rule 25 permit source 121.214.187.98 0
+ rule 30 permit source 19.143.22.35 0
+ rule 35 permit vpn-instance SmartMAN_AUTO_ONLINE source 117.0.0.0 0.244.244.244
+ rule 40 permit source 19.143.29.32 0
+ rule 45 permit source 181.157.243.0 0.0.0.255
+ rule 50 permit source 19.239.31.87 0.0.0.7
+ rule 55 permit vpn-instance SmartMAN_AUTO_ONLINE source 19.239.32.49 0.0.0.7
+ rule 60 permit source 121.214.197.191 0
+[16D                [16D rule 100 deny
+#
+acl name SmartMAN_NSM_SNMP basic
+  description for SmartMAN_NSM_SNMP
+ rule 5 permit source 181.157.243.0 0.0.0.255
+ rule 100 deny
+#
+acl name SmartMAN_SSH_TELNET basic
+  description telnzp nd snmp
+ rule 5 permit source 161.15.0.0 0.3.244.244
+ rule 10 permit source 19.89.0.0 0.0.255.255
+ rule 15 permit source 161.23.0.0 0.7.244.244
+ rule 20 permit source 121.214.153.0 0.0.0.255
+ rule 25 permit source 19.143.22.26 0
+ rule 30 permit source 19.143.22.35 0
+ rule 40 permit source 19.143.29.32 0
+ rule 45 permit source 121.214.241.0 0.0.0.63
+ rule 50 permit source 181.157.243.0 0.0.0.255
+ rule 55 permit source 19.239.31.87 0.0.0.7
+ rule 60 permit vpn-instance SmartMAN_AUTO_ONLINE source 19.239.32.15 0.0.0.7
+ rule 1000 deny
+#
+security password
+[16D                [16D #
+ rule admin
+  forbidden word changeme_123
+#
+aaa
+  local-user xzltipran password irreversible-cipher $1c$B!lkPKtuc<$"gcd0Y2qp)W37{S(n:NSepEx3,huJ-]\m[,9/xIC$   local-user xzltipran password irreversible-cipher fa9c6220c18276553bb35fc3aa150a1c
+ local-user xzltipran service-type telnet ssh
+ local-user xzltipran level 3
+ local-user xzltipran state block fail-times 3 interval 5
+  local-user js-xz-sdncontroler password irreversible-cipher $1c$[%c5/n5n-<$M[_m4C4Z2)Sv^r)<9v}L"c9w'36979#~OYO!Oj@~$   local-user js-xz-sdncontroler password irreversible-cipher d97218916b95744b8ed6ce5a91200c0e
+ local-user js-xz-sdncontroler service-type telnet ssh
+ local-user js-xz-sdncontroler level 3
+ local-user js-xz-sdncontroler state block fail-times 3 interval 5
+  local-user js-xz-manager password irreversible-cipher $1c$Mofv/=GAl&$Vqxw$;:*WI:a#QAq!^2G2]zL-lvIv3<g`MKCm%B:$   local-user js-xz-manager password irreversible-cipher 6eb64f32a4254b48502b0afb6d44d79b
+ local-user js-xz-manager service-type telnet ssh
+ local-user js-xz-manager level 3
+ local-user js-xz-manager state block fail-times 3 interval 5
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+[16D                [16D  authentication-mode local radius
+ #
+ authorization-scheme default
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+#
+license
+ active port-basic slot 1 card 0 port 0-3
+ active port-basic slot 2 card 0 port 0-3
+ active port-basic slot 3 card 0 port 0-71
+#
+segment-routing
+ bfd enable mode tunnel filter-policy ip-prefix srbebfd
+ bfd tunnel min-tx-interval 50 min-rx-interval 50
+#
+[16D                [16Disis 1000
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ bgp-ls enable level-2
+ network-entity 86.5334.1000.0100.8022.8001.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name FOTV-OX-8B-JZ8GT8-X001
+ import-route bgp route-policy SMAN_NMS_BGP_TO_ISIS
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ set-overload on-startup 120 allow external
+ frr
+  loop-free-alternate level-2
+  remote-lfa tunnel ldp level-2
+  ti-lfa level-2
+[16D                [16D#
+interface Eth-Trunk10
+ mtu 9000
+  description to_JOTV-POZF-4B-JZ8GT8-X002_Pnqjg10_200C
+ ipv6 enable
+ ip address 161.18.160.9 255.255.255.252
+ ipv6 mtu 9000
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+ isis circuit-level level-2
+ isis cost 150
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+[16D                [16D port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk20
+  description to_ZX0022-OXW_Oivnpcnkql40_20C_ELNVJ
+ mode lacp-static
+#
+interface Eth-Trunk20.200
+ vlan-type dot1q 200
+ mtu 9050
+  description for_HPZ-RLJ
+ ip binding vpn-instance LTE-VPN
+ ip address 19.89.217.142 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk20.301
+ vlan-type dot1q 301
+ mtu 9050
+ [16D                [16D description to_ZT_NOC1_CLNO_Cj_X
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 19.231.182.41 255.255.255.252
+ ipv6 address 573B:B474:B323:6322::8/127
+ ipv6 mtu 9000
+ statistic enable
+#
+interface Eth-Trunk20.843
+ vlan-type dot1q 843
+  description for_HP_5C_OV_r6
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 573B:B454:B633:5::5/127
+ ipv6 mtu 9000
+ statistic enable
+#
+interface Eth-Trunk20.873
+ vlan-type dot1q 873
+  description for_HP_5C_REL_OV_r6
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 573B:B454:B633:5::9/127
+[16D                [16D ipv6 mtu 9000
+ statistic enable
+#
+interface Eth-Trunk20.4000
+ vlan-type dot1q 4000
+ mtu 9050
+  description for_OIVJ_ivjvczizjp
+ ip address 161.18.160.1 255.255.255.252
+#
+interface Eth-Trunk30
+  description to_JO-TV-SDH-I-1.OPJ.XT600-T16V_NVCC90_200C
+ mode lacp-static
+#
+interface Eth-Trunk30.10
+ vlan-type dot1q 10
+ mtu 9000
+  description for_HPZ-RLJ
+ ip binding vpn-instance LTE-VPN
+ ip address 40.152.17.2 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk30.310
+ vlan-type dot1q 310
+[16D                [16D mtu 9000
+  description for_5C_NVJ
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 5731:4BA:B350:83::5:5/126
+ statistic enable
+#
+interface Eth-Trunk30.410
+ vlan-type dot1q 410
+ mtu 9000
+  description for_5C_NVJ_REL
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 5731:4BA:B350:93::5:5/126
+ statistic enable
+#
+interface Eth-Trunk40
+ mtu 4470
+  description to_joTV-OX-VN_Wqjyhz-Zpdzn100_OIVJ_JIO
+ mode lacp-static
+ lacp preempt enable
+ max active-linknumber 1
+ lacp preempt delay 10
+[16D                [16D#
+interface Eth-Trunk40.10
+ vlan-type dot1q 10
+  description to_joTV-OX-VN_Wqjyhz-Zpdzn100_OIVJ_JIO_FP1
+ ip address 19.89.217.118 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk40.11
+ vlan-type dot1q 11
+  description to_joTV-OX-VN_Wqjyhz-Zpdzn100_OIVJ_JIO_XF1
+ ip binding vpn-instance SmartMAN_AUTO_ONLINE
+ ip address 19.89.217.126 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk50
+  description to_joTV-OX-VN_Zpnqjg40_ELNVJ_FP
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk50.837
+ vlan-type dot1q 837
+  description 5GC_ICIJ_KI
+ ip binding vpn-instance 5GC_MGMN
+[16D                [16D ipv6 enable
+ ip address 1.81.244.19 255.255.255.252
+ ipv6 address 573B:B474:B323:6E22::4/127
+ statistic enable
+#
+interface Eth-Trunk50.839
+ vlan-type dot1q 839
+  description 5G_MZX
+ ip binding vpn-instance 5G_MEC
+ ipv6 enable
+ ip address 1.27.244.19 255.255.255.252
+ ipv6 address 573B:B474:B323:6122::4/127
+ statistic enable
+#
+interface Eth-Trunk50.875
+ vlan-type dot1q 875
+  description to_joTV-OX-VN_C1/0/1_ELNVJ
+ ip address 19.89.217.134 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk90
+  description to_XVHP_POZF_NJ01_YXCS01-DSJZ800-B_10C_IZX
+ mode lacp-static
+[16D                [16D#
+interface Eth-Trunk90.200
+ vlan-type dot1q 200
+  description to_XVHP_POZF_NJ01_YXCS01-DSJZ800-B.200_J2J3r4r6
+ ip binding vpn-instance LTE-VPN
+ ipv6 enable
+ ip address 52.224.7.16 255.255.255.252
+ ipv6 address 573B:B474:B323:6233::634/126
+ ipv6 mtu 9000
+#
+interface Eth-Trunk90.301
+ vlan-type dot1q 301
+  description to_XVHP_POZF_NJ01_YXCS01-DSJZ800-B.301_J4r4r6
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 19.231.182.210 255.255.255.252
+ ipv6 address 573B:B474:B323:6F33::634/126
+ ipv6 mtu 9000
+#
+interface Eth-Trunk90.837
+ vlan-type dot1q 837
+  description to_XVHP_POZF_NJ01_YXCS01-DSJZ800-B.837_KI
+ ip binding vpn-instance 5GC_MGMN
+[16D                [16D ip address 1.4.199.48 255.255.255.252
+#
+interface Eth-Trunk90.839
+ vlan-type dot1q 839
+  description to_XVHP_POZF_NJ01_YXCS01-DSJZ800-B.839_5CIZX
+ ip binding vpn-instance 5G_MEC
+ ip address 165.0.9.17 255.255.255.252
+#
+interface GigabitEthernet0/0/0
+ speed auto
+ duplex auto
+ undo shutdown
+ undo enable snmp trap updown
+ ip address 118.9.0.199 255.255.255.0
+#
+interface 25GE3/0/0
+  description to_ILNVJ_10C:1:0001EL_VX0022-0/3/0/6
+ undo shutdown
+ eth-trunk 20
+ undo dcn
+#
+interface 25GE3/0/1
+  description to_jotv-ox-VN_10CZ 1/1/4
+[16D                [16D undo shutdown
+ eth-trunk 40
+ lacp priority 10
+ undo dcn
+#
+interface 25GE3/0/2
+  description to_joTV-OX-VN_C8/0/0_ELNVJ_FP
+ undo shutdown
+ eth-trunk 50
+ undo dcn
+#
+interface 25GE3/0/3
+ shutdown
+ undo dcn
+#
+interface 25GE3/0/4
+  description to_ILNVJ_10C:2:0002EL_VX0022-0/4/0/6
+ undo shutdown
+ eth-trunk 20
+#
+interface 25GE3/0/5
+  description to_jotv-ox-VN_pzjCe5/0/2
+ undo shutdown
+[16D                [16D eth-trunk 40
+#
+interface 25GE3/0/6
+  description to_XVHP_POZF_NJ01_YXCS01-DSJZ800-B_10C_0/1/0
+ undo shutdown
+ eth-trunk 90
+#
+interface 25GE3/0/7
+  description to_XVHP_POZF_NJ01_YXCS01-DSJZ800-B_10C_0/1/1
+ undo shutdown
+ eth-trunk 90
+#
+interface 25GE3/0/8
+ shutdown
+#
+interface 25GE3/0/9
+ shutdown
+#
+interface 25GE3/0/10
+ shutdown
+#
+interface 25GE3/0/11
+ shutdown
+[16D                [16D#
+interface 25GE3/0/12
+ shutdown
+#
+interface 25GE3/0/13
+ shutdown
+#
+interface 25GE3/0/14
+ shutdown
+#
+interface 25GE3/0/15
+ shutdown
+#
+interface 25GE3/0/16
+ shutdown
+#
+interface 25GE3/0/17
+ shutdown
+#
+interface 25GE3/0/18
+ shutdown
+#
+interface 25GE3/0/19
+[16D                [16D shutdown
+#
+interface 25GE3/0/20
+ shutdown
+#
+interface 25GE3/0/21
+ shutdown
+#
+interface 25GE3/0/22
+ shutdown
+#
+interface 25GE3/0/23
+ shutdown
+#
+interface 25GE3/0/24
+ shutdown
+#
+interface 25GE3/0/25
+ shutdown
+#
+interface 25GE3/0/26
+ shutdown
+#
+[16D                [16Dinterface 25GE3/0/27
+ shutdown
+#
+interface 25GE3/0/28
+ shutdown
+#
+interface 25GE3/0/29
+ shutdown
+#
+interface 25GE3/0/30
+ shutdown
+#
+interface 25GE3/0/31
+ shutdown
+#
+interface 25GE3/0/32
+ shutdown
+#
+interface 25GE3/0/33
+ shutdown
+#
+interface 25GE3/0/34
+ shutdown
+[16D                [16D#
+interface 25GE3/0/35
+ shutdown
+#
+interface 25GE3/0/36
+ shutdown
+#
+interface 25GE3/0/37
+ shutdown
+#
+interface 25GE3/0/38
+ shutdown
+#
+interface 25GE3/0/39
+ shutdown
+#
+interface 25GE3/0/40
+ shutdown
+#
+interface 25GE3/0/41
+ shutdown
+#
+interface 25GE3/0/42
+[16D                [16D shutdown
+#
+interface 25GE3/0/43
+ shutdown
+#
+interface 25GE3/0/44
+ shutdown
+#
+interface 25GE3/0/45
+ shutdown
+#
+interface 25GE3/0/46
+ shutdown
+#
+interface 25GE3/0/47
+ shutdown
+#
+interface 25GE3/0/48
+ shutdown
+#
+interface 25GE3/0/49
+ shutdown
+#
+[16D                [16Dinterface 25GE3/0/50
+ shutdown
+#
+interface 25GE3/0/51
+ shutdown
+#
+interface 25GE3/0/52
+ shutdown
+#
+interface 25GE3/0/53
+ shutdown
+#
+interface 25GE3/0/54
+ shutdown
+#
+interface 25GE3/0/55
+ shutdown
+#
+interface 25GE3/0/56
+ shutdown
+#
+interface 25GE3/0/57
+ shutdown
+[16D                [16D#
+interface 25GE3/0/58
+ shutdown
+#
+interface 25GE3/0/59
+ shutdown
+#
+interface 25GE3/0/60
+ shutdown
+#
+interface 25GE3/0/61
+ shutdown
+#
+interface 25GE3/0/62
+ shutdown
+#
+interface 25GE3/0/63
+ shutdown
+#
+interface 25GE3/0/64
+ shutdown
+#
+interface 25GE3/0/65
+[16D                [16D shutdown
+#
+interface 25GE3/0/66
+ shutdown
+#
+interface 25GE3/0/67
+ shutdown
+#
+interface 25GE3/0/68
+ shutdown
+#
+interface 25GE3/0/69
+ shutdown
+#
+interface 25GE3/0/70
+ shutdown
+#
+interface 25GE3/0/71
+ shutdown
+#
+interface 25GE4/0/0
+ shutdown
+ undo dcn
+[16D                [16D#
+interface 25GE4/0/1
+ shutdown
+ undo dcn
+#
+interface 25GE4/0/2
+ shutdown
+ undo dcn
+#
+interface 25GE4/0/3
+ shutdown
+ undo dcn
+#
+interface 25GE4/0/4
+ shutdown
+#
+interface 25GE4/0/5
+ shutdown
+#
+interface 25GE4/0/6
+ shutdown
+#
+interface 25GE4/0/7
+[16D                [16D shutdown
+#
+interface 25GE4/0/8
+ shutdown
+#
+interface 25GE4/0/9
+ shutdown
+#
+interface 25GE4/0/10
+ shutdown
+#
+interface 25GE4/0/11
+ shutdown
+#
+interface 25GE4/0/12
+ shutdown
+#
+interface 25GE4/0/13
+ shutdown
+#
+interface 25GE4/0/14
+ shutdown
+#
+[16D                [16Dinterface 25GE4/0/15
+ shutdown
+#
+interface 25GE4/0/16
+ shutdown
+#
+interface 25GE4/0/17
+ shutdown
+#
+interface 25GE4/0/18
+ shutdown
+#
+interface 25GE4/0/19
+ shutdown
+#
+interface 25GE4/0/20
+ shutdown
+#
+interface 25GE4/0/21
+ shutdown
+#
+interface 25GE4/0/22
+ shutdown
+[16D                [16D#
+interface 25GE4/0/23
+ shutdown
+#
+interface 25GE4/0/24
+ shutdown
+#
+interface 25GE4/0/25
+ shutdown
+#
+interface 25GE4/0/26
+ shutdown
+#
+interface 25GE4/0/27
+ shutdown
+#
+interface 25GE4/0/28
+ shutdown
+#
+interface 25GE4/0/29
+ shutdown
+#
+interface 25GE4/0/30
+[16D                [16D shutdown
+#
+interface 25GE4/0/31
+ shutdown
+#
+interface 25GE4/0/32
+ shutdown
+#
+interface 25GE4/0/33
+ shutdown
+#
+interface 25GE4/0/34
+ shutdown
+#
+interface 25GE4/0/35
+ shutdown
+#
+interface 25GE4/0/36
+ shutdown
+#
+interface 25GE4/0/37
+ shutdown
+#
+[16D                [16Dinterface 25GE4/0/38
+ shutdown
+#
+interface 25GE4/0/39
+ shutdown
+#
+interface 25GE4/0/40
+ shutdown
+#
+interface 25GE4/0/41
+ shutdown
+#
+interface 25GE4/0/42
+ shutdown
+#
+interface 25GE4/0/43
+ shutdown
+#
+interface 25GE4/0/44
+ shutdown
+#
+interface 25GE4/0/45
+ shutdown
+[16D                [16D#
+interface 25GE4/0/46
+ shutdown
+#
+interface 25GE4/0/47
+ shutdown
+#
+interface 25GE4/0/48
+ shutdown
+#
+interface 25GE4/0/49
+ shutdown
+#
+interface 25GE4/0/50
+ shutdown
+#
+interface 25GE4/0/51
+ shutdown
+#
+interface 25GE4/0/52
+ shutdown
+#
+interface 25GE4/0/53
+[16D                [16D shutdown
+#
+interface 25GE4/0/54
+ shutdown
+#
+interface 25GE4/0/55
+ shutdown
+#
+interface 25GE4/0/56
+ shutdown
+#
+interface 25GE4/0/57
+ shutdown
+#
+interface 25GE4/0/58
+ shutdown
+#
+interface 25GE4/0/59
+ shutdown
+#
+interface 25GE4/0/60
+ shutdown
+#
+[16D                [16Dinterface 25GE4/0/61
+ shutdown
+#
+interface 25GE4/0/62
+ shutdown
+#
+interface 25GE4/0/63
+ shutdown
+#
+interface 25GE4/0/64
+ shutdown
+#
+interface 25GE4/0/65
+ shutdown
+#
+interface 25GE4/0/66
+ shutdown
+#
+interface 25GE4/0/67
+ shutdown
+#
+interface 25GE4/0/68
+ shutdown
+[16D                [16D#
+interface 25GE4/0/69
+ shutdown
+#
+interface 25GE4/0/70
+ shutdown
+#
+interface 25GE4/0/71
+ shutdown
+#
+interface 100GE1/0/0
+  description to_TZHZ_100C:1:0001EL_YTSDH
+ undo shutdown
+ eth-trunk 30
+ undo dcn
+#
+interface 100GE1/0/1
+ shutdown
+ undo dcn
+#
+interface 100GE1/0/2
+ shutdown
+ undo dcn
+[16D                [16D#
+interface 100GE1/0/3
+  description to_JOTV-POZF-4B-JZ8GT8-X002_100CZ1/0/2_100C:1:0001EL
+ undo shutdown
+ eth-trunk 10
+ undo dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ clock priority 20
+ ptp notslave disable
+ ptp enable
+#
+interface 100GE1/0/4
+ shutdown
+#
+interface 100GE1/0/5
+ shutdown
+#
+interface 100GE1/0/6
+ shutdown
+#
+interface 100GE1/0/7
+ shutdown
+[16D                [16D#
+interface 100GE1/0/8
+ shutdown
+#
+interface 100GE1/0/9
+ shutdown
+#
+interface 100GE1/0/10
+ shutdown
+#
+interface 100GE1/0/11
+ shutdown
+#
+interface 100GE1/0/12
+ shutdown
+#
+interface 100GE1/0/13
+ shutdown
+#
+interface 100GE1/0/14
+ shutdown
+#
+interface 100GE1/0/15
+[16D                [16D shutdown
+#
+interface 100GE1/0/16
+ shutdown
+#
+interface 100GE1/0/17
+ shutdown
+#
+interface 100GE1/0/18
+ shutdown
+#
+interface 100GE1/0/19
+ shutdown
+#
+interface 100GE1/0/20
+ shutdown
+#
+interface 100GE1/0/21
+ shutdown
+#
+interface 100GE1/0/22
+ shutdown
+#
+[16D                [16Dinterface 100GE1/0/23
+ shutdown
+#
+interface 100GE1/0/24
+ shutdown
+#
+interface 100GE1/0/25
+ shutdown
+#
+interface 100GE1/0/26
+ shutdown
+#
+interface 100GE1/0/27
+ shutdown
+#
+interface 100GE1/0/28
+ shutdown
+#
+interface 100GE1/0/29
+ shutdown
+#
+interface 100GE1/0/30
+ shutdown
+[16D                [16D#
+interface 100GE1/0/31
+ shutdown
+#
+interface 100GE1/0/32
+ shutdown
+#
+interface 100GE1/0/33
+ shutdown
+#
+interface 100GE1/0/34
+ shutdown
+#
+interface 100GE1/0/35
+ shutdown
+#
+interface 100GE1/0/36
+ shutdown
+#
+interface 100GE1/0/37
+ shutdown
+#
+interface 100GE1/0/38
+[16D                [16D shutdown
+#
+interface 100GE1/0/39
+ shutdown
+#
+interface 100GE2/0/0
+  description to_TZHZ_100C:2:0002EL_YTSDH
+ undo shutdown
+ eth-trunk 30
+ undo dcn
+#
+interface 100GE2/0/1
+ shutdown
+ undo dcn
+#
+interface 100GE2/0/2
+ shutdown
+ undo dcn
+#
+interface 100GE2/0/3
+  description to_JOTV-POZF-4B-JZ8GT8-X002_100CZ2/0/3_100C:2:0001EL
+ undo shutdown
+ eth-trunk 10
+[16D                [16D undo dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ clock priority 20
+ ptp notslave disable
+ ptp enable
+#
+interface 100GE2/0/4
+ shutdown
+#
+interface 100GE2/0/5
+ shutdown
+#
+interface 100GE2/0/6
+ shutdown
+#
+interface 100GE2/0/7
+ shutdown
+#
+interface 100GE2/0/8
+ shutdown
+#
+interface 100GE2/0/9
+[16D                [16D shutdown
+#
+interface 100GE2/0/10
+ shutdown
+#
+interface 100GE2/0/11
+ shutdown
+#
+interface 100GE2/0/12
+ shutdown
+#
+interface 100GE2/0/13
+ shutdown
+#
+interface 100GE2/0/14
+ shutdown
+#
+interface 100GE2/0/15
+ shutdown
+#
+interface 100GE2/0/16
+ shutdown
+#
+[16D                [16Dinterface 100GE2/0/17
+ shutdown
+#
+interface 100GE2/0/18
+ shutdown
+#
+interface 100GE2/0/19
+ shutdown
+#
+interface 100GE2/0/20
+ shutdown
+#
+interface 100GE2/0/21
+ shutdown
+#
+interface 100GE2/0/22
+ shutdown
+#
+interface 100GE2/0/23
+ shutdown
+#
+interface 100GE2/0/24
+ shutdown
+[16D                [16D#
+interface 100GE2/0/25
+ shutdown
+#
+interface 100GE2/0/26
+ shutdown
+#
+interface 100GE2/0/27
+ shutdown
+#
+interface 100GE2/0/28
+ shutdown
+#
+interface 100GE2/0/29
+ shutdown
+#
+interface 100GE2/0/30
+ shutdown
+#
+interface 100GE2/0/31
+ shutdown
+#
+interface 100GE2/0/32
+[16D                [16D shutdown
+#
+interface 100GE2/0/33
+ shutdown
+#
+interface 100GE2/0/34
+ shutdown
+#
+interface 100GE2/0/35
+ shutdown
+#
+interface 100GE2/0/36
+ shutdown
+#
+interface 100GE2/0/37
+ shutdown
+#
+interface 100GE2/0/38
+ shutdown
+#
+interface 100GE2/0/39
+ shutdown
+#
+[16D                [16Dinterface LoopBack0
+  description for_Chkwvh_Ivjvczizjp
+ ip address 19.89.217.1 255.255.255.255
+ isis enable 1000
+ isis prefix-sid index 1
+#
+interface LoopBack101
+  description 5G_RVJ
+ ipv6 enable
+ ipv6 address 573B:B454:B633:5::/128
+#
+interface NULL0
+#
+bfd eth10 bind link-bundle peer-ip 161.18.160.19 interface Eth-Trunk10 source-ip 161.18.160.9
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+bfd v4_5G_MEC bind peer-ip 165.0.9.16 vpn-instance 5G_MEC interface Eth-Trunk90.839 source-ip 165.0.9.17 auto
+ detect-multiplier 4
+ min-tx-interval 500
+ min-rx-interval 500
+#
+[16D                [16Dbfd v4_5GC_MGMN bind peer-ip 1.4.199.59 vpn-instance 5GC_MGMN interface Eth-Trunk90.837 source-ip 1.4.199.48 auto
+ detect-multiplier 4
+ min-tx-interval 500
+ min-rx-interval 500
+#
+bfd v4_GPRS_Gn_C bind peer-ip 19.231.182.211 vpn-instance GPRS_Gn_C interface Eth-Trunk90.301 source-ip 19.231.182.210 auto
+ detect-multiplier 4
+ min-tx-interval 500
+ min-rx-interval 500
+#
+bfd v4_LTE-VPN bind peer-ip 52.224.7.17 vpn-instance LTE-VPN interface Eth-Trunk90.200 source-ip 52.224.7.16 auto
+ detect-multiplier 4
+ min-tx-interval 500
+ min-rx-interval 500
+#
+bfd v6_GPRS_Gn_C bind peer-ipv6 573B:B474:B323:6F33::635 vpn-instance GPRS_Gn_C interface Eth-Trunk90.301 source-ipv6 573B:B474:B323:6F33::634 auto
+ detect-multiplier 4
+ min-tx-interval 500
+ min-rx-interval 500
+#
+bfd v6_LTE-VPN bind peer-ipv6 573B:B474:B323:6233::635 vpn-instance LTE-VPN interface Eth-Trunk90.200 source-ipv6 573B:B474:B323:6233::634 auto
+ detect-multiplier 4
+ min-tx-interval 500
+[16D                [16D min-rx-interval 500
+#
+bgp 65334
+ router-id 19.89.217.1
+ graceful-restart
+ graceful-restart peer-reset
+ peer 19.89.217.2 as-number 65334
+  peer 19.89.217.2 description to_JOTV-POZF-4B-JZ8GT8-X002
+ peer 19.89.217.2 connect-interface LoopBack0
+ peer 19.89.217.129 as-number 9929
+  peer 19.89.217.129 description connzxp_pk_XQEE_OYJ
+ peer 19.89.217.135 as-number 38351
+  peer 19.89.217.135 description connzxp_pk_XQEE_OYJ
+ peer 19.89.217.135 bfd min-tx-interval 150 min-rx-interval 150
+ peer 19.89.217.135 bfd enable
+ #
+ ipv4-family unicast
+  undo synchronization
+  aggregate 19.89.217.0 255.255.255.0
+  import-route direct
+  import-route isis 1000 route-policy SMAN_NMS_ISIS_TO_BGP
+  peer 19.89.217.2 enable
+  peer 19.89.217.129 enable
+[16D                [16D  peer 19.89.217.129 route-policy SMAN_NMS_JT_IPA_in import
+  peer 19.89.217.129 route-policy SMAN_NMS_JT_IPA_out export
+  peer 19.89.217.135 enable
+  peer 19.89.217.135 route-policy SMAN_NMS_JT_IPB_in import
+  peer 19.89.217.135 route-policy SMAN_NMS_JT_IPB_out export
+ #
+ ipv4-family vpnv4
+  policy vpn-target
+  route-select delay 180
+  peer 19.89.217.2 enable
+  peer 19.89.217.2 advertise-community
+ #
+ ipv4-family vpn-instance 5GC_MGMN
+  import-route direct
+  import-route static
+  peer 1.81.244.9 as-number 38351
+   peer 1.81.244.9 description connzxp_pk_5CX_ICIJ_KI
+  peer 1.81.244.9 bfd min-tx-interval 150 min-rx-interval 150
+  peer 1.81.244.9 bfd enable
+  peer 1.81.244.9 route-policy SMAN_5GC_MGMN_IPB_in import
+  peer 1.81.244.9 route-policy SMAN_5GC_MGMN_IPB_out export
+ #
+ ipv4-family vpn-instance 5G_MEC
+[16D                [16D  import-route direct
+  import-route static
+  peer 1.27.244.9 as-number 38351
+   peer 1.27.244.9 description connzxp_pk_5C_IZX_KI
+  peer 1.27.244.9 bfd min-tx-interval 150 min-rx-interval 150
+  peer 1.27.244.9 bfd enable
+  peer 1.27.244.9 route-policy SMAN_5G_MEC_IPB_in import
+  peer 1.27.244.9 route-policy SMAN_5G_MEC_IPB_out export
+ #
+ ipv4-family vpn-instance 5G_RAN
+  import-route direct
+  auto-frr
+ #
+ ipv4-family vpn-instance 5G_RAN_VIP
+  import-route direct
+  auto-frr
+ #
+ ipv4-family vpn-instance GPRS_Gn_C
+  import-route direct
+  import-route static
+  auto-frr
+  peer 19.231.182.40 as-number 65334.200
+  peer 19.231.182.40 fake-as 65334.100
+ [16D                [16D  peer 19.231.182.40 description connzxp_pk_CLNO_Cj_X_R4
+  peer 19.231.182.40 route-policy GPRS_Gn_C_v4_RSG_in import
+  peer 19.231.182.40 route-policy GPRS_Gn_C_v4_RSG_out export
+ #
+ ipv4-family vpn-instance LTE-VPN
+  import-route direct
+  import-route static
+  auto-frr
+  peer 19.89.217.143 as-number 65334.200
+  peer 19.89.217.143 fake-as 65334.100
+   peer 19.89.217.143 description connzxp_pk_HPZ_RLJ
+  peer 19.89.217.143 bfd min-tx-interval 150 min-rx-interval 150
+  peer 19.89.217.143 bfd enable
+  peer 19.89.217.143 route-policy LTE-VPN_v4_IPRAN_in import
+  peer 19.89.217.143 route-policy LTE-VPN_v4_IPRAN_out export
+  peer 40.152.17.1 as-number 2.9225
+   peer 40.152.17.1 description connzxp_pk_HPZ-RLJ
+  peer 40.152.17.1 password simple DxLt@1304
+  peer 40.152.17.1 bfd min-tx-interval 150 min-rx-interval 150
+  peer 40.152.17.1 bfd enable
+  peer 40.152.17.1 route-policy LTE-VPN_v4_DX_in import
+  peer 40.152.17.1 route-policy LTE-VPN_v4_DX_out export
+  peer 40.152.17.1 route-update-interval 5
+[16D                [16D #
+ ipv4-family vpn-instance SmartMAN_AUTO_ONLINE
+  aggregate 19.89.217.0 255.255.255.0
+  import-route direct
+  peer 19.89.217.127 as-number 9929
+   peer 19.89.217.127 description connzxp_pk_XQEE_vpqk_pkkh
+  peer 19.89.217.127 route-policy SMAN_NMS_CJ_IPA_in import
+  peer 19.89.217.127 route-policy SMAN_NMS_CJ_IPA_out export
+ #
+ ipv6-family vpnv6
+  policy vpn-target
+  route-select delay 180
+  peer 19.89.217.2 enable
+  peer 19.89.217.2 advertise-community
+ #
+ ipv6-family vpn-instance 5G_RAN
+  aggregate 573B:B494:B633:: 64
+  aggregate 573B:B494:B633:4:: 64
+  aggregate 5731:4BA:B350:: 64
+  import-route direct
+  import-route static
+  auto-frr
+  peer 573B:B454:B633:5::6 as-number 65334.200
+[16D                [16D  peer 573B:B454:B633:5::6 fake-as 65334.100
+   peer 573B:B454:B633:5::6 description to_ZX0022-OXWXknz
+  peer 573B:B454:B633:5::6 bfd min-tx-interval 150 min-rx-interval 150
+  peer 573B:B454:B633:5::6 bfd enable
+  peer 573B:B454:B633:5::6 route-policy LTSMAN-5G2C-V6-IPRAN-IN import
+  peer 573B:B454:B633:5::6 route-policy LTSMAN-5G2C-V6-IPRAN-OUT export
+  peer 573B:B454:B633:5::6 route-update-interval 5
+  peer 5731:4BA:B350:83::5:4 as-number 2.9225
+   peer 5731:4BA:B350:83::5:4 description to_JO-TV-SDH-I-1.OPJ.XT600-T16V
+  peer 5731:4BA:B350:83::5:4 password simple DxLt@1304
+  peer 5731:4BA:B350:83::5:4 bfd min-tx-interval 150 min-rx-interval 150
+  peer 5731:4BA:B350:83::5:4 bfd enable
+  peer 5731:4BA:B350:83::5:4 route-policy LT_5G_SA_v6_DX_in import
+  peer 5731:4BA:B350:83::5:4 route-policy LT_5G_SA_v6_DX_out export
+  peer 5731:4BA:B350:83::5:4 route-update-interval 5
+ #
+ ipv6-family vpn-instance 5G_RAN_VIP
+  aggregate 573B:B494:B633:5:: 64
+  aggregate 573B:B494:B633:6:: 64
+  aggregate 5731:4BA:B350:43:: 64
+  import-route direct
+  import-route static
+  auto-frr
+[16D                [16D  peer 573B:B454:B633:5::A as-number 65334.200
+  peer 573B:B454:B633:5::A fake-as 65334.100
+   peer 573B:B454:B633:5::A description to_ZX0022-OXWXknz
+  peer 573B:B454:B633:5::A bfd min-tx-interval 150 min-rx-interval 150
+  peer 573B:B454:B633:5::A bfd enable
+  peer 573B:B454:B633:5::A route-policy LTSMAN-5G2B-V6-IPRAN-OUT export
+  peer 573B:B454:B633:5::A route-update-interval 5
+  peer 5731:4BA:B350:93::5:4 as-number 2.9225
+   peer 5731:4BA:B350:93::5:4 description to_JO-TV-SDH-I-1.OPJ.XT600-T16V
+  peer 5731:4BA:B350:93::5:4 password simple DxLt@1304
+  peer 5731:4BA:B350:93::5:4 bfd min-tx-interval 150 min-rx-interval 150
+  peer 5731:4BA:B350:93::5:4 bfd enable
+  peer 5731:4BA:B350:93::5:4 route-policy LT_5G_VIP_SA_v6_DX_in import
+  peer 5731:4BA:B350:93::5:4 route-policy LT_5G_VIP_SA_v6_DX_out export
+  peer 5731:4BA:B350:93::5:4 route-update-interval 5
+ #
+ ipv6-family vpn-instance GPRS_Gn_C
+  import-route direct
+  import-route static
+  auto-frr
+  peer 573B:B474:B323:6322::7 as-number 65334.200
+  peer 573B:B474:B323:6322::7 fake-as 65334.100
+   peer 573B:B474:B323:6322::7 description connzxp_pk_CLNO_Cj_X_R6
+[16D                [16D  peer 573B:B474:B323:6322::7 bfd min-tx-interval 150 min-rx-interval 150
+  peer 573B:B474:B323:6322::7 bfd enable
+  peer 573B:B474:B323:6322::7 route-policy GPRS_Gn_C_v6_RSG_in import
+  peer 573B:B474:B323:6322::7 route-policy GPRS_Gn_C_v6_RSG_out export
+  peer 573B:B474:B323:6322::7 route-update-interval 5
+ #
+ l2vpn-family evpn
+  policy vpn-target
+#
+undo dcn
+#
+route-policy GPRS_Gn_C_v4_RSG_in permit node 10
+ if-match ip-prefix GPRS_Gn_C_v4_RSG_in
+#
+route-policy GPRS_Gn_C_v4_RSG_out permit node 10
+ if-match ip-prefix GPRS_Gn_C_v4_RSG_out
+#
+route-policy GPRS_Gn_C_v6_RSG_in permit node 10
+ if-match ipv6 address prefix-list GPRS_Gn_C_v6_RSG_in
+#
+route-policy GPRS_Gn_C_v6_RSG_out permit node 10
+ if-match ipv6 address prefix-list GPRS_Gn_C_v6_RSG_out
+#
+[16D                [16Droute-policy LTE-VPN_MEC_IPRAN_in permit node 10
+ if-match ip-prefix LTE-VPN_MEC_IPRAN_in
+#
+route-policy LTE-VPN_MEC_IPRAN_out permit node 10
+ if-match ip-prefix LTE-VPN_MEC_IPRAN_out
+#
+route-policy LTE-VPN_v4_DX_in permit node 10
+ if-match ip-prefix LTE-VPN_v4_DX_in
+#
+route-policy LTE-VPN_v4_DX_out permit node 10
+ if-match ip-prefix LTE-VPN_v4_DX_out
+#
+route-policy LTE-VPN_v4_IPRAN_in permit node 10
+ if-match ip-prefix LTE-VPN_v4_IPRAN_in
+#
+route-policy LTE-VPN_v4_IPRAN_out permit node 10
+ if-match ip-prefix LTE-VPN_v4_IPRAN_out
+#
+route-policy LTSMAN-5G2B-V6-IPRAN-OUT permit node 10
+ if-match ipv6 address prefix-list LTSMAN-5G2B-V6-IPRAN-OUT
+#
+route-policy LTSMAN-5G2C-V6-IPRAN-IN permit node 10
+ if-match ipv6 address prefix-list LTSMAN-5G2C-V6-IPRAN-IN
+[16D                [16D#
+route-policy LTSMAN-5G2C-V6-IPRAN-OUT permit node 10
+ if-match ipv6 address prefix-list LTSMAN-5G2C-V6-IPRAN-OUT
+#
+route-policy LT_5G_SA_v6_DX_in permit node 10
+ if-match ipv6 address prefix-list LT_5G_SA_v6_DX_in
+#
+route-policy LT_5G_SA_v6_DX_out permit node 10
+ if-match ipv6 address prefix-list LT_5G_SA_v6_DX_out
+#
+route-policy LT_5G_VIP_SA_v6_DX_in permit node 10
+ if-match ipv6 address prefix-list LT_5G_VIP_SA_v6_DX_in
+#
+route-policy LT_5G_VIP_SA_v6_DX_out permit node 10
+ if-match ipv6 address prefix-list LT_5G_VIP_SA_v6_DX_out
+#
+route-policy SMAN_5GC_MGMN_IPB_in permit node 10
+ if-match ip-prefix SMAN_5GC_MGMN_IPB_in
+#
+route-policy SMAN_5GC_MGMN_IPB_out permit node 10
+ if-match ip-prefix SMAN_5GC_MGMN_IPB_out
+#
+route-policy SMAN_5G_MEC_IPB_in permit node 10
+[16D                [16D if-match ip-prefix SMAN_5G_MEC_IPB_in
+#
+route-policy SMAN_5G_MEC_IPB_out permit node 10
+ if-match ip-prefix SMAN_5G_MEC_IPB_out
+#
+route-policy SMAN_NMS_BGP_TO_ISIS permit node 10
+ if-match ip-prefix SMAN_NMS_JT_IPA_in
+#
+route-policy SMAN_NMS_BGP_TO_ISIS permit node 20
+ if-match ip-prefix SMAN_NMS_JT_IPB_in
+#
+route-policy SMAN_NMS_CJ_IPA_in permit node 10
+ if-match ip-prefix SMAN_NMS_CJ_IPA_in
+#
+route-policy SMAN_NMS_CJ_IPA_out permit node 10
+ if-match ip-prefix SMAN_NMS_CJ_IPA_out
+#
+route-policy SMAN_NMS_ISIS_TO_BGP permit node 10
+ if-match ip-prefix SMAN_NMS_ISIS_TO_BGP
+#
+route-policy SMAN_NMS_JT_IPA_in permit node 10
+ if-match ip-prefix SMAN_NMS_JT_IPA_in
+#
+[16D                [16Droute-policy SMAN_NMS_JT_IPA_out permit node 10
+ if-match ip-prefix SMAN_NMS_JT_IPA_out
+#
+route-policy SMAN_NMS_JT_IPB_in permit node 10
+ if-match ip-prefix SMAN_NMS_JT_IPB_in
+#
+route-policy SMAN_NMS_JT_IPB_out permit node 10
+ if-match ip-prefix SMAN_NMS_JT_IPB_out
+#
+ip ip-prefix GPRS_Gn_C_v4_RSG_in index 10 permit 105.78.235.173 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_in index 20 permit 105.78.235.174 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_in index 30 permit 105.78.235.175 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_in index 40 permit 105.78.235.119 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_in index 50 permit 105.78.235.110 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_in index 60 permit 105.78.235.111 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_out index 10 permit 105.78.221.65 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_out index 20 permit 105.78.221.66 32
+ip ip-prefix GPRS_Gn_C_v4_RSG_out index 30 permit 105.78.221.67 32
+ip ip-prefix LTE-VPN_MEC_IPRAN_in index 10 permit 19.173.211.0 24
+ip ip-prefix LTE-VPN_MEC_IPRAN_out index 10 permit 52.224.7.14 32
+ip ip-prefix LTE-VPN_v4_DX_in index 10 permit 7.95.0.0 22
+ip ip-prefix LTE-VPN_v4_DX_in index 20 permit 7.95.19.0 23
+ip ip-prefix LTE-VPN_v4_DX_in index 30 permit 7.96.159.0 19
+[16D                [16Dip ip-prefix LTE-VPN_v4_DX_in index 40 permit 7.98.63.0 20
+ip ip-prefix LTE-VPN_v4_DX_in index 50 permit 7.199.159.0 19
+ip ip-prefix LTE-VPN_v4_DX_in index 60 permit 7.197.159.0 19
+ip ip-prefix LTE-VPN_v4_DX_in index 70 permit 7.110.159.0 19
+ip ip-prefix LTE-VPN_v4_DX_in index 80 permit 7.116.117.0 20
+ip ip-prefix LTE-VPN_v4_DX_in index 90 permit 40.142.0.0 16
+ip ip-prefix LTE-VPN_v4_DX_in index 100 permit 40.152.181.0 18
+ip ip-prefix LTE-VPN_v4_DX_in index 110 permit 50.194.0.0 16
+ip ip-prefix LTE-VPN_v4_DX_in index 120 permit 50.101.0.0 17
+ip ip-prefix LTE-VPN_v4_DX_out index 10 permit 7.104.117.0 17
+ip ip-prefix LTE-VPN_v4_DX_out index 20 permit 19.199.0.0 18
+ip ip-prefix LTE-VPN_v4_DX_out index 30 permit 19.197.0.0 17
+ip ip-prefix LTE-VPN_v4_DX_out index 40 permit 52.224.0.0 24
+ip ip-prefix LTE-VPN_v4_DX_out index 50 permit 52.224.1.0 24
+ip ip-prefix LTE-VPN_v4_DX_out index 60 permit 52.224.2.0 24
+ip ip-prefix LTE-VPN_v4_DX_out index 70 permit 52.224.7.14 32
+ip ip-prefix LTE-VPN_v4_IPRAN_in index 10 permit 7.104.117.0 17
+ip ip-prefix LTE-VPN_v4_IPRAN_in index 20 permit 19.199.0.0 18
+ip ip-prefix LTE-VPN_v4_IPRAN_in index 30 permit 19.197.0.0 17
+ip ip-prefix LTE-VPN_v4_IPRAN_in index 40 permit 52.224.0.0 24
+ip ip-prefix LTE-VPN_v4_IPRAN_in index 50 permit 52.224.1.0 24
+ip ip-prefix LTE-VPN_v4_IPRAN_in index 60 permit 52.224.2.0 24
+ip ip-prefix LTE-VPN_v4_IPRAN_in index 70 permit 19.173.211.0 24
+[16D                [16Dip ip-prefix LTE-VPN_v4_IPRAN_out index 10 permit 7.95.0.0 22
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 20 permit 7.95.19.0 23
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 30 permit 7.96.159.0 19
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 40 permit 7.98.63.0 20
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 50 permit 7.199.159.0 19
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 60 permit 7.197.159.0 19
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 70 permit 7.110.159.0 19
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 80 permit 7.116.117.0 20
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 90 permit 40.142.0.0 16
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 100 permit 40.152.181.0 18
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 110 permit 50.194.0.0 16
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 120 permit 50.101.0.0 17
+ip ip-prefix LTE-VPN_v4_IPRAN_out index 130 permit 52.224.7.14 32
+ip ip-prefix SMAN_5GC_MGMN_IPB_in index 10 permit 1.1.0.0 27
+ip ip-prefix SMAN_5GC_MGMN_IPB_in index 20 permit 1.1.8.0 27
+ip ip-prefix SMAN_5GC_MGMN_IPB_in index 30 permit 1.81.181.0 24
+ip ip-prefix SMAN_5GC_MGMN_IPB_out index 10 permit 1.81.298.0 27
+ip ip-prefix SMAN_5GC_MGMN_IPB_out index 20 permit 1.81.298.63 29
+ip ip-prefix SMAN_5GC_MGMN_IPB_out index 30 permit 1.4.190.63 28
+ip ip-prefix SMAN_5GC_MGMN_IPB_out index 40 permit 1.4.190.89 29
+ip ip-prefix SMAN_5GC_MGMN_IPB_out index 50 permit 1.4.190.95 27
+ip ip-prefix SMAN_5GC_MGMN_IPB_out index 60 permit 1.81.298.31 28
+ip ip-prefix SMAN_5GC_MGMN_IPB_out index 70 permit 1.81.298.47 28
+[16D                [16Dip ip-prefix SMAN_5G_MEC_IPB_in index 10 permit 1.26.0.0 24
+ip ip-prefix SMAN_5G_MEC_IPB_out index 10 permit 1.27.63.0 24
+ip ip-prefix SMAN_NMS_CJ_IPA_in index 10 permit 19.239.32.15 29
+ip ip-prefix SMAN_NMS_CJ_IPA_in index 20 permit 19.239.32.31 29
+ip ip-prefix SMAN_NMS_CJ_IPA_in index 30 permit 19.239.32.49 29
+ip ip-prefix SMAN_NMS_CJ_IPA_in index 40 permit 19.239.32.47 29
+ip ip-prefix SMAN_NMS_CJ_IPA_in index 50 permit 19.239.32.55 29
+ip ip-prefix SMAN_NMS_CJ_IPA_out index 10 permit 19.89.217.0 24
+ip ip-prefix SMAN_NMS_CJ_IPA_out index 100 deny 0.0.0.0 0
+ip ip-prefix SMAN_NMS_ISIS_TO_BGP index 10 permit 19.89.217.0 24 greater-equal 32 less-equal 32
+ip ip-prefix SMAN_NMS_JT_IPA_in index 10 permit 19.239.31.87 29
+ip ip-prefix SMAN_NMS_JT_IPA_out index 10 permit 19.89.217.0 24
+ip ip-prefix SMAN_NMS_JT_IPB_in index 10 permit 181.157.243.0 24
+ip ip-prefix SMAN_NMS_JT_IPB_in index 20 permit 19.239.31.87 29
+ip ip-prefix SMAN_NMS_JT_IPB_out index 10 permit 19.89.217.0 24
+ip ip-prefix srbebfd index 10 permit 19.89.0.0 16
+ip ip-prefix srbebfd index 20 permit 161.18.160.0 24
+#
+ ip route-static 19.143.29.32 255.255.255.255 161.18.160.2 description JS-CF
+ ip route-static 121.214.241.0 255.255.255.0 161.18.160.2 description hw_NXZ-EL
+ ip route-static 121.214.241.0 255.255.255.0 Eth-Trunk10 161.18.160.19 preference 100 description hw_NXZ-EL
+ip route-static vpn-instance LTE-VPN 52.224.7.14 255.255.255.255 Eth-Trunk90.200 52.224.7.17 track bfd-session v4_LTE-VPN
+ip route-static vpn-instance GPRS_Gn_C 105.78.221.65 255.255.255.255 Eth-Trunk90.301 19.231.182.211 track bfd-session v4_GPRS_Gn_C
+[16D                [16Dip route-static vpn-instance GPRS_Gn_C 105.78.221.66 255.255.255.255 Eth-Trunk90.301 19.231.182.211 track bfd-session v4_GPRS_Gn_C
+ip route-static vpn-instance GPRS_Gn_C 105.78.221.67 255.255.255.255 Eth-Trunk90.301 19.231.182.211 track bfd-session v4_GPRS_Gn_C
+ip route-static vpn-instance 5GC_MGMN 1.4.190.63 255.255.255.240 Eth-Trunk90.837 1.4.199.59 track bfd-session v4_5GC_MGMN
+ip route-static vpn-instance 5GC_MGMN 1.4.190.89 255.255.255.248 Eth-Trunk90.837 1.4.199.59 track bfd-session v4_5GC_MGMN
+ip route-static vpn-instance 5GC_MGMN 1.4.190.95 255.255.255.224 Eth-Trunk90.837 1.4.199.59 track bfd-session v4_5GC_MGMN
+ip route-static vpn-instance 5GC_MGMN 1.81.298.0 255.255.255.224 Eth-Trunk90.837 1.4.199.59 track bfd-session v4_5GC_MGMN
+ip route-static vpn-instance 5GC_MGMN 1.81.298.31 255.255.255.240 Eth-Trunk90.837 1.4.199.59 track bfd-session v4_5GC_MGMN
+ip route-static vpn-instance 5GC_MGMN 1.81.298.47 255.255.255.240 Eth-Trunk90.837 1.4.199.59 track bfd-session v4_5GC_MGMN
+ip route-static vpn-instance 5GC_MGMN 1.81.298.63 255.255.255.248 Eth-Trunk90.837 1.4.199.59 track bfd-session v4_5GC_MGMN
+ip route-static vpn-instance 5G_MEC 1.27.63.0 255.255.255.0 Eth-Trunk90.839 165.0.9.16 track bfd-session v4_5G_MEC
+#
+ipv6 route-static vpn-instance 5G_RAN 573B:B494:B633:: 64 NULL0 preference 200
+ipv6 route-static vpn-instance 5G_RAN 573B:B494:B633:4:: 64 NULL0 preference 200
+ipv6 route-static vpn-instance 5G_RAN 5731:4BA:B350:: 64 NULL0 preference 200
+ipv6 route-static vpn-instance 5G_RAN_VIP 573B:B494:B633:5:: 64 NULL0 preference 200
+ipv6 route-static vpn-instance 5G_RAN_VIP 573B:B494:B633:6:: 64 NULL0 preference 200
+ipv6 route-static vpn-instance 5G_RAN_VIP 5731:4BA:B350:43:: 64 NULL0 preference 200
+ipv6 route-static vpn-instance LTE-VPN 573B:B474:B323:6233::534 128 Eth-Trunk90.200 573B:B474:B323:6233::635 track bfd-session v6_LTE-VPN
+ipv6 route-static vpn-instance GPRS_Gn_C 573B:B474:B323:6F33::534 128 Eth-Trunk90.301 573B:B474:B323:6F33::635 track bfd-session v6_GPRS_Gn_C
+ipv6 route-static vpn-instance GPRS_Gn_C 573B:B474:B323:6F33::535 128 Eth-Trunk90.301 573B:B474:B323:6F33::635 track bfd-session v6_GPRS_Gn_C
+ipv6 route-static vpn-instance GPRS_Gn_C 573B:B474:B323:6F33::536 128 Eth-Trunk90.301 573B:B474:B323:6F33::635 track bfd-session v6_GPRS_Gn_C
+ipv6 route-static vpn-instance GPRS_Gn_C 573B:B474:B323:6F33::537 128 Eth-Trunk90.301 573B:B474:B323:6F33::635 track bfd-session v6_GPRS_Gn_C
+#
+[16D                [16Dip ipv6-prefix GPRS_Gn_C_v6_RSG_in index 10 permit 573B:B474:B322:2F33::837 128
+ip ipv6-prefix GPRS_Gn_C_v6_RSG_in index 20 permit 573B:B474:B322:2F34::837 128
+ip ipv6-prefix GPRS_Gn_C_v6_RSG_out index 10 permit 573B:B474:B323:6F33::534 128
+ip ipv6-prefix GPRS_Gn_C_v6_RSG_out index 20 permit 573B:B474:B323:6F33::535 128
+ip ipv6-prefix GPRS_Gn_C_v6_RSG_out index 30 permit 573B:B474:B323:6F33::536 128
+ip ipv6-prefix GPRS_Gn_C_v6_RSG_out index 40 permit 573B:B474:B323:6F33::537 128
+ip ipv6-prefix LTSMAN-5G2B-V6-IPRAN-OUT index 10 permit 573B:B494:B633:5:: 64
+ip ipv6-prefix LTSMAN-5G2B-V6-IPRAN-OUT index 20 permit 573B:B494:B633:6:: 64
+ip ipv6-prefix LTSMAN-5G2B-V6-IPRAN-OUT index 30 permit 573B:B494:B633:45:: 64
+ip ipv6-prefix LTSMAN-5G2B-V6-IPRAN-OUT index 40 permit 573B:B494:B633:46:: 64
+ip ipv6-prefix LTSMAN-5G2C-V6-IPRAN-IN index 10 permit 573B:B474:B322:2233:: 56
+ip ipv6-prefix LTSMAN-5G2C-V6-IPRAN-IN index 20 permit 573B:B474:B323:4333:: 52
+ip ipv6-prefix LTSMAN-5G2C-V6-IPRAN-OUT index 10 permit 573B:B494:B633:43:: 64
+ip ipv6-prefix LTSMAN-5G2C-V6-IPRAN-OUT index 20 permit 573B:B494:B633:44:: 64
+ip ipv6-prefix LTSMAN-5G2C-V6-IPRAN-OUT index 30 permit 573B:B494:B633:: 64
+ip ipv6-prefix LTSMAN-5G2C-V6-IPRAN-OUT index 40 permit 573B:B494:B633:4:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_in index 10 permit 5731:4BA:B333:: 46
+ip ipv6-prefix LT_5G_SA_v6_DX_in index 20 permit 5731:4BA:B337:: 46
+ip ipv6-prefix LT_5G_SA_v6_DX_in index 30 permit 5731:4BA:B35F:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_in index 40 permit 5731:4BA:B35F:53:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_in index 50 permit 5731:4BA:B35F:63:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_in index 60 permit 573B:B494:B633:43:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_in index 70 permit 573B:B494:B633:44:: 64
+[16D                [16Dip ipv6-prefix LT_5G_SA_v6_DX_out index 10 permit 5731:4BA:B350:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_out index 20 permit 573B:B494:B633:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_out index 30 permit 573B:B494:B633:4:: 64
+ip ipv6-prefix LT_5G_SA_v6_DX_out index 40 permit 573B:B474:B322:2233:: 56
+ip ipv6-prefix LT_5G_SA_v6_DX_out index 50 permit 573B:B474:B323:4333:: 52
+ip ipv6-prefix LT_5G_VIP_SA_v6_DX_in index 10 permit 573B:B494:B633:45:: 64
+ip ipv6-prefix LT_5G_VIP_SA_v6_DX_in index 20 permit 573B:B494:B633:46:: 64
+ip ipv6-prefix LT_5G_VIP_SA_v6_DX_in index 30 permit 5731:4BA:B35F:43:: 64
+ip ipv6-prefix LT_5G_VIP_SA_v6_DX_out index 10 permit 573B:B494:B633:5:: 64
+ip ipv6-prefix LT_5G_VIP_SA_v6_DX_out index 20 permit 573B:B494:B633:6:: 64
+ip ipv6-prefix LT_5G_VIP_SA_v6_DX_out index 30 permit 5731:4BA:B350:43:: 64
+#
+snmp-agent
+snmp-agent local-engineid 800007DB032811ECDF6A00
+ snmp-agent community read cipher 9e89b04ce207eb28538c319c1b334e20 alias __CommunityAliasName_01_26605
+ snmp-agent community write cipher 389dd43b6d96b1f5e31d4c984171037e alias __CommunityAliasName_02_47057
+ snmp-agent community read cipher 8b98f434b1455feefebe3b04d568c1b3 mib-view iso-view acl 2001 alias __CommunityAliasName_03_41786
+ snmp-agent community write cipher b928492ce48969637eb0cfda5829ad25 mib-view iso-view acl 2001 alias __CommunityAliasName_04_38762
+ snmp-agent community read cipher 6446080fd46813487c6f6b2512c0547c mib-view iso-view acl 2001 alias __CommunityAliasName_05_31129
+ snmp-agent community read cipher 1e7d8525359eeae54de5963b115eafc3 mib-view iso-view acl 2002 alias __CommunityAliasName_06_20512
+#
+snmp-agent sys-info version v2c v3
+ snmp-agent target-host host-name __targetHost_1_2595 trap address udp-domain 181.157.243.37 params securityname cipher b90ad2f0a90bce33e785e391d3f12c0b v2c
+ [16D                [16Dsnmp-agent target-host host-name __targetHost_3_34565 trap address udp-domain 121.214.241.46 params securityname cipher 4779312e102e691db92e2a6004202da5 v2c private-netmanager ext-vb
+#
+snmp-agent mib-view included iso-view iso
+#
+snmp-agent trap source LoopBack0
+#
+snmp-agent protocol source-status all-interface
+undo snmp-agent protocol source-status ipv6 all-interface
+#
+snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+snmp-agent trap enable
+#
+lldp enable
+#
+stelnet server enable
+sftp server enable
+snetconf server enable
+sftp server default-directory cfcard:
+ssh user root
+ssh user root authentication-type password
+ssh user root service-type snetconf stelnet
+[16D                [16Dssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#
+ ssh server cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa rsa_sha2_256 rsa_sha2_512
+#
+ssh server dh-exchange min-len 2048
+#
+ssh client first-time enable
+ssh client peer 19.89.217.2 assign rsa-key 19.89.217.2
+sftp client-source -i LoopBack0
+#
+ssh client publickey ecc rsa rsa_sha2_256 rsa_sha2_512
+#
+ ssh client cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+tunnel-policy SRBE_TUNNEL
+[16D                [16D tunnel select-seq sr-lsp load-balance-number 32
+#
+user-interface maximum-vty 21
+#
+user-interface con 0
+ authentication-mode password
+  set authentication password cipher a6aaf40ee8392360d4bd84cf8f3e6df1
+#
+user-interface vty 0 4
+ authentication-mode aaa
+#
+netconf
+ activate module huawei-ip
+#
+local-aaa-server
+#
+return

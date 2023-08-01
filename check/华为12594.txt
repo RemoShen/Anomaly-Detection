@@ -1,0 +1,859 @@
+display current-configuration
+!Software Version V300R005C00SPC600
+!Last configuration was updated at 2020-12-30 09:36:34+08:00 by hbunicom
+!Last configuration was saved at 2021-01-15 00:03:13+08:00 by hbunicom
+#
+loop-detect trigger enable
+#
+mpls fragment enable
+#
+clock timezone BeiJing add 08:00:00
+#
+sysname CVRC-XEF-1Z-UOI980W-NH-U1-HUM042
+#
+set neid d9641c
+lldp enable-dcn authentication %^%#/vH]8;MUZ$kCQ=R-i!<-CADoCJ*zC3k]UwY)bg($%^%#
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+info-center source default channel 0 log state off
+info-center source default channel 2 log level warning
+info-center source default channel 4 log level notification
+info-center loghost source LoopBack0
+info-center logbuffer size 1024
+[16D                [16D#
+port-wred af4-cs7-pq-10ge-ge
+ queue-depth 1000
+#
+port-wred be-af3-10ge-ge
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2-10ge-ge
+ queue-depth 2000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af4-cs7-pq
+ queue-depth 2000
+#
+port-wred be-af3
+ queue-depth 8000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+[16D                [16D color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+ntp-service ipv6 server disable
+ ntp-service authentication-keyid 1 authentication-mode md5 cipher e1085b7a08b1596b86d8bb98b18706f6
+ntp-service reliable authentication-keyid 1
+ntp-service unicast-server 18.199.1.45 authentication-keyid 1 source-interface LoopBack0 preference
+ntp-service unicast-server 18.199.1.47 authentication-keyid 1 source-interface LoopBack0
+ntp-service authentication enable
+ntp-service source-interface LoopBack0
+#
+alarm
+ suppression alarm-name hwMplsTunnelHotstandbySwitch cause-period 60
+ suppression alarm-name hwBfdSessFaultDown cause-period 600
+ suppression alarm-name hwPortDown cause-period 5
+ suppression alarm-name hwLosAlarm cause-period 5
+ suppression alarm-name hwIfFlowDown cause-period 60
+ suppression alarm-name hwPWVcDown cause-period 60
+[16D                [16D suppression alarm-name hwVpwsPwRedundancyDegradedExpand cause-period 600
+#
+rsa peer-public-key 18.199.1.238
+ public-key-code begin
+ 3082010A
+  02820101
+    00C93904 79129F94 CCB833FA 28DA2CBF C0CF34B2 7A0BA4DF 2B5CB6B6 6A35E421
+    DCCBFD60 64E2A1BB CE281E0B 80B39D3F B709B78E A28756A9 281BF51B 7996869F
+    7D6315F3 B0BBD5B8 517E1EDF 61738E52 19CEC537 0B5DB5D8 34CE642B B4FA2271
+    8079491D 47534BB2 AF964464 B4626663 3BCE33E3 AE9EB54F 94473B69 86E97A2C
+    45164662 A04CD158 F58EE02C FE3C2696 CF51B13F 8FF7C23C 7794E2E1 E679AEEC
+    407AA45A 51568C85 300773D4 EFE5DE45 A4A6AB65 AAC84C7B 7E557DCB C3396AB9
+    4FBC60FF 9BE9C7FA F1ED7580 AA74040B 45D9D50C 95BD8761 56D30294 466B74F8
+    437EC12E EF4796CC 55AC97D5 0F546F0A 7747620B A114F848 E6E5508D 4C33058D
+    25
+  0203
+    010001
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 18.199.1.238
+ public-key-code begin
+  04061E40 B599096E 30E61705 4D2FA56A CA321C62 F254DDE8 AA576CFF 6753BE06
+[16D                [16D  A0AA9D7B 542627F3 8E80BCBB EBBA9C00 E169D52C 0E40F6BD 3B39AE73 21E5D2A6
+  06
+ public-key-code end
+ peer-public-key end
+#
+dot1x-template 1
+#
+undo telnet server enable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+#
+forward alarm cpu-usage multi-core threshold 95
+forward alarm vcpu-usage multi-core threshold 95
+#
+ptp profile g-8275-1 enable
+ptp enable
+ptp device-type t-bc
+ptp passive-measure enable
+ptp clock-source local priority2 200
+#
+clock freq-deviation-detect enable
+[16D                [16Dclock ethernet-synchronization enable
+#
+soc
+#
+ip vpn-instance 4G_RAN
+ ipv4-family
+  route-distinguisher 65384:18020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65384:18020 export-extcommunity
+  vpn-target 65384:1075042 export-extcommunity
+  vpn-target 65384:18020 import-extcommunity
+#
+ip vpn-instance 5G_OAM
+ ipv4-family
+  route-distinguisher 65384:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65384:10030 export-extcommunity
+  vpn-target 65384:10030 import-extcommunity
+ ipv6-family
+[16D                [16D  route-distinguisher 65384:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65384:10030 export-extcommunity
+  vpn-target 65384:10030 import-extcommunity
+#
+ip vpn-instance 5G_RAN
+ ipv6-family
+  route-distinguisher 65384:10010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65384:10010 export-extcommunity
+  vpn-target 65384:1075042 export-extcommunity
+  vpn-target 65384:10010 import-extcommunity
+#
+ip vpn-instance 5G_RAN_VIP
+ ipv6-family
+  route-distinguisher 65384:10020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+[16D                [16D  vpn-target 65384:10020 export-extcommunity
+  vpn-target 65384:1075042 export-extcommunity
+  vpn-target 65384:10020 import-extcommunity
+#
+ip vpn-instance __LOCAL_OAM_VPN__
+ ipv6-family
+ ipv4-family
+
+#
+ip dcn vpn-instance __dcn_vpn__
+ ipv4-family
+#
+bfd
+ mpls-passive
+#
+mpls lsr-id 18.199.80.182
+#
+mpls
+ mpls te
+#
+mpls l2vpn
+#
+mpls ldp
+ #
+[16D                [16D ipv4-family
+#
+acl number 2000
+  description FOR_QOT_Uwwynn
+ rule 10 permit source 18.199.0.0 0.0.1.255
+ rule 20 permit source 18.199.1.238 0
+ rule 30 permit source 170.146.232.0 0.0.0.255
+ rule 40 permit vpn-instance __dcn_vpn__ source 106.0.0.0 0.233.233.233
+ rule 50 permit source 18.228.30.190 0.0.0.7
+ rule 60 permit source 18.228.31.14 0.0.0.7
+ rule 70 permit source 18.228.31.54 0.0.0.7
+ rule 80 permit vpn-instance __dcn_vpn__ source 18.228.31.54 0.0.0.7
+ rule 90 permit vpn-instance __dcn_vpn__ source 18.228.31.14 0.0.0.7
+ rule 110 permit source 188.0.4.175 0
+ rule 500 deny
+#
+acl number 2020
+  description FOR_NIHK_Uwwynn
+ rule 5 permit source 18.199.1.238 0
+ rule 10 permit source 170.146.232.0 0.0.0.255
+ rule 20 permit source 18.228.30.190 0.0.0.7
+ rule 500 deny
+#
+[16D                [16Dsecurity password
+ #
+ rule admin
+  forbidden word changeme_123
+#
+aaa
+  local-user root password irreversible-cipher $1c$]f(3Q<j7uS$!0!)8@e`\+lj]vQx\2l&y-$M(|\n_ERFU_BF$!6X$   local-user root password irreversible-cipher 1697da66e3bbd07083815d51ba7b8145
+ local-user root service-type ssh
+ local-user root state block fail-times 3 interval 5
+ local-user root user-group manage-ug
+  local-user hbunicom password irreversible-cipher $1c$P;K"F9Dx-/$JRue(h3V~J\GC8AX1H()*g+D@=v2w4N~+-*x+vfE$   local-user hbunicom password irreversible-cipher 9a71b96d04008cc9728d70b639fcfba7
+ local-user hbunicom service-type ssh
+ local-user hbunicom level 3
+ local-user hbunicom state block fail-times 3 interval 5
+ local-user hbunicom user-group manage-ug
+  local-user hb-wh-sdncontroler password irreversible-cipher $1c$ta,LWjM``V$_~fJWbaV{HrX2nUb3JGLZY[x'lJNQBoryuVa"VK,$   local-user hb-wh-sdncontroler password irreversible-cipher ca98c44fce082ffea1d2cbf4918efbb9
+ local-user hb-wh-sdncontroler service-type ssh
+ local-user hb-wh-sdncontroler level 3
+ local-user hb-wh-sdncontroler state block fail-times 3 interval 5
+ local-user hb-wh-sdncontroler user-group manage-ug
+  local-user hb-wh-manager password irreversible-cipher $1c$tbJ=1KO+;>$G_hd4@h<K/j5a-=f0&/1EulnWQ^tZP4#UiH%M,AW$   local-user hb-wh-manager password irreversible-cipher 3a1e245d567aec7bbdf87165985555a1
+ local-user hb-wh-manager service-type ssh
+ local-user hb-wh-manager level 3
+[16D                [16D local-user hb-wh-manager state block fail-times 3 interval 5
+ local-user hb-wh-manager user-group manage-ug
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+  authentication-mode local radius
+ #
+ authorization-scheme default
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+#
+license
+[16D                [16D#
+segment-routing
+ bfd enable mode tunnel
+ bfd tunnel min-tx-interval 50 min-rx-interval 50
+#
+isis 42
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.5384.0042.0143.1108.2104.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name CVRC-XEF-1Z-UOI980W-NH-U1-HUM042
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 24000 43999
+ avoid-microloop segment-routing
+ set-overload on-startup send-sa-bit 120 allow external
+ frr
+[16D                [16D  loop-free-alternate level-2
+  ti-lfa level-2
+#
+interface Ethernet0/0/0
+ undo shutdown
+ ip binding vpn-instance __LOCAL_OAM_VPN__
+ ip address 170.146.0.1 255.255.255.0
+#
+interface GigabitEthernet0/1/0
+ mtu 9000
+  description to_HVRC-EWW-1Z-UOI980W-NH-U1-HUM042_BY0/7/0_10B:1
+ undo shutdown
+ ip address 188.1.87.143 255.255.255.252
+ trust upstream default
+ isis enable 42
+ isis circuit-type p2p
+ isis circuit-level level-2
+  isis authentication-mode md5 cipher fd0a71b16eab155990a43497bf54bd86
+ isis cost 100
+ isis small-hello
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+[16D                [16D dcn
+ link-quality low bit-error-threshold error-ratio 5 5 resume-ratio 3 5
+ clock synchronization enable
+ clock priority 5
+ ptp notslave disable
+ ptp enable
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+#
+interface GigabitEthernet0/1/1
+ undo shutdown
+ dcn
+#
+interface GigabitEthernet0/1/2
+ undo shutdown
+ dcn
+#
+[16D                [16Dinterface GigabitEthernet0/1/3
+ undo shutdown
+ dcn
+#
+interface GigabitEthernet0/7/0
+ undo shutdown
+ dcn
+#
+interface GigabitEthernet0/7/1
+ undo shutdown
+ dcn
+#
+interface GigabitEthernet0/7/2
+ undo shutdown
+ dcn
+#
+interface GigabitEthernet0/7/3
+ undo shutdown
+ dcn
+#
+interface GigabitEthernet0/7/4
+ undo shutdown
+ dcn
+[16D                [16D#
+interface GigabitEthernet0/7/5
+ mtu 9000
+  description To_WC1808V6_Si5_10BY
+ undo shutdown
+ ipv6 enable
+ ipv6 mtu 9000
+ trust upstream default
+ undo dcn
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+#
+interface GigabitEthernet0/7/5.5
+ vlan-type dot1q 5
+  description To_WC1808V6_Si5_P&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+[16D                [16D ipv6 address 462A:A384:4322:3::3:347B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/5.6
+ vlan-type dot1q 6
+  description To_WC1808V6_Si5_O&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B::3:347B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/5.7
+ vlan-type dot1q 7
+  description To_WC1808V6_Si5_P&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 462A:A384:4322:5::3:347B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/5.8
+[16D                [16D vlan-type dot1q 8
+  description To_WC1808V6_Si5_O&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B:32::3:347B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/5.51
+ vlan-type dot1q 51
+ mtu 9000
+  description To_WC1808V6_Si5_JUH_10BY
+ ip binding vpn-instance 5G_OAM
+ ipv6 enable
+ ipv6 address 462A:A384:4322:111::7:347B/126
+ ipv6 mtu 9000
+ statistic enable
+ trust upstream default
+ dhcp select relay
+ dhcpv6 relay source-ip-address 462A:A384:5122::6
+#
+interface GigabitEthernet0/7/5.3002
+ vlan-type dot1q 3002
+[16D                [16D mtu 9000
+  description To_WC1808V6_Si4_10BY
+ ip binding vpn-instance 4G_RAN
+ ip address 18.282.177.111 255.255.255.252
+ statistic enable
+#
+interface GigabitEthernet0/7/6
+ undo shutdown
+ dcn
+#
+interface GigabitEthernet0/7/7
+ mtu 9000
+  description To_WC9431Z5_Si5_10BY
+ undo shutdown
+ ipv6 enable
+ ipv6 mtu 9000
+ trust upstream default
+ undo dcn
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+[16D                [16D port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+#
+interface GigabitEthernet0/7/7.5
+ vlan-type dot1q 5
+  description To_WC9431Z5_Si5_P&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 462A:A384:4322:3::3:388B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/7.6
+ vlan-type dot1q 6
+  description To_WC9431Z5_Si5_O&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B::3:388B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/7.7
+[16D                [16D vlan-type dot1q 7
+  description To_WC9431Z5_Si5_P&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 462A:A384:4322:5::3:388B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/7.8
+ vlan-type dot1q 8
+  description To_WC9431Z5_Si5_O&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B:32::3:388B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/7.51
+ vlan-type dot1q 51
+ mtu 9000
+  description To_WC9431Z5_Si5_JUH_10BY
+ ip binding vpn-instance 5G_OAM
+ ipv6 enable
+[16D                [16D ipv6 address 462A:A384:4322:111::7:388B/126
+ ipv6 mtu 9000
+ trust upstream default
+ dhcp select relay
+ dhcpv6 relay source-ip-address 462A:A384:5122::6
+#
+interface GigabitEthernet0/7/7.3002
+ vlan-type dot1q 3002
+ mtu 9000
+  description To_WC9431Z5_Si4_10BY
+ ip binding vpn-instance 4G_RAN
+ ip address 18.282.177.163 255.255.255.252
+ statistic enable
+#
+interface GigabitEthernet0/7/8
+ mtu 9000
+  description To_WC9431Z6_Si5_10BY
+ undo shutdown
+ ipv6 enable
+ ipv6 mtu 9000
+ trust upstream default
+ undo dcn
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+[16D                [16D port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+#
+interface GigabitEthernet0/7/8.5
+ vlan-type dot1q 5
+  description To_WC9431Z6_Si5_P&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 462A:A384:4322:3::3:384B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/8.6
+ vlan-type dot1q 6
+  description To_WC9431Z6_Si5_O&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B::3:384B/126
+[16D                [16D ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/8.7
+ vlan-type dot1q 7
+  description To_WC9431Z6_Si5_P&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 462A:A384:4322:5::3:384B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/8.8
+ vlan-type dot1q 8
+  description To_WC9431Z6_Si5_O&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B:32::3:384B/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/8.51
+ vlan-type dot1q 51
+[16D                [16D mtu 9000
+  description To_WC9431Z6_Si5_JUH_10BY
+ ip binding vpn-instance 5G_OAM
+ ipv6 enable
+ ipv6 address 462A:A384:4322:111::7:384B/126
+ ipv6 mtu 9000
+ statistic enable
+ trust upstream default
+ dhcp select relay
+ dhcpv6 relay source-ip-address 462A:A384:5122::6
+#
+interface GigabitEthernet0/7/8.3002
+ vlan-type dot1q 3002
+ mtu 9000
+  description To_WC9431Z6_Si4_10BY
+ ip binding vpn-instance 4G_RAN
+ ip address 18.282.177.191 255.255.255.252
+ statistic enable
+#
+interface GigabitEthernet0/7/9
+ mtu 9000
+  description To_WC942W1U_Si5_10BY
+ undo shutdown
+[16D                [16D ipv6 enable
+ ipv6 mtu 9000
+ trust upstream default
+ undo dcn
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+#
+interface GigabitEthernet0/7/9.5
+ vlan-type dot1q 5
+  description To_WC942W1U_Si5_P&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 462A:A384:4322:3::3:373F/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/9.6
+[16D                [16D vlan-type dot1q 6
+  description To_WC942W1U_Si5_O&S2_10BY
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B::3:373F/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/9.7
+ vlan-type dot1q 7
+  description To_WC942W1U_Si5_P&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 462A:A384:4322:5::3:373F/126
+ ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/9.8
+ vlan-type dot1q 8
+  description To_WC942W1U_Si5_O&S2_QDK_10BY
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 4620:3A7:E22B:32::3:373F/126
+[16D                [16D ipv6 mtu 9000
+ statistic enable
+#
+interface GigabitEthernet0/7/9.51
+ vlan-type dot1q 51
+ mtu 9000
+  description To_WC942W1U_Si5_JUH_10BY
+ ip binding vpn-instance 5G_OAM
+ ipv6 enable
+ ipv6 address 462A:A384:4322:111::7:373F/126
+ ipv6 mtu 9000
+ statistic enable
+ trust upstream default
+ dhcp select relay
+ dhcpv6 relay source-ip-address 462A:A384:5122::6
+#
+interface GigabitEthernet0/7/9.3002
+ vlan-type dot1q 3002
+ mtu 9000
+  description To_WC942W1U_Si4_10BY
+ ip binding vpn-instance 4G_RAN
+ ip address 18.282.175.11 255.255.255.252
+ statistic enable
+[16D                [16D#
+interface LoopBack0
+  description FOR_Huiubyhyio
+ ip address 18.199.80.182 255.255.255.255
+ isis enable 42
+ isis prefix-sid index 13004
+#
+interface LoopBack1023
+  description DCN loopback interface
+ ip binding vpn-instance __dcn_vpn__
+ ip address 106.295.188.26 255.255.0.0
+#
+interface NULL0
+#
+bgp 65384
+ router-id 18.199.80.182
+ graceful-restart
+ graceful-restart peer-reset
+ peer 18.199.1.45 as-number 65384
+ peer 18.199.1.45 connect-interface LoopBack0
+  peer 18.199.1.45 password cipher 846160892bdb81c43ec86d3bd541f244
+ peer 18.199.1.47 as-number 65384
+ peer 18.199.1.47 connect-interface LoopBack0
+ [16D                [16D peer 18.199.1.47 password cipher 3beae68fc1740873aa9a8abc35c74421
+ #
+ ipv4-family unicast
+  undo synchronization
+  undo peer 18.199.1.45 enable
+  undo peer 18.199.1.47 enable
+ #
+ ipv4-family vpnv4
+  policy vpn-target
+  peer 18.199.1.45 enable
+  peer 18.199.1.45 route-update-interval 0
+  peer 18.199.1.47 enable
+  peer 18.199.1.47 route-update-interval 0
+ #
+ ipv4-family vpn-instance 4G_RAN
+  import-route direct
+  auto-frr
+ #
+ ipv4-family vpn-instance 5G_OAM
+  import-route direct
+  auto-frr
+ #
+ ipv6-family vpnv6
+[16D                [16D  policy vpn-target
+  peer 18.199.1.45 enable
+  peer 18.199.1.45 route-update-interval 0
+  peer 18.199.1.47 enable
+  peer 18.199.1.47 route-update-interval 0
+ #
+ ipv6-family vpn-instance 5G_OAM
+  import-route direct
+  auto-frr
+ #
+ ipv6-family vpn-instance 5G_RAN
+  import-route direct
+  auto-frr
+ #
+ ipv6-family vpn-instance 5G_RAN_VIP
+  import-route direct
+  auto-frr
+ #
+ l2vpn-family evpn
+  policy vpn-target
+  peer 18.199.1.45 enable
+  peer 18.199.1.47 enable
+#
+[16D                [16Dospf 65534 vpn-instance __dcn_vpn__
+  description DCN ospf create by default
+ opaque-capability enable
+ hostname
+ vpn-instance-capability simple
+ area 0.0.0.0
+  network 0.0.0.0 255.255.255.255
+#
+!The DCN function implements the capability of plug-and-play for this device.
+!A NE IP address based on the unique NE ID is automatically generated in VPN
+!of DCN. It is recommended that the NE IP address be changed to the planned 
+!one by running the ne-ip X.X.X.X <MASK> command after the device being online.
+dcn
+#
+snmp-agent
+snmp-agent acl 2020
+snmp-agent local-engineid 800007DB036CEBB63B1232
+ snmp-agent community write cipher 1a2e52c08eb5daae2f561cdb4eabae3a mib-view iso-view acl 2020
+ snmp-agent community read cipher 6ad15980643eb6ebac1ec611920e5970 mib-view iso-view acl 2020
+#
+snmp-agent sys-info version v2c v3
+snmp-agent group v3 ACTRAP privacy read-view iso write-view iso notify-view iso
+ snmp-agent target-host host-name __targetHost_1_29252 trap address udp-domain 18.199.1.238 params securityname cipher 44d23d5237b8a9c709c88d0c15f3ef56 v2c private-netmanager ext-vb
+ [16D                [16Dsnmp-agent target-host host-name __targetHost_2_50537 trap address udp-domain 170.146.232.34 params securityname cipher 49c5f95d424c8224ec86151686582e6a v2c private-netmanager ext-vb
+#
+snmp-agent mib-view included iso iso
+snmp-agent mib-view included iso-view iso
+snmp-agent usm-user v3 cuser
+snmp-agent usm-user v3 cuser group ACTRAP
+ snmp-agent usm-user v3 cuser authentication-mode sha cipher d91477eaec3f6632649a73f8a5ce5093
+ snmp-agent usm-user v3 cuser privacy-mode aes256 cipher 64953b071b9467bd133460bffd987716
+#
+snmp-agent trap enable
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfTxRetransmit
+undo snmp-agent trap enable feature-name ospf trap-name ospfOriginateLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfMaxAgeLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfTxRetransmit
+undo snmp-agent trap enable feature-name isis trap-name isisIDLenMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationTypeFailure
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationFailure
+[16D                [16Dundo snmp-agent trap enable feature-name isis trap-name isisVersionSkew
+undo snmp-agent trap enable feature-name isis trap-name isisAreaMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisRejectedAdjacency
+undo snmp-agent trap enable feature-name isis trap-name isisOrigLSPBuffSizeMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisProtocolsSupportedMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisMaxAreaAddressesMismatch
+#
+lldp enable
+#
+stelnet server enable
+sftp server enable
+snetconf server enable
+ssh user HB-WH-Manager
+ssh user HB-WH-Manager authentication-type password
+ssh user HB-WH-Manager service-type snetconf stelnet
+ssh user HB-WH-SDNcontroler
+ssh user HB-WH-SDNcontroler authentication-type password
+ssh user HB-WH-SDNcontroler service-type snetconf stelnet
+ssh user hbunicom
+ssh user hbunicom authentication-type password
+ssh user hbunicom service-type snetconf stelnet
+ssh user root
+ssh user root authentication-type password
+[16D                [16Dssh user root service-type stelnet
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#
+ ssh server cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr aes256_cbc aes192_cbc aes128_cbc
+ssh server hmac sha2_512 sha2_256 sha1
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa
+#
+ssh server dh-exchange min-len 2048
+#
+ssh client first-time enable
+ssh client peer 18.199.1.238 assign rsa-key 18.199.1.238
+ssh client peer 18.199.1.238 assign ecc-key 18.199.1.238
+sftp client-source -i LoopBack0
+#
+ssh client publickey ecc rsa
+#
+ ssh client cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr aes256_cbc aes192_cbc aes128_cbc
+ssh client hmac sha2_512 sha2_256 sha1
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+[16D                [16D#
+tunnel-policy nms-tunnel-policy
+ tunnel select-seq sr-te te sr-lsp ldp load-balance-number 1
+#
+user-interface maximum-vty 10
+#
+user-interface con 0
+ authentication-mode password
+  set authentication password cipher 887ded1528bbdd3e4f6a779491bf7765
+#
+user-interface vty 0 9
+ acl 2000 inbound
+ authentication-mode aaa
+ user privilege level 3
+ protocol inbound ssh
+#
+local-aaa-server
+#
+pm
+ statistics enable
+ pm-server PMS_101111250
+  protocol sftp ip-address 18.199.1.238
+  username ftpuser password %^%#/+\WMtSsI%!zLVWG*A7&\%zP,j!;oP4eye.T~zF+%^%#
+[16D                [16D  path ftproot/Bulk_Stat/VRP/167772481
+ upload-config PMS_101111250 server PMS_101111250
+ statistics-task n16192238_g5_i1005_t0
+  statistics-cycle 5
+  record-interval 1
+  binding instance-type interface instance GigabitEthernet0/1/0
+  binding instance-type interface instance GigabitEthernet0/7/5
+  binding instance-type interface instance GigabitEthernet0/7/8
+  binding instance-type interface instance GigabitEthernet0/7/9
+  binding instance-type interface instance GigabitEthernet0/7/5.5
+  binding instance-type interface instance GigabitEthernet0/7/5.6
+  binding instance-type interface instance GigabitEthernet0/7/5.7
+  binding instance-type interface instance GigabitEthernet0/7/5.8
+  binding instance-type interface instance GigabitEthernet0/7/8.5
+  binding instance-type interface instance GigabitEthernet0/7/8.6
+  binding instance-type interface instance GigabitEthernet0/7/8.7
+  binding instance-type interface instance GigabitEthernet0/7/8.8
+  binding instance-type interface instance GigabitEthernet0/7/9.5
+  binding instance-type interface instance GigabitEthernet0/7/9.6
+  binding instance-type interface instance GigabitEthernet0/7/9.7
+  binding instance-type interface instance GigabitEthernet0/7/9.8
+  binding instance-type interface instance GigabitEthernet0/7/5.51
+  binding instance-type interface instance GigabitEthernet0/7/8.51
+[16D                [16D  binding instance-type interface instance GigabitEthernet0/7/9.51
+  binding instance-type interface instance GigabitEthernet0/7/5.3002
+  binding instance-type interface instance GigabitEthernet0/7/8.3002
+  binding instance-type interface instance GigabitEthernet0/7/9.3002
+#
+return

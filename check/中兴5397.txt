@@ -1,0 +1,1343 @@
+show running-config
+
+!<mim>
+
+!configuration saved at 16:52:18 Tue Dec 22 2020 by write zdb
+
+!configuration saved at 20:15:26 Wed Dec 16 2020 by write txt
+
+!last configuration change at 20:10:17 Wed Dec 16 2020 by xjunicom
+
+commit-mode default automatic
+
+!</mim>
+
+!<system-config>
+
+hostname SEVYOG-GOXG-4Z-US9F8YU-NH-W001
+load-mode txt
+
+nvram boot-server 170.1.2.67
+nvram boot-server ipv6 4222::3
+nvram default-gateway 170.1.2.67
+nvram default-gateway ipv6 4222::3
+nvram boot-username upp
+
+nvram ftp-path /
+
+!</system-config>
+
+!<nsr-config>
+
+nsr service all
+
+!</nsr-config>
+
+!<vrf>
+
+ip vrf 5G_RAN
+
+  rd 65257:10010
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target import 65257:10010
+
+    route-target export 65257:10010
+
+  $
+
+  address-family ipv6
+
+    route-target import 65257:10010
+
+    route-target export 65257:10010
+
+  $
+
+$
+
+ip vrf 5G_OAM
+
+  rd 65257:10030
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target import 65257:10030
+
+    route-target export 65257:10030
+
+  $
+
+  address-family ipv6
+
+    route-target import 65257:10030
+
+    route-target export 65257:10030
+
+  $
+
+$
+
+ip vrf 5G_RAN_VIP
+
+  rd 65257:10020
+
+  mpls label mode per-vrf
+
+  mpls label mode ipv6 per-vrf
+
+  address-family ipv4
+
+    route-target import 65257:10020
+
+    route-target export 65257:10020
+
+  $
+
+  address-family ipv6
+
+    route-target import 65257:10020
+
+    route-target export 65257:10020
+
+  $
+
+$
+
+!</vrf>
+
+!<if-intf>
+
+interface xgei-0/1/0/1
+
+  mtu 9216
+
+  ip mtu 9216
+
+  mpls mtu 9216
+
+  no shutdown
+
+$
+
+interface xgei-0/1/0/1.100
+
+  ip address 18.288.203.29 255.255.255.252
+$
+
+interface xgei-0/1/0/2
+
+$
+
+interface xgei-0/1/0/3
+
+  no shutdown
+
+$
+
+interface xgei-0/1/0/4
+
+$
+
+interface xgei-0/1/0/5
+
+$
+
+interface xgei-0/1/0/6
+
+$
+
+interface xgei-0/1/0/7
+
+$
+
+interface xgei-0/1/0/8
+
+$
+
+interface xgei-0/1/0/9
+
+$
+
+interface xgei-0/1/0/10
+
+$
+
+interface xgei-0/1/0/11
+
+$
+
+interface xgei-0/1/0/12
+
+$
+
+interface xgei-0/1/0/13
+
+$
+
+interface xgei-0/1/0/14
+
+$
+
+interface xgei-0/1/0/15
+
+$
+
+interface xgei-0/1/0/16
+
+$
+
+interface xgei-0/1/0/17
+
+$
+
+interface xgei-0/1/0/18
+
+$
+
+interface xgei-0/1/0/19
+
+$
+
+interface xgei-0/1/0/20
+
+$
+
+interface spi-0/1/0/1
+
+$
+
+interface cgei-0/1/1/1
+
+   description pT:XEVG-GOXG-4Z-US9F8YU-NH-W2-100BY-0/1/1/1
+  no shutdown
+
+$
+
+interface cgei-0/1/1/1.1000
+
+   description pT:XEVG-GOXG-4Z-US9F8YU-NH-W2-100BY-0/1/1/1
+  mtu 9050
+
+  ip mtu 9000
+
+  ip address 18.288.203.1 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface cgei-0/1/1/2
+
+$
+
+interface cgei-0/1/1/3
+
+$
+
+interface cgei-0/1/1/4
+
+$
+
+interface spi-0/1/1/1
+
+$
+
+interface cgei-0/2/0/1
+
+$
+
+interface cgei-0/2/0/2
+
+$
+
+interface cgei-0/2/0/3
+
+$
+
+interface cgei-0/2/0/4
+
+$
+
+interface spi-0/2/0/1
+
+$
+
+interface xgei-0/2/1/1
+
+   description uT:XERGHL-FZL-3C2Z-IY8FS8-NH-W001-10BY-7/0/8
+  no shutdown
+
+$
+
+interface xgei-0/2/1/2
+
+   description uT:XEVG-GOXN-7750-U1-10BY-6/2/2
+  no shutdown
+
+$
+
+interface xgei-0/2/1/2.875
+
+   description uT:XEVG-GOXN-7750-U1-10BY-6/2/2
+  mtu 9050
+
+  ip mtu 9000
+
+  ip address 18.288.203.6 255.255.255.252
+  mpls mtu 9000
+
+$
+
+interface xgei-0/2/1/3
+
+  no shutdown
+
+$
+
+interface xgei-0/2/1/4
+
+$
+
+interface xgei-0/2/1/5
+
+$
+
+interface xgei-0/2/1/6
+
+$
+
+interface xgei-0/2/1/7
+
+$
+
+interface xgei-0/2/1/8
+
+$
+
+interface xgei-0/2/1/9
+
+$
+
+interface xgei-0/2/1/10
+
+$
+
+interface xgei-0/2/1/11
+
+$
+
+interface xgei-0/2/1/12
+
+$
+
+interface xgei-0/2/1/13
+
+$
+
+interface xgei-0/2/1/14
+
+$
+
+interface xgei-0/2/1/15
+
+$
+
+interface xgei-0/2/1/16
+
+$
+
+interface xgei-0/2/1/17
+
+$
+
+interface xgei-0/2/1/18
+
+$
+
+interface xgei-0/2/1/19
+
+$
+
+interface xgei-0/2/1/20
+
+$
+
+interface spi-0/2/1/1
+
+$
+
+interface cgei-0/5/0/1
+
+  no shutdown
+
+$
+
+interface cgei-0/5/0/2
+
+$
+
+interface cgei-0/5/0/3
+
+$
+
+interface cgei-0/5/0/4
+
+$
+
+interface spi-0/5/0/1
+
+$
+
+interface cgei-0/5/1/1
+
+$
+
+interface cgei-0/5/1/2
+
+$
+
+interface cgei-0/5/1/3
+
+$
+
+interface cgei-0/5/1/4
+
+$
+
+interface spi-0/5/1/1
+
+$
+
+interface ptp-0/10/0/1
+
+$
+
+interface ptp-0/10/0/2
+
+$
+
+interface extimer-0/10/0/1
+
+$
+
+interface extimer-0/10/0/2
+
+$
+
+interface extimer-0/10/0/3
+
+$
+
+interface gps-0/10/0/3
+
+$
+
+interface gps-0/10/0/4
+
+$
+
+interface qx_eth-0/10/0/1
+
+$
+
+interface ptp-0/11/0/1
+
+$
+
+interface ptp-0/11/0/2
+
+$
+
+interface extimer-0/11/0/1
+
+$
+
+interface extimer-0/11/0/2
+
+$
+
+interface extimer-0/11/0/3
+
+$
+
+interface gps-0/11/0/3
+
+$
+
+interface gps-0/11/0/4
+
+$
+
+interface qx_eth-0/11/0/1
+
+$
+
+interface mgmt_eth
+
+  ip address 170.146.0.1 255.255.255.0
+  ipv6 address 4222::A/64
+$
+
+interface loopback1
+
+   description For-2VNymqdwy
+  ip address 18.288.202.1 255.255.255.255
+$
+
+interface loopback2
+
+   description IPRAI-IHN
+  ip address 18.282.84.7 255.255.255.255
+$
+
+interface null1
+
+$
+
+interface smartgroup1
+
+   description uT:XERGHL-FZL-3C2Z-IY8FS8-NH-W001
+$
+
+interface smartgroup1.843
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 462A:A385:0322:1222::3/127
+$
+
+interface smartgroup1.873
+
+  mtu 9050
+
+  ip vrf forwarding 5G_RAN_VIP
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 462A:A385:0322:1224::3/127
+$
+
+interface smartgroup1.895
+
+  mtu 9050
+
+  ip vrf forwarding 5G_OAM
+
+  ip mtu 9000
+
+  ipv6 enable
+
+  ipv6 mtu 9000
+
+  ipv6 address 462A:A385:0322:1111::3/127
+$
+
+interface qx1
+
+$
+
+!</if-intf>
+
+!<port-physical-config>
+
+interface cgei-0/1/1/1
+
+  link-delay-up 2000
+
+$
+
+!</port-physical-config>
+
+!<clock-mgr>
+
+clock timezone Beijing 8
+
+!</clock-mgr>
+
+!<switchvlan>
+
+switchvlan-configuration
+
+  vlan 1
+
+  $
+
+$
+
+!</switchvlan>
+
+!<lacp>
+
+lacp
+
+  interface smartgroup1
+
+    lacp mode 802.3ad
+
+  $
+
+  interface xgei-0/2/1/1
+
+    smartgroup 1 mode active
+
+  $
+
+$
+
+!</lacp>
+
+!<vlan>
+
+vlan-configuration
+
+  interface xgei-0/1/0/1.100
+
+    encapsulation-dot1q 100
+
+  $
+
+  interface cgei-0/1/1/1.1000
+
+    encapsulation-dot1q 1000
+
+  $
+
+  interface xgei-0/2/1/2.875
+
+    encapsulation-dot1q 875
+
+  $
+
+  interface smartgroup1.843
+
+    encapsulation-dot1q 843
+
+  $
+
+  interface smartgroup1.873
+
+    encapsulation-dot1q 873
+
+  $
+
+  interface smartgroup1.895
+
+    encapsulation-dot1q 895
+
+  $
+
+$
+
+!</vlan>
+
+!<ipv4-acl>
+
+ipv4-access-list SmartMAN_SSH_TELNET
+
+  rule 10 permit 170.146.232.0 0.0.0.255
+  rule 20 permit 18.228.30.286 0.0.0.7
+$
+
+!</ipv4-acl>
+
+!<route-map>
+
+route-map 5G_RAN_IN permit 10
+
+  match ipv6 address prefix-list 5G_RAN_V6_IN
+
+$
+
+route-map 5G_RAN_OUT permit 10
+
+  match ipv6 address prefix-list 5G_RAN_V6_OUT
+
+$
+
+route-map 5G_RAN_VIP_OUT permit 10
+
+  match ipv6 address prefix-list 5G_RAN_VIP_V6_OUT
+
+$
+
+route-map SmartMAN_OUT permit 5
+
+  match ip address prefix-list SmartMAN_OUT
+
+$
+
+route-map SmartMAN_SDN_SNMP_IN permit 5
+
+  match ip address prefix-list SmartMAN_SDN_IN
+
+  match ip address prefix-list SmartMAN_NSM_SNMP_IN
+
+$
+
+!</route-map>
+
+!<system-user>
+
+system-user
+
+  authorization-template 1
+
+    bind aaa-authorization-template 2001
+
+  $
+
+  authorization-template 2
+
+    bind aaa-authorization-template 2002
+
+    local-privilege-level 15
+
+  $
+
+  authorization-template 10
+
+    bind aaa-authorization-template 2002
+
+    local-privilege-level 15
+
+  $
+
+  authentication-template 1
+
+    bind aaa-authentication-template 2001
+
+  $
+
+  authentication-template 2
+
+    bind aaa-authentication-template 2002
+
+  $
+
+  authentication-template 10
+
+    bind aaa-authentication-template 2002
+
+  $
+
+  default-privilege-level 2
+
+  user-name XJ-BZ-SDNcontroler
+
+    bind authentication-template 2
+
+    bind authorization-template 2
+
+     password encrypted a77abf16820f802488f4a00c4ec8e7fb
+53bb5ee459
+
+  $
+
+  user-name who
+
+    bind authentication-template 10
+
+    bind authorization-template 10
+    
+    bind authorization-template 10
+
+     password encrypted d996ed643a657a0fd76bffa256c9ad88
+cb0295edf9
+
+  $
+
+  user-name xjunicom
+
+    bind authentication-template 2
+
+    bind authorization-template 2
+
+     password encrypted 5e1b989fd46b8b21ef0edaaefe96f381
+070a36e501
+
+  $
+
+$
+
+!</system-user>
+
+!<prefix-list>
+
+ip prefix-list SmartMAN_NSM_SNMP_IN seq 5 permit 170.146.232.0 24
+ip prefix-list SmartMAN_OUT seq 5 permit 18.288.202.0 19
+ip prefix-list SmartMAN_SDN_IN seq 5 permit 18.228.30.286 29
+ipv6 prefix-list 5G_RAN_V6_IN seq 5 permit 462A:A365:0217:322::/60
+ipv6 prefix-list 5G_RAN_V6_IN seq 10 permit 462A:A365:0217:332::/60
+ipv6 prefix-list 5G_RAN_V6_IN seq 15 permit 462A:A365:0217:342::/60
+ipv6 prefix-list 5G_RAN_V6_IN seq 20 permit 462A:A365:0217:352::/60
+ipv6 prefix-list 5G_RAN_V6_IN seq 25 permit 462A:A365:8211:11A2::/60
+ipv6 prefix-list 5G_RAN_V6_IN seq 30 permit 462A:A365:8211:1132::/60
+ipv6 prefix-list 5G_RAN_V6_IN seq 35 permit 462A:A365:8211:11B2::/60
+ipv6 prefix-list 5G_RAN_V6_IN seq 40 permit 462A:A365:8211:1122::/60
+ipv6 prefix-list 5G_RAN_V6_OUT seq 5 permit 462A:A385:0322:1222::/64
+ipv6 prefix-list 5G_RAN_V6_OUT seq 10 permit 462A:A385:0322:1232::/64
+ipv6 prefix-list 5G_RAN_VIP_V6_OUT seq 5 permit 462A:A385:0322:1224::/64
+ipv6 prefix-list 5G_RAN_VIP_V6_OUT seq 10 permit 462A:A385:0322:1234::/64
+!</prefix-list>
+
+!<ptp>
+
+ptp
+
+  fixed-mode
+
+  $
+
+  free-mode
+
+  $
+
+$
+
+!</ptp>
+
+!<aaa>
+
+aaa-authentication-template 2001
+
+  aaa-authentication-type local
+
+$
+
+aaa-authentication-template 2002
+
+  aaa-authentication-type local
+
+$
+
+aaa-authorization-template 2001
+
+  aaa-authorization-type local
+
+$
+
+aaa-authorization-template 2002
+
+  aaa-authorization-type local
+
+$
+
+!</aaa>
+
+!<stp>
+
+spantree
+
+$
+
+!</stp>
+
+!<ssh>
+
+ssh server access-class ipv4 SmartMAN_SSH_TELNET
+
+!</ssh>
+
+!<alarm>
+
+logging file default almlog
+
+  accept on
+
+$
+
+logging file default cmdlog
+
+  buffer 1000
+
+$
+
+logging file default netclog
+
+  accept on
+
+$
+
+logging file default snmplog
+
+  accept on
+
+$
+
+logging file default srvlog
+
+  accept on
+
+  interval 10
+
+$
+
+logging file default weblog
+
+  accept on
+
+$
+
+logging snmp
+
+  accept on
+
+  match cmdlog
+
+$
+
+!</alarm>
+
+!<ftp>
+
+ftp-client source-interface loopback2
+
+!</ftp>
+
+!<snmp>
+
+snmp-server access-list ipv4 SmartMAN_SSH_TELNET
+
+snmp-server community encrypted 97f9b62439930ac9954fcd841fce8cbe6cad51a1d009cffd
+
+bc89aab493291b96 view lldpview ro 
+
+snmp-server community encrypted 97f9b62439930ac9f9bd2123dc9569a76f6c28d15a962b3e
+
+bca67c1875b3a2a3 view lldpview rw 
+
+snmp-server enable inform snmp
+
+snmp-server enable inform bgp
+
+snmp-server enable inform mac
+
+snmp-server enable inform ospf
+
+snmp-server enable inform stp
+
+snmp-server enable inform ppp
+
+snmp-server enable inform arp
+
+snmp-server enable inform rmon
+
+snmp-server enable inform udld
+
+snmp-server enable inform cfm
+
+snmp-server enable inform efm
+
+snmp-server enable inform lacp
+
+snmp-server enable inform mc-elam
+
+snmp-server enable inform tcp
+
+snmp-server enable inform sctp
+
+snmp-server enable inform stalarm
+
+snmp-server enable inform cps
+
+snmp-server enable inform interface
+
+snmp-server enable inform acl
+
+snmp-server enable inform fib
+
+snmp-server enable inform pim
+
+snmp-server enable inform isis
+
+snmp-server enable inform rip
+
+snmp-server enable inform msdp
+
+snmp-server enable inform aps
+
+snmp-server enable inform config
+
+snmp-server enable inform am
+
+snmp-server enable inform um
+
+snmp-server enable inform system
+
+snmp-server enable inform ldp
+
+snmp-server enable inform pwe3
+
+snmp-server enable inform vpn
+
+snmp-server enable inform mpls-oam
+
+snmp-server enable inform ptp
+
+snmp-server enable inform tunnel-te
+
+snmp-server enable inform radius
+
+snmp-server enable inform dhcp
+
+snmp-server enable inform bfd
+
+snmp-server enable inform ippool
+
+snmp-server enable inform ntp
+
+snmp-server enable inform ssm
+
+snmp-server enable inform sqa
+
+snmp-server enable inform ipsec
+
+snmp-server enable inform cgn
+
+snmp-server enable inform vrrp
+
+snmp-server enable inform ftp_tftp
+
+snmp-server enable inform ping-trace
+
+snmp-server enable inform gm
+
+snmp-server enable trap snmp
+
+snmp-server enable trap bgp
+
+snmp-server enable trap mac
+
+snmp-server enable trap ospf
+
+snmp-server enable trap stp
+
+snmp-server enable trap ppp
+
+snmp-server enable trap arp
+
+snmp-server enable trap rmon
+
+snmp-server enable trap udld
+
+snmp-server enable trap cfm
+
+snmp-server enable trap efm
+
+snmp-server enable trap lacp
+
+snmp-server enable trap mc-elam
+
+snmp-server enable trap tcp
+
+snmp-server enable trap sctp
+
+snmp-server enable trap stalarm
+
+snmp-server enable trap cps
+
+snmp-server enable trap interface
+
+snmp-server enable trap acl
+
+snmp-server enable trap fib
+
+snmp-server enable trap pim
+
+snmp-server enable trap isis
+
+snmp-server enable trap rip
+
+snmp-server enable trap msdp
+
+snmp-server enable trap aps
+
+snmp-server enable trap config
+
+snmp-server enable trap am
+
+snmp-server enable trap um
+
+snmp-server enable trap system
+
+snmp-server enable trap ldp
+
+snmp-server enable trap pwe3
+
+snmp-server enable trap vpn
+
+snmp-server enable trap mpls-oam
+
+snmp-server enable trap ptp
+
+snmp-server enable trap tunnel-te
+
+snmp-server enable trap radius
+
+snmp-server enable trap dhcp
+
+snmp-server enable trap bfd
+
+snmp-server enable trap ippool
+
+snmp-server enable trap ntp
+
+snmp-server enable trap ssm
+
+snmp-server enable trap sqa
+
+snmp-server enable trap ipsec
+
+snmp-server enable trap cgn
+
+snmp-server enable trap vrrp
+
+snmp-server enable trap ftp_tftp
+
+snmp-server enable trap ping-trace
+
+snmp-server enable trap gm
+
+snmp-server host 170.146.232.36 trap version 2c encrypted 97f9b62439930ac9954fcd
+841fce8cbe6cad51a1d009cffdbc89aab493291b96 udp-port 162 snmp bgp mac ospf stp pp
+
+p arp rmon udld cfm efm lacp mc-elam tcp sctp stalarm cps interface acl fib pim 
+
+isis rip msdp aps config am um system ldp pwe3 vpn mpls-oam ptp tunnel-te radius
+
+ dhcp bfd ippool ntp
+
+snmp-server host 170.146.232.36 trap version 2c encrypted 97f9b62439930ac9954fcd
+841fce8cbe6cad51a1d009cffdbc89aab493291b96 udp-port 162 ssm sqa ipsec cgn vrrp f
+
+tp_tftp ping-trace gm
+
+snmp-server host 170.146.232.36 inform version 2c encrypted 97f9b62439930ac9954f
+cd841fce8cbe6cad51a1d009cffdbc89aab493291b96 udp-port 162 snmp bgp mac ospf stp 
+
+ppp arp rmon udld cfm efm lacp mc-elam tcp sctp stalarm cps interface acl fib pi
+
+m isis rip msdp aps config am um system ldp pwe3 vpn mpls-oam ptp tunnel-te radi
+
+us dhcp bfd ippool ntp
+
+snmp-server host 170.146.232.36 inform version 2c encrypted 97f9b62439930ac9954f
+cd841fce8cbe6cad51a1d009cffdbc89aab493291b96 udp-port 162 ssm sqa ipsec cgn vrrp
+
+ ftp_tftp ping-trace gm
+
+snmp-server trap-source 18.288.202.1
+snmp-server view lldpview iso included
+
+snmp-server view n31view iso included
+
+snmp-server version v2c enable
+
+!</snmp>
+
+!<telnet>
+
+line telnet absolute-timeout 0
+
+line telnet idle-timeout 30
+
+!</telnet>
+
+!<ipv6-static-route>
+
+ipv6 route vrf 5G_RAN 462A:A385:0322:1222::/64 null1
+ipv6 route vrf 5G_RAN 462A:A385:0322:1232::/64 null1
+ipv6 route vrf 5G_RAN_VIP 462A:A385:0322:1224::/64 null1
+ipv6 route vrf 5G_RAN_VIP 462A:A385:0322:1234::/64 null1
+!</ipv6-static-route>
+
+!<bgp>
+
+router bgp 65256
+
+  synchronization disable
+
+  bgp router-id 18.288.202.1
+  bgp cluster-id 18.288.202.1
+  bgp default route-target filter disable
+
+  network 18.288.202.0 255.255.224.0
+  neighbor 18.288.203.5 remote-as 38351
+  neighbor 18.288.203.5 activate
+  neighbor 18.288.203.5 weight 100
+  neighbor 18.288.203.5 fall-over bfd interval 150 min-rx 150 multiplier 3
+  neighbor 18.288.203.5 route-map SmartMAN_SDN_SNMP_IN in
+  neighbor 18.288.203.5 route-map SmartMAN_OUT out
+  address-family ipv6 vrf 5G_RAN
+
+    bgp frr
+
+    bgp frr wtr 5
+
+    network 462A:A385:0322:1222::/64
+    network 462A:A385:0322:1232::/64
+    neighbor 462A:A385:0322:1222:: remote-as 65249
+    neighbor 462A:A385:0322:1222:: activate
+    neighbor 462A:A385:0322:1222:: weight 100
+     neighbor 462A:A385:0322:1222:: password encrypted e7f9136447943e1e85c1feb205475f5b
+qbRaDnebeopIMvp/ii3EpFCOrL+UDvKz8k0IoUe7Ne17y79SF6d26+SO9MVRtpLUsQ9baIJQaeUE8d1w
+
+o=
+
+    neighbor 462A:A385:0322:1222:: route-map 5G_RAN_IN in
+    neighbor 462A:A385:0322:1222:: route-map 5G_RAN_OUT out
+  $
+
+  address-family ipv6 vrf 5G_RAN_VIP
+
+    bgp frr
+
+    bgp frr wtr 5
+
+    network 462A:A385:0322:1224::/64
+    network 462A:A385:0322:1234::/64
+    neighbor 462A:A385:0322:1224:: remote-as 65249
+    neighbor 462A:A385:0322:1224:: activate
+    neighbor 462A:A385:0322:1224:: weight 100
+     neighbor 462A:A385:0322:1224:: password encrypted e7f9136447943e1e85c1feb205475f5b
+qbRaDnebeopIMvp/ii3EpFCOrL+UDvKz8k0IoUe7Ne17y79SF6d26+SO9MVRtpLUsQ9baIJQaeUE8d1w
+
+o=
+
+    neighbor 462A:A385:0322:1224:: route-map 5G_RAN_VIP_OUT out
+  $
+
+  address-family ipv6 vrf 5G_OAM
+
+    bgp frr
+
+    bgp frr wtr 5
+
+    neighbor 462A:A385:0322:1111:: remote-as 65249
+    neighbor 462A:A385:0322:1111:: activate
+    neighbor 462A:A385:0322:1111:: weight 100
+     neighbor 462A:A385:0322:1111:: password encrypted e7f9136447943e1e85c1feb205475f5b
+qbRaDnebeopIMvp/ii3EpFCOrL+UDvKz8k0IoUe7Ne17y79SF6d26+SO9MVRtpLUsQ9baIJQaeUE8d1w
+
+o=
+
+  $
+
+$
+
+!</bgp>
+
+!<isis>
+
+router isis 1000
+
+  area 00.0909
+
+  system-id 0102.0022.4001
+
+  router-id 18.288.202.1
+  is-type level-2-only
+
+  metric-style wide
+
+  fast-flood 5
+
+  fast-reroute ti-lfa sr-mpls
+
+  i-spf
+
+  lsp-gen-interval 1 50 50
+
+  spf-interval 1 50 50
+
+  maximum-paths 8
+
+  mpls traffic-eng level-2
+
+  redistribute bgp route-map SmartMAN_SDN_SNMP_IN
+
+  restart enable
+
+  segment-routing mpls enable
+
+  set-overload-bit on-start-up 300
+
+  interface loopback1
+
+    ip router isis
+
+    circuit-type level-2-only
+
+    passive-mode
+
+  $
+
+  interface cgei-0/1/1/1.1000
+
+    ip router isis
+
+    bfd-enable
+
+    bfd-time-negotiation min-tx 10 min-rx 10 multiplier 3
+
+    circuit-type level-2-only
+
+    metric 150 level-2
+
+    network point-to-point
+
+  $
+
+$
+
+!</isis>
+
+!<ospfv2>
+
+router ospf 2
+
+  area 0.0.0.0
+    network 18.282.84.7 0.0.0.0
+    network 18.288.203.28 0.0.0.3
+    network 18.288.203.0 0.0.0.3
+  $
+
+  router-id 18.282.84.7
+$
+
+!</ospfv2>
+
+!<static>
+
+ip route 18.288.202.0 255.255.224.0 null1
+!</static>
+
+!<load-sharing>
+
+load-sharing hash-fields mpls ip-l4
+
+load-sharing hash-fields mpls l2
+
+!</load-sharing>
+

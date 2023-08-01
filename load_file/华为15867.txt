@@ -1,0 +1,838 @@
+display current-configuration
+!Software Version V300R005C00SPC600
+!Last configuration was updated at 2021-01-08 00:36:51+08:00 by cqlt
+!Last configuration was saved at 2021-01-15 09:34:23+08:00 by CQ-CQ-SDNcontroler
+#
+loop-detect trigger enable
+#
+mpls fragment enable
+#
+clock timezone Beijing add 08:00:00
+#
+sysname BPXZ-F6WXK-0G0E-YSM980B-RL-Y1
+#
+set neid d5babe
+lldp enable-dcn authentication %^%#/vH]8;MUZ$kCQ=R-i!<-CADoCJ*zC3k]UwY)bg($%^%#
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+FTP client-source -i LoopBack0
+#
+info-center source default channel 0 log state off
+info-center source default channel 2 log level warning
+info-center source default channel 4 log level notification
+[16D                [16Dinfo-center loghost source LoopBack0
+info-center loghost 12.158.0.260
+info-center logbuffer size 1024
+#
+undo user-security-policy enable
+#
+port-wred af4-cs7-pq
+ queue-depth 2000
+#
+port-wred be-af3
+ queue-depth 8000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af4-cs7-pq-10ge-ge
+ queue-depth 1000
+[16D                [16D#
+port-wred be-af3-10ge-ge
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2-10ge-ge
+ queue-depth 2000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+ntp-service server disable
+ntp-service ipv6 server disable
+ ntp-service authentication-keyid 1 authentication-mode md5 cipher e69cbab9cf07a24c14253e82304564fb
+ntp-service reliable authentication-keyid 1
+ntp-service unicast-server 12.162.14.276 authentication-keyid 1 source-interface LoopBack0
+ntp-service unicast-server 12.162.14.277 authentication-keyid 1 source-interface LoopBack0 preference
+ntp-service authentication enable
+ntp-service source-interface LoopBack0
+#
+alarm
+[16D                [16D suppression alarm-name hwMplsTunnelHotstandbySwitch cause-period 60
+ suppression alarm-name hwBfdSessFaultDown cause-period 600
+ suppression alarm-name hwPortDown cause-period 5
+ suppression alarm-name hwLosAlarm cause-period 5
+ suppression alarm-name hwIfFlowDown cause-period 60
+ suppression alarm-name hwPWVcDown cause-period 60
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand cause-period 600
+#
+rsa peer-public-key 12.162.0.267
+ public-key-code begin
+ 3082010A
+  02820101
+    00C57B6E 56546DD3 21600D36 DA96C84F 7BF75532 D7D8979B 4443CF99 EFE0C3F2
+    26D3ABBB C1E3D1FE 217CB2BC E10FBAF7 6EC8D030 9F1E10C7 8F570E64 3F3B25B2
+    A185EC90 D93A6B51 5BD25E1D 5BBE24CE F1342A6A 9A86A322 46899FCE 060030B8
+    5F0D82D1 B7F192B6 9DB07661 E4AB670C CF07ED69 56B7724F CEED004C E091BBD4
+    27473874 094E7F58 D9BC1C52 A7E18CBA 49A4016C A0C4029D 879DDAA5 93C1525F
+    457341DF 819BECEB 07C09A35 FA259DCA 90DE8344 41A9AD9D 6C4F2F69 0949DCCC
+    0847B005 2D1D9B1F 0B55D3F2 6DDC52BE E9E44C1E 1767CC45 32E72395 35920B68
+    7F08C996 443DFFF7 F4084233 1644B451 D1DAE62E E1E30B69 B7257B3F 76703EF8
+    61
+  0203
+    010001
+[16D                [16D public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 12.162.0.267
+ public-key-code begin
+  04BC02A0 447770F5 32645E5F 6D707437 25E17C55 2EBB9D02 23F1343D A4605ADC
+  154B636B BC9E09C3 C1911C94 67D70ABA 0E448900 B164146A A83A039F 3F1D2940
+  A5
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 140.197.148.160
+ public-key-code begin
+  04007E30 69809385 2F13AA6E 449CC605 82D15368 13C1533D 34044183 7DDDD6CE
+  1D0F257F CB50C767 F81C163C 61B0DBB9 4CA1CE49 E95733EC 6FD16A95 51AA5734
+  72CA6600 D5DBB1AD EBE05344 E73134F8 0AB001FC AC7B3AF8 3D1D2EAF CBE51834
+  780742D5 79174086 B44BB40C 493E228A FD3D0EAA C855F2FE C79390D3 F330ECF3
+  2786D2E5 2A
+ public-key-code end
+ peer-public-key end
+#
+dot1x-template 1
+#
+[16D                [16Drouter id 12.162.14.56
+#
+undo telnet server enable
+undo telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+#
+forward alarm cpu-usage multi-core threshold 95
+forward alarm vcpu-usage multi-core threshold 95
+#
+ptp enable
+ptp domain 24
+ptp device-type bc
+ptp passive-measure enable
+ptp clock-source local priority2 200
+#
+clock freq-deviation-detect enable
+clock ethernet-synchronization enable
+#
+soc
+#
+ip vpn-instance 3G_RAN
+ [16D                [16D description IN_CghmyTmhbnl_3F
+ ipv4-family
+  route-distinguisher 65448:18040
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:18040 export-extcommunity
+  vpn-target 65448:18040 import-extcommunity
+#
+ip vpn-instance 4G_OAM
+  description IN_CghmyTmhbnl_KSD
+ ipv4-family
+  route-distinguisher 65448:18030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:18030 export-extcommunity
+  vpn-target 65448:18030 import-extcommunity
+#
+ip vpn-instance 4G_RAN
+  description IN_CghmyTmhbnl_KSD
+ ipv4-family
+  route-distinguisher 65448:18020
+[16D                [16D  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:18020 export-extcommunity
+  vpn-target 65448:1023007 export-extcommunity
+  vpn-target 65448:18020 import-extcommunity
+#
+ip vpn-instance 5G_OAM
+  description IN_CghmyTmhbnl_MQ
+ ipv4-family
+  route-distinguisher 65448:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10030 export-extcommunity
+  vpn-target 65448:10030 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10030 export-extcommunity
+  vpn-target 65448:10030 import-extcommunity
+[16D                [16D#
+ip vpn-instance 5G_RAN
+  description IN_CghmyTmhbnl_MQ
+ ipv4-family
+  route-distinguisher 65448:10010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10010 export-extcommunity
+  vpn-target 65448:1023007 export-extcommunity
+  vpn-target 65448:10010 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10010 export-extcommunity
+  vpn-target 65448:1023007 export-extcommunity
+  vpn-target 65448:10010 import-extcommunity
+#
+ip vpn-instance 5G_RAN_VIP
+  description IN_CghmyTmhbnl_MQ
+ ipv4-family
+[16D                [16D  route-distinguisher 65448:10020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10020 export-extcommunity
+  vpn-target 65448:1023007 export-extcommunity
+  vpn-target 65448:10020 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10020 export-extcommunity
+  vpn-target 65448:1023007 export-extcommunity
+  vpn-target 65448:10020 import-extcommunity
+#
+ip vpn-instance CQUNICOM_APN
+  description CQUNHBNL_YOM
+ ipv4-family
+  route-distinguisher 65448:50000
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+[16D                [16D  vpn-target 65448:50000 export-extcommunity
+  vpn-target 5448:12 export-extcommunity
+  vpn-target 65448:50000 import-extcommunity
+#
+ip vpn-instance CQUNICOM_POWER
+  description CQUNHBNL_ONVDQ
+ ipv4-family
+  route-distinguisher 65448:40000
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:40000 export-extcommunity
+  vpn-target 5448:12 export-extcommunity
+  vpn-target 65448:40000 import-extcommunity
+#
+ip vpn-instance LTE-OAM-VPN
+  description LTE-NYL-UOM
+ ipv4-family
+  route-distinguisher 65448:20002
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:20002 export-extcommunity
+[16D                [16D  vpn-target 65448:20002 import-extcommunity
+#
+ip vpn-instance LTE-VPN
+  description LTE-UOM
+ ipv4-family
+  route-distinguisher 65448:20001
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:20001 export-extcommunity
+  vpn-target 5448:12 export-extcommunity
+  vpn-target 65448:20001 import-extcommunity
+#
+ip vpn-instance MANAGERMENT_M
+  description MANAFDQLDMS_L
+ ipv4-family
+  route-distinguisher 65448:60001
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:60001 export-extcommunity
+  vpn-target 5448:12 export-extcommunity
+  vpn-target 65448:60001 import-extcommunity
+[16D                [16D#
+ip vpn-instance WCDMAVPN
+  description WCDMYUOM
+ ipv4-family
+  route-distinguisher 65448:10000
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10000 export-extcommunity
+  vpn-target 5448:12 export-extcommunity
+  vpn-target 65448:10000 import-extcommunity
+#
+ip vpn-instance __LOCAL_OAM_VPN__
+ ipv4-family
+ ipv6-family
+#
+ip dcn vpn-instance __dcn_vpn__
+ ipv4-family
+#
+undo pnp enable
+#
+bfd
+ mpls-passive
+[16D                [16D#
+mpls lsr-id 12.162.14.56
+#
+mpls
+#
+mpls l2vpn
+#
+mpls ldp
+ #
+ ipv4-family
+#
+acl number 2000
+ rule 6 permit source 12.158.0.262 0.0.0.15
+ rule 7 permit source 114.180.276.0 0.0.0.255
+ rule 8 permit source 12.162.0.262 0.0.0.15
+#
+acl number 2077
+ rule 5 permit source 158.0.0.0 0.277.277.277
+ rule 10 permit source 12.158.0.0 0.0.255.255
+ rule 15 permit source 12.176.46.0 0.0.0.255
+ rule 20 permit source 12.177.46.158 0.0.0.3
+ rule 25 permit source 12.162.0.0 0.0.255.255
+ rule 30 permit source 162.0.0.0 0.277.277.277
+[16D                [16D rule 35 permit source 114.180.276.0 0.0.0.255
+ rule 40 permit vpn-instance __dcn_vpn__ source 140.0.0.0 0.277.277.277
+ rule 45 permit source 12.262.34.166 0.0.0.7
+ rule 50 permit source 12.262.35.18 0.0.0.7
+#
+security password
+ #
+ rule admin
+  forbidden word changeme_123
+#
+aaa
+  local-user root password irreversible-cipher $1c$lxM}0A,3Z-$zR)S8zPgvW-'CxOT/0s=Rx\,&~pF;YoS&v.{S3#4$   local-user root password irreversible-cipher a1a1c057662e0518bdbfcf36c612a76b
+ local-user root service-type ssh
+ local-user root state block fail-times 3 interval 5
+ local-user root user-group manage-ug
+  local-user cqlt password irreversible-cipher $1c$@8<e(rw54T$U~'*9aq,A(.o52RZaB9WXlW0T"<BN'UHK=-6^VX6$   local-user cqlt password irreversible-cipher 592a9350b549871d988f726972bfac24
+ local-user cqlt service-type telnet ssh
+ local-user cqlt level 3
+ local-user cqlt state active
+  local-user cqunicom password irreversible-cipher $1c$,7KE5mw(P'$Xw-r(t(bv90MhO=gH{n&aY_wT7X7B5792n"gcIf7$   local-user cqunicom password irreversible-cipher bee28df7c4e72a5f1a9d31586e4d3d26
+ local-user cqunicom service-type telnet ssh
+ local-user cqunicom level 3
+ local-user cqunicom state active
+ [16D                [16D local-user cq-cq-sdncontroler password irreversible-cipher $1c$WJNf$WUpp1$>RSQ/L|q='/vz34@ZqMXlJ%N-"hz1OIIFzSM16'%$  [16D                [16D local-user cq-cq-sdncontroler password irreversible-cipher 600b2b21754bd9297ea0315cf77f133e
+ local-user cq-cq-sdncontroler service-type telnet ssh
+ local-user cq-cq-sdncontroler level 3
+ local-user cq-cq-sdncontroler state block fail-times 3 interval 5
+  local-user cq-cq-manager password irreversible-cipher $1c$kJ'0Ae:brP$fwn4LdY679v\]2REZU5$cRE/FHhN<4!GE5#W1P4$$   local-user cq-cq-manager password irreversible-cipher a0be6ed7b2eae900e103a6a33b4457cb
+ local-user cq-cq-manager service-type telnet ssh
+ local-user cq-cq-manager level 3
+ local-user cq-cq-manager state block fail-times 3 interval 5
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+  authentication-mode local radius
+ #
+ authorization-scheme default
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ domain default0
+[16D                [16D #
+ domain default1
+ #
+ domain default_admin
+#
+license
+#
+segment-routing
+ bfd enable mode tunnel
+ bfd tunnel min-tx-interval 50 min-rx-interval 50
+#
+isis 7
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10
+ network-entity 86.5448.1000.0101.4001.2054.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name BPXZ-F6WXK-0G0E-YSM980B-RL-Y1
+ timer spf 1 50 50
+[16D                [16D traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 76800 142334
+ avoid-microloop segment-routing
+ set-overload on-startup send-sa-bit 120 allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+interface Ethernet0/0/0
+ undo shutdown
+ ip binding vpn-instance __LOCAL_OAM_VPN__
+ ip address 114.180.0.1 255.255.255.0
+#
+interface 25GE0/3/0
+ mtu 9000
+  description TO CQCQ-YB-GBZX-SM-ATN980C-A1-10GE0/4/0
+ undo shutdown
+ ip address 162.14.7.28 255.255.255.252
+ trust upstream default
+ isis enable 7
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher d45bb561243b3415b75a4ab8239370b4
+[16D                [16D isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ clock priority 5
+ ptp enable
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+#
+interface 25GE0/3/1
+[16D                [16D undo shutdown
+ dcn
+#
+interface 25GE0/3/2
+  description TO 5G-YB-SHBCG1819G6XYBYLE5G
+ undo shutdown
+ trust upstream default
+ undo dcn
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+#
+interface 25GE0/3/2.843
+ vlan-type dot1q 843
+  description TO 5G-YB-SHBCG1819G6XYBYLE5G
+[16D                [16D ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7C8:2686::FAB/126
+ ipv6 mtu 9000
+ trust upstream default
+#
+interface 25GE0/3/2.873
+ vlan-type dot1q 873
+  description TO 5G-YB-SHBCG1819G6XYBYLE5G
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 mtu 9000
+ trust upstream default
+#
+interface 25GE0/3/2.875
+ vlan-type dot1q 875
+  description TO 5G-YB-SHBCG1819G6XYBYLE5G
+ ip binding vpn-instance 5G_OAM
+ ipv6 enable
+ ipv6 address 8A6E:E7C8:2686:555::FAB/126
+ ipv6 mtu 9000
+ trust upstream default
+ dhcp select relay
+[16D                [16D dhcp option82 rebuild enable
+ dhcpv6 relay destination 8A6E:E7C8:2655:5555:5555:5555:5555:5568
+#
+interface 25GE0/3/2.1843
+ vlan-type dot1q 1843
+  description TO 5G-YB-SHBCG1819G6XYBYLE5G
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A64:7E9:87::FAB/126
+ ipv6 mtu 9000
+ trust upstream default
+#
+interface 25GE0/3/2.1873
+ vlan-type dot1q 1873
+  description TO 5G-YB-SHBCG1819G6XYBYLE5G
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 mtu 9000
+ trust upstream default
+#
+interface 25GE0/3/3
+  description TO 5G-YB-SHBCG1780G6XYBYLA(5G)
+ undo shutdown
+[16D                [16D trust upstream default
+ undo dcn
+ clock synchronization enable
+ ptp enable
+#
+interface 25GE0/3/3.301
+ vlan-type dot1q 301
+  description TO 5G-YB-SHBCG1780G6XYBYLA(5G)
+ ip binding vpn-instance LTE-VPN
+ ip address 64.184.226.107 255.255.255.248
+ statistic enable
+ trust upstream default
+ dhcp select relay
+ ip relay address 12.247.277.7
+ ip relay address 12.277.277.8
+ dhcp option82 rebuild enable
+#
+interface 25GE0/3/3.304
+ vlan-type dot1q 304
+  description TO 5G-YB-SHBCG1780G6XYBYLA(5G)
+ ip binding vpn-instance LTE-VPN
+ ip address 44.90.226.107 255.255.255.248
+ statistic enable
+[16D                [16D trust upstream default
+#
+interface 25GE0/3/3.843
+ vlan-type dot1q 843
+  description TO 5G-YB-SHBCG1780G6XYBYLA(5G)
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7C8:2686::907/126
+ ipv6 mtu 9000
+ trust upstream default
+#
+interface 25GE0/3/3.875
+ ipv6 enable
+ ipv6 mtu 9000
+ trust upstream default
+#
+interface 25GE0/3/3.1843
+ vlan-type dot1q 1843
+  description TO 5G-YB-SHBCG1780G6XYBYLA(5G)
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A64:7E9:87::907/126
+ ipv6 mtu 9000
+[16D                [16D trust upstream default
+#
+interface 25GE0/4/0
+ mtu 9000
+  description TO CQCQ-YB-YLJF-NE8KM14-SM-E004-10GE0/1/3
+ undo shutdown
+ ip address 162.14.7.21 255.255.255.252
+ trust upstream default
+ isis enable 7
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher e2db750ee6460a9939031133a02bba9f
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ clock priority 10
+[16D                [16D ptp enable
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+#
+interface 25GE0/4/1
+ undo shutdown
+ dcn
+#
+interface 25GE0/4/2
+ undo shutdown
+ dcn
+#
+interface 25GE0/4/3
+ undo shutdown
+ dcn
+#
+interface LoopBack0
+ [16D                [16D description For Manager&LSRID
+ ip address 12.162.14.56 255.255.255.255
+ isis enable 7
+ isis prefix-sid index 12054
+#
+interface LoopBack1023
+  description DCN loopback interface
+ ip binding vpn-instance __dcn_vpn__
+ ip address 140.235.108.112 255.255.0.0
+#
+interface NULL0
+#
+bgp 65448
+ router-id 12.162.14.56
+ graceful-restart
+ graceful-restart peer-reset
+ group MER-M internal
+ peer MER-M connect-interface LoopBack0
+  peer MER-M password cipher e305ec8a5823c0c02d762ddc3b4bcd36
+ peer 12.162.14.277 as-number 65448
+ peer 12.162.14.277 group MER-M
+ group MER-S internal
+ peer MER-S connect-interface LoopBack0
+ [16D                [16D peer MER-S password cipher 20d9a97703e743ee47a1f7f334f6b8f9
+ peer 12.162.14.276 as-number 65448
+ peer 12.162.14.276 group MER-S
+ #
+ ipv4-family unicast
+  undo synchronization
+  undo peer MER-M enable
+  undo peer MER-S enable
+  undo peer 12.162.14.276 enable
+  undo peer 12.162.14.277 enable
+ #
+ ipv4-family vpnv4
+  policy vpn-target
+  peer MER-M enable
+  peer MER-M route-update-interval 0
+  peer 12.162.14.277 enable
+  peer 12.162.14.277 group MER-M
+  peer MER-S enable
+  peer MER-S route-update-interval 0
+  peer 12.162.14.276 enable
+  peer 12.162.14.276 group MER-S
+ #
+ ipv4-family vpn-instance 3G_RAN
+[16D                [16D  import-route direct
+ #
+ ipv4-family vpn-instance 4G_OAM
+  import-route direct
+ #
+ ipv4-family vpn-instance 4G_RAN
+  import-route direct
+ #
+ ipv4-family vpn-instance CQUNICOM_APN
+  import-route direct
+ #
+ ipv4-family vpn-instance CQUNICOM_POWER
+  import-route direct
+ #
+ ipv4-family vpn-instance LTE-OAM-VPN
+  import-route direct
+ #
+ ipv4-family vpn-instance LTE-VPN
+  import-route direct
+ #
+ ipv4-family vpn-instance MANAGERMENT_M
+  import-route direct
+ #
+[16D                [16D ipv4-family vpn-instance WCDMAVPN
+  import-route direct
+ #
+ ipv6-family vpnv6
+  policy vpn-target
+  peer MER-M enable
+  peer MER-M route-update-interval 0
+  peer 12.162.14.277 enable
+  peer 12.162.14.277 group MER-M
+  peer MER-S enable
+  peer MER-S route-update-interval 0
+  peer 12.162.14.276 enable
+  peer 12.162.14.276 group MER-S
+ #
+ ipv6-family vpn-instance 5G_OAM
+  import-route direct
+ #
+ ipv6-family vpn-instance 5G_RAN
+  import-route direct
+ #
+ ipv6-family vpn-instance 5G_RAN_VIP
+  import-route direct
+ #
+[16D                [16D l2vpn-family evpn
+  policy vpn-target
+  peer MER-M enable
+  peer 12.162.14.277 enable
+  peer 12.162.14.277 group MER-M
+  peer MER-S enable
+  peer 12.162.14.276 enable
+  peer 12.162.14.276 group MER-S
+#
+ospf 65534 vpn-instance __dcn_vpn__
+  description DCN ospf create by default
+ opaque-capability enable
+ hostname
+ vpn-instance-capability simple
+ area 0.0.0.0
+  network 0.0.0.0 255.255.255.255
+#
+!The DCN function implements the capability of plug-and-play for this device.
+!A NE IP address based on the unique NE ID is automatically generated in VPN
+!of DCN. It is recommended that the NE IP address be changed to the planned 
+!one by running the ne-ip X.X.X.X <MASK> command after the device being online.
+dcn
+#
+[16D                [16Dnqa twamp-light
+ client
+   test-session 1 sender-ip 162.14.7.28 reflector-ip 162.14.7.27 sender-port 10001 reflector-port 10000 description GigazhsDsgdqmds0/3/0
+   test-session 2 sender-ip 162.14.7.21 reflector-ip 162.14.7.32 sender-port 10001 reflector-port 10000 description GigazhsDsgdqmds0/4/0
+ sender
+  test start-continual test-session 1 period 1000
+  test start-continual test-session 2 period 1000
+ responder
+  test-session 1 local-ip 162.14.7.28 remote-ip 162.14.7.27 local-port 10000 remote-port 10001
+  test-session 2 local-ip 162.14.7.21 remote-ip 162.14.7.32 local-port 10000 remote-port 10001
+#
+snmp-agent
+snmp-agent local-engineid 800007DB03A01C8D1B9EE3
+ snmp-agent community read cipher 172951d0ac1182abdfd544f7403df1c9 mib-view iso-view acl 2000
+ snmp-agent community write cipher b8c7de380aa9f5fa5b39fdbff1c5e634 mib-view iso-view acl 2000
+#
+snmp-agent sys-info version v2c v3
+ snmp-agent target-host host-name __targetHost_1_1873 trap address udp-domain 12.162.0.267 params securityname cipher 49bae7b6d8da4a29acdcce184f875846 v2c private-netmanager ext-vb
+ snmp-agent target-host host-name __targetHost_2_15148 trap address udp-domain 114.180.276.31 params securityname cipher 1d1c6c1704b6c2bfc768066d8c4ffd18 v2c private-netmanager ext-vb
+#
+snmp-agent mib-view included iso-view iso
+#
+snmp-agent trap source LoopBack0
+[16D                [16D#
+snmp-agent trap enable
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfTxRetransmit
+undo snmp-agent trap enable feature-name ospf trap-name ospfOriginateLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfMaxAgeLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfTxRetransmit
+undo snmp-agent trap enable feature-name isis trap-name isisIDLenMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationTypeFailure
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationFailure
+undo snmp-agent trap enable feature-name isis trap-name isisVersionSkew
+undo snmp-agent trap enable feature-name isis trap-name isisAreaMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisRejectedAdjacency
+undo snmp-agent trap enable feature-name isis trap-name isisOrigLSPBuffSizeMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisProtocolsSupportedMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisMaxAreaAddressesMismatch
+#
+lldp enable
+[16D                [16D#
+stelnet server enable
+snetconf server enable
+ssh user cqlt
+ssh user cqlt authentication-type password
+ssh user cqlt service-type all
+ssh user cqunicom
+ssh user cqunicom authentication-type password
+ssh user cqunicom service-type all
+ssh user root
+ssh user root authentication-type password
+ssh user root service-type snetconf stelnet
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#
+ ssh server cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr aes256_cbc aes192_cbc aes128_cbc
+ssh server hmac sha2_512 sha2_256 sha1
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa
+#
+ssh server dh-exchange min-len 2048
+[16D                [16D#
+ssh client first-time enable
+ssh client peer 12.162.0.267 assign rsa-key 12.162.0.267
+ssh client peer 12.162.0.267 assign ecc-key 12.162.0.267
+ssh client peer 140.197.148.160 assign ecc-key 140.197.148.160
+sftp client-source -i LoopBack0
+#
+ssh client publickey ecc rsa
+#
+ ssh client cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr aes256_cbc aes192_cbc aes128_cbc
+ssh client hmac sha2_512 sha2_256 sha1
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+tunnel-policy NMS-Tunnel-Policy
+ tunnel select-seq cr-lsp lsp load-balance-number 1
+#
+tunnel-policy nms-tunnel-policy
+ tunnel select-seq sr-te te sr-lsp ldp load-balance-number 1
+#
+user-interface maximum-vty 15
+#
+user-interface con 0
+ authentication-mode password
+ [16D                [16D set authentication password cipher 03c565b42d2acbdbd9cb2a0d407e6587
+#
+user-interface vty 0 5
+ acl 2077 inbound
+ authentication-mode aaa
+ user privilege level 3
+ idle-timeout 5 0
+ protocol inbound ssh
+#
+local-aaa-server
+#
+telemetry
+ #
+ sensor-group Group1
+  sensor-path huawei-debug:debug/cpu-infos/cpu-info
+  sensor-path huawei-debug:debug/memory-infos/memory-info
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity[class="chassis"]
+  sensor-path huawei-ifm:ifm/interfaces/interface
+  sensor-path huawei-ifm:ifm/interfaces/interface/mib-statistics
+  sensor-path huawei-twamp-controller:twamp-controller/client/sessions/session
+  sensor-path huawei-twamp-controller:twamp-controller/client/sessions/session/huawei-twamp-statistics:statistics
+ #
+[16D                [16D destination-group JiTuanWangGuan
+  ipv4-address 114.180.276.40 port 8895 protocol grpc no-tls
+ #
+ subscription JiTuanWangGuan
+  local-source-address ipv4 12.162.14.56
+  sensor-group Group1 sample-interval 10000
+  destination-group JiTuanWangGuan
+#
+return

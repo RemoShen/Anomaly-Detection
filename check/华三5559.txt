@@ -1,0 +1,2205 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 3606
+
+#
+
+mdc Admin id 1
+
+#
+
+  sysname JXNC-LTGC-3F-S12508R-SM-E001
+
+#
+
+ip vpn-instance 5G_RAN
+
+ route-distinguisher 65373:10010
+
+ tnl-policy SMARTMAN
+
+ vpn-target 65373:10010 import-extcommunity
+
+ vpn-target 65373:10010 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65373:10010
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65373:10010
+
+  apply-label per-instance
+
+#
+
+ telnet server enable
+
+
+
+               
+ telnet server acl 2011
+
+#
+
+bfd template 50
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+ packet-filter name anti-virus global inbound
+
+#
+
+ bfd multi-hop min-transmit-interval 10
+
+ bfd multi-hop min-receive-interval 10
+
+ bfd multi-hop detect-multiplier 3
+
+ undo bfd ip-router-alert
+
+#
+
+isis 1000
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 allow external
+
+  is-name JXNC-LTGC-3F-S12508R-SM-E001
+
+
+
+               
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.5373.1000.0100.1919.3023.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+ mpls lsr-id 11.10.104.24
+
+#
+
+ ip unreachables enable
+
+ ip ttl-expires enable
+
+#
+
+ lldp global enable
+
+#
+
+ active port basic-license slot 2 subslot 0 phy-port 1 to 48
+
+ active port basic-license slot 3 subslot 0 phy-port 7 to 12
+
+ active port basic-license slot 4 subslot 0 phy-port 7 to 12
+
+#
+
+
+
+               
+ system-working-mode bridgee
+
+ undo version auto-update enable
+
+ version check ignore
+
+ hardware-resource tcam mix
+
+ password-recovery enable
+
+#
+
+vlan 1
+
+#
+
+qos map-table dot1p-lp
+
+ import 0 export 0
+
+ import 1 export 1
+
+ import 2 export 2
+
+#
+
+qos map-table exp-dscp
+
+ import 1 export 10
+
+ import 2 export 18
+
+ import 3 export 26
+
+ import 4 export 34
+
+ import 5 export 46
+
+#
+
+qos wred queue table 100GE
+
+ queue 0 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+
+
+               
+ queue 0 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+
+
+               
+ queue 6 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+qos wred queue table 10GE
+
+ queue 0 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+
+
+               
+ queue 3 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+mpls te
+
+#
+
+tunnel-policy SRBE_TUNNEL
+
+ select-seq sr-lsp load-balance-number 32
+
+
+
+               
+#
+
+ mpls bfd enable
+
+#
+
+interface Route-Aggregation1
+
+  description TO_JXNC-LTGC-3F-NE8KX8-SM-C001_Eth_Trunk3_2*100G
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation1.10
+
+  description TO_JXNC-LTGC-3F-NE8KX8-SM-C001_Eth_Trunk3.10
+
+ ip address 11.10.105.31 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 4484
+
+ vlan-type dot1q vid 10
+
+#
+
+interface Route-Aggregation1.843
+
+  description TO_JXNC-LTGC-3F-NE8KX8-SM-C001_eth-trunk13.843_5G_RZN
+
+
+
+               
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 4484
+
+ vlan-type dot1q vid 843
+
+ ipv6 address 573B:B455:4233::64/127
+
+#
+
+interface Route-Aggregation2
+
+  description TO_JXNC-LTGC-3F-S12508R-SM-E002_RZGG2_2*100G
+
+ ip address 11.10.105.46 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode md5 cipher 31e9ab2a714a371bd32d234bfe074a53
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ link-aggregation bfd ipv4 source 11.10.105.46 destination 11.10.105.47
+
+ link-aggregation bfd-compatible enable
+
+ link-aggregation mode dynamic
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 4484
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+
+
+               
+ bfd detect-multiplier 3
+
+#
+
+interface NULL0
+
+#
+
+interface LoopBack0
+
+  description for_Mznzgement
+
+ ip address 11.10.104.24 255.255.255.255
+
+ isis enable 1000
+
+ isis prefix-sid index 9323 no-php
+
+#
+
+interface FortyGigE3/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/4
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface FortyGigE3/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/27
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE3/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/3
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE4/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/15
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface FortyGigE4/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE4/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/7
+
+ port link-mode route
+
+  description TO_JXNC-LTGC-3F-NE8KX8-SM-C001__HG1/0/0:1
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+
+
+               
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-interface source-ip 111.1.1.2 discriminator local 103 remote 301
+
+ port link-aggregation group 1
+
+#
+
+interface HundredGigE3/0/8
+
+ port link-mode route
+
+  description TO_JXNC-LTGC-3F-S12508R-SM-E002_HG3/0/8_100G:2
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+
+
+               
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 2
+
+#
+
+interface HundredGigE3/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/11
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE3/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/23
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface HundredGigE3/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/7
+
+ port link-mode route
+
+  description TO_JXNC-LTGC-3F-NE8KX8-SM-C001__HG2/0/0:1
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-interface source-ip 111.1.1.3 discriminator local 203 remote 302
+
+ port link-aggregation group 1
+
+#
+
+interface HundredGigE4/0/8
+
+ port link-mode route
+
+  description TO_JXNC-LTGC-3F-S12508R-SM-E002_HG4/0/8_100G:2
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 2
+
+#
+
+interface HundredGigE4/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/19
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE4/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/31
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE4/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface M-GigabitEthernet0/0/0
+
+#
+
+interface M-GigabitEthernet0/0/1
+
+#
+
+interface M-GigabitEthernet0/0/2
+
+ ip address 1.1.1.1 255.255.255.0
+
+#
+
+interface M-GigabitEthernet0/0/3
+
+#
+
+interface Ten-GigabitEthernet2/0/1
+
+ port link-mode route
+
+ link-delay down msec 250
+
+ link-delay up msec 2000
+
+#
+
+interface Ten-GigabitEthernet2/0/2
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet2/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/4
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/7
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/10
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet2/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/21
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet2/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/27
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/33
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/37
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/38
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet2/0/39
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/40
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/41
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/42
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/43
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/44
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet2/0/45
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/46
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/47
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet2/0/48
+
+ port link-mode route
+
+ shutdown
+
+#
+
+bgp 65373
+
+ bgp update-delay on-startup 600
+
+ non-stop-routing
+
+ retain local-label 5
+
+ labeled-route ignore-no-tunnel
+
+ router-id 11.10.104.24
+
+
+
+               
+ peer 11.10.104.1 as-number 65373
+
+  peer 11.10.104.1 description TO-JXNC-LTGC-3F-NE8KX8-SM-C001
+
+ peer 11.10.104.1 connect-interface LoopBack0
+
+ peer 11.10.104.1 route-update-interval 0
+
+ peer 11.10.104.1 bfd multi-hop
+
+ peer 11.10.104.1 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+ peer 11.10.104.2 as-number 65373
+
+  peer 11.10.104.2 description TO-JXNC-HJZ-5F-NE8XK8-SM-C002
+
+ peer 11.10.104.2 connect-interface LoopBack0
+
+ peer 11.10.104.2 route-update-interval 0
+
+ peer 11.10.104.2 bfd multi-hop
+
+ peer 11.10.104.2 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+ peer 11.10.104.25 as-number 65373
+
+  peer 11.10.104.25 description TO_JXNC-LTGC-3F-S12508R-SM-E001
+
+ peer 11.10.104.25 connect-interface LoopBack0
+
+ peer 11.10.104.25 route-update-interval 0
+
+ peer 11.10.104.25 bfd multi-hop
+
+ peer 11.10.104.25 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+ #
+
+ address-family ipv4 unicast
+
+  pic
+
+  import-route direct
+
+  import-route isis 1000 route-policy SmartMAN_OUT
+
+
+
+               
+  peer 11.10.104.1 enable
+
+  peer 11.10.104.1 route-policy SmartMAN_NSM_SNMP_IN import
+
+  peer 11.10.104.1 route-policy SmartMAN_OUT export
+
+  peer 11.10.104.2 enable
+
+  peer 11.10.104.2 route-policy SmartMAN_NSM_SNMP_IN import
+
+  peer 11.10.104.2 route-policy SmartMAN_OUT export
+
+  peer 11.10.104.25 enable
+
+ #
+
+ address-family vpnv4
+
+  pic
+
+  route-select delay 180
+
+  peer 11.10.104.25 enable
+
+  peer 11.10.104.25 advertise-community
+
+ #
+
+ address-family vpnv6
+
+  pic
+
+  route-select delay 180
+
+  peer 11.10.104.25 enable
+
+  peer 11.10.104.25 advertise-community
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  peer 573B:B455:4233::63 as-number 65373
+
+   peer 573B:B455:4233::63 description To_JXNC-LTGC-3F-NE8KX8-SM-C001
+
+
+
+               
+  peer 573B:B455:4233::63 route-update-interval 5
+
+  peer 573B:B455:4233::63 bfd
+
+  peer 573B:B455:4233::63 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+   peer 573B:B455:4233::63 enable
+
+   peer 573B:B455:4233::63 route-policy 5G_RAN-v6-route-from-NanChangMCR import
+
+   peer 573B:B455:4233::63 route-policy 5G_RAN-v6-route-to-NanChangMCR export
+
+#
+
+route-policy 5G_RAN-v6-route-from-NanChangMCR permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN-v6-route-from-NanChangMCR
+
+#
+
+route-policy 5G_RAN-v6-route-to-NanChangMCR permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN-v6-route-to-NanChangMCR
+
+#
+
+route-policy SmartMAN_NSM_SNMP_IN permit node 10
+
+ if-match ip address prefix-list SmartMAN_NSM_SNMP_IN
+
+#
+
+route-policy SmartMAN_OUT permit node 10
+
+ if-match ip address prefix-list SmartMAN_OUT
+
+#
+
+
+
+               
+ ip prefix-list SmartMAN_NSM_SNMP_IN index 10 permit 103.179.265.0 24 less-equal 32
+
+ ip prefix-list SmartMAN_NSM_SNMP_IN index 20 permit 11.10.104.0 24 less-equal 32
+
+ ip prefix-list SmartMAN_NSM_SNMP_IN index 30 permit 11.251.33.17 29
+
+ ip prefix-list SmartMAN_OUT index 10 permit 11.10.104.24 32
+
+ ip prefix-list SmartMAN_OUT index 20 permit 11.10.104.25 32
+
+#
+
+ ipv6 prefix-list 5G_RAN-v6-route-from-NanChangMCR index 10 permit 573B:B475:23:: 44
+
+ ipv6 prefix-list 5G_RAN-v6-route-to-NanChangMCR index 10 permit 573B:B495:433:43:: 64
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class aux
+
+ user-role network-admin
+
+#
+
+line class vty
+
+ user-role network-operator
+
+#
+
+line aux 0 1
+
+ authentication-mode scheme
+
+ user-role network-admin
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+
+
+               
+ user-role network-admin
+
+ user-role network-operator
+
+#
+
+ snmp-agent
+
+ snmp-agent local-engineid 800063A28078AA82CCFC0100000001
+
+ snmp-agent community read jxlt_smart_man
+
+ snmp-agent community write jxlt_smart_mandx
+
+ snmp-agent acl name SmartMAN_NSM_SNMP
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 103.179.265.37 udp-port 166 params securityname jxlt_smart_man v2c
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable mpls 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+ snmp-agent trap enable te 
+
+ snmp-agent trap source LoopBack0
+
+#
+
+ mpls tunnel-bfd 11.10.104.25 32 template 50
+
+#
+
+ ssh server enable
+
+ ssh server acl 2011
+
+#
+
+acl basic 2011
+
+
+
+               
+  description SmartMZN_SSH_TELNET           
+
+ rule 5 permit source 11.10.105.29 0.0.0.3
+
+ rule 10 permit source 11.10.105.45 0.0.0.3
+
+ rule 20 permit source 11.10.104.0 0.0.0.255
+
+ rule 25 permit source 11.251.33.17 0.0.0.7
+
+ rule 30 permit source 103.179.265.0 0.0.0.255
+
+ rule 35 permit source 11.251.34.41 0.0.0.7
+
+ rule 40 permit source 11.251.34.57 0.0.0.7
+
+ rule 100 permit source 1.1.1.2 0
+
+#
+
+acl basic name SmartMAN_NSM_SNMP
+
+ rule 5 permit source 103.179.265.0 0.0.0.255
+
+#
+
+acl advanced 3000
+
+ rule 5 permit ip source 11.10.104.21 0 destination 11.10.104.24 0
+
+#
+
+acl advanced 3999
+
+ rule 5 permit tcp destination-port eq 65079
+
+ rule 10 permit tcp source-port eq 65079
+
+#
+
+acl advanced name anti-virus
+
+ rule 5 deny tcp destination-port eq 135
+
+ rule 10 deny udp destination-port eq 135
+
+
+
+               
+ rule 15 deny tcp destination-port eq 593
+
+ rule 20 deny udp destination-port eq 593
+
+ rule 1000 permit ip
+
+#
+
+domain name system
+
+#
+
+ aaa session-limit telnet 10
+
+ aaa session-limit ssh 10
+
+ domain default enable system
+
+#
+
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+
+
+               
+  description Predefined level-4 role
+
+#
+
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+role name level-6
+
+  description Predefined level-6 role
+
+#
+
+role name level-7
+
+  description Predefined level-7 role
+
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+
+
+               
+role name level-12
+
+  description Predefined level-12 role
+
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+#
+
+role name level-14
+
+  description Predefined level-14 role
+
+#
+
+user-group system
+
+#
+
+local-user JX-NC-Manager class manage
+
+  password hash 86961dd2da58db7fee0e3fce9ca9a9ae
+
+ service-type ssh telnet
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user JX-NC-SDNcontroler class manage
+
+  password hash 88c6d109175e7b43aea79c2be7d9e023
+
+ service-type ssh telnet
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+
+
+               
+local-user jxltadmin class manage
+
+  password hash 97d49f82b7c5a920b7c6d3544fe80abd
+
+ service-type ftp
+
+ service-type ssh telnet terminal
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+public-key peer 11.10.104.25
+
+ public-key-code begin
+
+   30819F300D06092A864886F70D010101050003818D0030818902818100C808E242AE9EE3AE
+
+   3595147D41FE0FED7FFE0DF4205964CED19CA6F8937F6C795F2B1F6015483F26B7F6DA990E
+
+   4662A9391D8CBE6D03C94D1BF042EA33DABF51B749AE93E440EF7DEE3E13386FAF7FF3DD55
+
+   20DCFD7A10FC551ED5954D85E0973438EBF78C3CA0237705E055D7BDCA51AE127BAE8EEECA
+
+   266443C9FFBDA007EF0203010001
+
+ public-key-code end
+
+ peer-public-key end
+
+#
+
+ ftp server enable
+
+#
+
+ netconf ssh server enable
+
+#
+
+ grpc enable
+
+#
+
+
+
+               
+telemetry
+
+ sensor-group 1
+
+  sensor path device/cpus
+
+  sensor path device/physicalentities
+
+  sensor path diagnostic/memories
+
+ sensor-group 2
+
+  sensor path ifmgr/interfaces
+
+  sensor path ifmgr/statistics
+
+  sensor path ipfw/ipstatistic
+
+ sensor-group 3
+
+  sensor path nqa/twamplightclients
+
+  sensor path nqa/twamplightdelaystats/twamplightdelaystat/detailstats/detailstat
+
+  sensor path nqa/twamplightlossstats/twamplightlossstat/detailstats/detailstat
+
+ destination-group 1
+
+  ipv4-address 103.179.265.35 port 8899
+
+ subscription 1
+
+  sensor-group 1 sample-interval 10
+
+  sensor-group 2 sample-interval 10
+
+  sensor-group 3 sample-interval 10
+
+  source-address interface LoopBack0
+
+  destination-group 1
+
+#
+
+return
+

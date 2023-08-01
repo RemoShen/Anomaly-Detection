@@ -1,0 +1,2416 @@
+display current-configuration
+!Software Version V800R012C00SPC300
+!Last configuration was updated at 2021-01-12 18:43:41+08:00 by shannxi
+!Last configuration was saved at 2021-01-12 18:45:20+08:00 by shannxi
+#
+clock timezone beijing add 08:00:00
+#
+sysname TOYB-DC-4G-OF8LY8-TN-D001
+#
+set neid 75cb02
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+info-center source default channel 0 log state off
+info-center source default channel 2 log level critical
+info-center source default channel 4 log level informational
+info-center loghost source LoopBack0
+info-center loghost 1.1.1.1
+info-center logbuffer size 1024
+#
+slave batch-backup self-healing-timeout 600
+#
+port-wred af4-cs7-pq
+ queue-depth 2000
+#
+port-wred be-af3
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+service-template template-default0
+#
+service-template template-default1
+#
+service-template template-default2
+#
+service-template template-default3
+#
+service-template template-default4
+#
+ntp-service server disable
+ntp-service ipv6 server disable
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+ ntp-service authentication-keyid 1 authentication-mode md5 cipher b09080e728abaeed7c1dbc48a3a7edc3
+ntp-service unicast-server 1.1.1.1 authentication-keyid 1
+ntp-service access peer 2001
+ntp-service authentication enable
+ntp-service source-interface LoopBack0
+#
+alarm
+ suppression alarm-name hwMplsTunnelHotstandbySwitch cause-period 60
+ suppression alarm-name hwBfdSessFaultDown cause-period 600
+ suppression alarm-name hwPortDown cause-period 5
+ suppression alarm-name hwLosAlarm cause-period 5
+ suppression alarm-name hwIfFlowDown cause-period 60
+ suppression alarm-name hwIfFlowDown clear-period 60
+[16D                [16D suppression alarm-name hwPWVcDown cause-period 60
+ suppression alarm-name hwPWVcDown clear-period 60
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand cause-period 600
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand clear-period 600
+#
+ecc peer-public-key 1.6.67.2
+ public-key-code begin
+  04008F5C E6F1BF8D 0DA0F685 AEBACF68 1CA647B2 6827CC36 9AD336D9 D4DD4394
+  4B376DBB 068F3620 3A81E652 9F890B28 28C7AC72 AAC49756 E90FB1B8 7545F879
+  17890000 D3AF1322 FE0C0972 44384EAC FD96C12B DF57DF3F 9E0551F2 0F021C30
+  F70C7276 D0CB5822 19898DFF ACD601D7 DDCC8103 ED2A5851 ED1458F3 6371F714
+  FFE7285A 80
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 1.6.67.17
+ public-key-code begin
+  04003E21 3718ACCD 2B651276 922C53A1 0B6A8103 2D10E833 75862972 45048495
+  05DF1246 64F5C4FC D90A2809 4A0CC741 3819C352 4624CE8B 75C70692 CB4CC148
+  9BBAAD00 A42BE213 771912AA 2AECAEAB 6BC8F8D9 F1E2D400 F20FAFF2 81EC6343
+  FD2BE0C7 7340B719 4BF6138B FC6911A2 A91D1F9A 984FDB09 A83BABAA 84655854
+  E738747E 5F
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 1.6.60.28
+ public-key-code begin
+  040120A6 76C7CA7A 9918D086 D1CF800C E8411071 F61BFFBC 0D0DB78E B2524726
+  BE608F69 873A4015 A8F0A2C2 FE3F1BC9 B736CB91 B5967FF8 10B1E66B D9A9D608
+  B5AEA800 CCDA8DDA FC874352 8E9AD193 E97AC8A1 D43B6A56 6401FC71 0D7BE199
+  2967EC16 75B23E26 BC0F31D7 6F7103C1 9DB0F83E 5E7F85F2 8ECB76AB F595D4E9
+  1A7BC53C BB
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 13.191.286.2
+ public-key-code begin
+  04018196 F5E311EF F4EA3691 BFFFCA65 BB1D776B 52643EA9 A6DF468E 6804BD2F
+  849EF120 F314D7FA C3170316 F5E26BBE A627DF5C 20D204EF 6D3D93DB 740412CC
+  E855E901 78C75B28 F9DF555A CA2F27D3 87E78BDC AC8CA348 4F874803 D407FFFA
+  5B08B6E9 E813ECCB 0FF53050 877D0E2B 035B0174 32F7186A C4BEA3B7 012981D6
+  6C6A1C24 57
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 125.288.287.2
+ public-key-code begin
+  04019BBF FF7E852E 9B5DCCF1 F5C7E3C6 0678EAF9 64D55CF7 67B4FB3F 04ABEF62
+  CDDB228A C0B00856 27D28AB9 6B2F2A1E D873F8E0 E8AA378D A34C4C0C 17F9B298
+  F73EF400 22072BBB BD519C73 D39666FD 275D741C C8966939 1B70B645 CB0D01CE
+  EF5015A8 D8D79416 13D9935F 2F0118DF ACA041A0 7D1C75CC CEAAF60E A3DB2012
+  DC338E1E 63
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 13.191.286.287
+ public-key-code begin
+  04018196 F5E311EF F4EA3691 BFFFCA65 BB1D776B 52643EA9 A6DF468E 6804BD2F
+  849EF120 F314D7FA C3170316 F5E26BBE A627DF5C 20D204EF 6D3D93DB 740412CC
+  E855E901 78C75B28 F9DF555A CA2F27D3 87E78BDC AC8CA348 4F874803 D407FFFA
+  5B08B6E9 E813ECCB 0FF53050 877D0E2B 035B0174 32F7186A C4BEA3B7 012981D6
+  6C6A1C24 57
+ public-key-code end
+[16D                [16D peer-public-key end
+#
+undo dhcp enable
+#
+undo icmp name timestamp-reply send
+#
+router id 13.191.286.1
+#
+undo telnet ipv6 server enable
+telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+#
+diffserv domain 5p3d
+#
+soc
+#
+ip vpn-instance 5GC_MGMN
+  description 5GC_NHNO
+ ipv4-family
+  route-distinguisher 65496:10050
+  vpn frr
+  tnl-policy IPRAN
+  apply-label per-instance
+  ip frr
+  vpn-target 65496:10050 export-extcommunity
+  vpn-target 65496:10050 import-extcommunity
+ ipv6-family
+  route-distinguisher 65496:10050
+  vpn frr
+  tnl-policy IPRAN
+  apply-label per-instance
+  ipv6 frr
+  vpn-target 65496:10050 export-extcommunity
+  vpn-target 65496:10050 import-extcommunity
+#
+ip vpn-instance 5G_MEC
+  description 5G_MFD
+ ipv4-family
+  route-distinguisher 65496:10060
+  vpn frr
+  tnl-policy IPRAN
+  apply-label per-instance
+  ip frr
+  vpn-target 65496:10060 export-extcommunity
+  vpn-target 65496:10060 import-extcommunity
+#
+ip vpn-instance 5G_RAN
+ ipv4-family
+  route-distinguisher 65496:10010
+  tnl-policy IPRAN
+  apply-label per-instance
+  ip frr
+  vpn-target 65496:10010 export-extcommunity
+  vpn-target 65496:10010 import-extcommunity
+ ipv6-family
+  route-distinguisher 65496:10010
+  tnl-policy IPRAN
+  apply-label per-instance
+  ipv6 frr
+  vpn-target 65496:10010 export-extcommunity
+  vpn-target 65496:10010 import-extcommunity
+[16D                [16D#
+ip vpn-instance GPRS_Gn_C
+  description GPRS_Ho_D
+ ipv4-family
+  route-distinguisher 65496:250060
+  vpn frr
+  tnl-policy IPRAN
+  apply-label per-instance
+  ip frr
+  vpn-target 65496:250060 export-extcommunity
+  vpn-target 65496:250060 import-extcommunity
+ ipv6-family
+  route-distinguisher 65496:250060
+  vpn frr
+  tnl-policy IPRAN
+  apply-label per-instance
+  ipv6 frr
+  vpn-target 65496:250060 export-extcommunity
+  vpn-target 65496:250060 import-extcommunity
+#
+ip vpn-instance SmartMAN_AUTO_ONLINE
+ ipv4-family
+  route-distinguisher 65496:10080
+  apply-label per-instance
+  vpn-target 65496:10080 export-extcommunity
+  vpn-target 65496:10080 import-extcommunity
+#
+ip dcn vpn-instance __dcn_vpn__
+ ipv4-family
+#
+hwtacacs-server template tacacs
+ hwtacacs-server accounting 1.1.1.1
+ hwtacacs-server source-ip 13.191.286.1
+#
+bfd
+ mpls-passive
+#
+mpls lsr-id 13.191.286.1
+#
+mpls
+ label advertise non-null
+ mpls te
+ mpls bfd enable
+ mpls bfd-trigger-tunnel host
+ mpls bfd-tunnel min-tx-interval 50 min-rx-interval 50
+#
+mpls l2vpn
+#
+mpls ldp
+ accept target-hello all
+ send-message address all-loopback
+ #
+ ipv4-family
+#
+dhcp server request-packet all-interface disable
+#
+dot1x-template 1
+#
+acl number 2001
+  description For SNMP
+ rule 5 permit source 125.191.287.0 0.0.0.255
+ rule 10 permit source 13.273.35.109 0.0.0.7
+ rule 500 deny
+[16D                [16D#
+acl number 3000
+  description XiuFv-uftu
+ rule 0 deny tcp destination-port eq 4444
+ rule 1 deny udp destination-port eq tftp
+ rule 2 deny tcp destination-port eq 135
+ rule 3 deny udp destination-port eq 135
+ rule 4 deny tcp destination-port eq 139
+ rule 5 deny udp destination-port eq netbios-ssn
+ rule 6 deny tcp destination-port eq 445
+ rule 7 deny udp destination-port eq 445
+ rule 8 deny tcp destination-port eq 593
+ rule 9 deny udp destination-port eq 593
+ rule 10 deny udp destination-port eq 1434
+ rule 11 deny tcp destination-port eq 5554
+ rule 12 deny tcp destination-port eq 9995
+ rule 13 deny tcp destination-port eq 9996
+ rule 14 deny udp destination-port eq netbios-ns
+ rule 15 deny udp destination-port eq netbios-dgm
+#
+acl number 3001
+  description XiuFv-uftu
+ rule 200 deny icmp destination 1.1.1.1 0 fragment-type fragment
+ rule 205 permit icmp destination 1.1.1.1 0 icmp-type echo
+ rule 210 permit icmp destination 1.1.1.1 0 icmp-type echo-reply
+ rule 215 permit icmp destination 1.1.1.1 0 icmp-type ttl-exceeded
+ rule 220 permit icmp destination 1.1.1.1 0 icmp-type port-unreachable
+ rule 225 permit icmp destination 1.1.1.1 0 icmp-type fragmentneed-dfset
+#
+acl number 3100
+  description test
+ rule 5 permit tcp source 2.2.2.2 0 destination 2.2.2.1 0
+#
+traffic classifier test operator or
+ if-match acl 3100
+#
+traffic behavior test
+#
+traffic policy test
+ share-mode
+ classifier test behavior test precedence 1
+#
+security password
+ #
+ rule admin
+  forbidden word changeme_123
+#
+aaa
+  local-user x00400005 password irreversible-cipher $1c$[x<u=q^AoK$nZo'"vQ_*6)jQ3Gs|X}!}7Wh'SX!LO*/=73ifV6N$   local-user x00400005 password irreversible-cipher 8c3380cfbfb1281c186707c81a021b65
+ local-user x00400005 service-type terminal ssh
+ local-user x00400005 level 3
+ local-user x00400005 state block fail-times 3 interval 5
+  local-user wx292163 password irreversible-cipher $1c$ueja/#[_`Q$E]UJ3`>Oq>C2K.U"6wFZ*_f:*8j0C7J<G(,)}S%)$   local-user wx292163 password irreversible-cipher 89901f7a82e3a85fc299d53de187c644
+ local-user wx292163 service-type ftp telnet ssh
+ local-user wx292163 level 3
+ local-user wx292163 state block fail-times 3 interval 5
+  local-user shannxi password irreversible-cipher $1c$>*7M@4R[6T$dGY%FW=)FD(MH2"{ZS->yLW%<RQZyVR9!7,Wq\)9$   local-user shannxi password irreversible-cipher dc1cf8d9a93d4969973d5f15122b7c02
+ local-user shannxi service-type terminal telnet ssh
+ local-user shannxi level 3
+ local-user shannxi state block fail-times 3 interval 5
+  local-user wx534575 password irreversible-cipher $1c$z9L>5khRZ=$V,cT1*gtrIeJQrV6/%RG{fDE*iF`r6$Y:K1#9>FQ$   local-user wx534575 password irreversible-cipher 7f8a1a9ab4f154c320d9b8e1b2035eaa
+ local-user wx534575 service-type terminal ssh
+ local-user wx534575 level 3
+[16D                [16D local-user wx534575 state block fail-times 3 interval 5
+  local-user sn-xa-sdncontroler password irreversible-cipher $1c$kaWC:i]SyQ$|=QDZ<*-5H_W](60^)g)e4ZpH3g]p<$$.>'|G"94$   local-user sn-xa-sdncontroler password irreversible-cipher ef004ffdd6e94ce6a4af24ab58ec1b7e
+ local-user sn-xa-sdncontroler service-type terminal ssh
+ local-user sn-xa-sdncontroler level 3
+ local-user sn-xa-sdncontroler state block fail-times 3 interval 5
+  local-user test-1 password irreversible-cipher $1c$6t81F*t%#M$G)fFPe-%V.bcCAFD,Ns6fG][992APK)i<SA-y1#S$   local-user test-1 password irreversible-cipher 789125bc3b6db23f8e2eb2c6c47e22d1
+ local-user test-1 service-type terminal telnet ssh
+ local-user test-1 level 0
+ local-user test-1 state block fail-times 3 interval 5
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+  authentication-mode local radius
+ #
+ authorization-scheme default
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+ #
+ domain test
+  hwtacacs-server tacacs
+ #
+ recording-scheme tacacs
+  recording-mode hwtacacs tacacs
+ #
+ cmd recording-scheme tacacs
+#
+license
+ active port-basic slot 1 card 0 port 0-19
+ active port-basic slot 2 card 0 port 0-19
+ active port-basic slot 3 card 0 port 0-23
+#
+isis 1000
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 100 min-rx-interval 100 frr-binding
+ bgp-ls enable level-2
+ bgp-ls identifier 100
+ network-entity 86.5412.0100.0101.6825.3001.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name TOYB-DC-4G-OF8LY8-TN-D001
+ import-route bgp route-policy SmartMAN_NSM_SNMP_IN
+ timer spf 1 50 50
+ traffic-eng level-2
+ set-overload on-startup send-sa-bit 120 allow external
+ frr
+  loop-free-alternate level-2
+  remote-lfa tunnel ldp level-2
+  ti-lfa level-2
+[16D                [16D#
+interface Eth-Trunk0
+  description TO-SOYB-YY-3G-OF8LY8-TN-D2-Fui-Usvol0=2*100HF
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk0.100
+ vlan-type dot1q 100
+ mtu 9000
+  description TO-SOYB-YY-3G-OF8LY8-TN-D2-Fui-Usvol0=2*100HF
+ ip address 13.191.286.286 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 3b732c3a302c61a0bcb4a9f6622b99e3
+ isis cost 150
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ qos phb disable
+#
+interface Eth-Trunk10
+  description TO-soyb-exm-F-2=2*10HF
+ mode lacp-static
+#
+interface Eth-Trunk10.10
+ vlan-type dot1q 10
+ mtu 4470
+  description to_soyb-exm-F-2
+ ip address 13.191.286.283 255.255.255.252
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk10.11
+ vlan-type dot1q 11
+ mtu 4470
+  description to_soyb-exm-F-2
+ ip binding vpn-instance SmartMAN_AUTO_ONLINE
+ ip address 13.191.286.267 255.255.255.252
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk100
+  description SNXY-TOM-6G-OF8LY4-TN-D1
+ mode lacp-static
+#
+interface Eth-Trunk100.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNXY-TOM-6G-OF8LY4-TN-D1
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B955::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk101
+  description SNWN-BYK-7G-T12508S-TN-D001
+ mode lacp-static
+[16D                [16D#
+interface Eth-Trunk101.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNWN-BYK-7G-T12508S-TN-D001
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:BA55::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk102
+  description SNBJ-ZBET-3G-T12508S-TN-D001
+ mode lacp-static
+#
+interface Eth-Trunk102.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNBJ-ZBET-3G-T12508S-TN-D001
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B855::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk103
+  description SNTC-MUEM-4G-BY9L8FB-TN-D001
+ mode lacp-static
+#
+interface Eth-Trunk103.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNTC-MUEM-4G-BY9L8FB-TN-D001
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B755::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk104
+  description SNYA-MUEM-3G-T12508S-TN-D001
+ mode lacp-static
+#
+interface Eth-Trunk104.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNYA-MUEM-3G-T12508S-TN-D001
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:BB55::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk105
+  description SNYL-MUEM-5G-OF8LY4-TN-D001
+ mode lacp-static
+#
+interface Eth-Trunk105.301
+ vlan-type dot1q 301
+ mtu 9000
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 253.239.245.84 255.255.255.252
+[16D                [16D ipv6 address 795D:D698:B545:6175::662/126
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk105.837
+ vlan-type dot1q 837
+ mtu 9000
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 1.89.163.88 255.255.255.252
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk105.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNYL-MUEM-5G-OF8LY4-TN-D001
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:BD55::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk106
+  description SNAK-MUEM-6G-90008FB-TN-D1
+ mode lacp-static
+#
+interface Eth-Trunk106.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNAK-MUEM-6G-90008FB-TN-D1
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:BE55::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk107
+  description SNHZ-ZBEM-5G-T12508S-TN-D001
+ mode lacp-static
+#
+interface Eth-Trunk107.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNHZ-ZBEM-5G-T12508S-TN-D001
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:BC55::7/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk108
+  description SNSL-MUEM-3G-BY9L8FB-TN-D001
+ mode lacp-static
+#
+interface Eth-Trunk108.843
+ vlan-type dot1q 843
+ mtu 9000
+  description SNSL-MUEM-3G-BY9L8FB-TN-D001
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:BF55::7/127
+ trust upstream default
+[16D                [16D qos phb disable
+#
+interface Eth-Trunk1000
+  description to_B-BS-1_qpsu 9/1/2
+ mode lacp-static
+#
+interface Eth-Trunk1000.301
+ vlan-type dot1q 301
+ mtu 9000
+  description to_B-BS-1
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 13.277.109.85 255.255.255.252
+ ipv6 address 795D:D698:B544:4E15::A/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1000.837
+ vlan-type dot1q 837
+ mtu 9000
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 1.2.74.17 255.255.255.252
+ ipv6 address 795D:D698:B544:4E05::A/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1000.843
+ vlan-type dot1q 843
+ mtu 9000
+  description to_B-BS-1
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B655::C/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1000.875
+ vlan-type dot1q 875
+ mtu 9000
+  description to_B-BS-1
+ ip address 13.191.286.275 255.255.255.252
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1001
+  description to_SOYBVQG800DBY-TSW-TX
+ mode lacp-static
+#
+interface Eth-Trunk1001.10
+ vlan-type dot1q 10
+ mtu 9000
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 13.288.1.11 255.255.255.252
+ ipv6 address 795D:D698:B545:60E5:6::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1001.20
+ vlan-type dot1q 20
+ mtu 9000
+ ip binding vpn-instance GPRS_Gn_C
+[16D                [16D ipv6 enable
+ ip address 13.288.2.11 255.255.255.252
+ ipv6 address 795D:D698:B545:61E5:6::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1001.30
+ vlan-type dot1q 30
+ mtu 9000
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D698:B545:64E5:6::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1002
+  description to_SO-TO-YB-VQG901-D-BY-TSW-TX_1/2/26
+ mode lacp-static
+#
+interface Eth-Trunk1002.10
+ vlan-type dot1q 10
+ mtu 9000
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 13.288.1.29 255.255.255.252
+ ipv6 address 795D:D698:B545:60E5:7::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1002.20
+ vlan-type dot1q 20
+ mtu 9000
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 13.288.2.29 255.255.255.252
+ ipv6 address 795D:D698:B545:61E5:7::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1002.30
+ vlan-type dot1q 30
+ mtu 9000
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D698:B545:64E5:7::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1003
+  description to_SO-TO-YB-VQG801-D-BY-TSW-TX_1/2/26
+ mode lacp-static
+#
+interface Eth-Trunk1003.10
+ vlan-type dot1q 10
+ mtu 9000
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 13.288.1.13 255.255.255.252
+ ipv6 address 795D:D698:B545:60D5:7::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1003.20
+[16D                [16D vlan-type dot1q 20
+ mtu 9000
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 13.288.2.13 255.255.255.252
+ ipv6 address 795D:D698:B545:61D5:7::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1003.30
+ vlan-type dot1q 30
+ mtu 9000
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D698:B545:64D5:7::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1004
+  description to_SO-TO-YB-VQG800-D-BY-TSW-TX_1/2/26
+ mode lacp-static
+#
+interface Eth-Trunk1004.10
+ vlan-type dot1q 10
+ mtu 9000
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 13.288.1.2 255.255.255.252
+ ipv6 address 795D:D698:B545:60D5:6::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1004.20
+ vlan-type dot1q 20
+ mtu 9000
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 13.288.2.2 255.255.255.252
+ ipv6 address 795D:D698:B545:61D5:6::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1004.30
+ vlan-type dot1q 30
+ mtu 9000
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D698:B545:64D5:6::8/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1005
+  description to SN-XA-CB1B-2F01-R14C19U32-5GC-SSP-0003-HW8861_Eth-Trunk4
+ mode lacp-static
+#
+interface Eth-Trunk1005.2952
+ vlan-type dot1q 2952
+ mtu 9000
+  description to SN-XA-CB1B-2F01-R14C19U32-5GC-SSP-0003-HW8861_Eth-Trunk4.2952
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D698:B545:6455::6555/127
+ trust upstream default
+[16D                [16D qos phb disable
+#
+interface Eth-Trunk1005.2954
+ vlan-type dot1q 2954
+ mtu 9000
+  description to SN-XA-CB1B-2F01-R14C19U32-5GC-SSP-0003-HW8861_Eth-Trunk4.2954
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 149.72.125.172 255.255.255.252
+ ipv6 address 795D:D698:B545:6155::6555/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1005.2960
+ vlan-type dot1q 2960
+ mtu 9000
+  description to SN-XA-CB1B-2F01-R14C19U32-5GC-SSP-0003-HW8861_Eth-Trunk4.2960
+ ip binding vpn-instance 5GC_MGMN
+ ip address 1.6.67.1 255.255.255.252
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1006
+  description to SN-XA-XX1B-4F01-R07C14U32-IOT-SSP-0003-HW8861_Eth-Trunk4
+ mode lacp-static
+#
+interface Eth-Trunk1006.2952
+ vlan-type dot1q 2952
+ mtu 9000
+  description to SN-XA-XX1B-4F01-R07C14U32-IOT-SSP-0003-HW8861_Eth-Trunk4.2952
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D698:B545:6465::6555/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1006.2954
+ vlan-type dot1q 2954
+ mtu 9000
+  description to SN-XA-XX1B-4F01-R07C14U32-IOT-SSP-0003-HW8861_Eth-Trunk4.2954
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 149.72.125.198 255.255.255.252
+ ipv6 address 795D:D698:B545:6165::6555/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1006.2960
+ vlan-type dot1q 2960
+ mtu 9000
+  description to SN-XA-XX1B-4F01-R07C14U32-IOT-SSP-0003-HW8861_Eth-Trunk4.2960
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 1.6.67.16 255.255.255.252
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1008
+  description to:SOYB-DC-NU-90008F-1-BY
+ mode lacp-static
+#
+interface Eth-Trunk1008.100
+ vlan-type dot1q 100
+[16D                [16D mtu 9000
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B655::61/127
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1008.301
+ vlan-type dot1q 301
+ mtu 9000
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 253.239.245.152 255.255.255.252
+ ipv6 address 795D:D698:B545:6175::682/126
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk1008.837
+ vlan-type dot1q 837
+ mtu 9000
+ ip binding vpn-instance 5GC_MGMN
+ ipv6 enable
+ ip address 1.89.163.232 255.255.255.252
+ trust upstream default
+ qos phb disable
+#
+interface Eth-Trunk3000
+#
+interface GigabitEthernet0/0/0
+ speed auto
+ duplex auto
+ undo shutdown
+ ip address 13.13.133.1 255.255.255.252
+#
+interface 25GE3/0/0
+  description to:SOYB-DC-NU-90008F-1-BY
+ undo shutdown
+ eth-trunk 1008
+ dcn
+#
+interface 25GE3/0/1
+  description to_B-BS-1_qpsu 9/1/2
+ undo shutdown
+ eth-trunk 1000
+ dcn
+#
+interface 25GE3/0/2
+  description TO-soyb-exm-F-2-ufoHj0/2/0/4
+ undo shutdown
+ eth-trunk 10
+ dcn
+#
+interface 25GE3/0/3
+  description TO-soyb-exm-F-2-ufoHj0/6/0/4
+ undo shutdown
+ eth-trunk 10
+ dcn
+#
+interface 25GE3/0/4
+  description SNXA-DC-OF5LF-D1-10HF4/1/29
+ undo shutdown
+ ip address 1.1.1.6 255.255.255.252
+#
+[16D                [16Dinterface 25GE3/0/5
+ shutdown
+#
+interface 25GE3/0/6
+ shutdown
+#
+interface 25GE3/0/7
+ shutdown
+#
+interface 25GE3/0/8
+ shutdown
+#
+interface 25GE3/0/9
+ shutdown
+#
+interface 25GE3/0/10
+ shutdown
+#
+interface 25GE3/0/11
+ shutdown
+#
+interface 25GE3/0/12
+ shutdown
+#
+interface 25GE3/0/13
+ shutdown
+#
+interface 25GE3/0/14
+ shutdown
+#
+interface 25GE3/0/15
+ shutdown
+#
+interface 25GE3/0/16
+ shutdown
+#
+interface 25GE3/0/17
+ shutdown
+#
+interface 25GE3/0/18
+ shutdown
+#
+interface 25GE3/0/19
+ shutdown
+#
+interface 25GE3/0/20
+ shutdown
+#
+interface 25GE3/0/21
+ shutdown
+#
+interface 25GE3/0/22
+ shutdown
+#
+interface 25GE3/0/23
+ shutdown
+#
+interface 25GE3/0/24
+ shutdown
+#
+interface 25GE3/0/25
+ shutdown
+#
+[16D                [16Dinterface 25GE3/0/26
+ shutdown
+#
+interface 25GE3/0/27
+ shutdown
+#
+interface 25GE3/0/28
+ shutdown
+#
+interface 25GE3/0/29
+ shutdown
+#
+interface 25GE3/0/30
+ shutdown
+#
+interface 25GE3/0/31
+ shutdown
+#
+interface 25GE3/0/32
+ shutdown
+#
+interface 25GE3/0/33
+ shutdown
+#
+interface 25GE3/0/34
+ shutdown
+#
+interface 25GE3/0/35
+ shutdown
+#
+interface 25GE3/0/36
+ shutdown
+#
+interface 25GE3/0/37
+ shutdown
+#
+interface 25GE3/0/38
+ shutdown
+#
+interface 25GE3/0/39
+ shutdown
+#
+interface 25GE3/0/40
+ shutdown
+#
+interface 25GE3/0/41
+ shutdown
+#
+interface 25GE3/0/42
+ shutdown
+#
+interface 25GE3/0/43
+ shutdown
+#
+interface 25GE3/0/44
+ shutdown
+#
+interface 25GE3/0/45
+ shutdown
+#
+interface 25GE3/0/46
+ shutdown
+#
+[16D                [16Dinterface 25GE3/0/47
+ shutdown
+#
+interface 25GE3/0/48
+ shutdown
+#
+interface 25GE3/0/49
+ shutdown
+#
+interface 25GE3/0/50
+ shutdown
+#
+interface 25GE3/0/51
+ shutdown
+#
+interface 25GE3/0/52
+ shutdown
+#
+interface 25GE3/0/53
+ shutdown
+#
+interface 25GE3/0/54
+ shutdown
+#
+interface 25GE3/0/55
+ shutdown
+#
+interface 25GE3/0/56
+ shutdown
+#
+interface 25GE3/0/57
+ shutdown
+#
+interface 25GE3/0/58
+ shutdown
+#
+interface 25GE3/0/59
+ shutdown
+#
+interface 25GE3/0/60
+ shutdown
+#
+interface 25GE3/0/61
+ shutdown
+#
+interface 25GE3/0/62
+ shutdown
+#
+interface 25GE3/0/63
+ shutdown
+#
+interface 25GE3/0/64
+ shutdown
+#
+interface 25GE3/0/65
+ shutdown
+#
+interface 25GE3/0/66
+ shutdown
+#
+interface 25GE3/0/67
+ shutdown
+#
+[16D                [16Dinterface 25GE3/0/68
+ shutdown
+#
+interface 25GE3/0/69
+ shutdown
+#
+interface 25GE3/0/70
+ shutdown
+#
+interface 25GE3/0/71
+ shutdown
+ traffic-policy test inbound
+#
+interface 100GE1/0/0
+  description TO-SOYB-YY-3G-OF8LY8-TN-D2-10HF1/0/0
+ undo shutdown
+ eth-trunk 0
+ dcn
+ clock synchronization enable
+#
+interface 100GE1/0/1
+ carrier down-hold-time 200
+  description SN-XB-BKC-WN-8.TUO.DY600 100GE7/0/0
+ undo shutdown
+ dcn
+#
+interface 100GE1/0/1.300
+ vlan-type dot1q 300
+  description to_DYJQSBO-100HF7/0/0.300
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B655::66/127
+ statistic enable
+#
+interface 100GE1/0/2
+  description SN-SO-YB-VQG800-D-BY-TSW-TX smartgroup23
+ undo shutdown
+ eth-trunk 1004
+ dcn
+#
+interface 100GE1/0/3
+  description SN-SO-YB-VQG800-D-BY-TSW-TX smartgroup23
+ undo shutdown
+ eth-trunk 1003
+ dcn
+#
+interface 100GE1/0/4
+  description SN-XB-DC1C-2G01-S14D19V32-5HD-TTQ-0003-IX8861 100GE1/3/2
+ undo shutdown
+ eth-trunk 1005
+#
+interface 100GE1/0/5
+  description SNXAVQG800DBY-TSW-TX smartgroup23
+ undo shutdown
+ eth-trunk 1001
+#
+interface 100GE1/0/6
+  description SN-SO-YB-VQG901-D-BY-TSW-TX smartgroup23
+ undo shutdown
+ eth-trunk 1002
+#
+interface 100GE1/0/7
+  description SNXY-SNM-6G-OF8LY4-TN-D001 100GE1/0/2
+[16D                [16D undo shutdown
+ eth-trunk 100
+#
+interface 100GE1/0/8
+  description SNWN-BYK-7G-T12508S-TN-D001 HundredGigE2/0/8
+ undo shutdown
+ eth-trunk 101
+#
+interface 100GE1/0/9
+  description SNBJ-ZBET-3G-T12508S-TN-D001 HundredGigE2/0/8
+ undo shutdown
+ eth-trunk 102
+#
+interface 100GE1/0/10
+  description SNTC-MUEM-4G-BY9L8FB-TN-D001 cgei-0/0/0/1
+ undo shutdown
+ eth-trunk 103
+#
+interface 100GE1/0/11
+  description SNYA-MUEM-3G-T12508S-TN-D001 HundredGigE2/0/8
+ undo shutdown
+ eth-trunk 104
+#
+interface 100GE1/0/12
+  description SNXA-DC-NU-DS-DY600-Y16B-1 100ge1/0/0
+ undo shutdown
+ ip address 125.288.287.1 255.255.255.252
+#
+interface 100GE1/0/12.100
+ vlan-type dot1q 100
+  description TO_XB_JQSBO_STH1-100HF10/0/0.100
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B655::6E/127
+#
+interface 100GE1/0/13
+ shutdown
+#
+interface 100GE1/0/14
+ shutdown
+#
+interface 100GE1/0/15
+ shutdown
+#
+interface 100GE1/0/16
+ shutdown
+#
+interface 100GE1/0/17
+ shutdown
+#
+interface 100GE1/0/18
+ shutdown
+#
+interface 100GE1/0/19
+ shutdown
+#
+interface 100GE1/0/20
+ shutdown
+#
+interface 100GE1/0/21
+ shutdown
+#
+interface 100GE1/0/22
+[16D                [16D shutdown
+#
+interface 100GE1/0/23
+ shutdown
+#
+interface 100GE1/0/24
+ shutdown
+#
+interface 100GE1/0/25
+ shutdown
+#
+interface 100GE1/0/26
+ shutdown
+#
+interface 100GE1/0/27
+ shutdown
+#
+interface 100GE1/0/28
+ shutdown
+#
+interface 100GE1/0/29
+ shutdown
+#
+interface 100GE1/0/30
+ shutdown
+#
+interface 100GE1/0/31
+ shutdown
+#
+interface 100GE1/0/32
+ shutdown
+#
+interface 100GE1/0/33
+ shutdown
+#
+interface 100GE1/0/34
+ shutdown
+#
+interface 100GE1/0/35
+ shutdown
+#
+interface 100GE1/0/36
+ shutdown
+#
+interface 100GE1/0/37
+ shutdown
+#
+interface 100GE1/0/38
+ shutdown
+#
+interface 100GE1/0/39
+ shutdown
+#
+interface 100GE2/0/0
+  description TO-SOYB-YY-3G-OF8LY8-TN-D2-10HF2/0/0
+ undo shutdown
+ eth-trunk 0
+ dcn
+#
+interface 100GE2/0/1
+ carrier down-hold-time 200
+  description SN-XB-BKC-WN-8.TUO.DY600 100GE7/0/1
+ undo shutdown
+[16D                [16D dcn
+#
+interface 100GE2/0/1.300
+ vlan-type dot1q 300
+  description to_DYJQSBO-100HF7/0/1.300
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 795D:D6B8:B655::6A/127
+ statistic enable
+#
+interface 100GE2/0/2
+ undo shutdown
+ eth-trunk 1004
+ dcn
+#
+interface 100GE2/0/3
+ undo shutdown
+ eth-trunk 1003
+ dcn
+#
+interface 100GE2/0/4
+  description SN-XB-YY1C-4G01-S07D14V32-JPU-TTQ-0003-IX8861 100GE1/3/2
+ undo shutdown
+ eth-trunk 1006
+#
+interface 100GE2/0/5
+ undo shutdown
+ eth-trunk 1001
+#
+interface 100GE2/0/6
+ undo shutdown
+ eth-trunk 1002
+#
+interface 100GE2/0/7
+  description SNYL-MUEM-5G-OF8LY4-TN-D001 100GE1/0/2
+ undo shutdown
+ eth-trunk 105
+#
+interface 100GE2/0/8
+  description SNAK-MUEM-6G-BY9L8FB-TN-D001 cgei-0/0/0/2
+ undo shutdown
+ eth-trunk 106
+#
+interface 100GE2/0/9
+  description SNHZ-ZBEM-5G-T12508S-TN-D001 HundredGigE2/0/8
+ undo shutdown
+ eth-trunk 107
+#
+interface 100GE2/0/10
+  description SNSL-MUEM-3G-BY9L8FB-TN-D001 cgei-0/0/0/2
+ undo shutdown
+ eth-trunk 108
+#
+interface 100GE2/0/11
+  description SNXA-DC-7750-B1 100GE8/2/1
+ undo shutdown
+ eth-trunk 1000
+#
+interface 100GE2/0/12
+  description SNXA-DC-7750-B1 100GE8/2/1
+ shutdown
+#
+interface 100GE2/0/13
+[16D                [16D shutdown
+#
+interface 100GE2/0/14
+ shutdown
+#
+interface 100GE2/0/15
+ shutdown
+#
+interface 100GE2/0/16
+ shutdown
+#
+interface 100GE2/0/17
+ shutdown
+#
+interface 100GE2/0/18
+ shutdown
+#
+interface 100GE2/0/19
+ shutdown
+#
+interface 100GE2/0/20
+ shutdown
+#
+interface 100GE2/0/21
+ shutdown
+#
+interface 100GE2/0/22
+ shutdown
+#
+interface 100GE2/0/23
+ shutdown
+#
+interface 100GE2/0/24
+ shutdown
+#
+interface 100GE2/0/25
+ shutdown
+#
+interface 100GE2/0/26
+ shutdown
+#
+interface 100GE2/0/27
+ shutdown
+#
+interface 100GE2/0/28
+ shutdown
+#
+interface 100GE2/0/29
+ shutdown
+#
+interface 100GE2/0/30
+ shutdown
+#
+interface 100GE2/0/31
+ shutdown
+#
+interface 100GE2/0/32
+ shutdown
+#
+interface 100GE2/0/33
+ shutdown
+#
+interface 100GE2/0/34
+[16D                [16D shutdown
+#
+interface 100GE2/0/35
+ shutdown
+#
+interface 100GE2/0/36
+ shutdown
+#
+interface 100GE2/0/37
+ shutdown
+#
+interface 100GE2/0/38
+ shutdown
+#
+interface 100GE2/0/39
+ shutdown
+#
+interface LoopBack0
+ ip address 13.191.286.1 255.255.255.255
+ isis enable 1000
+#
+interface LoopBack2147483647
+  description DCN loopback interface
+ ip binding vpn-instance __dcn_vpn__
+ ip address 151.140.236.2 255.255.0.0
+#
+interface NULL0
+#
+bgp 65496
+ router-id 13.191.286.1
+ graceful-restart
+ graceful-restart peer-reset
+ peer 13.191.286.2 as-number 65496
+  peer 13.191.286.2 description SNXA-YY-4G-OF8LY8-TN-D2
+ peer 13.191.286.2 connect-interface LoopBack0
+  peer 13.191.286.2 password cipher 3b66e8e2bdcebf0bf8364202d29f7840
+ peer 13.191.286.274 as-number 38351
+  peer 13.191.286.274 description to_B-BS-1
+ peer 13.191.286.274 connect-interface Eth-Trunk1000.875
+ peer 13.191.286.272 as-number 9929
+  peer 13.191.286.272 description to_soyb-exm-F-2
+ peer 13.191.286.272 connect-interface Eth-Trunk10.10
+ #
+ ipv4-family unicast
+  undo synchronization
+  preference route-policy SmartMAN_NSM_SNMP_IN
+  aggregate 13.191.286.0 255.255.255.0 detail-suppressed
+  import-route isis 1000 route-policy SmartMAN_OUT_DETAIL
+  undo peer 13.191.286.2 enable
+  peer 13.191.286.274 enable
+  peer 13.191.286.274 route-policy SmartMAN_NSM_SNMP_IN import
+  peer 13.191.286.274 route-policy SmartMAN_OUT_AGGREGATION export
+  peer 13.191.286.272 enable
+  peer 13.191.286.272 route-policy SmartMAN_SDN_IN import
+  peer 13.191.286.272 route-policy SmartMAN_OUT_AGGREGATION export
+ #
+ ipv6-family unicast
+  undo synchronization
+ #
+ ipv4-family vpnv4
+  reflector cluster-id 65496
+  reflect change-path-attribute
+  policy vpn-target
+[16D                [16D  route-select delay 180
+  peer 13.191.286.2 enable
+  peer 13.191.286.2 route-policy to-MCR import
+  peer 13.191.286.2 advertise-community
+ #
+ ipv4-family vpn-instance 5GC_MGMN
+  aggregate 1.6.67.0 255.255.255.128 detail-suppressed
+  aggregate 1.6.67.151 255.255.255.128 detail-suppressed
+  aggregate 1.6.68.0 255.255.255.0 detail-suppressed
+  aggregate 1.6.69.0 255.255.255.0 detail-suppressed
+  aggregate 1.6.60.0 255.255.255.0
+  aggregate 1.6.83.0 255.255.255.0 detail-suppressed
+  aggregate 1.6.84.0 255.255.255.0 detail-suppressed
+  aggregate 1.89.151.0 255.255.255.0 detail-suppressed
+  aggregate 1.89.152.0 255.255.255.0 detail-suppressed
+  aggregate 1.89.163.0 255.255.255.0
+  aggregate 1.89.193.0 255.255.255.0 detail-suppressed
+  aggregate 1.89.194.0 255.255.255.0 detail-suppressed
+  import-route direct
+  auto-frr
+  peer 1.2.74.16 as-number 38351
+   peer 1.2.74.16 description CB-AS1
+  peer 1.2.74.16 route-policy 5GC_MGMN_B_Wang_V4_in import
+  peer 1.2.74.16 route-policy 5GC_MGMN_B_Wang_V4_out export
+  peer 1.2.74.16 advertise-community
+  peer 1.2.74.16 route-update-interval 5
+  peer 1.6.67.2 as-number 64087.641
+   peer 1.6.67.2 description HW_CC_VQG700
+   peer 1.6.67.2 password cipher 24e90312d98b076eb1f8384843266a43
+  peer 1.6.67.2 bfd min-tx-interval 300 min-rx-interval 300
+  peer 1.6.67.2 bfd enable
+  peer 1.6.67.2 as-path-filter HW_UPF import
+  peer 1.6.67.2 route-policy 5GC_MGMN_HW_UPF_in import
+  peer 1.6.67.2 route-policy to_UPF_out_v4 export
+  peer 1.6.67.2 advertise-community
+  peer 1.6.67.2 default-route-advertise
+  peer 1.6.67.2 route-update-interval 5
+  peer 1.6.67.17 as-number 64087.641
+   peer 1.6.67.17 description HW_XY_VQG750
+   peer 1.6.67.17 password cipher b3c245ab718af4c864a4857e5439019c
+  peer 1.6.67.17 bfd min-tx-interval 300 min-rx-interval 300
+  peer 1.6.67.17 bfd enable
+  peer 1.6.67.17 as-path-filter HW_UPF import
+  peer 1.6.67.17 route-policy 5GC_MGMN_HW_UPF_in import
+  peer 1.6.67.17 route-policy to_UPF_out_v4 export
+  peer 1.6.67.17 advertise-community
+  peer 1.6.67.17 default-route-advertise
+  peer 1.6.67.17 route-update-interval 5
+  peer 1.89.163.89 as-number 65510
+   peer 1.89.163.89 description yulio-NDS1
+   peer 1.89.163.89 password cipher 40389e9cf0828d29485c09ad64bd31ae
+  peer 1.89.163.89 bfd min-tx-interval 150 min-rx-interval 150
+  peer 1.89.163.89 bfd enable
+  peer 1.89.163.89 route-policy 5GC_MGMN_yulin_inV4 import
+  peer 1.89.163.89 route-policy default_denyV4 export
+  peer 1.89.163.243 as-number 65496.200
+  peer 1.89.163.243 fake-as 65496.100
+   peer 1.89.163.243 description To-XB-BY-JQSBO-STH1
+   peer 1.89.163.243 password cipher c7025366a7898c92d5e9a7308b42475c
+  peer 1.89.163.243 bfd min-tx-interval 150 min-rx-interval 150
+  peer 1.89.163.243 bfd enable
+  peer 1.89.163.243 route-policy 5GC_MGMN_xian_ZX_inV4 import
+  peer 1.89.163.243 route-policy default_denyV4 export
+[16D                [16D  peer 13.288.1.1 as-number 64087.640
+   peer 13.288.1.1 description ZTE_DC_VQG800
+  peer 13.288.1.1 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.1.1 bfd enable
+  peer 13.288.1.1 as-path-filter ZTE_UPF import
+  peer 13.288.1.1 route-policy 5GC_MGMN_ZTE_UPF_in import
+  peer 13.288.1.1 route-policy to_UPF_out_v4 export
+  peer 13.288.1.1 advertise-community
+  peer 13.288.1.1 default-route-advertise
+  peer 13.288.1.1 route-update-interval 5
+  peer 13.288.1.9 as-number 64087.640
+   peer 13.288.1.9 description ZTE_DC_VQG801
+  peer 13.288.1.9 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.1.9 bfd enable
+  peer 13.288.1.9 as-path-filter ZTE_UPF import
+  peer 13.288.1.9 route-policy 5GC_MGMN_ZTE_UPF_in import
+  peer 13.288.1.9 route-policy to_UPF_out_v4 export
+  peer 13.288.1.9 advertise-community
+  peer 13.288.1.9 default-route-advertise
+  peer 13.288.1.9 route-update-interval 5
+  peer 13.288.1.10 as-number 64087.640
+   peer 13.288.1.10 description ZTE_YY_VQG900
+  peer 13.288.1.10 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.1.10 bfd enable
+  peer 13.288.1.10 as-path-filter ZTE_UPF import
+  peer 13.288.1.10 route-policy 5GC_MGMN_ZTE_UPF_in import
+  peer 13.288.1.10 route-policy to_UPF_out_v4 export
+  peer 13.288.1.10 advertise-community
+  peer 13.288.1.10 default-route-advertise
+  peer 13.288.1.10 route-update-interval 5
+  peer 13.288.1.28 as-number 64087.640
+   peer 13.288.1.28 description ZTE_YY_VQG901
+  peer 13.288.1.28 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.1.28 bfd enable
+  peer 13.288.1.28 as-path-filter ZTE_UPF import
+  peer 13.288.1.28 route-policy 5GC_MGMN_ZTE_UPF_in import
+  peer 13.288.1.28 route-policy to_UPF_out_v4 export
+  peer 13.288.1.28 advertise-community
+  peer 13.288.1.28 default-route-advertise
+  peer 13.288.1.28 route-update-interval 5
+ #
+ ipv4-family vpn-instance GPRS_Gn_C
+  aggregate 149.72.125.41 255.255.255.252 detail-suppressed
+  aggregate 149.72.125.55 255.255.255.252 detail-suppressed
+  aggregate 149.72.125.145 255.255.255.252 detail-suppressed
+  aggregate 149.72.125.149 255.255.255.252 detail-suppressed
+  aggregate 149.72.125.177 255.255.255.240 detail-suppressed
+  aggregate 149.72.125.193 255.255.255.240 detail-suppressed
+  import-route direct
+  auto-frr
+  peer 13.277.109.84 as-number 38351
+   peer 13.277.109.84 description CB-AS1
+  peer 13.277.109.84 route-policy GPRS_Gn_C_B_Wang_V4_in import
+  peer 13.277.109.84 route-policy GPRS_Gn_C_B_Wang_V4_out export
+  peer 13.277.109.84 advertise-community
+  peer 13.277.109.84 route-update-interval 5
+  peer 13.288.2.1 as-number 64087.640
+   peer 13.288.2.1 description ZTE_DC_VQG800
+  peer 13.288.2.1 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.2.1 bfd enable
+  peer 13.288.2.1 as-path-filter ZTE_UPF import
+  peer 13.288.2.1 route-policy GPRS_Gn_C_ZTE_UPF_in import
+  peer 13.288.2.1 route-policy to_UPF_out_v4 export
+[16D                [16D  peer 13.288.2.1 advertise-community
+  peer 13.288.2.1 default-route-advertise
+  peer 13.288.2.1 route-update-interval 5
+  peer 13.288.2.9 as-number 64087.640
+   peer 13.288.2.9 description ZTE_DC_VQG801
+  peer 13.288.2.9 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.2.9 bfd enable
+  peer 13.288.2.9 as-path-filter ZTE_UPF import
+  peer 13.288.2.9 route-policy GPRS_Gn_C_ZTE_UPF_in import
+  peer 13.288.2.9 route-policy to_UPF_out_v4 export
+  peer 13.288.2.9 advertise-community
+  peer 13.288.2.9 default-route-advertise
+  peer 13.288.2.9 route-update-interval 5
+  peer 13.288.2.10 as-number 64087.640
+   peer 13.288.2.10 description ZTE_YY_VQG900
+  peer 13.288.2.10 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.2.10 bfd enable
+  peer 13.288.2.10 as-path-filter ZTE_UPF import
+  peer 13.288.2.10 route-policy GPRS_Gn_C_ZTE_UPF_in import
+  peer 13.288.2.10 route-policy to_UPF_out_v4 export
+  peer 13.288.2.10 advertise-community
+  peer 13.288.2.10 default-route-advertise
+  peer 13.288.2.10 route-update-interval 5
+  peer 13.288.2.28 as-number 64087.640
+   peer 13.288.2.28 description ZTE_YY_VQG901
+  peer 13.288.2.28 bfd min-tx-interval 300 min-rx-interval 300
+  peer 13.288.2.28 bfd enable
+  peer 13.288.2.28 as-path-filter ZTE_UPF import
+  peer 13.288.2.28 route-policy GPRS_Gn_C_ZTE_UPF_in import
+  peer 13.288.2.28 route-policy to_UPF_out_v4 export
+  peer 13.288.2.28 advertise-community
+  peer 13.288.2.28 default-route-advertise
+  peer 13.288.2.28 route-update-interval 5
+  peer 149.72.125.183 as-number 64087.641
+   peer 149.72.125.183 description HW_CC_VQG700
+   peer 149.72.125.183 password cipher 248f9cc337c5f5b6b4ecd8631e17710e
+  peer 149.72.125.183 bfd min-tx-interval 300 min-rx-interval 300
+  peer 149.72.125.183 bfd enable
+  peer 149.72.125.183 as-path-filter HW_UPF import
+  peer 149.72.125.183 route-policy GPRS_Gn_C_HW_UPF_in import
+  peer 149.72.125.183 route-policy to_UPF_out_v4 export
+  peer 149.72.125.183 advertise-community
+  peer 149.72.125.183 default-route-advertise
+  peer 149.72.125.183 route-update-interval 5
+  peer 149.72.125.199 as-number 64087.641
+   peer 149.72.125.199 description HW_XY_VQG750
+   peer 149.72.125.199 password cipher b719c6585c60a6d442cee31fe1bb4520
+  peer 149.72.125.199 bfd min-tx-interval 300 min-rx-interval 300
+  peer 149.72.125.199 bfd enable
+  peer 149.72.125.199 as-path-filter HW_UPF import
+  peer 149.72.125.199 route-policy GPRS_Gn_C_HW_UPF_in import
+  peer 149.72.125.199 route-policy to_UPF_out_v4 export
+  peer 149.72.125.199 advertise-community
+  peer 149.72.125.199 default-route-advertise
+  peer 149.72.125.199 route-update-interval 5
+  peer 253.239.245.85 as-number 65510
+   peer 253.239.245.85 description yulio-NDS1
+   peer 253.239.245.85 password cipher bda7aa55f7f0497efc6c4a45053a4e6a
+  peer 253.239.245.85 bfd min-tx-interval 150 min-rx-interval 150
+  peer 253.239.245.85 bfd enable
+  peer 253.239.245.85 route-policy GPRS_Gn_C_yulin_inV4 import
+  peer 253.239.245.85 route-policy default_denyV4 export
+  peer 253.239.245.163 as-number 65496.200
+[16D                [16D  peer 253.239.245.163 fake-as 65496.100
+   peer 253.239.245.163 description To-XB-BY-JQSBO-STH1
+   peer 253.239.245.163 password cipher 7298aa97f81cbbbc4ff0a7c3704029de
+  peer 253.239.245.163 bfd min-tx-interval 150 min-rx-interval 150
+  peer 253.239.245.163 bfd enable
+  peer 253.239.245.163 route-policy GPRS_Gn_C_xian_ZX_inV4 import
+  peer 253.239.245.163 route-policy default_denyV4 export
+ #
+ ipv4-family vpn-instance SmartMAN_AUTO_ONLINE
+  peer 13.191.286.266 as-number 9929
+  peer 13.191.286.266 connect-interface Eth-Trunk10.11
+  peer 13.191.286.266 route-policy ROUTE_FROM-A import
+ #
+ ipv6-family vpnv6
+  reflector cluster-id 65496
+  reflect change-path-attribute
+  policy vpn-target
+  route-select delay 180
+  peer 13.191.286.2 enable
+  peer 13.191.286.2 route-policy to-MCR-v6 export
+  peer 13.191.286.2 advertise-community
+ #
+ ipv6-family vpn-instance 5GC_MGMN
+  aggregate 795D:D698:B545:60D5:: 60 detail-suppressed
+  aggregate 795D:D698:B545:60E5:: 60 detail-suppressed
+  aggregate 795D:D698:B545:60F5:: 60 detail-suppressed
+  aggregate 795D:D698:B545:6005:: 60 detail-suppressed
+  import-route direct
+  auto-frr
+  peer 795D:D698:B545:60D5:6::7 as-number 64087.640
+   peer 795D:D698:B545:60D5:6::7 description ZTE_DC_VQG800
+  peer 795D:D698:B545:60D5:6::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:60D5:6::7 bfd enable
+  peer 795D:D698:B545:60D5:6::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:60D5:6::7 route-policy ZTE_5GC_MGMN_in_v6 import
+  peer 795D:D698:B545:60D5:6::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:60D5:6::7 advertise-community
+  peer 795D:D698:B545:60D5:6::7 default-route-advertise
+  peer 795D:D698:B545:60D5:6::7 route-update-interval 5
+  peer 795D:D698:B545:60D5:7::7 as-number 64087.640
+   peer 795D:D698:B545:60D5:7::7 description ZTE_DC_VQG801
+  peer 795D:D698:B545:60D5:7::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:60D5:7::7 bfd enable
+  peer 795D:D698:B545:60D5:7::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:60D5:7::7 route-policy ZTE_5GC_MGMN_in_v6 import
+  peer 795D:D698:B545:60D5:7::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:60D5:7::7 advertise-community
+  peer 795D:D698:B545:60D5:7::7 default-route-advertise
+  peer 795D:D698:B545:60D5:7::7 route-update-interval 5
+  peer 795D:D698:B545:60E5:6::7 as-number 64087.640
+   peer 795D:D698:B545:60E5:6::7 description ZTE_YY_VQG900
+  peer 795D:D698:B545:60E5:6::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:60E5:6::7 bfd enable
+  peer 795D:D698:B545:60E5:6::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:60E5:6::7 route-policy ZTE_5GC_MGMN_in_v6 import
+  peer 795D:D698:B545:60E5:6::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:60E5:6::7 advertise-community
+  peer 795D:D698:B545:60E5:6::7 default-route-advertise
+  peer 795D:D698:B545:60E5:6::7 route-update-interval 5
+  peer 795D:D698:B545:60E5:7::7 as-number 64087.640
+   peer 795D:D698:B545:60E5:7::7 description ZTE_YY_VQG901
+  peer 795D:D698:B545:60E5:7::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:60E5:7::7 bfd enable
+[16D                [16D  peer 795D:D698:B545:60E5:7::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:60E5:7::7 route-policy ZTE_5GC_MGMN_in_v6 import
+  peer 795D:D698:B545:60E5:7::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:60E5:7::7 advertise-community
+  peer 795D:D698:B545:60E5:7::7 default-route-advertise
+  peer 795D:D698:B545:60E5:7::7 route-update-interval 5
+  peer 795D:D698:B544:4E05::9 as-number 38351
+   peer 795D:D698:B544:4E05::9 description CB-AS1
+  peer 795D:D698:B544:4E05::9 route-policy 5GC_MGMN_B_Wang_V6_in import
+  peer 795D:D698:B544:4E05::9 route-policy 5GC_MGMN_B_Wang_V6_out export
+  peer 795D:D698:B544:4E05::9 advertise-community
+  peer 795D:D698:B544:4E05::9 route-update-interval 5
+ #
+ ipv6-family vpn-instance 5G_RAN
+  aggregate 795D:D698:B545:6455:: 60 detail-suppressed
+  aggregate 795D:D698:B545:6465:: 60 detail-suppressed
+  aggregate 795D:D698:B545:64D5:: 60 detail-suppressed
+  aggregate 795D:D698:B545:64E5:: 60 detail-suppressed
+  import-route direct
+  maximum load-balancing eibgp 8
+  auto-frr
+  peer 795D:D698:B545:6455::6556 as-number 64087.641
+   peer 795D:D698:B545:6455::6556 description HW_CC_VQG700
+   peer 795D:D698:B545:6455::6556 password cipher 2ff2fce07b60b07dd048a1fedad1e258
+  peer 795D:D698:B545:6455::6556 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:6455::6556 bfd enable
+  peer 795D:D698:B545:6455::6556 as-path-filter HW_UPF import
+  peer 795D:D698:B545:6455::6556 route-policy HW_5G_RAN_in_v6 import
+  peer 795D:D698:B545:6455::6556 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:6455::6556 advertise-community
+  peer 795D:D698:B545:6455::6556 default-route-advertise
+  peer 795D:D698:B545:6455::6556 route-update-interval 5
+  peer 795D:D698:B545:6465::6556 as-number 64087.641
+   peer 795D:D698:B545:6465::6556 description HW_XY_VQG750
+   peer 795D:D698:B545:6465::6556 password cipher aadf1c5158c5cd1fa703b30a929ad5a0
+  peer 795D:D698:B545:6465::6556 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:6465::6556 bfd enable
+  peer 795D:D698:B545:6465::6556 as-path-filter HW_UPF import
+  peer 795D:D698:B545:6465::6556 route-policy HW_5G_RAN_in_v6 import
+  peer 795D:D698:B545:6465::6556 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:6465::6556 advertise-community
+  peer 795D:D698:B545:6465::6556 default-route-advertise
+  peer 795D:D698:B545:6465::6556 route-update-interval 5
+  peer 795D:D698:B545:64D5:6::7 as-number 64087.640
+   peer 795D:D698:B545:64D5:6::7 description ZTE_DC_VQG801
+  peer 795D:D698:B545:64D5:6::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:64D5:6::7 bfd enable
+  peer 795D:D698:B545:64D5:6::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:64D5:6::7 route-policy ZTE_5G_RAN_in_v6 import
+  peer 795D:D698:B545:64D5:6::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:64D5:6::7 advertise-community
+  peer 795D:D698:B545:64D5:6::7 default-route-advertise
+  peer 795D:D698:B545:64D5:6::7 route-update-interval 5
+  peer 795D:D698:B545:64D5:7::7 as-number 64087.640
+   peer 795D:D698:B545:64D5:7::7 description ZTE_DC_VQG801
+  peer 795D:D698:B545:64D5:7::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:64D5:7::7 bfd enable
+  peer 795D:D698:B545:64D5:7::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:64D5:7::7 route-policy ZTE_5G_RAN_in_v6 import
+  peer 795D:D698:B545:64D5:7::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:64D5:7::7 advertise-community
+  peer 795D:D698:B545:64D5:7::7 default-route-advertise
+  peer 795D:D698:B545:64D5:7::7 route-update-interval 5
+[16D                [16D  peer 795D:D698:B545:64E5:6::7 as-number 64087.640
+   peer 795D:D698:B545:64E5:6::7 description ZTE_DC_VQG800
+  peer 795D:D698:B545:64E5:6::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:64E5:6::7 bfd enable
+  peer 795D:D698:B545:64E5:6::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:64E5:6::7 route-policy ZTE_5G_RAN_in_v6 import
+  peer 795D:D698:B545:64E5:6::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:64E5:6::7 advertise-community
+  peer 795D:D698:B545:64E5:6::7 default-route-advertise
+  peer 795D:D698:B545:64E5:6::7 route-update-interval 5
+  peer 795D:D698:B545:64E5:7::7 as-number 64087.640
+   peer 795D:D698:B545:64E5:7::7 description ZTE_YY_VQG901
+  peer 795D:D698:B545:64E5:7::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:64E5:7::7 bfd enable
+  peer 795D:D698:B545:64E5:7::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:64E5:7::7 route-policy ZTE_5G_RAN_in_v6 import
+  peer 795D:D698:B545:64E5:7::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:64E5:7::7 advertise-community
+  peer 795D:D698:B545:64E5:7::7 default-route-advertise
+  peer 795D:D698:B545:64E5:7::7 route-update-interval 5
+  peer 795D:D6B8:B655::B as-number 38351
+   peer 795D:D6B8:B655::B description CB-AS-1
+  peer 795D:D6B8:B655::B route-policy 5G_RAN_V6_NR_in import
+  peer 795D:D6B8:B655::B route-policy 5G_RAN_V6_NR_out export
+  peer 795D:D6B8:B655::B advertise-community
+  peer 795D:D6B8:B655::B route-update-interval 5
+  peer 795D:D6B8:B655::6D as-number 65496.100
+  peer 795D:D6B8:B655::6D fake-as 65496.200
+   peer 795D:D6B8:B655::6D description To-XB-JQSBO-STH1
+  peer 795D:D6B8:B655::6D connect-interface 100GE1/0/12.100
+   peer 795D:D6B8:B655::6D password cipher b7f6d08859787cb2bf826dace3657795
+  peer 795D:D6B8:B655::6D bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:B655::6D bfd enable
+  peer 795D:D6B8:B655::6D route-policy 5G_RAN_in_IPRANv6 import
+  peer 795D:D6B8:B655::6D route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:B655::62 as-number 65496.200
+  peer 795D:D6B8:B655::62 fake-as 65496.100
+   peer 795D:D6B8:B655::62 description To-XB-BY-JQSBO-STH1
+   peer 795D:D6B8:B655::62 password cipher a44a91140b1d044f6ad87dc2b1f77cf6
+  peer 795D:D6B8:B655::62 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:B655::62 bfd enable
+  peer 795D:D6B8:B655::62 route-policy 5G_RAN_xian_ZX_inV6 import
+  peer 795D:D6B8:B655::62 route-policy default_denyV6 export
+  peer 795D:D6B8:B755::8 as-number 65512
+   peer 795D:D6B8:B755::8 description tongdivbo-NDS1
+   peer 795D:D6B8:B755::8 password cipher 17aaf2b2d2b5685bc0498ebd1f2a0d04
+  peer 795D:D6B8:B755::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:B755::8 bfd enable
+  peer 795D:D6B8:B755::8 route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:B855::8 as-number 65498
+   peer 795D:D6B8:B855::8 description baojj-NDS1
+   peer 795D:D6B8:B855::8 password cipher 2c36ade0321f7748d965c83a3af3d215
+  peer 795D:D6B8:B855::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:B855::8 bfd enable
+  peer 795D:D6B8:B855::8 route-policy 5G_RAN_baoji_in import
+  peer 795D:D6B8:B855::8 route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:B955::8 as-number 65497
+   peer 795D:D6B8:B955::8 description xianzboh-NDS1
+   peer 795D:D6B8:B955::8 password cipher fd53ca040286535ed1d167bfe3f83e83
+  peer 795D:D6B8:B955::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:B955::8 bfd enable
+  peer 795D:D6B8:B955::8 route-policy 5G_RAN_xianyang_in import
+  peer 795D:D6B8:B955::8 route-policy 5G-DX-IPv6-5GC export
+[16D                [16D  peer 795D:D6B8:BA55::8 as-number 65499
+   peer 795D:D6B8:BA55::8 description weinbo-NDS1
+   peer 795D:D6B8:BA55::8 password cipher ff7b57d47c168d0250430ae58edc3bf9
+  peer 795D:D6B8:BA55::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:BA55::8 bfd enable
+  peer 795D:D6B8:BA55::8 route-policy 5G_RAN_weinan_in import
+  peer 795D:D6B8:BA55::8 route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:BB55::8 as-number 65511
+   peer 795D:D6B8:BB55::8 description yanao-NDS1
+   peer 795D:D6B8:BB55::8 password cipher c5199694e32926ec93ae6158c47f3ad9
+  peer 795D:D6B8:BB55::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:BB55::8 bfd enable
+  peer 795D:D6B8:BB55::8 route-policy 5G_RAN_yanan_in import
+  peer 795D:D6B8:BB55::8 route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:BC55::8 as-number 65513
+   peer 795D:D6B8:BC55::8 description hanzipoh-NDS1
+   peer 795D:D6B8:BC55::8 password cipher 411464eca3ab19e290aa9b35b5a03bc0
+  peer 795D:D6B8:BC55::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:BC55::8 bfd enable
+  peer 795D:D6B8:BC55::8 route-policy 5G_RAN_hanzhong_in import
+  peer 795D:D6B8:BC55::8 route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:BD55::8 as-number 65510
+   peer 795D:D6B8:BD55::8 description yulio-NDS1
+   peer 795D:D6B8:BD55::8 password cipher 790d4f549115a849793c96db9473d5ea
+  peer 795D:D6B8:BD55::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:BD55::8 bfd enable
+  peer 795D:D6B8:BD55::8 route-policy 5G_RAN_yulin_in import
+  peer 795D:D6B8:BD55::8 route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:BE55::8 as-number 65515
+   peer 795D:D6B8:BE55::8 description ankaoh-NDS1
+   peer 795D:D6B8:BE55::8 password cipher 47ccb9fe15cad834ef0091fe617790fe
+  peer 795D:D6B8:BE55::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:BE55::8 bfd enable
+  peer 795D:D6B8:BE55::8 route-policy 5G_RAN_ankang_in import
+  peer 795D:D6B8:BE55::8 route-policy 5G-DX-IPv6-5GC export
+  peer 795D:D6B8:BF55::8 as-number 65514
+   peer 795D:D6B8:BF55::8 description shanhmvp-NDS1
+   peer 795D:D6B8:BF55::8 password cipher f1e2068ad200709adb364782c6f597e0
+  peer 795D:D6B8:BF55::8 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D6B8:BF55::8 bfd enable
+  peer 795D:D6B8:BF55::8 route-policy 5G_RAN_shangluo_in import
+  peer 795D:D6B8:BF55::8 route-policy 5G-DX-IPv6-5GC export
+  group DX-IPRAN-V6 external
+  peer DX-IPRAN-V6 as-number 138387
+   peer DX-IPRAN-V6 password cipher 094cd12d9f87e588eeb9f7bb94740f02
+  peer DX-IPRAN-V6 bfd min-tx-interval 150 min-rx-interval 150
+  peer DX-IPRAN-V6 bfd enable
+  peer 795D:D6B8:B655::65 as-number 138387
+  peer 795D:D6B8:B655::65 group DX-IPRAN-V6
+  peer 795D:D6B8:B655::65 connect-interface 100GE1/0/1.300
+  peer 795D:D6B8:B655::69 as-number 138387
+  peer 795D:D6B8:B655::69 group DX-IPRAN-V6
+  peer 795D:D6B8:B655::69 connect-interface 100GE2/0/1.300
+  peer DX-IPRAN-V6 route-policy 5G-DX-GXZ-IPv6-IN import
+  peer DX-IPRAN-V6 route-policy 5G-DX-IPv6-5GC export
+ #
+ ipv6-family vpn-instance GPRS_Gn_C
+  aggregate 795D:D698:B545:6155:: 60 detail-suppressed
+  aggregate 795D:D698:B545:6165:: 60 detail-suppressed
+  aggregate 795D:D698:B545:6175:: 64
+  aggregate 795D:D698:B545:61D5:: 60 detail-suppressed
+  aggregate 795D:D698:B545:61E5:: 60 detail-suppressed
+  import-route direct
+[16D                [16D  auto-frr
+  peer 795D:D698:B545:6155::6556 as-number 64087.641
+   peer 795D:D698:B545:6155::6556 description HW_CC_VQG700
+   peer 795D:D698:B545:6155::6556 password cipher cf63767d85bece6d11749eef08127407
+  peer 795D:D698:B545:6155::6556 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:6155::6556 bfd enable
+  peer 795D:D698:B545:6155::6556 as-path-filter HW_UPF import
+  peer 795D:D698:B545:6155::6556 route-policy HW_GPRS_Gn_C_in_v6 import
+  peer 795D:D698:B545:6155::6556 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:6155::6556 advertise-community
+  peer 795D:D698:B545:6155::6556 default-route-advertise
+  peer 795D:D698:B545:6155::6556 route-update-interval 5
+  peer 795D:D698:B545:6165::6556 as-number 64087.641
+   peer 795D:D698:B545:6165::6556 description HW_XY_VQG750
+   peer 795D:D698:B545:6165::6556 password cipher 81b312d590538ba6b5411b4bce3138b4
+  peer 795D:D698:B545:6165::6556 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:6165::6556 bfd enable
+  peer 795D:D698:B545:6165::6556 as-path-filter HW_UPF import
+  peer 795D:D698:B545:6165::6556 route-policy HW_GPRS_Gn_C_in_v6 import
+  peer 795D:D698:B545:6165::6556 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:6165::6556 advertise-community
+  peer 795D:D698:B545:6165::6556 default-route-advertise
+  peer 795D:D698:B545:6165::6556 route-update-interval 5
+  peer 795D:D698:B545:6175::663 as-number 65510
+   peer 795D:D698:B545:6175::663 description yulio-NDS1
+   peer 795D:D698:B545:6175::663 password cipher 6fd4c779942081410b234f1deda5498a
+  peer 795D:D698:B545:6175::663 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D698:B545:6175::663 bfd enable
+  peer 795D:D698:B545:6175::663 route-policy GPRS_Gn_C_yulin_inV6 import
+  peer 795D:D698:B545:6175::663 route-policy default_denyV6 export
+  peer 795D:D698:B545:6175::683 as-number 65496.200
+  peer 795D:D698:B545:6175::683 fake-as 65496.100
+   peer 795D:D698:B545:6175::683 description To-XB-BY-JQSBO-STH1
+   peer 795D:D698:B545:6175::683 password cipher ad701602a321c0dbc56bde9e2af279cf
+  peer 795D:D698:B545:6175::683 bfd min-tx-interval 150 min-rx-interval 150
+  peer 795D:D698:B545:6175::683 bfd enable
+  peer 795D:D698:B545:6175::683 route-policy GPRS_Gn_C_xian_ZX_inV6 import
+  peer 795D:D698:B545:6175::683 route-policy default_denyV6 export
+  peer 795D:D698:B545:61D5:6::7 as-number 64087.640
+   peer 795D:D698:B545:61D5:6::7 description ZTE_DC_VQG800
+  peer 795D:D698:B545:61D5:6::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:61D5:6::7 bfd enable
+  peer 795D:D698:B545:61D5:6::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:61D5:6::7 route-policy ZTE_GPRS_Gn_C_in_v6 import
+  peer 795D:D698:B545:61D5:6::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:61D5:6::7 advertise-community
+  peer 795D:D698:B545:61D5:6::7 default-route-advertise
+  peer 795D:D698:B545:61D5:6::7 route-update-interval 5
+  peer 795D:D698:B545:61D5:7::7 as-number 64087.640
+   peer 795D:D698:B545:61D5:7::7 description ZTE_DC_VQG801
+  peer 795D:D698:B545:61D5:7::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:61D5:7::7 bfd enable
+  peer 795D:D698:B545:61D5:7::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:61D5:7::7 route-policy ZTE_GPRS_Gn_C_in_v6 import
+  peer 795D:D698:B545:61D5:7::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:61D5:7::7 advertise-community
+  peer 795D:D698:B545:61D5:7::7 default-route-advertise
+  peer 795D:D698:B545:61D5:7::7 route-update-interval 5
+  peer 795D:D698:B545:61E5:6::7 as-number 64087.640
+   peer 795D:D698:B545:61E5:6::7 description ZTE_YY_VQG900
+  peer 795D:D698:B545:61E5:6::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:61E5:6::7 bfd enable
+  peer 795D:D698:B545:61E5:6::7 as-path-filter ZTE_UPF import
+[16D                [16D  peer 795D:D698:B545:61E5:6::7 route-policy ZTE_GPRS_Gn_C_in_v6 import
+  peer 795D:D698:B545:61E5:6::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:61E5:6::7 advertise-community
+  peer 795D:D698:B545:61E5:6::7 default-route-advertise
+  peer 795D:D698:B545:61E5:6::7 route-update-interval 5
+  peer 795D:D698:B545:61E5:7::7 as-number 64087.640
+   peer 795D:D698:B545:61E5:7::7 description ZTE_YY_VQG901
+  peer 795D:D698:B545:61E5:7::7 bfd min-tx-interval 300 min-rx-interval 300
+  peer 795D:D698:B545:61E5:7::7 bfd enable
+  peer 795D:D698:B545:61E5:7::7 as-path-filter ZTE_UPF import
+  peer 795D:D698:B545:61E5:7::7 route-policy ZTE_GPRS_Gn_C_in_v6 import
+  peer 795D:D698:B545:61E5:7::7 route-policy to_UPF_out_V6 export
+  peer 795D:D698:B545:61E5:7::7 advertise-community
+  peer 795D:D698:B545:61E5:7::7 default-route-advertise
+  peer 795D:D698:B545:61E5:7::7 route-update-interval 5
+  peer 795D:D698:B544:4E15::9 as-number 38351
+   peer 795D:D698:B544:4E15::9 description CB-AS1
+  peer 795D:D698:B544:4E15::9 route-policy GPRS_Gn_C_B_Wang_V6_in import
+  peer 795D:D698:B544:4E15::9 route-policy GPRS_Gn_C_B_Wang_V6_out export
+  peer 795D:D698:B544:4E15::9 advertise-community
+  peer 795D:D698:B544:4E15::9 route-update-interval 5
+#
+ospf 65534 vpn-instance __dcn_vpn__
+  description DCN ospf create by default
+ opaque-capability enable
+ hostname
+ vpn-instance-capability simple
+ area 0.0.0.0
+  network 0.0.0.0 255.255.255.255
+#
+!The DCN function implements the capability of plug-and-play for this device.
+!A NE IP address based on the unique NE ID is automatically generated in VPN
+!of DCN. It is recommended that the NE IP address be changed to the planned
+!one by running the ne-ip X.X.X.X <MASK> command after the device being online.
+dcn
+#
+route-policy 5G-DX-GXZ-IPv6-IN permit node 10
+ if-match ipv6 address prefix-list 5G-DX-GXZ-IPv6-IN
+#
+route-policy 5G-DX-IPv6-5GC permit node 10
+ if-match ipv6 address prefix-list 5G-DX-IPv6-5GC-2B
+#
+route-policy 5G-DX-IPv6-5GC permit node 20
+ if-match ipv6 address prefix-list 5G-DX-IPv6-5GC-2C
+#
+route-policy 5GC_MGMN_B_Wang_V4_in deny node 10
+ if-match ip-prefix permit_DefaultRoute_v4
+#
+route-policy 5GC_MGMN_B_Wang_V4_in permit node 20
+#
+route-policy 5GC_MGMN_B_Wang_V4_out permit node 10
+ if-match ip-prefix 5GC_MGMN_B_Wang_V4_out
+#
+route-policy 5GC_MGMN_B_Wang_V6_in deny node 10
+ if-match ipv6 address prefix-list permit_DefaultRoute_v6
+#
+route-policy 5GC_MGMN_B_Wang_V6_in permit node 20
+#
+route-policy 5GC_MGMN_B_Wang_V6_out permit node 10
+ if-match ipv6 address prefix-list 5GC_MGMN_B_Wang_V6_out
+#
+route-policy 5GC_MGMN_HW_UPF_in permit node 10
+ if-match ip-prefix 5GC_MGMN_HW_UPF_in
+[16D                [16D#
+route-policy 5GC_MGMN_ZTE_UPF_in permit node 10
+ if-match ip-prefix 5GC_MGMN_ZTE_UPF_in
+#
+route-policy 5GC_MGMN_xian_ZX_inV4 permit node 10
+ if-match ip-prefix 5GC_MGMN_xian_ZX_inV4
+#
+route-policy 5GC_MGMN_yulin_inV4 permit node 10
+ if-match ip-prefix 5GC_MGMN_yulin_inV4
+#
+route-policy 5G_RAN_V6_NR_in deny node 10
+ if-match ipv6 address prefix-list permit_DefaultRoute_v6
+#
+route-policy 5G_RAN_V6_NR_in permit node 20
+#
+route-policy 5G_RAN_V6_NR_out permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_V6_NR_out
+#
+route-policy 5G_RAN_ankang_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_ankang_in
+#
+route-policy 5G_RAN_baoji_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_baoji_in
+#
+route-policy 5G_RAN_hanzhong_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_hanzhong_in
+#
+route-policy 5G_RAN_in_IPRANv6 permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_in_IPRANv6
+#
+route-policy 5G_RAN_shangluo_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_shangluo_in
+#
+route-policy 5G_RAN_tongchuan_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_tongchuan_in
+#
+route-policy 5G_RAN_weinan_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_weinan_in
+#
+route-policy 5G_RAN_xian_ZX_inV6 permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_xian_ZX_inV6
+#
+route-policy 5G_RAN_xianyang_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_xianyang_in
+#
+route-policy 5G_RAN_yanan_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_yanan_in
+#
+route-policy 5G_RAN_yulin_in permit node 10
+ if-match ipv6 address prefix-list 5G_RAN_yulin_in
+#
+route-policy GPRS_Gn_C_B_Wang_V4_in deny node 10
+ if-match ip-prefix permit_DefaultRoute_v4
+#
+route-policy GPRS_Gn_C_B_Wang_V4_in permit node 20
+#
+route-policy GPRS_Gn_C_B_Wang_V4_out permit node 10
+ if-match ip-prefix GPRS_Gn_C_B_Wang_V4_out
+#
+route-policy GPRS_Gn_C_B_Wang_V6_in deny node 10
+ if-match ipv6 address prefix-list permit_DefaultRoute_v6
+#
+route-policy GPRS_Gn_C_B_Wang_V6_in permit node 20
+[16D                [16D#
+route-policy GPRS_Gn_C_B_Wang_V6_out permit node 10
+ if-match ipv6 address prefix-list GPRS_Gn_C_B_Wang_V6_out
+#
+route-policy GPRS_Gn_C_HW_UPF_in permit node 10
+ if-match ip-prefix GPRS_Gn_C_HW_UPF_in
+#
+route-policy GPRS_Gn_C_ZTE_UPF_in permit node 10
+ if-match ip-prefix GPRS_Gn_C_ZTE_UPF_in
+#
+route-policy GPRS_Gn_C_xian_ZX_inV4 permit node 10
+ if-match ip-prefix GPRS_Gn_C_xian_ZX_inV4
+#
+route-policy GPRS_Gn_C_xian_ZX_inV6 permit node 10
+ if-match ipv6 address prefix-list GPRS_Gn_C_xian_ZX_inV6
+#
+route-policy GPRS_Gn_C_yulin_inV4 permit node 10
+ if-match ip-prefix GPRS_Gn_C_yulin_inV4
+#
+route-policy GPRS_Gn_C_yulin_inV6 permit node 10
+ if-match ipv6 address prefix-list GPRS_Gn_C_yulin_inV6
+#
+route-policy HW_5G_RAN_in_v6 deny node 10
+ if-match ipv6 address prefix-list deny_DefaultRoute_v6
+#
+route-policy HW_5G_RAN_in_v6 permit node 20
+ if-match ipv6 address prefix-list HW_5G_RAN_in_v6
+#
+route-policy HW_5G_RAN_in_v6 deny node 200
+#
+route-policy HW_GPRS_Gn_C_in_v6 deny node 10
+ if-match ipv6 address prefix-list deny_DefaultRoute_v6
+#
+route-policy HW_GPRS_Gn_C_in_v6 permit node 20
+ if-match ipv6 address prefix-list HW_GPRS_Gn_C_in_v6
+#
+route-policy HW_GPRS_Gn_C_in_v6 deny node 200
+#
+route-policy ROUTE_FROM-A permit node 10
+ if-match ip-prefix AUTO_TOOL_H3C
+#
+route-policy ROUTE_FROM-A permit node 15
+ if-match ip-prefix AUTO_TOOL_HW
+#
+route-policy ROUTE_FROM-A permit node 20
+ if-match ip-prefix AUTO_TOOL_FH
+#
+route-policy ROUTE_FROM-A permit node 25
+ if-match ip-prefix AUTO_TOOL_ZX
+#
+route-policy ROUTE_FROM-A permit node 30
+ if-match ip-prefix AUTO_TOOL_Cisco
+#
+route-policy SmartMAN_NSM_SNMP_IN permit node 10
+ if-match ip-prefix SmartMAN_NSM_SNMP_IN
+ apply preference 10
+#
+route-policy SmartMAN_OUT_AGGREGATION permit node 10
+ if-match ip-prefix SmartMAN_OUT_AGGREGATION
+#
+route-policy SmartMAN_OUT_DETAIL permit node 10
+ if-match ip-prefix SmartMAN_OUT_DETAIL
+#
+[16D                [16Droute-policy SmartMAN_SDN_IN permit node 10
+ if-match ip-prefix SmartMAN_SDN_IN
+ apply preference 10
+#
+route-policy ZTE_5GC_MGMN_in_v6 deny node 10
+ if-match ipv6 address prefix-list deny_DefaultRoute_v6
+#
+route-policy ZTE_5GC_MGMN_in_v6 permit node 20
+ if-match ipv6 address prefix-list ZTE_5GC_MGMN_in_v6
+#
+route-policy ZTE_5GC_MGMN_in_v6 deny node 200
+#
+route-policy ZTE_5G_RAN_in_v6 deny node 10
+ if-match ipv6 address prefix-list deny_DefaultRoute_v6
+#
+route-policy ZTE_5G_RAN_in_v6 permit node 20
+ if-match ipv6 address prefix-list ZTE_5G_RAN_in_v6
+#
+route-policy ZTE_5G_RAN_in_v6 deny node 200
+#
+route-policy ZTE_GPRS_Gn_C_in_v6 deny node 10
+ if-match ipv6 address prefix-list deny_DefaultRoute_v6
+#
+route-policy ZTE_GPRS_Gn_C_in_v6 permit node 20
+ if-match ipv6 address prefix-list ZTE_GPRS_Gn_C_in_v6
+#
+route-policy ZTE_GPRS_Gn_C_in_v6 deny node 200
+#
+route-policy default_denyV4 deny node 10
+ if-match ip-prefix permit_DefaultRoute_v4
+#
+route-policy default_denyV4 permit node 20
+#
+route-policy default_denyV6 deny node 10
+ if-match ipv6 address prefix-list permit_DefaultRoute_v6
+#
+route-policy default_denyV6 permit node 20
+#
+route-policy to-MCR permit node 10
+ if-match ip-prefix nodefault
+#
+route-policy to-MCR-v6 permit node 10
+ if-match ipv6 address prefix-list nodefault-ipv6
+#
+route-policy to_UPF_5G_RAN_out_V6 permit node 10
+ if-match ipv6 address prefix-list permit_DefaultRoute_v6
+#
+route-policy to_UPF_5G_RAN_out_V6 deny node 200
+#
+route-policy to_UPF_out_V6 permit node 10
+ if-match ipv6 address prefix-list permit_DefaultRoute_v6
+#
+route-policy to_UPF_out_V6 deny node 200
+#
+route-policy to_UPF_out_v4 permit node 10
+ if-match ip-prefix permit_DefaultRoute
+#
+route-policy to_UPF_out_v4 deny node 200
+#
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 10 permit 1.6.67.0 25
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 20 permit 1.6.67.151 25
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 30 permit 1.6.68.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 40 permit 1.6.69.0 24
+[16D                [16Dip ip-prefix 5GC_MGMN_B_Wang_V4_out index 50 permit 1.89.151.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 60 permit 1.89.152.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 70 permit 1.6.83.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 80 permit 1.6.84.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 90 permit 1.89.193.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 100 permit 1.89.194.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 110 permit 1.89.163.0 24
+ip ip-prefix 5GC_MGMN_B_Wang_V4_out index 120 permit 1.6.60.0 24
+ip ip-prefix 5GC_MGMN_HW_UPF_in index 10 permit 1.6.67.0 25 greater-equal 25 less-equal 32
+ip ip-prefix 5GC_MGMN_HW_UPF_in index 20 permit 1.6.67.151 25 greater-equal 25 less-equal 32
+ip ip-prefix 5GC_MGMN_HW_UPF_in index 30 permit 1.6.68.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_HW_UPF_in index 40 permit 1.6.69.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_HW_UPF_in index 50 permit 1.89.151.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_HW_UPF_in index 60 permit 1.89.152.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_ZTE_UPF_in index 10 permit 1.6.83.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_ZTE_UPF_in index 20 permit 1.6.84.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_ZTE_UPF_in index 30 permit 1.89.193.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_ZTE_UPF_in index 40 permit 1.89.194.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_xian_ZX_inV4 index 10 permit 1.89.163.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_xian_ZX_inV4 index 20 permit 1.6.60.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_yulin_inV4 index 10 permit 1.89.163.0 24 greater-equal 24 less-equal 32
+ip ip-prefix 5GC_MGMN_yulin_inV4 index 20 permit 1.6.60.0 24 greater-equal 24 less-equal 32
+ip ip-prefix AUTO_TOOL_Cisco index 10 permit 13.273.36.59 29
+ip ip-prefix AUTO_TOOL_FH index 10 permit 13.273.36.41 29
+ip ip-prefix AUTO_TOOL_H3C index 10 permit 13.273.36.43 29
+ip ip-prefix AUTO_TOOL_HW index 10 permit 13.273.36.19 29
+ip ip-prefix AUTO_TOOL_ZX index 10 permit 13.273.36.35 29
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 10 permit 149.72.125.177 28
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 20 permit 149.72.125.193 28
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 30 permit 149.72.125.145 30
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 40 permit 149.72.125.149 30
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 50 permit 149.72.125.41 30
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 60 permit 149.72.125.55 30
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 70 permit 253.239.245.67 32
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 80 permit 253.239.245.68 32
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 90 permit 253.239.245.69 32
+ip ip-prefix GPRS_Gn_C_B_Wang_V4_out index 100 permit 253.239.245.131 30 greater-equal 30 less-equal 32
+ip ip-prefix GPRS_Gn_C_HW_UPF_in index 10 permit 149.72.125.177 28 greater-equal 28 less-equal 32
+ip ip-prefix GPRS_Gn_C_HW_UPF_in index 20 permit 149.72.125.193 28 greater-equal 28 less-equal 32
+ip ip-prefix GPRS_Gn_C_ZTE_UPF_in index 10 permit 149.72.125.41 30 greater-equal 30 less-equal 32
+ip ip-prefix GPRS_Gn_C_ZTE_UPF_in index 20 permit 149.72.125.55 30 greater-equal 30 less-equal 32
+ip ip-prefix GPRS_Gn_C_ZTE_UPF_in index 30 permit 149.72.125.145 30 greater-equal 30 less-equal 32
+ip ip-prefix GPRS_Gn_C_ZTE_UPF_in index 40 permit 149.72.125.149 30 greater-equal 30 less-equal 32
+ip ip-prefix GPRS_Gn_C_xian_ZX_inV4 index 10 permit 253.239.245.131 30 greater-equal 30 less-equal 32
+ip ip-prefix GPRS_Gn_C_yulin_inV4 index 10 permit 253.239.245.0 24 greater-equal 24 less-equal 32
+ip ip-prefix SmartMAN_NSM_SNMP_IN index 10 permit 125.191.287.0 24 greater-equal 24 less-equal 24
+ip ip-prefix SmartMAN_NSM_SNMP_IN index 20 permit 13.273.35.109 29
+ip ip-prefix SmartMAN_OUT_AGGREGATION index 10 permit 13.191.286.0 24
+ip ip-prefix SmartMAN_OUT_DETAIL index 10 permit 13.191.286.0 24 greater-equal 32 less-equal 32
+ip ip-prefix SmartMAN_SDN_IN index 10 permit 13.273.35.109 29
+ip ip-prefix deny_DefaultRoute index 5 permit 0.0.0.0 0
+ip ip-prefix nodefault index 10 deny 0.0.0.0 0
+ip ip-prefix nodefault index 20 permit 0.0.0.0 0 less-equal 32
+ip ip-prefix permit_DefaultRoute index 5 permit 0.0.0.0 0
+ip ip-prefix permit_DefaultRoute_v4 index 5 permit 0.0.0.0 0
+ip as-path-filter HW_UPF index 10 permit _64087.641_
+ip as-path-filter ZTE_UPF index 10 permit ^64087.640$
+ip as-path-filter ankang index 10 permit ^65515$
+ip as-path-filter baoji index 10 permit ^65498$
+ip as-path-filter hanzhong index 10 permit ^65513$
+ip as-path-filter shangluo index 10 permit ^65514$
+ip as-path-filter tongchuan index 10 permit ^65512$
+ip as-path-filter weinan index 10 permit ^65499$
+[16D                [16Dip as-path-filter xianyang index 10 permit ^65497$
+ip as-path-filter yanan index 10 permit ^65511$
+ip as-path-filter yulin index 10 permit ^65510$
+#
+ip ipv6-prefix 5G-DX-GXZ-IPv6-IN index 10 permit 795D:D6B8:B655:6:: 64
+ip ipv6-prefix 5G-DX-IPv6-5GC-2B index 10 permit 795D:D698:B545:6455:: 60
+ip ipv6-prefix 5G-DX-IPv6-5GC-2B index 20 permit 795D:D698:B545:6465:: 60
+ip ipv6-prefix 5G-DX-IPv6-5GC-2B index 30 permit 795D:D698:B544:4455:: 60
+ip ipv6-prefix 5G-DX-IPv6-5GC-2B index 40 permit 795D:D698:B544:4465:: 60
+ip ipv6-prefix 5G-DX-IPv6-5GC-2C index 10 permit 795D:D698:B545:64D5:: 60
+ip ipv6-prefix 5G-DX-IPv6-5GC-2C index 20 permit 795D:D698:B545:64E5:: 60
+ip ipv6-prefix 5G-DX-IPv6-5GC-2C index 30 permit 795D:D698:B544:44D5:: 60
+ip ipv6-prefix 5G-DX-IPv6-5GC-2C index 40 permit 795D:D698:B544:44E5:: 60
+ip ipv6-prefix 5GC_MGMN_B_Wang_V6_out index 10 permit 795D:D698:B545:60D5:: 60
+ip ipv6-prefix 5GC_MGMN_B_Wang_V6_out index 20 permit 795D:D698:B545:60E5:: 60
+ip ipv6-prefix 5GC_MGMN_B_Wang_V6_out index 30 permit 795D:D698:B545:60F5:: 60
+ip ipv6-prefix 5GC_MGMN_B_Wang_V6_out index 40 permit 795D:D698:B545:6005:: 60
+ip ipv6-prefix 5G_RAN_V6_NR_out index 10 permit 795D:D6B8:B655:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 20 permit 795D:D6B8:B755:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 30 permit 795D:D6B8:B855:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 40 permit 795D:D6B8:B955:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 50 permit 795D:D6B8:BA55:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 60 permit 795D:D6B8:BB55:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 70 permit 795D:D6B8:BC55:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 80 permit 795D:D6B8:BD55:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 90 permit 795D:D6B8:BE55:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 100 permit 795D:D6B8:BF55:6:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 110 permit 795D:D6B8:BD55:7:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 120 permit 795D:D698:B545:6475:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 130 permit 795D:D6B8:B655:7:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 140 permit 795D:D6B8:B655:8:: 64
+ip ipv6-prefix 5G_RAN_V6_NR_out index 150 permit 795D:D6B8:B755:8:: 64
+ip ipv6-prefix 5G_RAN_ankang_in index 10 permit 795D:D6B8:BE55:6:: 64
+ip ipv6-prefix 5G_RAN_baoji_in index 10 permit 795D:D6B8:B855:6:: 64
+ip ipv6-prefix 5G_RAN_hanzhong_in index 10 permit 795D:D6B8:BC55:6:: 64
+ip ipv6-prefix 5G_RAN_in_IPRANv6 index 10 permit 795D:D6B8:B655:7:: 64
+ip ipv6-prefix 5G_RAN_shangluo_in index 10 permit 795D:D6B8:BF55:6:: 64
+ip ipv6-prefix 5G_RAN_tongchuan_in index 10 permit 795D:D6B8:B755:6:: 64
+ip ipv6-prefix 5G_RAN_tongchuan_in index 20 permit 795D:D6B8:B755:8:: 64
+ip ipv6-prefix 5G_RAN_weinan_in index 10 permit 795D:D6B8:BA55:6:: 64
+ip ipv6-prefix 5G_RAN_xian_ZX_inV6 index 30 permit 795D:D6B8:B655:8:: 64
+ip ipv6-prefix 5G_RAN_xianyang_in index 10 permit 795D:D6B8:B955:6:: 64
+ip ipv6-prefix 5G_RAN_yanan_in index 10 permit 795D:D6B8:BB55:6:: 64
+ip ipv6-prefix 5G_RAN_yulin_in index 10 permit 795D:D6B8:BD55:6:: 64
+ip ipv6-prefix 5G_RAN_yulin_in index 20 permit 795D:D6B8:BD55:7:: 64
+ip ipv6-prefix 5G_RAN_yulin_in index 30 permit 795D:D698:B545:6475:: 64
+ip ipv6-prefix GPRS_Gn_C_B_Wang_V6_out index 10 permit 795D:D698:B545:6155:: 60
+ip ipv6-prefix GPRS_Gn_C_B_Wang_V6_out index 20 permit 795D:D698:B545:6165:: 60
+ip ipv6-prefix GPRS_Gn_C_B_Wang_V6_out index 30 permit 795D:D698:B545:61D5:: 60
+ip ipv6-prefix GPRS_Gn_C_B_Wang_V6_out index 40 permit 795D:D698:B545:61E5:: 60
+ip ipv6-prefix GPRS_Gn_C_B_Wang_V6_out index 50 permit 795D:D698:B545:6175:: 64
+ip ipv6-prefix GPRS_Gn_C_xian_ZX_inV6 index 10 permit 795D:D698:B545:6175::B 128
+ip ipv6-prefix GPRS_Gn_C_xian_ZX_inV6 index 15 permit 795D:D698:B545:6175::C 128
+ip ipv6-prefix GPRS_Gn_C_xian_ZX_inV6 index 20 permit 795D:D698:B545:6175::D 128
+ip ipv6-prefix GPRS_Gn_C_xian_ZX_inV6 index 25 permit 795D:D698:B545:6175::E 128
+ip ipv6-prefix GPRS_Gn_C_yulin_inV6 index 10 permit 795D:D698:B545:6175:: 64 greater-equal 64 less-equal 128
+ip ipv6-prefix HW_5G_RAN_in_v6 index 10 permit 795D:D698:B545:6455:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix HW_5G_RAN_in_v6 index 20 permit 795D:D698:B545:6465:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix HW_GPRS_Gn_C_in_v6 index 10 permit 795D:D698:B545:6155:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix HW_GPRS_Gn_C_in_v6 index 20 permit 795D:D698:B545:6165:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix ZTE_5GC_MGMN_in_v6 index 10 permit 795D:D698:B545:60D5:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix ZTE_5GC_MGMN_in_v6 index 20 permit 795D:D698:B545:60E5:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix ZTE_5GC_MGMN_in_v6 index 30 permit 795D:D698:B545:60F5:: 60 greater-equal 60 less-equal 128
+[16D                [16Dip ipv6-prefix ZTE_5GC_MGMN_in_v6 index 40 permit 795D:D698:B545:6005:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix ZTE_5G_RAN_in_v6 index 10 permit 795D:D698:B545:64D5:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix ZTE_5G_RAN_in_v6 index 20 permit 795D:D698:B545:64E5:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix ZTE_GPRS_Gn_C_in_v6 index 10 permit 795D:D698:B545:61D5:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix ZTE_GPRS_Gn_C_in_v6 index 20 permit 795D:D698:B545:61E5:: 60 greater-equal 60 less-equal 128
+ip ipv6-prefix deny_DefaultRoute_v6 index 5 permit :: 0
+ip ipv6-prefix nodefault-ipv6 index 10 deny :: 0
+ip ipv6-prefix nodefault-ipv6 index 20 permit :: 0 less-equal 128
+ip ipv6-prefix permit_DefaultRoute_v6 index 5 permit :: 0
+#
+snmp-agent
+snmp-agent acl 2001
+snmp-agent local-engineid 800007DB036CEBB6120300
+ snmp-agent community read cipher 4a6f01b2d17a97ec6434aeae2faa5bae mib-view iso-view
+ snmp-agent community write cipher bc0fc668c64cadb4e97389ec481e8e7c mib-view iso-view
+#
+snmp-agent sys-info version v2c v3
+ snmp-agent target-host host-name __targetHost_1_21919 trap address udp-domain 125.191.287.31 params securityname cipher 660200decf52b91daf7f85c845dcd420 v2c private-netmanager ext-vb
+#
+snmp-agent mib-view included iso-view iso
+#
+snmp-agent trap source LoopBack0
+#
+snmp-agent protocol source-status all-interface
+undo snmp-agent protocol source-status ipv6 all-interface
+#
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+snmp-agent trap enable
+#
+lldp enable
+#
+stelnet server enable
+snetconf server enable
+ssh user SN-XA-SDNcontroler
+ssh user SN-XA-SDNcontroler authentication-type password
+ssh user SN-XA-SDNcontroler service-type stelnet
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#
+ ssh server cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa
+#
+ssh server dh-exchange min-len 2048
+#
+ssh client first-time enable
+ssh client peer 1.6.67.17 assign ecc-key 1.6.67.17
+ssh client peer 1.6.67.2 assign ecc-key 1.6.67.2
+ssh client peer 1.6.60.28 assign ecc-key 1.6.60.28
+ssh client peer 13.191.286.2 assign ecc-key 13.191.286.2
+ssh client peer 13.191.286.287 assign ecc-key 13.191.286.287
+ssh client peer 125.288.287.2 assign ecc-key 125.288.287.2
+#
+ssh client publickey ecc rsa
+#
+ ssh client cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+[16D                [16D#
+tunnel-policy IPRAN
+ tunnel select-seq sr-te te sr-lsp ldp load-balance-number 1
+#
+user-interface maximum-vty 9
+#
+user-interface con 0
+ authentication-mode password
+  set authentication password cipher a3fafa9971719c21d701f6cfa9b0e300
+#
+user-interface vty 0 4
+ authentication-mode aaa
+ idle-timeout 5 0
+ screen-length 64
+#
+netconf
+ activate module huawei-ip
+#
+local-aaa-server
+#
+return

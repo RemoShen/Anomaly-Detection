@@ -1,0 +1,3123 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 3606
+
+#
+
+mdc Admin id 1
+
+#
+
+  sysname XMOQ-YGK-2E-R12508Q-RL-B002
+
+#
+
+ip vpn-instance 5G_OAM
+
+ route-distinguisher 65491:21524
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65491:11524 import-extcommunity
+
+ vpn-target 65491:11524 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65491:21524
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65491:21524
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_RAN
+
+
+
+               
+ route-distinguisher 65491:21158
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65491:11158 import-extcommunity
+
+ vpn-target 65491:11158 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65491:21158
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65491:21158
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_RAN_VIP
+
+ route-distinguisher 65491:21159
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65491:11159 import-extcommunity
+
+ vpn-target 65491:11159 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65491:21159
+
+
+
+               
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65491:21159
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance IPRAN
+
+ route-distinguisher 65491:22187
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65491:12187 import-extcommunity
+
+ vpn-target 65491:12187 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65491:22187
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65491:22187
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance LOCAL_DCN
+
+ route-distinguisher 65491:248611
+
+
+
+               
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65491:248611
+
+  vpn-target 65491:248610 import-extcommunity
+
+  vpn-target 65491:248610 export-extcommunity
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65491:248611
+
+#
+
+ip vpn-instance LTE-OAM-VPN
+
+ route-distinguisher 65491:21000
+
+ vpn-target 65491:11000 import-extcommunity
+
+ vpn-target 65491:11000 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65491:21000
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65491:21000
+
+  apply-label per-instance
+
+#
+
+
+
+               
+ip vpn-instance LTE-VPN
+
+ route-distinguisher 65491:20010
+
+ vpn-target 65491:10010 import-extcommunity
+
+ vpn-target 65491:10010 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65491:20010
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65491:20010
+
+  apply-label per-instance
+
+#
+
+ telnet server enable
+
+#
+
+bfd template 10
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+bfd template 50
+
+ bfd min-transmit-interval 50
+
+
+
+               
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+ undo bfd ip-router-alert
+
+#
+
+isis 100
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 allow external
+
+  is-name MOD-YGK-2E-R12508Q-RL-B002
+
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.5483.0100.0101.6725.5026.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+  maximum load-balancing 16
+
+
+
+               
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+ mpls lsr-id 10.167.255.26
+
+ mpls label advertise non-null
+
+#
+
+ ip unreachables enable
+
+ ip ttl-expires enable
+
+#
+
+ lldp global enable
+
+#
+
+ active port basic-license slot 2 subslot 0 phy-port 7 to 12
+
+ active port basic-license slot 4 subslot 0 phy-port 1 to 24
+
+#
+
+ system-working-mode bridgee
+
+ undo version auto-update enable
+
+ version check ignore
+
+ hardware-resource tcam mix
+
+ password-recovery enable
+
+#
+
+vlan 1
+
+#
+
+
+
+               
+qos map-table dot1p-lp
+
+ import 0 export 0
+
+ import 1 export 1
+
+ import 2 export 2
+
+#
+
+qos wred queue table 100GE
+
+ queue 0 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+
+
+               
+ queue 4 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+qos wred queue table 10GE
+
+ queue 0 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+
+
+               
+ queue 1 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+
+
+               
+ queue 7 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+mpls te
+
+#
+
+tunnel-policy SRBE_TUNNEL
+
+ select-seq sr-lsp load-balance-number 32
+
+#
+
+ mpls bfd enable
+
+#
+
+interface Route-Aggregation1
+
+  description to_YMOD-YGK-2E-R12508Q-RL-B001-Qntsd-Yff 1
+
+ ip address 10.167.252.58 255.255.255.252
+
+ isis enable 100
+
+ isis circuit-level level-2
+
+ link-aggregation mode dynamic
+
+ mpls enable
+
+ ipv6 address 462A:A345:4222::323F/127
+
+#
+
+interface Route-Aggregation2
+
+  description to_YMJL-MS-2E-MD8JW8-RL-B002
+
+ link-aggregation mode dynamic
+
+
+
+               
+#
+
+interface Route-Aggregation2.10
+
+  description to_YMJL-GGCK-5E-MD8JW8-RL-B002-RCM
+
+ ip address 10.167.253.70 255.255.255.252
+
+ vlan-type dot1q vid 10
+
+#
+
+interface Route-Aggregation2.75
+
+  description to_YMJL-MS-2E-MD8JW8-RL-B002-HOQYM
+
+ ip binding vpn-instance IPRAN
+
+ ip address 10.167.252.166 255.255.255.252
+
+ vlan-type dot1q vid 75
+
+ ipv6 address 462A:A345:4222::3275/127
+
+#
+
+interface Route-Aggregation2.420
+
+  description to_YMJL-GGCK-2E-MD8JW8-RL-B002-KSD-UOM
+
+ ip binding vpn-instance LTE-VPN
+
+ ip address 53.29.178.110 255.255.255.252
+
+ vlan-type dot1q vid 420
+
+#
+
+interface Route-Aggregation2.430
+
+  description to_YMJL-GGCK-2E-MD8JW8-RL-B002-KSD-NYL-UOM
+
+ ip binding vpn-instance LTE-OAM-VPN
+
+ ip address 53.29.178.230 255.255.255.252
+
+
+
+               
+ vlan-type dot1q vid 430
+
+#
+
+interface Route-Aggregation2.843
+
+  description to_YMJL-MS-2E-MD8JW8-RL-B002-5F_QYM
+
+ ip binding vpn-instance 5G_RAN
+
+ vlan-type dot1q vid 843
+
+ ipv6 address 462A:A345:4222::4275/127
+
+#
+
+interface Route-Aggregation2.873
+
+  description to_YMJL-MS-2E-MD8JW8-RL-B002-5F_QYM_UHO
+
+ ip binding vpn-instance 5G_RAN_VIP
+
+ vlan-type dot1q vid 873
+
+ ipv6 address 462A:A345:4222::6275/127
+
+#
+
+interface Route-Aggregation2.875
+
+  description to_YMJL-MS-2E-MD8JW8-RL-B002-5F_NYL
+
+ ip binding vpn-instance 5G_OAM
+
+ vlan-type dot1q vid 875
+
+ ipv6 address 462A:A345:4222::5275/127
+
+#
+
+interface Route-Aggregation3
+
+  description to_YM-OD-RL-RMK-L-2.RSM.9000-18DY_100FD10-1-1_Rlyqsfqnto3
+
+ link-aggregation mode dynamic
+
+
+
+               
+#
+
+interface Route-Aggregation3.100
+
+  description to_YM-OD-RL-RMK-L-2.RSM.9000-18DY_100FD10-1-1_Rlyqsfqnto3-5F_QYM
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 100
+
+ ipv6 address 462A:A345:4222::42A4/127
+
+#
+
+interface Route-Aggregation3.200
+
+  description to_YM-OD-RL-RMK-L-2.RSM.9000-18DY_100FD10-1-1_Rlyqsfqnto3-5F_NYL
+
+ ip binding vpn-instance 5G_OAM
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 200
+
+ ipv6 address 462A:A345:4222::52A4/127
+
+#
+
+interface Route-Aggregation4
+
+  description to_YMOD-YGK-2E-YQ02-Z
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation4.66
+
+  description to_YMOD-YGK-2E-YQ02-Z
+
+ ip binding vpn-instance LOCAL_DCN
+
+ ip address 69.46.32.110 255.255.255.252
+
+
+
+               
+ vlan-type dot1q vid 66
+
+#
+
+interface Route-Aggregation4.75
+
+  description to_YMOD-YGK-2E-YQ02-Z
+
+ ip binding vpn-instance IPRAN
+
+ ip address 10.167.253.78 255.255.255.252
+
+ vlan-type dot1q vid 75
+
+#
+
+interface Route-Aggregation6
+
+  description to_YMJL-MSCK-2E-MD8JW8-RL-B002
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation6.410
+
+  description to_YMJL-GGCK-2E-MD8JW8-RL-B001-BCLY-QYM
+
+ mtu 9000
+
+ ip binding vpn-instance LTE-VPN
+
+ ip address 53.29.176.77 255.255.255.252
+
+ vlan-type dot1q vid 410
+
+ bfd min-transmit-interval 150
+
+ bfd min-receive-interval 150
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation7
+
+
+
+               
+  description to_YM-KB-DQ-HOQYM-2
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation7.410
+
+  description to_YM-ZM-IG-WhmIt-BCLY-QYM
+
+ mtu 9000
+
+ ip binding vpn-instance LTE-VPN
+
+ ip address 42.147.126.69 255.255.255.252
+
+ vlan-type dot1q vid 410
+
+#
+
+interface Route-Aggregation7.420
+
+  description to_YM-KB-DQ-HOQYM-1-KSD-UOM
+
+ mtu 9000
+
+ ip binding vpn-instance LTE-VPN
+
+ ip address 42.147.126.205 255.255.255.252
+
+ vlan-type dot1q vid 420
+
+#
+
+interface Route-Aggregation7.430
+
+  description to_YM-KB-DQ-HOQYM-1-KSD-NYL-UOM
+
+ mtu 9000
+
+ ip binding vpn-instance LTE-OAM-VPN
+
+ ip address 42.147.127.85 255.255.255.252
+
+ vlan-type dot1q vid 430
+
+
+
+               
+#
+
+interface NULL0
+
+#
+
+interface LoopBack0
+
+ ip address 10.167.255.26 255.255.255.255
+
+ isis enable 100
+
+ isis circuit-level level-2
+
+ isis prefix-sid index 2 no-php
+
+ ipv6 address 462A:A345:4222::4C/128
+
+#
+
+interface LoopBack3
+
+ ip binding vpn-instance LOCAL_DCN
+
+ ip address 69.46.33.24 255.255.255.255
+
+#
+
+interface LoopBack100
+
+ ip binding vpn-instance IPRAN
+
+ ip address 10.167.255.26 255.255.255.255
+
+ ipv6 address 462A:A345:4222::4C/128
+
+#
+
+interface FortyGigE2/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface FortyGigE2/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/13
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE2/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/25
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE2/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/1
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface FortyGigE3/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/18
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE3/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/30
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE2/0/7
+
+ port link-mode route
+
+  description to_YMOD-YGK-2E-R12508Q-RL-B001-100FD2/0/7
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ port link-aggregation group 1
+
+#
+
+interface HundredGigE2/0/8
+
+ port link-mode route
+
+
+
+               
+  description to_YM-OD-RL-RMK-L-2.RSM.9000-18DY_100FD10-1-1_Rlyqsfqnto3
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ lacp period short
+
+ port link-aggregation group 3
+
+#
+
+interface HundredGigE2/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/10
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface HundredGigE2/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/33
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface HundredGigE2/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/7
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/9
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE3/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/21
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface HundredGigE3/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface M-GigabitEthernet0/0/0
+
+#
+
+interface M-GigabitEthernet0/0/1
+
+#
+
+interface M-GigabitEthernet0/0/2
+
+ ip address 1.1.1.2 255.255.255.252
+
+#
+
+
+
+               
+interface M-GigabitEthernet0/0/3
+
+#
+
+interface Ten-GigabitEthernet4/0/1
+
+ port link-mode route
+
+  description to_YMJL-MS-2E-MD8JW8-RL-B002-10FD3/0/6
+
+ port link-aggregation group 2
+
+#
+
+interface Ten-GigabitEthernet4/0/2
+
+ port link-mode route
+
+  description to_YMOD-YGK-2E-YQ02-Z-10FD8/0/5
+
+ port link-aggregation group 4
+
+#
+
+interface Ten-GigabitEthernet4/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/5
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/6
+
+ port link-mode route
+
+  description to_YMJL-MS-2E-MD8JW8-RL-B002
+
+ port link-aggregation group 6
+
+#
+
+interface Ten-GigabitEthernet4/0/7
+
+ port link-mode route
+
+  description to_YM-KB-DQ-HOQYM-2
+
+ port link-aggregation group 7
+
+#
+
+interface Ten-GigabitEthernet4/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet4/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/16
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/22
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/28
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet4/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/37
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/38
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/39
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/40
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/41
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/42
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/43
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/44
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/45
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/46
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/47
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/48
+
+ port link-mode route
+
+ shutdown
+
+#
+
+bgp 65491
+
+ bgp update-delay on-startup 600
+
+ non-stop-routing
+
+ retain local-label 5
+
+ labeled-route ignore-no-tunnel
+
+ router-id 10.167.255.26
+
+ peer 10.167.253.69 as-number 65479
+
+  peer 10.167.253.69 description to_YMJL-GGCK-5E-MD8JW8-RL-B002-RCM
+
+ peer 10.167.253.69 route-update-interval 5
+
+
+
+               
+ peer 10.167.253.69 bfd
+
+  peer 10.167.253.69 password cipher 2468e52836d367a59f04643291c6ce6e
+
+ peer 10.167.253.69 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+ peer 10.167.255.25 as-number 65491
+
+  peer 10.167.255.25 description YNPE-YGK-2E-R12508Q-RL-B001
+
+ peer 10.167.255.25 connect-interface LoopBack0
+
+ peer 10.167.255.25 route-update-interval 0
+
+ #
+
+ address-family ipv4 unicast
+
+  network 10.167.255.26 255.255.255.255
+
+  peer 10.167.253.69 enable
+
+  peer 10.167.253.69 advertise-community
+
+  peer 10.167.253.69 next-hop-local
+
+  peer 10.167.255.25 enable
+
+  peer 10.167.255.25 advertise-community
+
+  peer 10.167.255.25 next-hop-local
+
+ #
+
+ address-family vpnv4
+
+  reflector cluster-id 10
+
+  pic
+
+  route-select delay 180
+
+  peer 10.167.255.25 enable
+
+  peer 10.167.255.25 advertise-community
+
+
+
+               
+ #
+
+ address-family vpnv6
+
+  reflector cluster-id 10
+
+  pic
+
+  route-select delay 180
+
+  peer 10.167.255.25 enable
+
+  peer 10.167.255.25 advertise-community
+
+ #
+
+ ip vpn-instance 5G_OAM
+
+  peer 462A:A345:4222::5274 as-number 65479
+
+   peer 462A:A345:4222::5274 description YNKM-MS-2E-MD8JW8-RL-B002
+
+  peer 462A:A345:4222::5274 route-update-interval 5
+
+  peer 462A:A345:4222::5274 bfd
+
+   peer 462A:A345:4222::5274 password cipher 2093b65b1233f8089dbb895cfcbad9cd
+
+  peer 462A:A345:4222::5274 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  peer 462A:A345:4222::52A5 as-number 140357
+
+   peer 462A:A345:4222::52A5 description To-YM-OD-L-2.LBM.9000-18D 
+
+  peer 462A:A345:4222::52A5 route-update-interval 5
+
+  peer 462A:A345:4222::52A5 bfd
+
+   peer 462A:A345:4222::52A5 password cipher 95d1b0b8f853ca49df42657a54b147c9
+
+  peer 462A:A345:4222::52A5 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  #
+
+  address-family ipv6 unicast
+
+
+
+               
+   peer 462A:A345:4222::5274 enable
+
+   peer 462A:A345:4222::5274 route-policy from_KM_MCR_STN_5G_OAM_v6_in import
+
+   peer 462A:A345:4222::5274 route-policy to_KM_MCR_STN_5G_OAM_v6_out export
+
+   peer 462A:A345:4222::5274 advertise-community
+
+   peer 462A:A345:4222::52A5 enable
+
+   peer 462A:A345:4222::52A5 route-policy from_ER_STN_5G_OAM_v6_in import
+
+   peer 462A:A345:4222::52A5 route-policy to_ER_STN_5G_OAM_v6_out export
+
+   peer 462A:A345:4222::52A5 advertise-community
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  peer 462A:A345:4222::4274 as-number 65479
+
+   peer 462A:A345:4222::4274 description YNKM-MS-2E-MD8JW8-RL-B002
+
+  peer 462A:A345:4222::4274 route-update-interval 5
+
+  peer 462A:A345:4222::4274 bfd
+
+   peer 462A:A345:4222::4274 password cipher 37486c2096ad5943e0ce2e10242e0438
+
+  peer 462A:A345:4222::4274 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  peer 462A:A345:4222::42A5 as-number 140357
+
+   peer 462A:A345:4222::42A5 description To-YM-OD-L-2.LBM.9000-18D  
+
+  peer 462A:A345:4222::42A5 route-update-interval 5
+
+  peer 462A:A345:4222::42A5 bfd
+
+   peer 462A:A345:4222::42A5 password cipher 952f9088697787e8e3387dc6a658776e
+
+  peer 462A:A345:4222::42A5 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  #
+
+
+
+               
+  address-family ipv6 unicast
+
+   peer 462A:A345:4222::4274 enable
+
+   peer 462A:A345:4222::4274 route-policy from_KM_MCR_STN_5G_RAN_v6_in import
+
+   peer 462A:A345:4222::4274 route-policy to_KM_MCR_STN_5G_RAN_v6_out export
+
+   peer 462A:A345:4222::4274 advertise-community
+
+   peer 462A:A345:4222::42A5 enable
+
+   peer 462A:A345:4222::42A5 route-policy from_ER_STN_5G_RAN_v6_in import
+
+   peer 462A:A345:4222::42A5 route-policy to_ER_STN_5G_RAN_v6_out export
+
+   peer 462A:A345:4222::42A5 advertise-community
+
+ #
+
+ ip vpn-instance 5G_RAN_VIP
+
+  peer 462A:A345:4222::6274 as-number 65479
+
+   peer 462A:A345:4222::6274 description YNKM-MS-2E-MD8JW8-RL-B002
+
+  peer 462A:A345:4222::6274 route-update-interval 5
+
+  peer 462A:A345:4222::6274 bfd
+
+   peer 462A:A345:4222::6274 password cipher b746c8f488c4bfea299e5615f970a679
+
+  peer 462A:A345:4222::6274 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  #
+
+  address-family ipv6 unicast
+
+   peer 462A:A345:4222::6274 enable
+
+   peer 462A:A345:4222::6274 advertise-community
+
+ #
+
+ ip vpn-instance IPRAN
+
+
+
+               
+  peer 10.167.253.77 as-number 38351
+
+  peer 10.167.253.77 route-update-interval 5
+
+  peer 10.167.253.77 bfd
+
+  peer 10.167.253.77 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  #
+
+  address-family ipv4 unicast
+
+   import-route direct
+
+   peer 10.167.253.77 enable
+
+   peer 10.167.253.77 advertise-community
+
+ #
+
+ ip vpn-instance LOCAL_DCN
+
+  peer 69.46.32.109 as-number 38351
+
+  #
+
+  address-family ipv4 unicast
+
+   import-route direct
+
+   peer 69.46.32.109 enable
+
+   peer 69.46.32.109 advertise-community
+
+ #
+
+ ip vpn-instance LTE-OAM-VPN
+
+  peer 42.147.127.86 as-number 65237
+
+  peer 42.147.127.86 bfd
+
+   peer 42.147.127.86 password cipher 9434519ef1918a9d026dd261edb39eaa
+
+  peer 42.147.127.86 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+
+
+               
+  peer 53.29.178.229 as-number 65479
+
+  peer 53.29.178.229 bfd
+
+   peer 53.29.178.229 password cipher e506f9006a21366a39b85c465dbc420e
+
+  peer 53.29.178.229 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  #
+
+  address-family ipv4 unicast
+
+   peer 42.147.127.86 enable
+
+   peer 42.147.127.86 route-policy from_ER_STN_4G_LTE-OAM-VPN_v4_in import
+
+   peer 42.147.127.86 route-policy to_ER_STN_4G_LTE-OAM-VPN_v4_out export
+
+   peer 42.147.127.86 advertise-community
+
+   peer 53.29.178.229 enable
+
+   peer 53.29.178.229 route-policy from_KM_MCR_STN_4G_LTE-OAM-VPN_v4_in import
+
+   peer 53.29.178.229 route-policy to_KM_MCR_STN_4G_LTE-OAM-VPN_v4_out export
+
+   peer 53.29.178.229 advertise-community
+
+ #
+
+ ip vpn-instance LTE-VPN
+
+  peer 42.147.126.70 as-number 65237
+
+  peer 42.147.126.70 route-update-interval 5
+
+  peer 42.147.126.70 bfd
+
+   peer 42.147.126.70 password cipher 0f22598c175d319edf0f0e7475a5bf2c
+
+  peer 42.147.126.70 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  peer 42.147.126.206 as-number 65237
+
+  peer 42.147.126.206 bfd
+
+
+
+               
+   peer 42.147.126.206 password cipher ded6f4fe932de3e5b3e79c0fba7f60c2
+
+  peer 42.147.126.206 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  peer 53.29.178.109 as-number 65479
+
+  peer 53.29.178.109 bfd
+
+   peer 53.29.178.109 password cipher a6266943fbd1a04861780f49557070ad
+
+  peer 53.29.178.109 bfd parameters min-transmit-interval 150 min-receive-interval 150 detect-multiplier 3
+
+  #
+
+  address-family ipv4 unicast
+
+   network 42.147.32.0 255.255.252.0
+
+   network 42.147.228.0 255.255.252.0
+
+   peer 42.147.126.70 enable
+
+   peer 42.147.126.70 route-policy from_ER_STN_4G_CDMA_RAN_v4_in import
+
+   peer 42.147.126.70 route-policy to_ER_STN_4G_CDMA_RAN_v4_out export
+
+   peer 42.147.126.70 advertise-community
+
+   peer 42.147.126.206 enable
+
+   peer 42.147.126.206 route-policy from_ER_STN_4G_LTE-VPN_v4_in import
+
+   peer 42.147.126.206 route-policy to_ER_STN_4G_LTE-VPN_v4_out export
+
+   peer 42.147.126.206 advertise-community
+
+   peer 53.29.178.109 enable
+
+   peer 53.29.178.109 route-policy from_KM_MCR_STN_4G_LTE-VPN_v4_in import
+
+   peer 53.29.178.109 route-policy to_KM_MCR_STN_4G_LTE-VPN_v4_out export
+
+   peer 53.29.178.109 advertise-community
+
+#
+
+
+
+               
+route-policy from_ER_STN_4G_CDMA_RAN_v4_in permit node 10
+
+ if-match ip address prefix-list pl_4G_CDMA-RAN_MME
+
+#
+
+route-policy from_ER_STN_4G_CDMA_RAN_v4_in permit node 20
+
+ if-match ip address prefix-list pl_4G_CDMA-RAN_SGW
+
+#
+
+route-policy from_ER_STN_4G_CDMA_RAN_v4_in permit node 30
+
+ if-match ip address prefix-list pl_4G_CDMA-RAN_JZ_Ericsson
+
+#
+
+route-policy from_ER_STN_4G_CDMA_RAN_v4_in permit node 40
+
+ if-match ip address prefix-list pl_4G_CDMA-RAN_UPF
+
+#
+
+route-policy from_ER_STN_4G_CDMA_RAN_v4_in deny node 900
+
+#
+
+route-policy from_ER_STN_4G_LTE-OAM-VPN_v4_in permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_JZ
+
+#
+
+route-policy from_ER_STN_4G_LTE-OAM-VPN_v4_in deny node 900
+
+#
+
+route-policy from_ER_STN_4G_LTE-VPN_v4_in permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-VPN_JZ
+
+#
+
+route-policy from_ER_STN_4G_LTE-VPN_v4_in deny node 900
+
+
+
+               
+#
+
+route-policy from_ER_STN_5G_OAM_v6_in permit node 10
+
+ if-match ipv6 address prefix-list pl_gnb_stn_5G_OAM_v6
+
+#
+
+route-policy from_ER_STN_5G_OAM_v6_in deny node 999
+
+#
+
+route-policy from_ER_STN_5G_RAN_v6_in permit node 10
+
+ if-match ipv6 address prefix-list pl_gnb_stn_5G_RAN_v6
+
+#
+
+route-policy from_ER_STN_5G_RAN_v6_in deny node 999
+
+#
+
+route-policy from_KM_MCR_STN_4G_LTE-OAM-VPN_v4_in permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_MME
+
+#
+
+route-policy from_KM_MCR_STN_4G_LTE-OAM-VPN_v4_in permit node 20
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_SGW
+
+#
+
+route-policy from_KM_MCR_STN_4G_LTE-OAM-VPN_v4_in deny node 900
+
+#
+
+route-policy from_KM_MCR_STN_4G_LTE-VPN_v4_in permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-VPN_MME
+
+#
+
+route-policy from_KM_MCR_STN_4G_LTE-VPN_v4_in permit node 20
+
+
+
+               
+ if-match ip address prefix-list pl_4G_LTE-VPN_SGW
+
+#
+
+route-policy from_KM_MCR_STN_4G_LTE-VPN_v4_in deny node 900
+
+#
+
+route-policy from_KM_MCR_STN_5G_OAM_v6_in permit node 10
+
+ if-match ipv6 address prefix-list pl_amf_upf_5G_OAM_v6
+
+#
+
+route-policy from_KM_MCR_STN_5G_OAM_v6_in deny node 900
+
+#
+
+route-policy from_KM_MCR_STN_5G_RAN_v6_in permit node 10
+
+ if-match ipv6 address prefix-list pl_amf_upf_5G_RAN_v6
+
+#
+
+route-policy from_KM_MCR_STN_5G_RAN_v6_in deny node 900
+
+#
+
+route-policy to_ER_STN_4G_CDMA_RAN_v4_out permit node 10
+
+ if-match ip address prefix-list pl_4G_CDMA-RAN_JZ
+
+#
+
+route-policy to_ER_STN_4G_CDMA_RAN_v4_out permit node 20
+
+ if-match ip address prefix-list pl_4G_LTE_JZ_Ericsson
+
+#
+
+route-policy to_ER_STN_4G_CDMA_RAN_v4_out permit node 30
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_MME
+
+#
+
+
+
+               
+route-policy to_ER_STN_4G_CDMA_RAN_v4_out permit node 40
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_SGW
+
+#
+
+route-policy to_ER_STN_4G_CDMA_RAN_v4_out deny node 900
+
+#
+
+route-policy to_ER_STN_4G_LTE-OAM-VPN_v4_out permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_MME
+
+#
+
+route-policy to_ER_STN_4G_LTE-OAM-VPN_v4_out permit node 20
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_SGW
+
+#
+
+route-policy to_ER_STN_4G_LTE-OAM-VPN_v4_out deny node 900
+
+#
+
+route-policy to_ER_STN_4G_LTE-VPN_v4_out permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-VPN_MME
+
+#
+
+route-policy to_ER_STN_4G_LTE-VPN_v4_out permit node 20
+
+ if-match ip address prefix-list pl_4G_LTE-VPN_SGW
+
+#
+
+route-policy to_ER_STN_4G_LTE-VPN_v4_out deny node 900
+
+#
+
+route-policy to_ER_STN_5G_OAM_v6_out permit node 10
+
+ if-match ipv6 address prefix-list pl_amf_upf_5G_OAM_v6
+
+
+
+               
+#
+
+route-policy to_ER_STN_5G_OAM_v6_out deny node 900
+
+#
+
+route-policy to_ER_STN_5G_RAN_v6_out permit node 10
+
+ if-match ipv6 address prefix-list pl_amf_upf_5G_RAN_v6
+
+#
+
+route-policy to_ER_STN_5G_RAN_v6_out deny node 900
+
+#
+
+route-policy to_KM_MCR_STN_4G_LTE-OAM-VPN_v4_out permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-OAM-VPN_JZ
+
+#
+
+route-policy to_KM_MCR_STN_4G_LTE-OAM-VPN_v4_out deny node 900
+
+#
+
+route-policy to_KM_MCR_STN_4G_LTE-VPN_v4_out permit node 10
+
+ if-match ip address prefix-list pl_4G_LTE-VPN_JZ
+
+#
+
+route-policy to_KM_MCR_STN_4G_LTE-VPN_v4_out permit node 20
+
+ if-match ip address prefix-list pl_4G_CDMA-RAN_JZ_Ericsson
+
+#
+
+route-policy to_KM_MCR_STN_4G_LTE-VPN_v4_out deny node 900
+
+#
+
+route-policy to_KM_MCR_STN_5G_OAM_v6_out permit node 10
+
+ if-match ipv6 address prefix-list pl_gnb_stn_5G_OAM_v6
+
+
+
+               
+#
+
+route-policy to_KM_MCR_STN_5G_OAM_v6_out deny node 900
+
+#
+
+route-policy to_KM_MCR_STN_5G_RAN_v6_out permit node 10
+
+ if-match ipv6 address prefix-list pl_gnb_stn_5G_RAN_v6
+
+#
+
+route-policy to_KM_MCR_STN_5G_RAN_v6_out deny node 900
+
+#
+
+ ip prefix-list pl_4G_CDMA-RAN_JZ index 10 permit 42.147.32.0 22
+
+ ip prefix-list pl_4G_CDMA-RAN_JZ_Ericsson index 10 permit 42.147.160.0 22
+
+ ip prefix-list pl_4G_CDMA-RAN_MME index 10 permit 6.48.127.250 32
+
+ ip prefix-list pl_4G_CDMA-RAN_MME index 20 permit 6.48.127.253 32
+
+ ip prefix-list pl_4G_CDMA-RAN_MME index 30 permit 6.48.127.248 32
+
+ ip prefix-list pl_4G_CDMA-RAN_MME index 40 permit 6.48.252.126 32
+
+ ip prefix-list pl_4G_CDMA-RAN_MME index 50 permit 6.48.252.254 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 10 permit 6.48.127.249 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 20 permit 6.48.127.252 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 30 permit 6.48.127.247 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 40 permit 6.48.252.125 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 50 permit 6.48.252.253 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 60 permit 6.48.252.122 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 70 permit 6.48.252.250 32
+
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 80 permit 6.48.252.251 32
+
+
+
+               
+ ip prefix-list pl_4G_CDMA-RAN_SGW index 90 permit 6.48.252.123 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 10 permit 42.146.254.233 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 11 permit 42.146.254.234 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 12 permit 42.146.254.235 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 13 permit 42.146.254.236 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 14 permit 42.146.254.237 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 15 permit 42.146.254.238 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 16 permit 42.146.254.239 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 17 permit 42.146.254.240 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 18 permit 42.146.254.241 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 19 permit 42.146.254.242 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 20 permit 42.146.254.213 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 21 permit 42.146.254.214 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 22 permit 42.146.254.215 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 23 permit 42.146.254.216 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 24 permit 42.146.254.217 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 25 permit 42.146.254.218 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 26 permit 42.146.254.219 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 27 permit 42.146.254.220 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 28 permit 42.146.254.221 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 29 permit 42.146.254.222 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 30 permit 42.146.254.193 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 31 permit 42.146.254.194 32
+
+
+
+               
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 32 permit 42.146.254.195 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 33 permit 42.146.254.196 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 34 permit 42.146.254.197 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 35 permit 42.146.254.198 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 36 permit 42.146.254.199 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 37 permit 42.146.254.200 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 38 permit 42.146.254.201 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 39 permit 42.146.254.202 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 40 permit 42.146.255.233 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 41 permit 42.146.255.234 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 42 permit 42.146.255.235 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 43 permit 42.146.255.236 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 44 permit 42.146.255.237 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 45 permit 42.146.255.238 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 46 permit 42.146.255.239 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 47 permit 42.146.255.240 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 48 permit 42.146.255.241 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 49 permit 42.146.255.242 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 50 permit 42.146.255.213 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 51 permit 42.146.255.214 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 52 permit 42.146.255.215 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 53 permit 42.146.255.216 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 54 permit 42.146.255.217 32
+
+
+
+               
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 55 permit 42.146.255.218 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 56 permit 42.146.255.219 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 57 permit 42.146.255.220 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 58 permit 42.146.255.221 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 59 permit 42.146.255.222 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 60 permit 42.146.255.193 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 61 permit 42.146.255.194 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 62 permit 42.146.255.195 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 63 permit 42.146.255.196 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 64 permit 42.146.255.197 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 65 permit 42.146.255.198 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 66 permit 42.146.255.199 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 67 permit 42.146.255.200 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 68 permit 42.146.255.201 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 69 permit 42.146.255.202 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 70 permit 42.146.255.173 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 71 permit 42.146.255.174 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 72 permit 42.146.255.175 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 73 permit 42.146.255.176 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 74 permit 42.146.255.177 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 75 permit 42.146.255.178 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 76 permit 42.146.255.179 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 77 permit 42.146.255.180 32
+
+
+
+               
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 78 permit 42.146.255.181 32
+
+ ip prefix-list pl_4G_CDMA-RAN_UPF index 79 permit 42.146.255.182 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_JZ index 10 permit 53.3.32.0 22
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 10 permit 10.100.5.9 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 20 permit 10.100.5.10 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 30 permit 10.100.5.25 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 40 permit 10.100.5.26 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 50 permit 10.100.4.160 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 60 permit 10.100.4.161 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 70 permit 10.100.4.162 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 80 permit 10.100.4.163 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 90 permit 10.100.4.36 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 100 permit 10.100.4.37 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 110 permit 10.100.4.98 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_MME index 120 permit 10.100.4.99 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_SGW index 10 permit 10.100.37.49 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_SGW index 20 permit 10.100.37.53 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_SGW index 30 permit 10.100.36.176 28 less-equal 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_SGW index 40 permit 10.100.36.112 28 less-equal 32
+
+ ip prefix-list pl_4G_LTE-OAM-VPN_SGW index 50 permit 10.100.36.192 28 less-equal 32
+
+ ip prefix-list pl_4G_LTE-VPN_JZ index 10 permit 53.3.32.0 22
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 10 permit 10.100.5.9 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 20 permit 10.100.5.10 32
+
+
+
+               
+ ip prefix-list pl_4G_LTE-VPN_MME index 30 permit 10.100.5.25 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 40 permit 10.100.5.26 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 50 permit 10.100.4.160 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 60 permit 10.100.4.161 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 70 permit 10.100.4.162 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 80 permit 10.100.4.163 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 90 permit 10.100.4.36 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 100 permit 10.100.4.37 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 110 permit 10.100.4.98 32
+
+ ip prefix-list pl_4G_LTE-VPN_MME index 120 permit 10.100.4.99 32
+
+ ip prefix-list pl_4G_LTE-VPN_SGW index 10 permit 10.100.37.49 32
+
+ ip prefix-list pl_4G_LTE-VPN_SGW index 20 permit 10.100.37.53 32
+
+ ip prefix-list pl_4G_LTE-VPN_SGW index 30 permit 10.100.36.176 28 less-equal 32
+
+ ip prefix-list pl_4G_LTE-VPN_SGW index 40 permit 10.100.36.112 28 less-equal 32
+
+ ip prefix-list pl_4G_LTE-VPN_SGW index 50 permit 10.100.36.192 28 less-equal 32
+
+ ip prefix-list pl_4G_LTE_JZ_Ericsson index 10 permit 42.147.228.0 22
+
+#
+
+ ipv6 prefix-list pl_amf_upf_5G_OAM_v6 index 10 permit 462A:A364:0211:1122:: 60
+
+ ipv6 prefix-list pl_amf_upf_5G_OAM_v6 index 20 permit 462A:A364:0211:1162:: 60
+
+ ipv6 prefix-list pl_amf_upf_5G_OAM_v6 index 30 permit 462A:A365:4212:3122:: 56
+
+ ipv6 prefix-list pl_amf_upf_5G_RAN_v6 index 10 permit 462A:A364:0211:1122:: 60
+
+ ipv6 prefix-list pl_amf_upf_5G_RAN_v6 index 20 permit 462A:A364:0211:1162:: 60
+
+ ipv6 prefix-list pl_amf_upf_5G_RAN_v6 index 30 permit 462A:A365:4212:3122:: 56
+
+
+
+               
+ ipv6 prefix-list pl_gnb_stn_5G_OAM_v6 index 10 permit 462A:A385:4C22:: 52
+
+ ipv6 prefix-list pl_gnb_stn_5G_RAN_v6 index 10 permit 462A:A385:4C22:: 52
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class aux
+
+ user-role network-admin
+
+#
+
+line class vty
+
+ user-role network-operator
+
+#
+
+line aux 0 1
+
+ user-role network-admin
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+ user-role network-operator
+
+#
+
+ ip route-static vpn-instance LTE-VPN 42.147.32.0 22 Route-Aggregation6.410 53.29.176.78 bfd control-packet
+
+ ip route-static vpn-instance LTE-VPN 42.147.228.0 22 Route-Aggregation6.410 53.29.176.78 bfd control-packet
+
+#
+
+ snmp-agent
+
+ snmp-agent local-engineid 800063A28078AA82CD240100000001
+
+
+
+               
+  snmp-agent community read cipher 78e239461cce0bb1c6c8b5737f10e17a acl 2001
+
+  snmp-agent community write cipher b1b04f2e08266b45dc8e848b40c9ff30 acl 2001
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 192.168.254.40 vpn-instance IPRAN params securityname ynsmSNMPread
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable mpls 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+ snmp-agent trap enable te 
+
+ snmp-agent trap source LoopBack100
+
+#
+
+ ssh server enable
+
+#
+
+acl basic 2001
+
+  description SmarsLYM_MRL_RMLO
+
+ rule 5 permit source 172.13.1.0 0.0.0.63
+
+ rule 10 permit vpn-instance IPRAN source 192.168.254.0 0.0.0.255
+
+ rule 15 permit vpn-instance IPRAN source 10.167.253.192 0.0.0.15
+
+ rule 20 permit vpn-instance IPRAN source 42.236.3.126 0
+
+ rule 25 permit vpn-instance IPRAN source 120.52.12.128 0.0.0.31
+
+ rule 999 deny
+
+#
+
+ password-control length 4
+
+
+
+               
+#
+
+domain name system
+
+#
+
+ domain default enable system
+
+#
+
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+  description Predefined level-4 role
+
+#
+
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+
+
+               
+role name level-6
+
+  description Predefined level-6 role
+
+#
+
+role name level-7
+
+  description Predefined level-7 role
+
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+role name level-12
+
+  description Predefined level-12 role
+
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+
+
+               
+#
+
+role name level-14
+
+  description Predefined level-14 role
+
+#
+
+user-group system
+
+#
+
+local-user YN-PE-SDNcontroler class manage
+
+  password hash 66816e94db55429c3ac2ca2dc79bc6a2
+
+ service-type ssh terminal
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user local_xuyufeng class manage
+
+  password hash bccd9ea7a996a6034f3726bc6c90271f
+
+ service-type ssh terminal
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user local_yanpengfei class manage
+
+  password hash 2ae65c5676a9ac35b09a623b5e8da9b1
+
+ service-type ssh terminal
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+
+
+               
+#
+
+local-user yn_ipnoc class manage
+
+  password hash 70f53b84244fbe03a44d2ccf2ce411b5
+
+ service-type ssh telnet terminal
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user ypf class manage
+
+  password hash fd8d2cc3287858984dd90b0862754722
+
+ service-type ssh terminal
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+ ftp server enable
+
+ ftp timeout 6000
+
+#
+
+return
+

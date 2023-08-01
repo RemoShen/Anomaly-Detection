@@ -1,0 +1,2467 @@
+display current-configuration
+!Software Version V800R012C00SPC200
+!Last configuration was updated at 2021-01-05 01:03:52+08:00 by cqlt
+!Last configuration was saved at 2021-01-15 09:34:34+08:00 by CQ-CQ-SDNcontroler
+#
+clock timezone Beijing add 08:00:00
+#
+sysname ZOLX-LQH-0F0D-LC8IK14-QK-C038
+#
+set neid 72e9f8
+#
+undo FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+undo user-security-policy enable
+#
+port-wred af4-cs7-pq
+ queue-depth 2000
+#
+port-wred be-af3
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+[16D                [16Dport-wred af1-af2
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af4-cs7-pq-10ge-ge
+ queue-depth 1000
+#
+port-wred be-af3-10ge-ge
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2-10ge-ge
+ queue-depth 2000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+service-template template-default0
+#
+[16D                [16Dservice-template template-default1
+#
+service-template template-default2
+#
+service-template template-default3
+#
+service-template template-default4
+#
+ntp-service ipv6 server disable
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+ ntp-service authentication-keyid 1 authentication-mode md5 cipher f4803f0ddb0443e5dde7117504904e16
+ntp-service reliable authentication-keyid 1
+ntp-service unicast-server 11.151.266.265 authentication-keyid 1 source-interface LoopBack0
+ntp-service unicast-server 11.151.266.266 authentication-keyid 1 source-interface LoopBack0 preference
+ntp-service authentication enable
+ntp-service server source-interface LoopBack0
+ntp-service source-interface LoopBack0
+#
+alarm
+ suppression alarm-name hwMplsTunnelHotstandbySwitch cause-period 60
+ suppression alarm-name hwBfdSessFaultDown cause-period 600
+ suppression alarm-name hwPortDown cause-period 5
+[16D                [16D suppression alarm-name hwLosAlarm cause-period 5
+ suppression alarm-name hwIfFlowDown cause-period 60
+ suppression alarm-name hwIfFlowDown clear-period 60
+ suppression alarm-name hwCposE1DownE1AisAlarm cause-period 60
+ suppression alarm-name hwPWVcDown cause-period 60
+ suppression alarm-name hwPWVcDown clear-period 60
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand cause-period 600
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand clear-period 600
+#
+rsa peer-public-key 11.151.0.256
+ public-key-code begin
+ 3082010A
+  02820101
+    00C57B6E 56546DD3 21600D36 DA96C84F 7BF75532 D7D8979B 4443CF99 EFE0C3F2
+    26D3ABBB C1E3D1FE 217CB2BC E10FBAF7 6EC8D030 9F1E10C7 8F570E64 3F3B25B2
+    A185EC90 D93A6B51 5BD25E1D 5BBE24CE F1342A6A 9A86A322 46899FCE 060030B8
+    5F0D82D1 B7F192B6 9DB07661 E4AB670C CF07ED69 56B7724F CEED004C E091BBD4
+    27473874 094E7F58 D9BC1C52 A7E18CBA 49A4016C A0C4029D 879DDAA5 93C1525F
+    457341DF 819BECEB 07C09A35 FA259DCA 90DE8344 41A9AD9D 6C4F2F69 0949DCCC
+    0847B005 2D1D9B1F 0B55D3F2 6DDC52BE E9E44C1E 1767CC45 32E72395 35920B68
+    7F08C996 443DFFF7 F4084233 1644B451 D1DAE62E E1E30B69 B7257B3F 76703EF8
+    61
+  0203
+[16D                [16D    010001
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 11.151.0.256
+ public-key-code begin
+  04BC02A0 447770F5 32645E5F 6D707437 25E17C55 2EBB9D02 23F1343D A4605ADC
+  154B636B BC9E09C3 C1911C94 67D70ABA 0E448900 B164146A A83A039F 3F1D2940
+  A5
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 139.106.138.63
+ public-key-code begin
+  04015375 6D38BD4E 6481ED6C 35EE63D9 6702B837 DD815308 9BB3AF16 51A7E1E9
+  F21FC74A D6FEEDD3 A3BFB685 9057AB0B 6FC462EC 95B7BD3D 513A4953 5405953E
+  D140E600 EF69669B 4C53BBAF EB91BA06 01A4DB96 DD976845 F0C4D714 DB19529F
+  29EDEF5A 3E9A0771 EA63835D 2AB1849C D27D5F4A FF956043 6E14092D 104D74BF
+  E3C6DA92 00
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 139.215.179.10
+[16D                [16D public-key-code begin
+  040170EC 031CFF9B 069B8376 D0EE8C3A 265EE39A 91553821 51D7C400 66AD0B64
+  DDB91207 2972D11A C55BC50A 89143DA2 96959FA6 DDCDC57E 01E71101 5D6BA711
+  DAE1EB00 6B7B5C4C 91D73FF2 C2C23645 9523FBDA 9D4C7472 AB26852A FD38E4F7
+  6B79309E 3583E10A EE9A0DBD 3641965B 366CBEFC 76D02970 7ED873F3 7D0E2D9F
+  FD2C1E4E 62
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 139.125.244.221
+ public-key-code begin
+  040197AC 4DF49129 01F825B2 EAAF38B5 764408A8 01F111A6 8E29D039 1C1CA6B8
+  821B7AE8 EC9ABA16 B50E8171 1F103336 64F1B4A5 B3D7CB91 75AC735C 6F59E423
+  8EEC1300 32DFBD62 9DAF4B0B 40539B85 7EE2A602 2813FFE3 84CBCF54 69BC61B4
+  A41E7A61 43E62FC7 09D4B562 219AD247 E345A756 77EB29C8 03E6CEE9 865D55AD
+  8A9406AB B9
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 139.125.240.135
+ public-key-code begin
+  04005763 639E4B47 C34B5325 48C68DB9 6C16233E FB2CDCB3 27368C1F C553FFC8
+  6E52F7D5 A683B1B9 0AC7BEB1 143840B6 C021BCA8 D9AA4848 3FC4D856 217EC229
+[16D                [16D  AC5FAF01 EF7B17C6 9F5FB7B5 4B03FAEB 8BA63422 903B0DFA EAD7A56B AAAF4270
+  6D597974 78CA7D79 9DBB054C 90DB2379 ED65488A B23A7F72 E506033D 97B6794D
+  B525CA91 65
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 139.125.240.231
+ public-key-code begin
+  0401366E E5067E9C 2A8D9916 18FACCD2 BBA0640A B99DBD54 074CF61D ED7E3281
+  CA86AEEA C8879BC3 D2D6D4CE 5A432C22 0857429D AF96B3C1 B64BC4C9 948B6EF0
+  2E2FDF00 30667A99 4082C06B C6D0394B FF6E365A 542AD38C 7076D583 1E86D1DE
+  628E7304 4EDD6E20 B5A96B00 9F71CD83 836B7F29 838B6B8F 119A977C 8FDABBA7
+  0206473C 20
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 139.197.184.231
+ public-key-code begin
+  040097D0 988C8394 FE4EED35 ED676108 07049629 01856CFF 7F0B433C 27168798
+  5EFE0A29 1AA42227 86EF732E 8C8342D7 B968552B 13473628 AF7165E9 662DD6B8
+  E96A6F01 DAEEE48A 0117610C 760B6EE3 4DC27721 6C4438E4 184E17BA D0541C99
+  44BAFBF8 4EAD14E9 FF2AD332 F540822E 05562DE1 2883DD17 97B2D017 7C900BA9
+  B7DC9F9E 55
+[16D                [16D public-key-code end
+ peer-public-key end
+#
+router id 11.151.10.265
+#
+ipv6 route recursive-lookup inherit-label-route enable
+#
+undo telnet ipv6 server enable
+telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+undo radius local-ip all
+#
+diffserv domain default
+#
+diffserv domain 5p3d
+#
+ptp enable
+ptp domain 24
+ptp device-type bc
+ptp passive-measure enable
+ptp clock-source local priority2 200
+#
+[16D                [16Dclock ssm-control on
+clock ethernet-synchronization enable
+#
+soc
+#
+ip vpn-instance 3G_RAN
+  description IN_CfglxSlgzmk_3E
+ ipv4-family
+  route-distinguisher 65448:18040
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:18040 export-extcommunity
+  vpn-target 65448:10000 export-extcommunity
+  vpn-target 65448:18040 import-extcommunity
+  vpn-target 65448:10000 import-extcommunity
+#
+ip vpn-instance 4G_OAM
+  description IN_CfglxSlgzmk_JRC
+ ipv4-family
+  route-distinguisher 65448:18030
+  vpn frr
+[16D                [16D  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:18030 export-extcommunity
+  vpn-target 65448:20002 export-extcommunity
+  vpn-target 65448:18030 import-extcommunity
+  vpn-target 65448:20002 import-extcommunity
+#
+ip vpn-instance 4G_RAN
+  description IN_CfglxSlgzmk_JRC
+ ipv4-family
+  route-distinguisher 65448:18020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:18020 export-extcommunity
+  vpn-target 65448:20001 export-extcommunity
+  vpn-target 65448:18020 import-extcommunity
+  vpn-target 65448:20001 import-extcommunity
+#
+ip vpn-instance 5G_OAM
+  description IN_CfglxSlgzmk_LP
+[16D                [16D ipv4-family
+  route-distinguisher 65448:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:10030 export-extcommunity
+  vpn-target 65448:10030 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:10030 export-extcommunity
+  vpn-target 65448:10030 import-extcommunity
+#
+ip vpn-instance 5G_RAN
+  description IN_CfglxSlgzmk_LP
+ ipv4-family
+  route-distinguisher 65448:10010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+[16D                [16D  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:10010 export-extcommunity
+  vpn-target 65448:10010 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:10010 export-extcommunity
+  vpn-target 65448:10010 import-extcommunity
+#
+ip vpn-instance 5G_RAN_VIP
+  description IN_CfglxSlgzmk_LP
+ ipv4-family
+  route-distinguisher 65448:10020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:10020 export-extcommunity
+  vpn-target 65448:10020 import-extcommunity
+[16D                [16D ipv6-family
+  route-distinguisher 65448:10020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:10020 export-extcommunity
+  vpn-target 65448:10020 import-extcommunity
+#
+ip vpn-instance CQUNICOM_APN
+  description CQUNGZMK_XNL
+ ipv4-family
+  route-distinguisher 65448:50000
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:50000 export-extcommunity
+  vpn-target 65448:50000 import-extcommunity
+#
+ip vpn-instance CQUNICOM_POWER
+  description CQUNGZMK_NMUCP
+ ipv4-family
+[16D                [16D  route-distinguisher 65448:40000
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:40000 export-extcommunity
+  vpn-target 65448:40000 import-extcommunity
+#
+ip vpn-instance LTE-OAM-VPN
+  description LTE-MXK-TNL
+ ipv4-family
+  route-distinguisher 65448:20002
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:20002 export-extcommunity
+  vpn-target 65448:20002 import-extcommunity
+#
+ip vpn-instance LTE-VPN
+  description LTE-TNL
+ ipv4-family
+  route-distinguisher 65448:20001
+  vpn frr
+[16D                [16D  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:20001 export-extcommunity
+  vpn-target 65448:20001 import-extcommunity
+#
+ip vpn-instance MANAGERMENT_M
+  description MANAECPKCLR_K
+ ipv4-family
+  route-distinguisher 65448:60001
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:60001 export-extcommunity
+  vpn-target 65448:60001 import-extcommunity
+#
+ip vpn-instance WCDMAVPN
+  description WCDMXTNL
+ ipv4-family
+  route-distinguisher 65448:10000
+  vpn frr
+  tnl-policy nms-tunnel-policy
+[16D                [16D  apply-label per-instance
+  transit-vpn
+  vpn-target 65448:10000 export-extcommunity
+  vpn-target 65448:10000 import-extcommunity
+#
+ip vpn-instance __LOCAL_OAM_VPN__
+ ipv4-family
+ ipv6-family
+#
+ip dcn vpn-instance __dcn_vpn__
+ ipv4-family
+#
+tunnel-selector NMS-Tunnel-Policy permit node 10
+ apply tunnel-policy NMS-Tunnel-Policy
+#
+tunnel-selector nms-tunnel-policy permit node 10
+ apply tunnel-policy nms-tunnel-policy
+#
+bfd
+ mpls-passive
+#
+mpls lsr-id 11.151.10.265
+#
+[16D                [16Dmpls
+#
+mpls ldp
+ #
+ ipv4-family
+#
+dhcp server request-packet all-interface disable
+#
+dot1x-template 1
+#
+acl number 2000
+ rule 6 permit source 11.147.0.251 0.0.0.15
+ rule 7 permit source 103.179.265.0 0.0.0.255
+ rule 8 permit source 11.151.0.256 0
+#
+security password
+ #
+ rule admin
+  forbidden word changeme_123
+#
+aaa
+  local-user root password irreversible-cipher +Hv$!xKCa#UY6\$GWJ!N4[QH.O/'HIa@AoURN`>;R"Z8PtIa\3AZAy6Sa60(C6GCN   local-user root password irreversible-cipher 8e6086cd4302a270c84e38afa14246ba
+ local-user root service-type ssh
+[16D                [16D local-user root level 3
+ local-user root state block fail-times 3 interval 5
+ local-user root expire 2000-01-01
+  local-user cqlt password irreversible-cipher $1c$Cz@x>;]MX)$w+:/GGw8jBY)}r=O!F(9ic|]>:z6\!py|d7hVx90$   local-user cqlt password irreversible-cipher c62446b9dd6d125c48dbb62838151c26
+ local-user cqlt service-type telnet ssh
+ local-user cqlt level 3
+ local-user cqlt state active
+  local-user cq-cq-sdncontroler password irreversible-cipher $1c$hid9Y,!Z6/$p(wO#*`*mC-{y2%UUO7*3l.=:Ux%jR7a|sGT$nL@$   local-user cq-cq-sdncontroler password irreversible-cipher 71e639eec9dd877b4808dd56414c7e31
+ local-user cq-cq-sdncontroler service-type telnet ssh
+ local-user cq-cq-sdncontroler level 3
+ local-user cq-cq-sdncontroler state block fail-times 3 interval 5
+  local-user cq-cq-manager password irreversible-cipher $1c$H`kx$kFd%Q$KrCO#v:;EPo'}9>lgL<,t5PG5"}r;Z(>X%$@T+cU$   local-user cq-cq-manager password irreversible-cipher bd2151508a849ef84fb5f15d16b42657
+ local-user cq-cq-manager service-type telnet ssh
+ local-user cq-cq-manager level 3
+ local-user cq-cq-manager state block fail-times 3 interval 5
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+  authentication-mode local radius
+ #
+[16D                [16D authorization-scheme default
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+#
+license
+#
+segment-routing
+ bfd enable mode tunnel
+ bfd tunnel min-tx-interval 50 min-rx-interval 50
+#
+isis 1
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+[16D                [16D bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ bgp-ls enable level-2
+ bgp-ls identifier 191
+ network-entity 86.5448.1000.0201.4001.9254.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name ZOZO-LX-LQH-LC8IK14-QK-C038
+ import-route isis 1000 cost 10000 route-policy import-MER&NCE-ip
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 76800 142334
+ avoid-microloop segment-routing
+ set-overload on-startup send-sa-bit 120 allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+isis 2
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+[16D                [16D flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ bgp-ls enable level-2
+ bgp-ls identifier 192
+ network-entity 86.5448.1000.0301.4001.9254.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name ZOZO-LX-LQH-LC8IK14-QK-C038
+ import-route isis 1000 cost 10000 route-policy import-MER&NCE-ip
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 76800 142334
+ avoid-microloop segment-routing
+ set-overload on-startup send-sa-bit 120 allow external
+ frr
+  loop-free-alternate level-2
+  ti-lfa level-2
+#
+isis 1000
+ is-level level-2
+ cost-style wide
+[16D                [16D timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.5448.1000.0101.4001.9254.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name ZOLX-LQH-0F0D-LC8IK14-QK-C038
+ import-route isis 1 cost 10000 no-sid route-policy import-MAR-ip
+ import-route isis 2 cost 10000 no-sid route-policy import-MAR-ip
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 76800 142334
+ avoid-microloop segment-routing
+ set-overload on-startup send-sa-bit 120 allow external
+ frr
+  loop-free-alternate level-2
+  remote-lfa tunnel ldp level-2
+  ti-lfa level-2
+#
+interface Eth-Trunk0
+ mtu 9000
+ [16D                [16D description TO  CQNA-ZYYJS-E8000-M14-MER-Eth-Trunk 0
+ ip address 151.10.0.11 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 17e0138fa875a0056ff6810df7237201
+ isis cost 150
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+[16D                [16D qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk0.1
+ vlan-type dot1q 1
+ mtu 9000
+  description TO CQCQ-NA-ZYYJS-SM-NE8KM14-E1-Eth-Trunk 0.1
+ ip address 151.10.1.2 255.255.255.252
+ trust upstream default
+ isis enable 1
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 8df6f9180678dfacebf07169c1019afb
+ isis cost 2000
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ qos phb disable
+#
+[16D                [16Dinterface Eth-Trunk0.2
+ vlan-type dot1q 2
+ mtu 9000
+  description TO CQCQ-NA-ZYYJS-SM-NE8KM14-E1-Eth-Trunk 0.2
+ ip address 151.10.2.2 255.255.255.252
+ trust upstream default
+ isis enable 2
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 8a2ca713e78901d4df857d970580f0ea
+ isis cost 2000
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ qos phb disable
+#
+interface Eth-Trunk1
+ mtu 9000
+  description TO CQBB-ST-NE8000-X8-MCR-Eth-Trunk 19
+ ip address 151.10.0.2 255.255.255.252
+[16D                [16D trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 41d03b3efab1f55fe2b5f381a04364a4
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+[16D                [16D bit-error-detection
+#
+interface Ethernet0/0/0
+ speed auto
+ duplex auto
+ undo shutdown
+ ip binding vpn-instance __LOCAL_OAM_VPN__
+ ip address 103.179.0.1 255.255.255.0
+#
+interface Virtual-Template0
+ ppp authentication-mode auto
+#
+interface GigabitEthernet0/1/0
+ mtu 9000
+  description TO CQCQ-NA-LCSG-SM-ATN980C-A1-10GE0/4/0
+ undo shutdown
+ ip address 151.10.1.19 255.255.255.252
+ trust upstream default
+ isis enable 1
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher bb3e0b8450a9ca565b8d83a4efc6d4c4
+ isis cost 100
+ isis small-hello
+[16D                [16D isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ qos phb disable
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface GigabitEthernet0/1/0.99
+ vlan-type dot1q 99
+[16D                [16D mtu 9000
+  description TO CROSS-LINK PROTECT for MER-MER
+ ip address 151.10.0.15 255.255.255.252
+ statistic enable
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher de19b5c498f89f4f8c3f863b99d64737
+ isis cost 500
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ qos phb disable
+#
+interface GigabitEthernet0/1/1
+ mtu 9000
+  description TO CQCQ-NA-NSJSG-SM-ATN980C-A1-10GE0/4/0
+ undo shutdown
+ ip address 151.10.2.19 255.255.255.252
+[16D                [16D trust upstream default
+ isis enable 2
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher ddd2d24127cfdbd06aaa764d6a1aed63
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ port-queue be wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2-10ge-ge outbound
+ port-queue af3 wfq weight 30 port-wred be-af3-10ge-ge outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq-10ge-ge outbound
+ qos phb disable
+[16D                [16D clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface GigabitEthernet0/1/2
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/1/3
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/1/4
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/1/5
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+[16D                [16D#
+interface GigabitEthernet0/1/6
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/1/7
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/1/8
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/1/9
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/0
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+[16D                [16D#
+interface GigabitEthernet0/3/1
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/2
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/3
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/4
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/5
+ undo shutdown
+[16D                [16D dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/6
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/7
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/8
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/3/9
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/0
+ undo shutdown
+[16D                [16D dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/1
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/2
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/3
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/4
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+[16D                [16Dinterface GigabitEthernet0/5/5
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/6
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/7
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/8
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/5/9
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+[16D                [16Dinterface GigabitEthernet0/11/0
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/1
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/2
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/3
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/4
+ undo shutdown
+ dcn
+[16D                [16D link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/5
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/6
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/7
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/8
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/11/9
+ undo shutdown
+[16D                [16D link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/0
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/1
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/2
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/3
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/4
+[16D                [16D undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/5
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/6
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/7
+ undo shutdown
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface GigabitEthernet0/13/8
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+[16D                [16Dinterface GigabitEthernet0/13/9
+ undo shutdown
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface 50GE0/2/1
+ undo shutdown
+ dcn
+#
+interface 50|100GE0/2/0
+ undo shutdown
+ dcn
+#
+interface 100GE0/7/0
+ carrier down-hold-time 150
+  description TO CQBB-ST-NE8000-X8-MCR-100GE1/0/6
+ undo shutdown
+ eth-trunk 1
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ clock priority 10
+ ptp enable
+#
+[16D                [16Dinterface 100GE0/7/1
+ undo shutdown
+ dcn
+#
+interface 100GE0/8/0
+  description TO CQNA-ZYYJS-E8000-M14-MER-100GE0/8/0
+ undo shutdown
+ eth-trunk 0
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ clock priority 5
+ ptp enable
+#
+interface 100GE0/8/1
+ undo shutdown
+ dcn
+#
+interface 100GE0/9/0
+ undo shutdown
+ dcn
+#
+interface 100GE0/9/1
+[16D                [16D undo shutdown
+ dcn
+#
+interface LoopBack0
+  description For Manager&LSRID
+ ip address 11.151.10.265 255.255.255.255
+ isis enable 1000
+ isis prefix-sid index 216
+#
+interface LoopBack1023
+  description DCN loopback interface
+ ip binding vpn-instance __dcn_vpn__
+ ip address 139.125.244.259 255.255.0.0
+#
+interface NULL0
+#
+bfd Eth-Trunk0 bind link-bundle peer-ip 151.10.0.9 interface Eth-Trunk0 source-ip 151.10.0.11
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+bfd Eth-Trunk1 bind link-bundle peer-ip 151.10.0.1 interface Eth-Trunk1 source-ip 151.10.0.2
+ min-tx-interval 30
+[16D                [16D min-rx-interval 30
+ process-pst
+#
+bgp 65448
+ router-id 11.151.10.265
+ graceful-restart
+ graceful-restart peer-reset
+ group MAR-Ring1 internal
+ peer MAR-Ring1 connect-interface LoopBack0
+  peer MAR-Ring1 password cipher 34237cbbd3d541349c7dd7107bca1725
+ peer 11.151.10.1 as-number 65448
+ peer 11.151.10.1 group MAR-Ring1
+ peer 11.151.10.2 as-number 65448
+ peer 11.151.10.2 group MAR-Ring1
+ peer 11.151.10.3 as-number 65448
+ peer 11.151.10.3 group MAR-Ring1
+ group MAR-Ring10 internal
+ peer MAR-Ring10 connect-interface LoopBack0
+  peer MAR-Ring10 password cipher 8c860d929e58eff3a2f43585a27e67b0
+ group MAR-Ring11 internal
+ peer MAR-Ring11 connect-interface LoopBack0
+  peer MAR-Ring11 password cipher 7dd9d74ac4c3e8faab78175044d5c309
+ group MAR-Ring12 internal
+[16D                [16D peer MAR-Ring12 connect-interface LoopBack0
+  peer MAR-Ring12 password cipher cddb977c0e105330535b4439e5bf67ea
+ group MAR-Ring13 internal
+ peer MAR-Ring13 connect-interface LoopBack0
+  peer MAR-Ring13 password cipher 9f726cbaa2d52429c2014d8343f2ea9a
+ group MAR-Ring14 internal
+ peer MAR-Ring14 connect-interface LoopBack0
+  peer MAR-Ring14 password cipher 9f3ea4c11202c1ed81736063d3ee3f1d
+ group MAR-Ring15 internal
+ peer MAR-Ring15 connect-interface LoopBack0
+  peer MAR-Ring15 password cipher 45a1c1b1277589d6e84f820bf1e7a2ad
+ group MAR-Ring16 internal
+ peer MAR-Ring16 connect-interface LoopBack0
+  peer MAR-Ring16 password cipher 70905ee8d40cfbbfa2cbc74a33d4168c
+ group MAR-Ring17 internal
+ peer MAR-Ring17 connect-interface LoopBack0
+  peer MAR-Ring17 password cipher f62e5c14090535ab76c4f6779e041f80
+ group MAR-Ring18 internal
+ peer MAR-Ring18 connect-interface LoopBack0
+  peer MAR-Ring18 password cipher e5fc61b033fb02f1066379e887ef880e
+ group MAR-Ring19 internal
+ peer MAR-Ring19 connect-interface LoopBack0
+  peer MAR-Ring19 password cipher af19578ad20f299861a79f09a3f96a58
+[16D                [16D group MAR-Ring2 internal
+ peer MAR-Ring2 connect-interface LoopBack0
+  peer MAR-Ring2 password cipher 5e42c95ed1c3d8bf95b8b2a5642609e2
+ peer 11.151.10.9 as-number 65448
+ peer 11.151.10.9 group MAR-Ring2
+ peer 11.151.10.11 as-number 65448
+ peer 11.151.10.11 group MAR-Ring2
+ peer 11.151.10.12 as-number 65448
+ peer 11.151.10.12 group MAR-Ring2
+ group MAR-Ring20 internal
+ peer MAR-Ring20 connect-interface LoopBack0
+  peer MAR-Ring20 password cipher 6fc5fba40e330963507cfb052991d9d7
+ group MAR-Ring21 internal
+ peer MAR-Ring21 connect-interface LoopBack0
+  peer MAR-Ring21 password cipher 4b1cc44e9def767f170f6c3961871219
+ group MAR-Ring22 internal
+ peer MAR-Ring22 connect-interface LoopBack0
+  peer MAR-Ring22 password cipher 2773ded9081a19b37af0b6fbb4318ed9
+ group MAR-Ring23 internal
+ peer MAR-Ring23 connect-interface LoopBack0
+  peer MAR-Ring23 password cipher 170d895c468851da0a9381265863abe5
+ group MAR-Ring24 internal
+ peer MAR-Ring24 connect-interface LoopBack0
+ [16D                [16D peer MAR-Ring24 password cipher a556ccbe66a9e340993c11a737c86704
+ group MAR-Ring25 internal
+ peer MAR-Ring25 connect-interface LoopBack0
+  peer MAR-Ring25 password cipher 98974cdbfee4ab27cbea10157ee29766
+ group MAR-Ring26 internal
+ peer MAR-Ring26 connect-interface LoopBack0
+  peer MAR-Ring26 password cipher 8688eac58a425605e28a3cbc6c885ee9
+ group MAR-Ring27 internal
+ peer MAR-Ring27 connect-interface LoopBack0
+  peer MAR-Ring27 password cipher 75f406a859b21cb122ba12d032b9379e
+ group MAR-Ring28 internal
+ peer MAR-Ring28 connect-interface LoopBack0
+  peer MAR-Ring28 password cipher f723e3cac57d7b29722068b609f6cfec
+ group MAR-Ring29 internal
+ peer MAR-Ring29 connect-interface LoopBack0
+  peer MAR-Ring29 password cipher 93617c9ea8ab55929a0adae96f492fe9
+ group MAR-Ring3 internal
+ peer MAR-Ring3 connect-interface LoopBack0
+  peer MAR-Ring3 password cipher 17f6446de988f128e0a560c2073ecbda
+ group MAR-Ring30 internal
+ peer MAR-Ring30 connect-interface LoopBack0
+  peer MAR-Ring30 password cipher d330c4387c6f28631bafb138aa215ffb
+ group MAR-Ring31 internal
+[16D                [16D peer MAR-Ring31 connect-interface LoopBack0
+  peer MAR-Ring31 password cipher 45989032e99f4881660b059dcc7b806f
+ group MAR-Ring4 internal
+ peer MAR-Ring4 connect-interface LoopBack0
+  peer MAR-Ring4 password cipher b24f4fc2800881540e0d8120a38e87e2
+ group MAR-Ring5 internal
+ peer MAR-Ring5 connect-interface LoopBack0
+  peer MAR-Ring5 password cipher 9d19c449bb2536f6b9bcb4063736239b
+ group MAR-Ring6 internal
+ peer MAR-Ring6 connect-interface LoopBack0
+  peer MAR-Ring6 password cipher b088d007921d38875377c658369e7009
+ group MAR-Ring7 internal
+ peer MAR-Ring7 connect-interface LoopBack0
+  peer MAR-Ring7 password cipher 3a239fc1174ae735c1b29144cf78950f
+ group MAR-Ring8 internal
+ peer MAR-Ring8 connect-interface LoopBack0
+  peer MAR-Ring8 password cipher 5cb155340b743d2fbbe00b31cf820306
+ group MAR-Ring9 internal
+ peer MAR-Ring9 connect-interface LoopBack0
+  peer MAR-Ring9 password cipher 54658471ee21609dc10cb071cc6e8621
+ group RR-M internal
+ peer RR-M connect-interface LoopBack0
+  peer RR-M password cipher d1b01be59ac32a43fcde6df39240da63
+[16D                [16D peer 11.147.0.7 as-number 65448
+ peer 11.147.0.7 group RR-M
+ group RR-S internal
+ peer RR-S connect-interface LoopBack0
+  peer RR-S password cipher 2a1f01090a26f5be7bc1b1c7f3f860f3
+ peer 11.147.0.8 as-number 65448
+ peer 11.147.0.8 group RR-S
+ #
+ ipv4-family unicast
+  undo synchronization
+  reflect change-path-attribute
+  network 11.151.10.265 255.255.255.255
+  auto-frr
+  tunnel-selector NMS-Tunnel-Policy
+  ingress-lsp protect-mode bgp-frr
+  bestroute nexthop-resolved tunnel
+  route-select delay 300
+  undo peer MAR-Ring1 enable
+  undo peer MAR-Ring2 enable
+  undo peer MAR-Ring3 enable
+  undo peer MAR-Ring4 enable
+  undo peer MAR-Ring5 enable
+  undo peer MAR-Ring6 enable
+[16D                [16D  undo peer MAR-Ring7 enable
+  undo peer MAR-Ring8 enable
+  undo peer MAR-Ring9 enable
+  undo peer MAR-Ring10 enable
+  undo peer MAR-Ring11 enable
+  undo peer MAR-Ring12 enable
+  undo peer MAR-Ring13 enable
+  undo peer MAR-Ring14 enable
+  undo peer MAR-Ring15 enable
+  undo peer MAR-Ring16 enable
+  undo peer MAR-Ring17 enable
+  undo peer MAR-Ring18 enable
+  undo peer MAR-Ring19 enable
+  undo peer MAR-Ring20 enable
+  undo peer MAR-Ring21 enable
+  undo peer MAR-Ring22 enable
+  undo peer MAR-Ring23 enable
+  undo peer MAR-Ring24 enable
+  undo peer MAR-Ring25 enable
+  undo peer MAR-Ring26 enable
+  undo peer MAR-Ring27 enable
+  undo peer MAR-Ring28 enable
+  undo peer MAR-Ring29 enable
+[16D                [16D  undo peer MAR-Ring30 enable
+  undo peer MAR-Ring31 enable
+  undo peer 11.151.10.1 enable
+  undo peer 11.151.10.2 enable
+  undo peer 11.151.10.3 enable
+  undo peer 11.151.10.9 enable
+  undo peer 11.151.10.11 enable
+  undo peer 11.151.10.12 enable
+  peer RR-M enable
+  peer RR-M route-policy Import-LabelRoute-From-RR import
+  peer RR-M route-policy Export-LabelRoute-To-RR-Master export
+  peer RR-M label-route-capability
+  peer RR-M advertise-community
+  peer 11.147.0.7 enable
+  peer 11.147.0.7 group RR-M
+  peer RR-S enable
+  peer RR-S route-policy Import-LabelRoute-From-RR import
+  peer RR-S route-policy Export-LabelRoute-To-RR-Slave export
+  peer RR-S label-route-capability
+  peer RR-S advertise-community
+  peer 11.147.0.8 enable
+  peer 11.147.0.8 group RR-S
+ #
+[16D                [16D ipv4-family vpnv4
+  reflector cluster-id 548819
+  reflect change-path-attribute
+  policy vpn-target
+  auto-frr
+  tunnel-selector nms-tunnel-policy
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  label-free delay 5
+  peer MAR-Ring1 enable
+  peer MAR-Ring1 route-policy Export-Ipv4-To-MAR-Ring1 export
+  peer MAR-Ring1 reflect-client
+  peer MAR-Ring1 preferred-value 10
+  peer MAR-Ring1 route-update-interval 0
+  peer 11.151.10.1 enable
+  peer 11.151.10.1 group MAR-Ring1
+  peer 11.151.10.2 enable
+  peer 11.151.10.2 group MAR-Ring1
+  peer 11.151.10.3 enable
+  peer 11.151.10.3 group MAR-Ring1
+  peer MAR-Ring10 enable
+  peer MAR-Ring10 route-policy Export-Ipv4-To-MAR-Ring10 export
+  peer MAR-Ring10 reflect-client
+[16D                [16D  peer MAR-Ring10 preferred-value 10
+  peer MAR-Ring10 route-update-interval 0
+  peer MAR-Ring11 enable
+  peer MAR-Ring11 route-policy Export-Ipv4-To-MAR-Ring11 export
+  peer MAR-Ring11 reflect-client
+  peer MAR-Ring11 preferred-value 10
+  peer MAR-Ring11 route-update-interval 0
+  peer MAR-Ring12 enable
+  peer MAR-Ring12 route-policy Export-Ipv4-To-MAR-Ring12 export
+  peer MAR-Ring12 reflect-client
+  peer MAR-Ring12 preferred-value 10
+  peer MAR-Ring12 route-update-interval 0
+  peer MAR-Ring13 enable
+  peer MAR-Ring13 route-policy Export-Ipv4-To-MAR-Ring13 export
+  peer MAR-Ring13 reflect-client
+  peer MAR-Ring13 preferred-value 10
+  peer MAR-Ring13 route-update-interval 0
+  peer MAR-Ring14 enable
+  peer MAR-Ring14 route-policy Export-Ipv4-To-MAR-Ring14 export
+  peer MAR-Ring14 reflect-client
+  peer MAR-Ring14 preferred-value 10
+  peer MAR-Ring14 route-update-interval 0
+  peer MAR-Ring15 enable
+[16D                [16D  peer MAR-Ring15 route-policy Export-Ipv4-To-MAR-Ring15 export
+  peer MAR-Ring15 reflect-client
+  peer MAR-Ring15 preferred-value 10
+  peer MAR-Ring15 route-update-interval 0
+  peer MAR-Ring16 enable
+  peer MAR-Ring16 route-policy Export-Ipv4-To-MAR-Ring16 export
+  peer MAR-Ring16 reflect-client
+  peer MAR-Ring16 preferred-value 10
+  peer MAR-Ring16 route-update-interval 0
+  peer MAR-Ring17 enable
+  peer MAR-Ring17 route-policy Export-Ipv4-To-MAR-Ring17 export
+  peer MAR-Ring17 reflect-client
+  peer MAR-Ring17 preferred-value 10
+  peer MAR-Ring17 route-update-interval 0
+  peer MAR-Ring18 enable
+  peer MAR-Ring18 route-policy Export-Ipv4-To-MAR-Ring18 export
+  peer MAR-Ring18 reflect-client
+  peer MAR-Ring18 preferred-value 10
+  peer MAR-Ring18 route-update-interval 0
+  peer MAR-Ring19 enable
+  peer MAR-Ring19 route-policy Export-Ipv4-To-MAR-Ring19 export
+  peer MAR-Ring19 reflect-client
+  peer MAR-Ring19 preferred-value 10
+[16D                [16D  peer MAR-Ring19 route-update-interval 0
+  peer MAR-Ring2 enable
+  peer MAR-Ring2 route-policy Export-Ipv4-To-MAR-Ring2 export
+  peer MAR-Ring2 reflect-client
+  peer MAR-Ring2 preferred-value 10
+  peer MAR-Ring2 route-update-interval 0
+  peer 11.151.10.9 enable
+  peer 11.151.10.9 group MAR-Ring2
+  peer 11.151.10.11 enable
+  peer 11.151.10.11 group MAR-Ring2
+  peer 11.151.10.12 enable
+  peer 11.151.10.12 group MAR-Ring2
+  peer MAR-Ring20 enable
+  peer MAR-Ring20 route-policy Export-Ipv4-To-MAR-Ring20 export
+  peer MAR-Ring20 reflect-client
+  peer MAR-Ring20 preferred-value 10
+  peer MAR-Ring20 route-update-interval 0
+  peer MAR-Ring21 enable
+  peer MAR-Ring21 route-policy Export-Ipv4-To-MAR-Ring21 export
+  peer MAR-Ring21 reflect-client
+  peer MAR-Ring21 preferred-value 10
+  peer MAR-Ring21 route-update-interval 0
+  peer MAR-Ring22 enable
+[16D                [16D  peer MAR-Ring22 route-policy Export-Ipv4-To-MAR-Ring22 export
+  peer MAR-Ring22 reflect-client
+  peer MAR-Ring22 preferred-value 10
+  peer MAR-Ring22 route-update-interval 0
+  peer MAR-Ring23 enable
+  peer MAR-Ring23 route-policy Export-Ipv4-To-MAR-Ring23 export
+  peer MAR-Ring23 reflect-client
+  peer MAR-Ring23 preferred-value 10
+  peer MAR-Ring23 route-update-interval 0
+  peer MAR-Ring24 enable
+  peer MAR-Ring24 route-policy Export-Ipv4-To-MAR-Ring24 export
+  peer MAR-Ring24 reflect-client
+  peer MAR-Ring24 preferred-value 10
+  peer MAR-Ring24 route-update-interval 0
+  peer MAR-Ring25 enable
+  peer MAR-Ring25 route-policy Export-Ipv4-To-MAR-Ring25 export
+  peer MAR-Ring25 reflect-client
+  peer MAR-Ring25 preferred-value 10
+  peer MAR-Ring25 route-update-interval 0
+  peer MAR-Ring26 enable
+  peer MAR-Ring26 route-policy Export-Ipv4-To-MAR-Ring26 export
+  peer MAR-Ring26 reflect-client
+  peer MAR-Ring26 preferred-value 10
+[16D                [16D  peer MAR-Ring26 route-update-interval 0
+  peer MAR-Ring27 enable
+  peer MAR-Ring27 route-policy Export-Ipv4-To-MAR-Ring27 export
+  peer MAR-Ring27 reflect-client
+  peer MAR-Ring27 preferred-value 10
+  peer MAR-Ring27 route-update-interval 0
+  peer MAR-Ring28 enable
+  peer MAR-Ring28 route-policy Export-Ipv4-To-MAR-Ring28 export
+  peer MAR-Ring28 reflect-client
+  peer MAR-Ring28 preferred-value 10
+  peer MAR-Ring28 route-update-interval 0
+  peer MAR-Ring29 enable
+  peer MAR-Ring29 route-policy Export-Ipv4-To-MAR-Ring29 export
+  peer MAR-Ring29 reflect-client
+  peer MAR-Ring29 preferred-value 10
+  peer MAR-Ring29 route-update-interval 0
+  peer MAR-Ring3 enable
+  peer MAR-Ring3 route-policy Export-Ipv4-To-MAR-Ring3 export
+  peer MAR-Ring3 reflect-client
+  peer MAR-Ring3 preferred-value 10
+  peer MAR-Ring3 route-update-interval 0
+  peer MAR-Ring30 enable
+  peer MAR-Ring30 route-policy Export-Ipv4-To-MAR-Ring30 export
+[16D                [16D  peer MAR-Ring30 reflect-client
+  peer MAR-Ring30 preferred-value 10
+  peer MAR-Ring30 route-update-interval 0
+  peer MAR-Ring31 enable
+  peer MAR-Ring31 route-policy Export-Ipv4-To-MAR-Ring31 export
+  peer MAR-Ring31 reflect-client
+  peer MAR-Ring31 preferred-value 10
+  peer MAR-Ring31 route-update-interval 0
+  peer MAR-Ring4 enable
+  peer MAR-Ring4 route-policy Export-Ipv4-To-MAR-Ring4 export
+  peer MAR-Ring4 reflect-client
+  peer MAR-Ring4 preferred-value 10
+  peer MAR-Ring4 route-update-interval 0
+  peer MAR-Ring5 enable
+  peer MAR-Ring5 route-policy Export-Ipv4-To-MAR-Ring5 export
+  peer MAR-Ring5 reflect-client
+  peer MAR-Ring5 preferred-value 10
+  peer MAR-Ring5 route-update-interval 0
+  peer MAR-Ring6 enable
+  peer MAR-Ring6 route-policy Export-Ipv4-To-MAR-Ring6 export
+  peer MAR-Ring6 reflect-client
+  peer MAR-Ring6 preferred-value 10
+  peer MAR-Ring6 route-update-interval 0
+[16D                [16D  peer MAR-Ring7 enable
+  peer MAR-Ring7 route-policy Export-Ipv4-To-MAR-Ring7 export
+  peer MAR-Ring7 reflect-client
+  peer MAR-Ring7 preferred-value 10
+  peer MAR-Ring7 route-update-interval 0
+  peer MAR-Ring8 enable
+  peer MAR-Ring8 route-policy Export-Ipv4-To-MAR-Ring8 export
+  peer MAR-Ring8 reflect-client
+  peer MAR-Ring8 preferred-value 10
+  peer MAR-Ring8 route-update-interval 0
+  peer MAR-Ring9 enable
+  peer MAR-Ring9 route-policy Export-Ipv4-To-MAR-Ring9 export
+  peer MAR-Ring9 reflect-client
+  peer MAR-Ring9 preferred-value 10
+  peer MAR-Ring9 route-update-interval 0
+  peer RR-M enable
+  peer RR-M route-policy Import-Ipv4-From-RR import
+  peer RR-M route-policy Export-Ipv4-To-RR-Master export
+  peer RR-M next-hop-local
+  peer RR-M advertise-community
+  peer 11.147.0.7 enable
+  peer 11.147.0.7 group RR-M
+  peer RR-S enable
+[16D                [16D  peer RR-S route-policy Import-Ipv4-From-RR import
+  peer RR-S route-policy Export-Ipv4-To-RR-Slave export
+  peer RR-S next-hop-local
+  peer RR-S advertise-community
+  peer 11.147.0.8 enable
+  peer 11.147.0.8 group RR-S
+ #
+ ipv4-family vpn-instance 3G_RAN
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance 4G_OAM
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance 4G_RAN
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance CQUNICOM_APN
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance CQUNICOM_POWER
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance LTE-OAM-VPN
+[16D                [16D  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance LTE-VPN
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance MANAGERMENT_M
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv4-family vpn-instance WCDMAVPN
+  network 0.0.0.0 route-policy preferred-value
+ #
+ ipv6-family vpnv6
+  reflector cluster-id 548819
+  reflect change-path-attribute
+  policy vpn-target
+  auto-frr
+  tunnel-selector nms-tunnel-policy
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  label-free delay 5
+  peer MAR-Ring1 enable
+  peer MAR-Ring1 route-policy Export-Ipv6-To-MAR-Ring1 export
+  peer MAR-Ring1 reflect-client
+[16D                [16D  peer MAR-Ring1 preferred-value 10
+  peer MAR-Ring1 route-update-interval 0
+  peer 11.151.10.1 enable
+  peer 11.151.10.1 group MAR-Ring1
+  peer 11.151.10.2 enable
+  peer 11.151.10.2 group MAR-Ring1
+  peer 11.151.10.3 enable
+  peer 11.151.10.3 group MAR-Ring1
+  peer MAR-Ring10 enable
+  peer MAR-Ring10 route-policy Export-Ipv6-To-MAR-Ring10 export
+  peer MAR-Ring10 reflect-client
+  peer MAR-Ring10 preferred-value 10
+  peer MAR-Ring10 route-update-interval 0
+  peer MAR-Ring11 enable
+  peer MAR-Ring11 route-policy Export-Ipv6-To-MAR-Ring11 export
+  peer MAR-Ring11 reflect-client
+  peer MAR-Ring11 preferred-value 10
+  peer MAR-Ring11 route-update-interval 0
+  peer MAR-Ring12 enable
+  peer MAR-Ring12 route-policy Export-Ipv6-To-MAR-Ring12 export
+  peer MAR-Ring12 reflect-client
+  peer MAR-Ring12 preferred-value 10
+  peer MAR-Ring12 route-update-interval 0
+[16D                [16D  peer MAR-Ring13 enable
+  peer MAR-Ring13 route-policy Export-Ipv6-To-MAR-Ring13 export
+  peer MAR-Ring13 reflect-client
+  peer MAR-Ring13 preferred-value 10
+  peer MAR-Ring13 route-update-interval 0
+  peer MAR-Ring14 enable
+  peer MAR-Ring14 route-policy Export-Ipv6-To-MAR-Ring14 export
+  peer MAR-Ring14 reflect-client
+  peer MAR-Ring14 preferred-value 10
+  peer MAR-Ring14 route-update-interval 0
+  peer MAR-Ring15 enable
+  peer MAR-Ring15 route-policy Export-Ipv6-To-MAR-Ring15 export
+  peer MAR-Ring15 reflect-client
+  peer MAR-Ring15 preferred-value 10
+  peer MAR-Ring15 route-update-interval 0
+  peer MAR-Ring16 enable
+  peer MAR-Ring16 route-policy Export-Ipv6-To-MAR-Ring16 export
+  peer MAR-Ring16 reflect-client
+  peer MAR-Ring16 preferred-value 10
+  peer MAR-Ring16 route-update-interval 0
+  peer MAR-Ring17 enable
+  peer MAR-Ring17 route-policy Export-Ipv6-To-MAR-Ring17 export
+  peer MAR-Ring17 reflect-client
+[16D                [16D  peer MAR-Ring17 preferred-value 10
+  peer MAR-Ring17 route-update-interval 0
+  peer MAR-Ring18 enable
+  peer MAR-Ring18 route-policy Export-Ipv6-To-MAR-Ring18 export
+  peer MAR-Ring18 reflect-client
+  peer MAR-Ring18 preferred-value 10
+  peer MAR-Ring18 route-update-interval 0
+  peer MAR-Ring19 enable
+  peer MAR-Ring19 route-policy Export-Ipv6-To-MAR-Ring19 export
+  peer MAR-Ring19 reflect-client
+  peer MAR-Ring19 preferred-value 10
+  peer MAR-Ring19 route-update-interval 0
+  peer MAR-Ring2 enable
+  peer MAR-Ring2 route-policy Export-Ipv6-To-MAR-Ring2 export
+  peer MAR-Ring2 reflect-client
+  peer MAR-Ring2 preferred-value 10
+  peer MAR-Ring2 route-update-interval 0
+  peer 11.151.10.9 enable
+  peer 11.151.10.9 group MAR-Ring2
+  peer 11.151.10.11 enable
+  peer 11.151.10.11 group MAR-Ring2
+  peer 11.151.10.12 enable
+  peer 11.151.10.12 group MAR-Ring2
+[16D                [16D  peer MAR-Ring20 enable
+  peer MAR-Ring20 route-policy Export-Ipv6-To-MAR-Ring20 export
+  peer MAR-Ring20 reflect-client
+  peer MAR-Ring20 preferred-value 10
+  peer MAR-Ring20 route-update-interval 0
+  peer MAR-Ring21 enable
+  peer MAR-Ring21 route-policy Export-Ipv6-To-MAR-Ring21 export
+  peer MAR-Ring21 reflect-client
+  peer MAR-Ring21 preferred-value 10
+  peer MAR-Ring21 route-update-interval 0
+  peer MAR-Ring22 enable
+  peer MAR-Ring22 route-policy Export-Ipv6-To-MAR-Ring22 export
+  peer MAR-Ring22 reflect-client
+  peer MAR-Ring22 preferred-value 10
+  peer MAR-Ring22 route-update-interval 0
+  peer MAR-Ring23 enable
+  peer MAR-Ring23 route-policy Export-Ipv6-To-MAR-Ring23 export
+  peer MAR-Ring23 reflect-client
+  peer MAR-Ring23 preferred-value 10
+  peer MAR-Ring23 route-update-interval 0
+  peer MAR-Ring24 enable
+  peer MAR-Ring24 route-policy Export-Ipv6-To-MAR-Ring24 export
+  peer MAR-Ring24 reflect-client
+[16D                [16D  peer MAR-Ring24 preferred-value 10
+  peer MAR-Ring24 route-update-interval 0
+  peer MAR-Ring25 enable
+  peer MAR-Ring25 route-policy Export-Ipv6-To-MAR-Ring25 export
+  peer MAR-Ring25 reflect-client
+  peer MAR-Ring25 preferred-value 10
+  peer MAR-Ring25 route-update-interval 0
+  peer MAR-Ring26 enable
+  peer MAR-Ring26 route-policy Export-Ipv6-To-MAR-Ring26 export
+  peer MAR-Ring26 reflect-client
+  peer MAR-Ring26 preferred-value 10
+  peer MAR-Ring26 route-update-interval 0
+  peer MAR-Ring27 enable
+  peer MAR-Ring27 route-policy Export-Ipv6-To-MAR-Ring27 export
+  peer MAR-Ring27 reflect-client
+  peer MAR-Ring27 preferred-value 10
+  peer MAR-Ring27 route-update-interval 0
+  peer MAR-Ring28 enable
+  peer MAR-Ring28 route-policy Export-Ipv6-To-MAR-Ring28 export
+  peer MAR-Ring28 reflect-client
+  peer MAR-Ring28 preferred-value 10
+  peer MAR-Ring28 route-update-interval 0
+  peer MAR-Ring29 enable
+[16D                [16D  peer MAR-Ring29 route-policy Export-Ipv6-To-MAR-Ring29 export
+  peer MAR-Ring29 reflect-client
+  peer MAR-Ring29 preferred-value 10
+  peer MAR-Ring29 route-update-interval 0
+  peer MAR-Ring3 enable
+  peer MAR-Ring3 route-policy Export-Ipv6-To-MAR-Ring3 export
+  peer MAR-Ring3 reflect-client
+  peer MAR-Ring3 preferred-value 10
+  peer MAR-Ring3 route-update-interval 0
+  peer MAR-Ring30 enable
+  peer MAR-Ring30 route-policy Export-Ipv6-To-MAR-Ring30 export
+  peer MAR-Ring30 reflect-client
+  peer MAR-Ring30 preferred-value 10
+  peer MAR-Ring30 route-update-interval 0
+  peer MAR-Ring31 enable
+  peer MAR-Ring31 route-policy Export-Ipv6-To-MAR-Ring31 export
+  peer MAR-Ring31 reflect-client
+  peer MAR-Ring31 preferred-value 10
+  peer MAR-Ring31 route-update-interval 0
+  peer MAR-Ring4 enable
+  peer MAR-Ring4 route-policy Export-Ipv6-To-MAR-Ring4 export
+  peer MAR-Ring4 reflect-client
+  peer MAR-Ring4 preferred-value 10
+[16D                [16D  peer MAR-Ring4 route-update-interval 0
+  peer MAR-Ring5 enable
+  peer MAR-Ring5 route-policy Export-Ipv6-To-MAR-Ring5 export
+  peer MAR-Ring5 reflect-client
+  peer MAR-Ring5 preferred-value 10
+  peer MAR-Ring5 route-update-interval 0
+  peer MAR-Ring6 enable
+  peer MAR-Ring6 route-policy Export-Ipv6-To-MAR-Ring6 export
+  peer MAR-Ring6 reflect-client
+  peer MAR-Ring6 preferred-value 10
+  peer MAR-Ring6 route-update-interval 0
+  peer MAR-Ring7 enable
+  peer MAR-Ring7 route-policy Export-Ipv6-To-MAR-Ring7 export
+  peer MAR-Ring7 reflect-client
+  peer MAR-Ring7 preferred-value 10
+  peer MAR-Ring7 route-update-interval 0
+  peer MAR-Ring8 enable
+  peer MAR-Ring8 route-policy Export-Ipv6-To-MAR-Ring8 export
+  peer MAR-Ring8 reflect-client
+  peer MAR-Ring8 preferred-value 10
+  peer MAR-Ring8 route-update-interval 0
+  peer MAR-Ring9 enable
+  peer MAR-Ring9 route-policy Export-Ipv6-To-MAR-Ring9 export
+[16D                [16D  peer MAR-Ring9 reflect-client
+  peer MAR-Ring9 preferred-value 10
+  peer MAR-Ring9 route-update-interval 0
+  peer RR-M enable
+  peer RR-M route-policy Import-Ipv6-From-RR import
+  peer RR-M route-policy Export-Ipv6-To-RR-Master export
+  peer RR-M next-hop-local
+  peer RR-M advertise-community
+  peer 11.147.0.7 enable
+  peer 11.147.0.7 group RR-M
+  peer RR-S enable
+  peer RR-S route-policy Import-Ipv6-From-RR import
+  peer RR-S route-policy Export-Ipv6-To-RR-Slave export
+  peer RR-S next-hop-local
+  peer RR-S advertise-community
+  peer 11.147.0.8 enable
+  peer 11.147.0.8 group RR-S
+ #
+ ipv6-family vpn-instance 5G_OAM
+  network :: 0 route-policy preferred-value
+ #
+ ipv6-family vpn-instance 5G_RAN
+  network :: 0 route-policy SET_DEF_ROUTE_v6
+[16D                [16D #
+ ipv6-family vpn-instance 5G_RAN_VIP
+  network :: 0 route-policy preferred-value
+ #
+ l2vpn-family evpn
+  reflector cluster-id 544819
+  reflect change-path-attribute
+  undo policy vpn-target
+  auto-frr
+  tunnel-selector nms-tunnel-policy
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  peer MAR-Ring1 enable
+  peer MAR-Ring1 reflect-client
+  peer MAR-Ring1 next-hop-local
+  peer MAR-Ring1 preferred-value 10
+  peer 11.151.10.1 enable
+  peer 11.151.10.1 group MAR-Ring1
+  peer 11.151.10.2 enable
+  peer 11.151.10.2 group MAR-Ring1
+  peer 11.151.10.3 enable
+  peer 11.151.10.3 group MAR-Ring1
+  peer MAR-Ring10 enable
+[16D                [16D  peer MAR-Ring10 reflect-client
+  peer MAR-Ring10 next-hop-local
+  peer MAR-Ring10 preferred-value 10
+  peer MAR-Ring11 enable
+  peer MAR-Ring11 reflect-client
+  peer MAR-Ring11 next-hop-local
+  peer MAR-Ring11 preferred-value 10
+  peer MAR-Ring12 enable
+  peer MAR-Ring12 reflect-client
+  peer MAR-Ring12 next-hop-local
+  peer MAR-Ring12 preferred-value 10
+  peer MAR-Ring13 enable
+  peer MAR-Ring13 reflect-client
+  peer MAR-Ring13 next-hop-local
+  peer MAR-Ring13 preferred-value 10
+  peer MAR-Ring14 enable
+  peer MAR-Ring14 reflect-client
+  peer MAR-Ring14 next-hop-local
+  peer MAR-Ring14 preferred-value 10
+  peer MAR-Ring15 enable
+  peer MAR-Ring15 reflect-client
+  peer MAR-Ring15 next-hop-local
+  peer MAR-Ring15 preferred-value 10
+[16D                [16D  peer MAR-Ring16 enable
+  peer MAR-Ring16 reflect-client
+  peer MAR-Ring16 next-hop-local
+  peer MAR-Ring16 preferred-value 10
+  peer MAR-Ring17 enable
+  peer MAR-Ring17 reflect-client
+  peer MAR-Ring17 next-hop-local
+  peer MAR-Ring17 preferred-value 10
+  peer MAR-Ring18 enable
+  peer MAR-Ring18 reflect-client
+  peer MAR-Ring18 next-hop-local
+  peer MAR-Ring18 preferred-value 10
+  peer MAR-Ring19 enable
+  peer MAR-Ring19 reflect-client
+  peer MAR-Ring19 next-hop-local
+  peer MAR-Ring19 preferred-value 10
+  peer MAR-Ring2 enable
+  peer MAR-Ring2 reflect-client
+  peer MAR-Ring2 next-hop-local
+  peer MAR-Ring2 preferred-value 10
+  peer 11.151.10.9 enable
+  peer 11.151.10.9 group MAR-Ring2
+  peer 11.151.10.11 enable
+[16D                [16D  peer 11.151.10.11 group MAR-Ring2
+  peer 11.151.10.12 enable
+  peer 11.151.10.12 group MAR-Ring2
+  peer MAR-Ring20 enable
+  peer MAR-Ring20 reflect-client
+  peer MAR-Ring20 next-hop-local
+  peer MAR-Ring20 preferred-value 10
+  peer MAR-Ring21 enable
+  peer MAR-Ring21 reflect-client
+  peer MAR-Ring21 next-hop-local
+  peer MAR-Ring21 preferred-value 10
+  peer MAR-Ring22 enable
+  peer MAR-Ring22 reflect-client
+  peer MAR-Ring22 next-hop-local
+  peer MAR-Ring22 preferred-value 10
+  peer MAR-Ring23 enable
+  peer MAR-Ring23 reflect-client
+  peer MAR-Ring23 next-hop-local
+  peer MAR-Ring23 preferred-value 10
+  peer MAR-Ring24 enable
+  peer MAR-Ring24 reflect-client
+  peer MAR-Ring24 next-hop-local
+  peer MAR-Ring24 preferred-value 10
+[16D                [16D  peer MAR-Ring25 enable
+  peer MAR-Ring25 reflect-client
+  peer MAR-Ring25 next-hop-local
+  peer MAR-Ring25 preferred-value 10
+  peer MAR-Ring26 enable
+  peer MAR-Ring26 reflect-client
+  peer MAR-Ring26 next-hop-local
+  peer MAR-Ring26 preferred-value 10
+  peer MAR-Ring27 enable
+  peer MAR-Ring27 reflect-client
+  peer MAR-Ring27 next-hop-local
+  peer MAR-Ring27 preferred-value 10
+  peer MAR-Ring28 enable
+  peer MAR-Ring28 reflect-client
+  peer MAR-Ring28 next-hop-local
+  peer MAR-Ring28 preferred-value 10
+  peer MAR-Ring29 enable
+  peer MAR-Ring29 reflect-client
+  peer MAR-Ring29 next-hop-local
+  peer MAR-Ring29 preferred-value 10
+  peer MAR-Ring3 enable
+  peer MAR-Ring3 reflect-client
+  peer MAR-Ring3 next-hop-local
+[16D                [16D  peer MAR-Ring3 preferred-value 10
+  peer MAR-Ring30 enable
+  peer MAR-Ring30 reflect-client
+  peer MAR-Ring30 next-hop-local
+  peer MAR-Ring30 preferred-value 10
+  peer MAR-Ring31 enable
+  peer MAR-Ring31 reflect-client
+  peer MAR-Ring31 next-hop-local
+  peer MAR-Ring31 preferred-value 10
+  peer MAR-Ring4 enable
+  peer MAR-Ring4 reflect-client
+  peer MAR-Ring4 next-hop-local
+  peer MAR-Ring4 preferred-value 10
+  peer MAR-Ring5 enable
+  peer MAR-Ring5 reflect-client
+  peer MAR-Ring5 next-hop-local
+  peer MAR-Ring5 preferred-value 10
+  peer MAR-Ring6 enable
+  peer MAR-Ring6 reflect-client
+  peer MAR-Ring6 next-hop-local
+  peer MAR-Ring6 preferred-value 10
+  peer MAR-Ring7 enable
+  peer MAR-Ring7 reflect-client
+[16D                [16D  peer MAR-Ring7 next-hop-local
+  peer MAR-Ring7 preferred-value 10
+  peer MAR-Ring8 enable
+  peer MAR-Ring8 reflect-client
+  peer MAR-Ring8 next-hop-local
+  peer MAR-Ring8 preferred-value 10
+  peer MAR-Ring9 enable
+  peer MAR-Ring9 reflect-client
+  peer MAR-Ring9 next-hop-local
+  peer MAR-Ring9 preferred-value 10
+  peer RR-M enable
+  peer RR-M route-policy Import-EVPN-From-RR import
+  peer RR-M route-policy Export-EVPN-To-RR-Master export
+  peer RR-M next-hop-local
+  peer RR-M advertise-community
+  peer 11.147.0.7 enable
+  peer 11.147.0.7 group RR-M
+  peer RR-S enable
+  peer RR-S route-policy Import-EVPN-From-RR import
+  peer RR-S route-policy Export-EVPN-To-RR-Slave export
+  peer RR-S next-hop-local
+  peer RR-S advertise-community
+  peer 11.147.0.8 enable
+[16D                [16D  peer 11.147.0.8 group RR-S
+#
+ospf 65534 vpn-instance __dcn_vpn__
+  description DCN ospf create by default
+ opaque-capability enable
+ hostname
+ vpn-instance-capability simple
+ area 0.0.0.0
+  network 0.0.0.0 255.255.255.255
+#
+!The DCN function implements the capability of plug-and-play for this device.
+!A NE IP address based on the unique NE ID is automatically generated in VPN
+!of DCN. It is recommended that the NE IP address be changed to the planned
+!one by running the ne-ip X.X.X.X <MASK> command after the device being online.
+dcn
+#
+route-policy Export-EVPN-To-RR-Master permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+ apply local-preference 50
+ apply community 65448:200 additive
+#
+route-policy Export-EVPN-To-RR-Slave permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+[16D                [16D apply local-preference 100
+ apply community 65448:200 additive
+#
+route-policy Export-Ipv4-To-MAR-Ring1 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring1 permit node 10
+ if-match extcommunity-filter MAR-Ring1
+#
+route-policy Export-Ipv4-To-MAR-Ring10 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring10 permit node 10
+ if-match extcommunity-filter MAR-Ring10
+#
+route-policy Export-Ipv4-To-MAR-Ring11 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring11 permit node 10
+ if-match extcommunity-filter MAR-Ring11
+#
+route-policy Export-Ipv4-To-MAR-Ring12 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+[16D                [16D#
+route-policy Export-Ipv4-To-MAR-Ring12 permit node 10
+ if-match extcommunity-filter MAR-Ring12
+#
+route-policy Export-Ipv4-To-MAR-Ring13 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring13 permit node 10
+ if-match extcommunity-filter MAR-Ring13
+#
+route-policy Export-Ipv4-To-MAR-Ring14 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring14 permit node 10
+ if-match extcommunity-filter MAR-Ring14
+#
+route-policy Export-Ipv4-To-MAR-Ring15 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring15 permit node 10
+ if-match extcommunity-filter MAR-Ring15
+#
+route-policy Export-Ipv4-To-MAR-Ring16 permit node 5
+[16D                [16D if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring16 permit node 10
+ if-match extcommunity-filter MAR-Ring16
+#
+route-policy Export-Ipv4-To-MAR-Ring17 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring17 permit node 10
+ if-match extcommunity-filter MAR-Ring17
+#
+route-policy Export-Ipv4-To-MAR-Ring18 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring18 permit node 10
+ if-match extcommunity-filter MAR-Ring18
+#
+route-policy Export-Ipv4-To-MAR-Ring19 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring19 permit node 10
+ if-match extcommunity-filter MAR-Ring19
+#
+[16D                [16Droute-policy Export-Ipv4-To-MAR-Ring2 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring2 permit node 10
+ if-match extcommunity-filter MAR-Ring2
+#
+route-policy Export-Ipv4-To-MAR-Ring20 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring20 permit node 10
+ if-match extcommunity-filter MAR-Ring20
+#
+route-policy Export-Ipv4-To-MAR-Ring21 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring21 permit node 10
+ if-match extcommunity-filter MAR-Ring21
+#
+route-policy Export-Ipv4-To-MAR-Ring22 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring22 permit node 10
+ if-match extcommunity-filter MAR-Ring22
+[16D                [16D#
+route-policy Export-Ipv4-To-MAR-Ring23 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring23 permit node 10
+ if-match extcommunity-filter MAR-Ring23
+#
+route-policy Export-Ipv4-To-MAR-Ring24 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring24 permit node 10
+ if-match extcommunity-filter MAR-Ring24
+#
+route-policy Export-Ipv4-To-MAR-Ring25 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring25 permit node 10
+ if-match extcommunity-filter MAR-Ring25
+#
+route-policy Export-Ipv4-To-MAR-Ring26 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring26 permit node 10
+[16D                [16D if-match extcommunity-filter MAR-Ring26
+#
+route-policy Export-Ipv4-To-MAR-Ring27 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring27 permit node 10
+ if-match extcommunity-filter MAR-Ring27
+#
+route-policy Export-Ipv4-To-MAR-Ring28 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring28 permit node 10
+ if-match extcommunity-filter MAR-Ring28
+#
+route-policy Export-Ipv4-To-MAR-Ring29 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring29 permit node 10
+ if-match extcommunity-filter MAR-Ring29
+#
+route-policy Export-Ipv4-To-MAR-Ring3 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+[16D                [16Droute-policy Export-Ipv4-To-MAR-Ring3 permit node 10
+ if-match extcommunity-filter MAR-Ring3
+#
+route-policy Export-Ipv4-To-MAR-Ring30 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring30 permit node 10
+ if-match extcommunity-filter MAR-Ring30
+#
+route-policy Export-Ipv4-To-MAR-Ring31 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring31 permit node 10
+ if-match extcommunity-filter MAR-Ring31
+#
+route-policy Export-Ipv4-To-MAR-Ring4 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring4 permit node 10
+ if-match extcommunity-filter MAR-Ring4
+#
+route-policy Export-Ipv4-To-MAR-Ring5 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+[16D                [16D#
+route-policy Export-Ipv4-To-MAR-Ring5 permit node 10
+ if-match extcommunity-filter MAR-Ring5
+#
+route-policy Export-Ipv4-To-MAR-Ring6 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring6 permit node 10
+ if-match extcommunity-filter MAR-Ring6
+#
+route-policy Export-Ipv4-To-MAR-Ring7 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring7 permit node 10
+ if-match extcommunity-filter MAR-Ring7
+#
+route-policy Export-Ipv4-To-MAR-Ring8 permit node 5
+ if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring8 permit node 10
+ if-match extcommunity-filter MAR-Ring8
+#
+route-policy Export-Ipv4-To-MAR-Ring9 permit node 5
+[16D                [16D if-match ip-prefix Ipv4-Default-To-MAR
+#
+route-policy Export-Ipv4-To-MAR-Ring9 permit node 10
+ if-match extcommunity-filter MAR-Ring9
+#
+route-policy Export-Ipv4-To-RR-Master permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+ apply local-preference 50
+ apply community 65448:200 additive
+#
+route-policy Export-Ipv4-To-RR-Slave permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+ apply local-preference 100
+ apply community 65448:200 additive
+#
+route-policy Export-Ipv6-To-MAR-Ring1 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring1 permit node 10
+ if-match extcommunity-filter MAR-Ring1
+#
+route-policy Export-Ipv6-To-MAR-Ring10 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+[16D                [16D#
+route-policy Export-Ipv6-To-MAR-Ring10 permit node 10
+ if-match extcommunity-filter MAR-Ring10
+#
+route-policy Export-Ipv6-To-MAR-Ring11 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring11 permit node 10
+ if-match extcommunity-filter MAR-Ring11
+#
+route-policy Export-Ipv6-To-MAR-Ring12 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring12 permit node 10
+ if-match extcommunity-filter MAR-Ring12
+#
+route-policy Export-Ipv6-To-MAR-Ring13 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring13 permit node 10
+ if-match extcommunity-filter MAR-Ring13
+#
+route-policy Export-Ipv6-To-MAR-Ring14 permit node 5
+[16D                [16D if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring14 permit node 10
+ if-match extcommunity-filter MAR-Ring14
+#
+route-policy Export-Ipv6-To-MAR-Ring15 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring15 permit node 10
+ if-match extcommunity-filter MAR-Ring15
+#
+route-policy Export-Ipv6-To-MAR-Ring16 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring16 permit node 10
+ if-match extcommunity-filter MAR-Ring16
+#
+route-policy Export-Ipv6-To-MAR-Ring17 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring17 permit node 10
+ if-match extcommunity-filter MAR-Ring17
+#
+[16D                [16Droute-policy Export-Ipv6-To-MAR-Ring18 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring18 permit node 10
+ if-match extcommunity-filter MAR-Ring18
+#
+route-policy Export-Ipv6-To-MAR-Ring19 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring19 permit node 10
+ if-match extcommunity-filter MAR-Ring19
+#
+route-policy Export-Ipv6-To-MAR-Ring2 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring2 permit node 10
+ if-match extcommunity-filter MAR-Ring2
+#
+route-policy Export-Ipv6-To-MAR-Ring20 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring20 permit node 10
+ if-match extcommunity-filter MAR-Ring20
+[16D                [16D#
+route-policy Export-Ipv6-To-MAR-Ring21 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring21 permit node 10
+ if-match extcommunity-filter MAR-Ring21
+#
+route-policy Export-Ipv6-To-MAR-Ring22 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring22 permit node 10
+ if-match extcommunity-filter MAR-Ring22
+#
+route-policy Export-Ipv6-To-MAR-Ring23 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring23 permit node 10
+ if-match extcommunity-filter MAR-Ring23
+#
+route-policy Export-Ipv6-To-MAR-Ring24 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring24 permit node 10
+[16D                [16D if-match extcommunity-filter MAR-Ring24
+#
+route-policy Export-Ipv6-To-MAR-Ring25 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring25 permit node 10
+ if-match extcommunity-filter MAR-Ring25
+#
+route-policy Export-Ipv6-To-MAR-Ring26 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring26 permit node 10
+ if-match extcommunity-filter MAR-Ring26
+#
+route-policy Export-Ipv6-To-MAR-Ring27 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring27 permit node 10
+ if-match extcommunity-filter MAR-Ring27
+#
+route-policy Export-Ipv6-To-MAR-Ring28 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+[16D                [16Droute-policy Export-Ipv6-To-MAR-Ring28 permit node 10
+ if-match extcommunity-filter MAR-Ring28
+#
+route-policy Export-Ipv6-To-MAR-Ring29 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring29 permit node 10
+ if-match extcommunity-filter MAR-Ring29
+#
+route-policy Export-Ipv6-To-MAR-Ring3 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring3 permit node 10
+ if-match extcommunity-filter MAR-Ring3
+#
+route-policy Export-Ipv6-To-MAR-Ring30 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring30 permit node 10
+ if-match extcommunity-filter MAR-Ring30
+#
+route-policy Export-Ipv6-To-MAR-Ring31 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+[16D                [16D#
+route-policy Export-Ipv6-To-MAR-Ring31 permit node 10
+ if-match extcommunity-filter MAR-Ring31
+#
+route-policy Export-Ipv6-To-MAR-Ring4 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring4 permit node 10
+ if-match extcommunity-filter MAR-Ring4
+#
+route-policy Export-Ipv6-To-MAR-Ring5 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring5 permit node 10
+ if-match extcommunity-filter MAR-Ring5
+#
+route-policy Export-Ipv6-To-MAR-Ring6 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring6 permit node 10
+ if-match extcommunity-filter MAR-Ring6
+#
+route-policy Export-Ipv6-To-MAR-Ring7 permit node 5
+[16D                [16D if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring7 permit node 10
+ if-match extcommunity-filter MAR-Ring7
+#
+route-policy Export-Ipv6-To-MAR-Ring8 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring8 permit node 10
+ if-match extcommunity-filter MAR-Ring8
+#
+route-policy Export-Ipv6-To-MAR-Ring9 permit node 5
+ if-match ipv6 address prefix-list Ipv6-Default-To-MAR
+#
+route-policy Export-Ipv6-To-MAR-Ring9 permit node 10
+ if-match extcommunity-filter MAR-Ring9
+#
+route-policy Export-Ipv6-To-RR-Master permit node 10
+ if-match ipv6 address prefix-list No-Ipv6-Default-To-RR
+ apply local-preference 50
+ apply community 65448:200 additive
+#
+route-policy Export-Ipv6-To-RR-Slave permit node 10
+[16D                [16D if-match ipv6 address prefix-list No-Ipv6-Default-To-RR
+ apply local-preference 100
+ apply community 65448:200 additive
+#
+route-policy Export-LabelRoute-To-RR-Master permit node 10
+ if-match ip-prefix LoopBack-Label
+ apply local-preference 50
+ apply community 65448:200
+ apply mpls-label
+#
+route-policy Export-LabelRoute-To-RR-Slave permit node 10
+ if-match ip-prefix LoopBack-Label
+ apply local-preference 100
+ apply community 65448:200
+ apply mpls-label
+#
+route-policy Import-EVPN-From-RR permit node 10
+ if-match community-filter From-MCR-M
+ apply local-preference 50
+#
+route-policy Import-EVPN-From-RR permit node 20
+ if-match community-filter From-MCR-S
+ apply local-preference 100
+[16D                [16D#
+route-policy Import-EVPN-From-RR permit node 30
+#
+route-policy Import-Ipv4-From-RR permit node 10
+ if-match community-filter From-MCR-M
+ apply local-preference 50
+#
+route-policy Import-Ipv4-From-RR permit node 20
+ if-match community-filter From-MCR-S
+ apply local-preference 100
+#
+route-policy Import-Ipv4-From-RR permit node 30
+#
+route-policy Import-Ipv6-From-RR permit node 10
+ if-match community-filter From-MCR-M
+ apply local-preference 50
+#
+route-policy Import-Ipv6-From-RR permit node 20
+ if-match community-filter From-MCR-S
+ apply local-preference 100
+#
+route-policy Import-Ipv6-From-RR permit node 30
+#
+[16D                [16Droute-policy Import-LabelRoute-From-RR permit node 10
+ if-match community-filter From-MCR-M
+ apply local-preference 50
+#
+route-policy Import-LabelRoute-From-RR permit node 20
+ if-match community-filter From-MCR-S
+ apply local-preference 100
+#
+route-policy Import-LabelRoute-From-RR permit node 30
+#
+route-policy SET_DEF_ROUTE_v6 permit node 10
+ apply community 64500:1000 additive
+ apply preferred-value 32768
+#
+route-policy import-MAR-ip permit node 5
+ if-match ip-prefix import-MAR-ip
+#
+route-policy import-MER&NCE-ip permit node 5
+ if-match ip-prefix import-MER-ip
+#
+route-policy import-MER&NCE-ip permit node 10
+ if-match ip-prefix import-NMS-ip
+#
+[16D                [16Droute-policy preferred-value permit node 10
+ apply preferred-value 32768
+#
+nqa twamp-light
+ client
+   test-session 1 sender-ip 151.10.0.11 reflector-ip 151.10.0.9 sender-port 10001 reflector-port 10000 description Eth-Rpsli0
+   test-session 2 sender-ip 151.10.0.2 reflector-ip 151.10.0.1 sender-port 10001 reflector-port 10000 description Eth-Rpsli1
+   test-session 3 sender-ip 151.10.1.19 reflector-ip 151.10.1.18 sender-port 10001 reflector-port 10000 description GigaygrCrfcplcr0/1/0
+   test-session 4 sender-ip 151.10.2.19 reflector-ip 151.10.2.18 sender-port 10001 reflector-port 10000 description GigaygrCrfcplcr0/1/1
+ sender
+  test start-continual test-session 1 period 1000
+  test start-continual test-session 2 period 1000
+  test start-continual test-session 3 period 1000
+  test start-continual test-session 4 period 1000
+ responder
+  test-session 1 local-ip 151.10.0.11 remote-ip 151.10.0.9 local-port 10000 remote-port 10001
+  test-session 2 local-ip 151.10.0.2 remote-ip 151.10.0.1 local-port 10000 remote-port 10001
+  test-session 3 local-ip 151.10.1.19 remote-ip 151.10.1.18 local-port 10000 remote-port 10001
+  test-session 4 local-ip 151.10.2.19 remote-ip 151.10.2.18 local-port 10000 remote-port 10001
+#
+ip ip-prefix Ipv4-Default-To-MAR index 10 permit 0.0.0.0 0
+ip ip-prefix LoopBack-Label index 10 permit 11.151.10.265 32
+ip ip-prefix No-Ipv4-Default-To-RR index 10 deny 0.0.0.0 0
+[16D                [16Dip ip-prefix No-Ipv4-Default-To-RR index 20 permit 0.0.0.0 0 less-equal 32
+ip ip-prefix import-MAR-ip index 10 permit 11.151.0.0 16 greater-equal 32 less-equal 32
+ip ip-prefix import-MER-ip index 10 permit 11.151.10.265 32
+ip ip-prefix import-MER-ip index 11 permit 11.147.36.265 31 greater-equal 32 less-equal 32
+ip ip-prefix import-MER-ip index 12 permit 11.147.37.265 31 greater-equal 32 less-equal 32
+ip ip-prefix import-MER-ip index 13 permit 11.147.30.265 31 greater-equal 32 less-equal 32
+ip ip-prefix import-MER-ip index 14 permit 11.147.4.265 31 greater-equal 32 less-equal 32
+ip ip-prefix import-MER-ip index 15 permit 11.147.5.265 31 greater-equal 32 less-equal 32
+ip ip-prefix import-NMS-ip index 10 permit 11.151.0.251 28
+ip ip-prefix import-NMS-ip index 11 permit 11.165.45.0 24 greater-equal 24 less-equal 32
+ip ip-prefix import-NMS-ip index 12 permit 103.179.265.0 24 greater-equal 24 less-equal 32
+ip ip-prefix import-NMS-ip index 13 permit 11.147.0.251 28 greater-equal 28 less-equal 32
+ip ip-prefix import-NMS-ip index 14 permit 11.251.33.155 29
+ip ip-prefix import-NMS-ip index 15 permit 11.251.34.17 29
+ip community-filter basic From-MCR-M index 10 permit 65448:100
+ip community-filter basic From-MCR-S index 10 permit 65448:200
+ip extcommunity-filter basic MAR-Ring1 index 10 permit rt 65448:1037001
+ip extcommunity-filter basic MAR-Ring10 index 10 permit rt 65448:1037010
+ip extcommunity-filter basic MAR-Ring11 index 10 permit rt 65448:1037011
+ip extcommunity-filter basic MAR-Ring12 index 10 permit rt 65448:1037012
+ip extcommunity-filter basic MAR-Ring13 index 10 permit rt 65448:1037013
+ip extcommunity-filter basic MAR-Ring14 index 10 permit rt 65448:1037014
+ip extcommunity-filter basic MAR-Ring15 index 10 permit rt 65448:1037015
+[16D                [16Dip extcommunity-filter basic MAR-Ring16 index 10 permit rt 65448:1037016
+ip extcommunity-filter basic MAR-Ring17 index 10 permit rt 65448:1037017
+ip extcommunity-filter basic MAR-Ring18 index 10 permit rt 65448:1037018
+ip extcommunity-filter basic MAR-Ring19 index 10 permit rt 65448:1037019
+ip extcommunity-filter basic MAR-Ring2 index 10 permit rt 65448:1037002
+ip extcommunity-filter basic MAR-Ring20 index 10 permit rt 65448:1037020
+ip extcommunity-filter basic MAR-Ring21 index 10 permit rt 65448:1037021
+ip extcommunity-filter basic MAR-Ring22 index 10 permit rt 65448:1037022
+ip extcommunity-filter basic MAR-Ring23 index 10 permit rt 65448:1037023
+ip extcommunity-filter basic MAR-Ring24 index 10 permit rt 65448:1037024
+ip extcommunity-filter basic MAR-Ring25 index 10 permit rt 65448:1037025
+ip extcommunity-filter basic MAR-Ring26 index 10 permit rt 65448:1037026
+ip extcommunity-filter basic MAR-Ring27 index 10 permit rt 65448:1037027
+ip extcommunity-filter basic MAR-Ring28 index 10 permit rt 65448:1037028
+ip extcommunity-filter basic MAR-Ring29 index 10 permit rt 65448:1037029
+ip extcommunity-filter basic MAR-Ring3 index 10 permit rt 65448:1037003
+ip extcommunity-filter basic MAR-Ring30 index 10 permit rt 65448:1037030
+ip extcommunity-filter basic MAR-Ring31 index 10 permit rt 65448:1037031
+ip extcommunity-filter basic MAR-Ring4 index 10 permit rt 65448:1037004
+ip extcommunity-filter basic MAR-Ring5 index 10 permit rt 65448:1037005
+ip extcommunity-filter basic MAR-Ring6 index 10 permit rt 65448:1037006
+ip extcommunity-filter basic MAR-Ring7 index 10 permit rt 65448:1037007
+ip extcommunity-filter basic MAR-Ring8 index 10 permit rt 65448:1037008
+[16D                [16Dip extcommunity-filter basic MAR-Ring9 index 10 permit rt 65448:1037009
+#
+ ip route-static vpn-instance LTE-VPN 0.0.0.0 0.0.0.0 11.147.0.22 description TO-RQE-JmmnYxzi20001
+ ip route-static vpn-instance LTE-OAM-VPN 0.0.0.0 0.0.0.0 11.147.0.23 description TO-RQE-JmmnYxzi20002
+ ip route-static vpn-instance WCDMAVPN 0.0.0.0 0.0.0.0 11.147.0.9 description TO-RQE-JmmnYxzi10000
+ ip route-static vpn-instance CQUNICOM_POWER 0.0.0.0 0.0.0.0 11.147.0.19 description TO RSG-LOOPBACK
+ ip route-static vpn-instance MANAGERMENT_M 0.0.0.0 0.0.0.0 11.147.0.32 description TO RSG-LOOPBACK
+ ip route-static vpn-instance CQUNICOM_APN 0.0.0.0 0.0.0.0 11.147.0.10 description TO RSG-LOOPBACK
+ ip route-static vpn-instance 3G_RAN 0.0.0.0 0.0.0.0 11.151.266.9 description For_BcdxsjrPmsrcRmKXP
+ ip route-static vpn-instance 4G_RAN 0.0.0.0 0.0.0.0 11.151.266.22 description For_BcdxsjrPmsrcRmKXP
+ ip route-static vpn-instance 4G_OAM 0.0.0.0 0.0.0.0 11.151.266.23 description For_BcdxsjrPmsrcRmKXP
+#
+ ipv6 route-static vpn-instance 5G_OAM :: 0 4315::FD1:445A description For_BcdxsjrPmsrcRmKXP
+ipv6 route-static vpn-instance 5G_RAN :: 0 4315::FD1:4456
+ ipv6 route-static vpn-instance 5G_RAN_VIP :: 0 4315::FD1:4459 description For_BcdxsjrPmsrcRmKXP
+#
+ip ipv6-prefix Ipv6-Default-To-MAR index 10 permit :: 0
+ip ipv6-prefix No-Ipv6-Default-To-RR index 10 deny :: 0
+ip ipv6-prefix No-Ipv6-Default-To-RR index 20 permit :: 0 less-equal 128
+#
+snmp-agent
+snmp-agent local-engineid 800007DB03F03F95F41111
+ snmp-agent community read cipher c772e080e8c6c55560f70f0fa6fbd1ae mib-view iso-view acl 2000
+ [16D                [16Dsnmp-agent community write cipher fbe12c4206f4b5768db85f7212702f40 mib-view iso-view acl 2000
+#
+snmp-agent sys-info version v2c v3
+ snmp-agent target-host host-name __targetHost_1_13273 trap address udp-domain 11.151.0.256 params securityname cipher d8d889c55b98c98256044180e5c82dfd v2c private-netmanager ext-vb
+ snmp-agent target-host host-name __targetHost_2_36433 trap address udp-domain 103.179.265.30 params securityname cipher e62d8f11b10319b8a58c87feff7a921b v2c private-netmanager ext-vb
+#
+snmp-agent mib-view included iso-view iso
+#
+snmp-agent trap source LoopBack0
+#
+snmp-agent protocol source-status all-interface
+undo snmp-agent protocol source-status ipv6 all-interface
+#
+undo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+snmp-agent trap enable
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfTxRetransmit
+undo snmp-agent trap enable feature-name ospf trap-name ospfOriginateLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfMaxAgeLsa
+[16D                [16Dundo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfTxRetransmit
+undo snmp-agent trap enable feature-name isis trap-name isisIDLenMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationTypeFailure
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationFailure
+undo snmp-agent trap enable feature-name isis trap-name isisVersionSkew
+undo snmp-agent trap enable feature-name isis trap-name isisAreaMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisRejectedAdjacency
+undo snmp-agent trap enable feature-name isis trap-name isisOrigLSPBuffSizeMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisProtocolsSupportedMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisMaxAreaAddressesMismatch
+#
+lldp enable
+#
+web-auth-server version v2 v1
+#
+undo web-auth-server source-ip all
+#
+undo web-auth-server source-ipv6 all
+#
+stelnet server enable
+[16D                [16Dsnetconf server enable
+ssh user cqlt
+ssh user cqlt authentication-type password
+ssh user cqlt service-type snetconf stelnet
+ssh user root
+ssh user root authentication-type password
+ssh user root service-type snetconf stelnet
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#
+ ssh server cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa
+#
+ssh server dh-exchange min-len 2048
+#
+ssh client first-time enable
+ssh client peer 11.151.0.256 assign rsa-key 11.151.0.256
+ssh client peer 11.151.0.256 assign ecc-key 11.151.0.256
+ssh client peer 139.125.244.221 assign ecc-key 139.125.244.221
+[16D                [16Dssh client peer 139.125.240.135 assign ecc-key 139.125.240.135
+ssh client peer 139.125.240.231 assign ecc-key 139.125.240.231
+ssh client peer 139.197.184.231 assign ecc-key 139.197.184.231
+ssh client peer 139.106.138.63 assign ecc-key 139.106.138.63
+ssh client peer 139.215.179.10 assign ecc-key 139.215.179.10
+#
+ssh client publickey ecc rsa
+#
+ ssh client cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+tunnel-policy NMS-Tunnel-Policy
+ tunnel select-seq cr-lsp lsp load-balance-number 1
+#
+tunnel-policy nms-tunnel-policy
+ tunnel select-seq sr-te te sr-lsp ldp load-balance-number 1
+#
+user-interface maximum-vty 21
+#
+user-interface con 0
+ authentication-mode password
+  set authentication password cipher c1560972e9630de12963803f725e26fe
+[16D                [16D#
+user-interface vty 0 5
+ authentication-mode aaa
+ user privilege level 3
+#
+netconf
+ activate module huawei-ip
+#
+local-aaa-server
+#
+pm
+ statistics enable
+ pm-server PMS_101400245
+  protocol sftp ip-address 11.151.0.256
+  username ftpuser password %^%#vD>O~:^M_Rq7aa-C0)t'@!A#V(RS}.-$zF-X7Zq:%^%#
+  path ftproot/Bulk_Stat/VRP/167772183
+ upload-config PMS_101400245 server PMS_101400245
+ statistics-task n1544445_g15_i1005_t0
+  record-interval 1
+  binding instance-type interface instance GigabitEthernet0/1/0
+  binding instance-type interface instance GigabitEthernet0/1/1
+#
+telemetry
+[16D                [16D #
+ sensor-group Group1
+  sensor-path huawei-debug:debug/cpu-infos/cpu-info
+  sensor-path huawei-debug:debug/memory-infos/memory-info
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity[class="chassis"]
+  sensor-path huawei-ifm:ifm/interfaces/interface
+  sensor-path huawei-ifm:ifm/interfaces/interface/mib-statistics
+  sensor-path huawei-twamp-controller:twamp-controller/client/sessions/session
+  sensor-path huawei-twamp-controller:twamp-controller/client/sessions/session/huawei-twamp-statistics:statistics
+ #
+ destination-group JiTuanWangGuan
+  ipv4-address 103.179.265.49 port 8895 protocol grpc no-tls
+ #
+ subscription JiTuanWangGuan
+  local-source-address ipv4 11.151.10.265
+  sensor-group Group1 sample-interval 10000
+  destination-group JiTuanWangGuan
+#
+evpn srv6 next-header-field 59 
+#
+l2tp-group default-lac
+ tunnel name HUAWEI
+[16D                [16D#
+l2tp-group default-lns
+ tunnel name HUAWEI
+#
+return

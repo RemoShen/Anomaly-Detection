@@ -1,0 +1,2358 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 3606
+
+#
+
+ clock protocol ntp mdc 1
+
+#
+
+mdc Admin id 1
+
+#
+
+  sysname IVDB-KIKG-18G-T12508S-TN-D002
+
+#
+
+ip vpn-instance 5G_RAN
+
+ route-distinguisher 65400:10010
+
+ tnl-policy ZNCYW
+
+ vpn-target 65400:10010 import-extcommunity
+
+ vpn-target 65400:10010 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65400:10010
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65400:10010
+
+  apply-label per-instance
+
+
+
+               
+#
+
+ip vpn-instance SmartMAN_AUTO_ONLINE
+
+ route-distinguisher 65400:10080
+
+ tnl-policy 100
+
+ vpn-target 65400:10080 import-extcommunity
+
+ vpn-target 65400:10080 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65400:10080
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65400:10080
+
+#
+
+ telnet server enable
+
+#
+
+bfd template 10
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+bfd template 50
+
+
+
+               
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+ bfd multi-hop min-transmit-interval 10
+
+ bfd multi-hop min-receive-interval 10
+
+ bfd multi-hop min-echo-receive-interval 10
+
+ bfd multi-hop detect-multiplier 3
+
+ undo bfd ip-router-alert
+
+#
+
+ router id 13.156.94.1
+
+#
+
+isis 1000
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 
+
+  is-name IVDB-KIKG-18G-T12508S-TN-D001
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.5400.1000.0101.2309.1001.00
+
+
+
+               
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable
+
+#
+
+ mpls lsr-id 13.156.94.1
+
+ mpls label advertise non-null
+
+#
+
+ ip load-sharing mode per-flow algorithm 5 global
+
+#
+
+ active port basic-license slot 2 subslot 0 phy-port 7 to 12
+
+ active port basic-license slot 2 subslot 0 phy-port 19 to 24
+
+ active port basic-license slot 2 subslot 0 phy-port 31 to 36
+
+ active port basic-license slot 3 subslot 0 phy-port 7 to 12
+
+ active port basic-license slot 3 subslot 0 phy-port 19 to 24
+
+ active port basic-license slot 3 subslot 0 phy-port 31 to 36
+
+ active port basic-license slot 4 subslot 0 phy-port 1 to 48
+
+#
+
+ system-working-mode bridgee
+
+ undo version auto-update enable
+
+
+
+               
+ version check ignore
+
+ hardware-resource tcam mix
+
+ password-recovery enable
+
+#
+
+vlan 1
+
+#
+
+qos map-table dot1p-lp
+
+ import 0 export 0
+
+ import 1 export 1
+
+ import 2 export 2
+
+#
+
+qos wred queue table 100GE
+
+ queue 0 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+
+
+               
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 2000 high-limit 2001 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+qos wred queue table 10GE
+
+
+
+               
+ queue 0 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+
+
+               
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 1000 high-limit 1001 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+mpls te
+
+#
+
+tunnel-policy 100
+
+ select-seq sr-lsp load-balance-number 32
+
+#
+
+tunnel-policy ZNCYW
+
+ select-seq sr-lsp load-balance-number 32
+
+#
+
+interface Route-Aggregation1
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation1.2008
+
+  description to_HVZZ-EY-DY600-Usvol-5H_SBO
+
+
+
+               
+ mtu 9000
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 2008
+
+ ipv6 address 7953:6DB:D5C5:655::7/126
+
+ ipv6 address auto link-local
+
+#
+
+interface Route-Aggregation6
+
+  description to_HVDB-KIKG-JQSBO-5H_SBO
+
+ link-aggregation mode dynamic
+
+#
+
+interface Route-Aggregation6.3006
+
+  description to_HVDB-KIKG-JQSBO-5H_SBO_30H
+
+ mtu 9000
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 3006
+
+ ipv6 address 795D:D697:9545:A456::B/127
+
+ ipv6 address auto link-local
+
+#
+
+interface Route-Aggregation10
+
+  description to_HVDB-KIKG-BS1-Usvol-5H_SBO
+
+ link-aggregation mode dynamic
+
+
+
+               
+#
+
+interface Route-Aggregation10.843
+
+  description to_HVDB-XMKG.BS1-Usvol-5H_SBO
+
+ mtu 9000
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ vlan-type dot1q vid 843
+
+ ipv6 address 795D:D697:9545:A456::E/127
+
+ ipv6 address auto link-local
+
+#
+
+interface Route-Aggregation10.875
+
+  description TO-IQ-C-XBOHHBOH
+
+ ip address 13.156.97.11 255.255.255.252
+
+ vlan-type dot1q vid 875
+
+#
+
+interface Route-Aggregation20
+
+  description to_A_BS2_20H
+
+ link-aggregation mode dynamic
+
+ link-aggregation selected-port maximum 1
+
+#
+
+interface Route-Aggregation20.10
+
+  description TO-IQ-B-TEO
+
+ mtu 9000
+
+
+
+               
+ ip address 13.156.97.31 255.255.255.252
+
+ vlan-type dot1q vid 10
+
+#
+
+interface Route-Aggregation20.11
+
+  description to_
+
+ mtu 9000
+
+ ip binding vpn-instance SmartMAN_AUTO_ONLINE
+
+ ip address 13.156.97.33 255.255.255.252
+
+ vlan-type dot1q vid 11
+
+#
+
+interface Route-Aggregation100
+
+  description to_HVDB-XMKG-4G-T12508S-TN-D002_SBH100_100H
+
+ mtu 9000
+
+ ip address 13.156.95.1 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-level level-2
+
+ isis circuit-type p2p
+
+ isis cost 50
+
+ isis small-hello
+
+ link-aggregation mode dynamic
+
+ mpls enable
+
+ ipv6 mtu 9000
+
+#
+
+
+
+               
+interface NULL0
+
+#
+
+interface LoopBack0
+
+  description For-Hmpcbm-Nbobhfnfou
+
+ ip address 13.156.94.1 255.255.255.255
+
+ isis enable 1000
+
+ isis prefix-sid index 1 no-php
+
+#
+
+interface FortyGigE2/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/4
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE2/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/16
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE2/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/28
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE2/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/1
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/2
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/3
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface FortyGigE3/0/4
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/13
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/15
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface FortyGigE3/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/27
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface FortyGigE3/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface FortyGigE3/0/30
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/7
+
+ port link-mode route
+
+  description to_HVDB-XMKG-4G-T12508S-TN-D002_I2/0/7_100H
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+
+
+               
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ port link-aggregation group 100
+
+#
+
+interface HundredGigE2/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface HundredGigE2/0/11
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/22
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface HundredGigE2/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/34
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE2/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE2/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/7
+
+ port link-mode route
+
+  description to_HVDB-EY-DY600-Usvol-5H_SBO_100H
+
+ mtu 9000
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+
+
+               
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ port link-aggregation group 1
+
+#
+
+interface HundredGigE3/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/9
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/10
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/11
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface HundredGigE3/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/23
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface HundredGigE3/0/24
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/35
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface HundredGigE3/0/36
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface M-GigabitEthernet0/0/0
+
+#
+
+interface M-GigabitEthernet0/0/1
+
+#
+
+interface M-GigabitEthernet0/0/2
+
+#
+
+interface M-GigabitEthernet0/0/3
+
+#
+
+interface Ten-GigabitEthernet4/0/1
+
+ port link-mode route
+
+  description to_HVDB-KIKG-BS1-Usvol-8/1/0
+
+ link-delay down msec 150
+
+ link-delay up 3
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+
+
+               
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 10
+
+#
+
+interface Ten-GigabitEthernet4/0/2
+
+ port link-mode route
+
+  description to_A_BS2_H3/0/0
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+
+
+               
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 20
+
+#
+
+interface Ten-GigabitEthernet4/0/3
+
+ port link-mode route
+
+  description to_A_BS2_H4/0/0
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+
+
+               
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 20
+
+#
+
+interface Ten-GigabitEthernet4/0/4
+
+ port link-mode route
+
+#
+
+interface Ten-GigabitEthernet4/0/5
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/6
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/7
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet4/0/8
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/9
+
+ port link-mode route
+
+  description to_HVDB-KIKG-JQSBO-5H_SBO_3/0/2
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 6
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/10
+
+ port link-mode route
+
+  description to_HVDB-KIKG-JQSBO-5H_SBO_8/0/0
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 6
+
+#
+
+interface Ten-GigabitEthernet4/0/11
+
+ port link-mode route
+
+
+
+               
+  description to_HVDB-KIKG-JQSBO-5H_SBO_8/0/1
+
+ qos trust dscp
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+ port link-aggregation group 6
+
+#
+
+interface Ten-GigabitEthernet4/0/12
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/13
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/14
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/15
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/16
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/17
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/18
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet4/0/19
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/20
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/21
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/22
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/23
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/24
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/25
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/26
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/27
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/28
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/29
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/30
+
+ port link-mode route
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/31
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/32
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/33
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/34
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/35
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/36
+
+
+
+               
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/37
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/38
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/39
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/40
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/41
+
+ port link-mode route
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet4/0/42
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/43
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/44
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/45
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/46
+
+ port link-mode route
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet4/0/47
+
+ port link-mode route
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet4/0/48
+
+ port link-mode route
+
+ shutdown
+
+#
+
+bgp 65400
+
+ non-stop-routing
+
+ router-id 13.156.94.1
+
+ timer keepalive 30 hold 90
+
+ peer 13.156.94.2 as-number 65400
+
+  peer 13.156.94.2 description to_HVDB-XMKG-4G-T12508S-TN-D002
+
+ peer 13.156.94.2 connect-interface LoopBack0
+
+ peer 13.156.97.10 as-number 38351
+
+ peer 13.156.97.30 as-number 9929
+
+ #
+
+ address-family ipv4 unicast
+
+  pic
+
+  network 13.156.94.0 255.255.255.0
+
+  peer 13.156.94.2 enable
+
+  peer 13.156.97.10 enable
+
+  peer 13.156.97.30 enable
+
+ #
+
+ address-family vpnv4
+
+
+
+               
+  undo policy vpn-target
+
+  pic
+
+  peer 13.156.94.2 enable
+
+ #
+
+ address-family vpnv6
+
+  undo policy vpn-target
+
+  pic
+
+  peer 13.156.94.2 enable
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  peer 795D:D697:9545:A456::C as-number 65400.200
+
+   peer 795D:D697:9545:A456::C description to_HVDB-XMKG-JQSBO-5H_SBO
+
+  peer 795D:D697:9545:A456::C fake-as 65400.100
+
+  peer 795D:D697:9545:A456::D as-number 38351
+
+   peer 795D:D697:9545:A456::D description to_HVDB-KIKG-BS1-Usvol-5H_SBO  
+
+  peer 7953:6DB:D5C5:655::6 as-number 65111
+
+   peer 7953:6DB:D5C5:655::6 description to_HVZZ-EY-DY600
+
+   peer 7953:6DB:D5C5:655::6 password cipher 09cae43d497cd93d7042054372117fbc
+
+  #
+
+  address-family ipv6 unicast
+
+   import-route direct
+
+   peer 795D:D697:9545:A456::C enable
+
+   peer 795D:D697:9545:A456::C route-policy 5G_RAN_v6_ipran_in import
+
+
+
+               
+   peer 795D:D697:9545:A456::C route-policy 5G_RAN_v6_ipran_out export
+
+   peer 795D:D697:9545:A456::D enable
+
+   peer 795D:D697:9545:A456::D route-policy 5G_RAN_v6_AR_in import
+
+   peer 795D:D697:9545:A456::D route-policy 5G_RAN_v6_AR_out export
+
+   peer 7953:6DB:D5C5:655::6 enable
+
+   peer 7953:6DB:D5C5:655::6 route-policy 5G_RAN_v6_CT-ER_in import
+
+   peer 7953:6DB:D5C5:655::6 route-policy 5G_RAN_v6_CT-ER_out export
+
+ #
+
+ ip vpn-instance SmartMAN_AUTO_ONLINE
+
+  peer 13.156.97.22 as-number 9929
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   peer 13.156.97.22 enable
+
+#
+
+route-policy 5G_RAN_v6_AR_in permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN_v6_AR_in
+
+#
+
+route-policy 5G_RAN_v6_AR_out permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN_v6_AR_out
+
+#
+
+route-policy 5G_RAN_v6_CT-ER_in permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN_v6_CT-ER_in
+
+
+
+               
+#
+
+route-policy 5G_RAN_v6_CT-ER_out permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN_v6_CT-ER_out
+
+#
+
+route-policy 5G_RAN_v6_ipran_in permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN_v6_ipran_in
+
+#
+
+route-policy 5G_RAN_v6_ipran_out permit node 10
+
+ if-match ipv6 address prefix-list 5G_RAN_v6_ipran_out
+
+#
+
+ ipv6 prefix-list 5G_RAN_v6_AR_in index 10 permit 795D:D697:B544:4455:: 56
+
+ ipv6 prefix-list 5G_RAN_v6_AR_in index 20 permit 795D:D697:9545:455:: 56
+
+ ipv6 prefix-list 5G_RAN_v6_AR_out index 10 permit 795D:D6B7:9A55:65:: 64
+
+ ipv6 prefix-list 5G_RAN_v6_CT-ER_in index 10 permit 795D:D6B7:9A55:65:: 64
+
+ ipv6 prefix-list 5G_RAN_v6_CT-ER_out index 10 permit 795D:D697:B544:4455:: 56
+
+ ipv6 prefix-list 5G_RAN_v6_CT-ER_out index 20 permit 795D:D697:9545:455:: 56
+
+ ipv6 prefix-list 5G_RAN_v6_ipran_in index 10 permit 795D:D697:9545:455:: 56
+
+ ipv6 prefix-list 5G_RAN_v6_ipran_out index 10 permit 795D:D6B7:9A55:65:: 64
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class aux
+
+ user-role network-admin
+
+
+
+               
+#
+
+line class vty
+
+ user-role network-operator
+
+#
+
+line aux 0 1
+
+ user-role network-admin
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+ user-role network-operator
+
+#
+
+ ip route-static 13.156.94.0 24 NULL0
+
+#
+
+ snmp-agent
+
+ snmp-agent local-engineid 800063A28078AA82C7D00100000001
+
+ snmp-agent community read Hnunicom001
+
+ snmp-agent community write Hnunicom@2020
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 121.191.287.32 udp-port 166 params securityname un1c0m_private v2c
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable mpls 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+
+
+               
+ snmp-agent trap enable te 
+
+ snmp-agent trap source LoopBack0
+
+#
+
+ ssh server enable
+
+ ssh server acl 2003
+
+#
+
+acl basic 2003
+
+ rule 0 permit source 125.191.287.0 0.0.0.255
+
+ rule 5 permit source 13.150.119.0 0.0.0.255
+
+ rule 10 permit source 13.273.35.151 0.0.0.7
+
+ rule 500 deny
+
+#
+
+acl advanced name anti-virus
+
+ rule 2 deny tcp destination-port eq 135
+
+ rule 3 deny udp source-port eq 135
+
+ rule 4 deny udp destination-port eq 135
+
+ rule 5 deny tcp source-port eq 593
+
+ rule 6 deny tcp destination-port eq 593
+
+ rule 7 deny udp source-port eq 593
+
+ rule 8 deny udp destination-port eq 593
+
+#
+
+ password-control length 8
+
+#
+
+
+
+               
+domain name system
+
+#
+
+ domain default enable system
+
+#
+
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+  description Predefined level-4 role
+
+#
+
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+role name level-6
+
+
+
+               
+  description Predefined level-6 role
+
+#
+
+role name level-7
+
+  description Predefined level-7 role
+
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+role name level-12
+
+  description Predefined level-12 role
+
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+#
+
+
+
+               
+role name level-14
+
+  description Predefined level-14 role
+
+#
+
+user-group system
+
+#
+
+local-user DSFSMnoc class manage
+
+  password hash 5476739106fc301287d95877ac082c30
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user HNSDNcon class manage
+
+  password hash ac50272b9417ae73405816af250ebe07
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user yuzhibin class manage
+
+  password hash d9220f382c3c1649e79d33c34e4d0ce4
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+
+
+               
+ grpc enable
+
+#
+
+telemetry
+
+ sensor-group 1
+
+  sensor path device/cpus
+
+  sensor path device/physicalentities
+
+  sensor path diagnostic/memories
+
+ sensor-group 2
+
+  sensor path ifmgr/interfaces
+
+  sensor path ifmgr/statistics
+
+  sensor path ipfw/ipstatistic
+
+ sensor-group 3
+
+  sensor path nqa/twamplightclients
+
+  sensor path nqa/twamplightdelaystats/twamplightdelaystat/detailstats/detailstat
+
+  sensor path nqa/twamplightlossstats/twamplightlossstat/detailstats/detailstat
+
+ destination-group 1
+
+  ipv4-address 125.191.287.55 port 8899
+
+ subscription 1
+
+  sensor-group 1 sample-interval 10
+
+  sensor-group 2 sample-interval 10
+
+  sensor-group 3 sample-interval 10
+
+  source-address interface LoopBack0
+
+  destination-group 1
+
+
+
+               
+#
+
+return
+

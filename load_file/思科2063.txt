@@ -1,0 +1,3168 @@
+Building configuration...
+
+!! IOS XR Configuration 7.2.1
+
+!! Last configuration change at Wed Nov 11 22:36:55 2020 by admin_cisco
+
+!
+
+service unsupported-transceiver
+
+hostname PZNZ-IVZ-8C-KYP5508-PJ-MY0002
+usergroup readonly_grp
+
+ taskgroup read-only-tg
+
+!
+
+clock timezone CST Asia/Shanghai
+
+banner motd cWARNING!!! Authorised access only, all of your done will be recorded! Disconnect IMMEDIATELY if you are not an authorised user!c 
+
+logging trap debugging
+
+logging archive
+
+ device harddisk
+
+ severity debugging
+
+ file-size 10
+
+ frequency daily
+
+ archive-size 300
+
+ archive-length 4
+
+!
+
+logging console disable
+
+logging buffered 8192000
+
+logging facility local7
+
+logging source-interface Loopback0
+
+service timestamps log datetime
+
+service timestamps debug datetime
+
+logging events link-status software-interfaces
+
+domain lookup disable
+
+username admin_cisco
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$ZA/ta1HEitYPCa1.$Vk3fUyvaGpoXyJup2hc54.fCWyh8seiOyC1PRLb6Sk1/w4UMR1suTwKwj8AFyO2hxE7ALLXsey4T0suvrURCJ/
+!
+
+username SD-QD-SDNcontroler
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$a1TiP1kbvqtiBP1.$kvkCKsVHvPQGXxSJQGFfJDf3yE2luPaLjqIamDWgoxtUYnSX7gqVNH40XtH6HX9MTWNuyKalRR2.v9Jc4qhVu/
+!
+
+username SD-QD-Manager
+
+ group readonly_grp
+
+  secret d3d9446802a44259755d38e6d163e820 $6$hm5um0wVigc99m0.$wxcTg690RIYz4v/FZ3egg0NliBY0EFWvucEkbYeAFTHz25shHpcRGlRqOnnidZYoa5UkN4Nw2p7VNKmbxjCOF/
+!
+
+username jxy
+
+ group root-lr
+
+ group sysadmin
+
+ group cisco-support
+
+  secret d3d9446802a44259755d38e6d163e820 $6$NbivN/dvSKib3N/.$EmTJNNYdZlKKo2BBDXGj.6FVLTNttzGyOH99wXLV7IqW4/or5FYI2bGHFr7x6bcxkpWqMw2qFrZvhuKpZUaod.
+!
+
+telemetry model-driven
+
+ destination-group Dest_Group1
+
+  address-family ipv4 170.146.232.43 port 8896
+   encoding self-describing-gpb
+
+   protocol grpc no-tls
+
+  !
+
+ !
+
+ sensor-group SGroup1
+
+  sensor-path Cisco-IOS-XR-pfi-im-cmd-oper:interfaces/interface-xr/interface
+
+  sensor-path Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters
+
+ !
+
+ sensor-group SGroup2
+
+  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization
+
+  sensor-path Cisco-IOS-XR-procmem-oper:processes-memory/nodes/node/process-ids/process-id
+
+ !
+
+ sensor-group SGroup3
+
+  sensor-path Cisco-IOS-XR-nto-misc-oper:memory-summary/nodes/node/summary
+
+ !
+
+ subscription SUB1
+
+  sensor-group-id SGroup1 sample-interval 10000
+
+  sensor-group-id SGroup2 sample-interval 10000
+
+  sensor-group-id SGroup3 sample-interval 10000
+
+  destination-id Dest_Group1
+
+  source-interface Loopback0
+
+ !
+
+!
+
+ptp
+
+ clock
+
+  domain 24
+
+  profile g.8275.1 clock-type T-BC
+
+  priority2 100
+
+  clock-class 165
+
+ !
+
+ profile g82751_any
+
+  multicast
+
+  transport ethernet
+
+  sync frequency 16
+
+  announce frequency 8
+
+  delay-request frequency 16
+
+ !
+
+ time-of-day priority 99
+
+ physical-layer-frequency
+
+ log
+
+  servo events
+
+  best-master-clock changes
+
+ !
+
+!
+
+vrf 5G_RAN
+
+ address-family ipv6 unicast
+
+  import route-target
+
+   64585:10010
+
+  !
+
+  export route-target
+
+   64585:10010
+
+  !
+
+ !
+
+!
+
+tcp selective-ack
+
+tcp path-mtu-discovery
+
+snmp-server ifindex persist
+
+snmp-server ifmib stats cache
+
+ snmp-server host 170.146.232.36 traps version 2c encrypted 4442799f8f79533d19116cfeb66dfa06 udp-port 163
+snmp-server view netflowview 1.3.6.1.2.1 included
+
+snmp-server view netflowview 1.3.6.1.4.1.9.9 included
+
+snmp-server view netflowview 1.3.6.1.6.3.1.1.5 included
+
+snmp-server community SdqdspDC@2020 RO
+
+snmp-server community SdqdspDC@2020RW RW
+
+snmp-server traps snmp linkup
+
+snmp-server traps snmp linkdown
+
+snmp-server traps snmp coldstart
+
+snmp-server traps snmp warmstart
+
+snmp-server traps snmp authentication
+
+snmp-server traps power
+
+snmp-server traps entity
+
+snmp-server traps system
+
+snmp-server traps entity-redundancy all
+
+snmp-server traps entity-redundancy status
+
+snmp-server traps entity-redundancy switchover
+
+snmp-server trap-source Loopback0
+
+fpd auto-upgrade enable
+
+ntp
+
+  authentication-key 1 md5 encrypted bc748b26ad53c9219e873a260e75ab96
+ authenticate
+
+ trusted-key 1
+
+ server 18.46.154.1
+ access-group ipv4 peer ntp_acl
+
+ source Loopback0
+
+ update-calendar
+
+!
+
+bfd
+
+ multipath include location 0/0/CPU0
+
+ multipath include location 0/3/CPU0
+
+!
+
+frequency synchronization
+
+ quality itu-t option 1
+
+ log selection changes
+
+!
+
+call-home
+
+ service active
+
+ contact smart-licensing
+
+ profile CiscoTAC-1
+
+  active
+
+  destination transport-method http
+
+ !
+
+!
+
+control-plane
+
+ management-plane
+
+  inband
+
+   interface all
+
+    allow SSH peer
+
+     address ipv4 170.146.1.189
+     address ipv4 18.46.154.0/23
+     address ipv4 18.228.30.54/29
+     address ipv4 18.228.31.54/29
+     address ipv4 150.15.154.0/22
+     address ipv4 150.15.168.0/23
+     address ipv4 170.146.1.182/30
+     address ipv4 170.146.232.0/24
+    !
+
+    allow SNMP peer
+
+     address ipv4 170.146.1.182/30
+     address ipv4 170.146.232.0/24
+    !
+
+    allow Telnet peer
+
+     address ipv4 170.146.1.189
+     address ipv4 18.46.154.0/23
+     address ipv4 18.228.30.54/29
+     address ipv4 18.228.31.54/29
+     address ipv4 150.15.154.0/22
+     address ipv4 150.15.168.0/23
+     address ipv4 170.146.1.182/30
+    !
+
+   !
+
+  !
+
+ !
+
+!
+
+hw-module profile qos hqos-enable
+
+netconf-yang agent
+
+ ssh
+
+!
+
+ipv4 access-list ntp_acl
+
+ 10 permit ipv4 18.46.154.0/21 any
+!
+
+class-map match-any CM_1
+
+ match precedence 1 
+
+ match dscp 8-15 
+
+ match cos inner 1 
+
+ match mpls experimental topmost 1 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_2
+
+ match precedence 2 
+
+ match dscp 16-23 
+
+ match cos inner 2 
+
+ match mpls experimental topmost 2 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_3
+
+ match precedence 3 
+
+ match dscp 24-31 
+
+ match cos inner 3 
+
+ match mpls experimental topmost 3 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_4
+
+ match precedence 4 
+
+ match dscp 32-39 
+
+ match cos inner 4 
+
+ match mpls experimental topmost 4 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_5
+
+ match precedence 5 
+
+ match dscp 40-47 
+
+ match cos inner 5 
+
+ match mpls experimental topmost 5 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_6
+
+ match precedence 6 
+
+ match dscp 48-55 
+
+ match cos inner 6 
+
+ match mpls experimental topmost 6 
+
+ end-class-map
+
+! 
+
+class-map match-any CM_7
+
+ match precedence 7 
+
+ match dscp 56-63 
+
+ match cos inner 7 
+
+ match mpls experimental topmost 7 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_1
+
+ match traffic-class 1 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_2
+
+ match traffic-class 2 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_3
+
+ match traffic-class 3 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_4
+
+ match traffic-class 4 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_5
+
+ match traffic-class 5 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_6
+
+ match traffic-class 6 
+
+ end-class-map
+
+! 
+
+class-map match-any TC_7
+
+ match traffic-class 7 
+
+ end-class-map
+
+! 
+
+policy-map PM_NNI_IN
+
+ class CM_7
+
+  set traffic-class 7
+
+ ! 
+
+ class CM_6
+
+  set traffic-class 6
+
+ ! 
+
+ class CM_5
+
+  set traffic-class 5
+
+ ! 
+
+ class CM_4
+
+  set traffic-class 4
+
+ ! 
+
+ class CM_3
+
+  set traffic-class 3
+
+ ! 
+
+ class CM_2
+
+  set traffic-class 2
+
+ ! 
+
+ class CM_1
+
+  set traffic-class 1
+
+ ! 
+
+ class class-default
+
+ ! 
+
+ end-policy-map
+
+! 
+
+policy-map PM_NNI_OUT
+
+ class TC_7
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_6
+
+  priority level 1 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_5
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_4
+
+  priority level 2 
+
+  shape average percent 80 
+
+  queue-limit 2 mbytes 
+
+ ! 
+
+ class TC_3
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ class TC_2
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class TC_1
+
+  bandwidth remaining percent 20 
+
+  random-detect 3200 kbytes 4000 kbytes 
+
+ ! 
+
+ class class-default
+
+  bandwidth remaining percent 30 
+
+  random-detect 6400 kbytes 8000 kbytes 
+
+ ! 
+
+ end-policy-map
+
+! 
+
+interface Bundle-Ether1
+
+  description to_SZTE-522-2C-KB8HU8-PJ-Y2_QORKH101_100D
+ mtu 9000
+
+ lacp mode active
+
+!
+
+interface Bundle-Ether1.843
+
+  description To_SZTE-522-2C-KB8HU8-PJ-Y2_QORKH101.843_soc_5D_OWK
+ vrf 5G_RAN
+
+ ipv6 address 2408:8160:8A00::FF:10:6/127
+ encapsulation dot1q 843
+
+!
+
+interface Bundle-Ether2
+
+  description to_SZTC-EU-2C-KB8HU8-PJ-Y002_QORKH101_100D
+ mtu 9000
+
+ lacp mode active
+
+!
+
+interface Bundle-Ether2.843
+
+  description To_SZTC-EU-2C-KB8HU8-PJ-Y002_QORKH101.843_soc_5D_OWK
+ vrf 5G_RAN
+
+ ipv6 address 2408:8160:8700::FF:10:6/127
+ encapsulation dot1q 843
+
+!
+
+interface Bundle-Ether3
+
+  description to_SZIV-VJI-6C-WU9H18BW-PJ-Y002_QORKH102_100D
+ mtu 9000
+
+ lacp mode active
+
+!
+
+interface Bundle-Ether3.843
+
+  description To_SZIV-VJI-6C-WU9H18BW-PJ-Y002_QORKH102.843_soc_5D_OWK
+ vrf 5G_RAN
+
+ ipv6 address 2408:8160:8C00::FF:11:1000/127
+ encapsulation dot1q 843
+
+!
+
+interface Bundle-Ether4
+
+  description to_SZVQ-ZEV-3C-WU9H18BW-PJ-Y002_QORKH101_100D
+ mtu 9000
+
+ lacp mode active
+
+!
+
+interface Bundle-Ether4.843
+
+  description To_SZVQ-ZEV-3C-WU9H18BW-PJ-Y002_QORKH101.843_soc_5D_OWK
+ vrf 5G_RAN
+
+ ipv6 address 2408:8160:8600::FF:10:4/127
+ encapsulation dot1q 843
+
+!
+
+interface Loopback0
+
+ ipv4 address 18.46.154.2 255.255.255.255
+!
+
+interface MgmtEth0/RP0/CPU0/0
+
+ shutdown
+
+!
+
+interface MgmtEth0/RP1/CPU0/0
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/0
+
+  description To_SZNZ-ZY1-PZI-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state slave-only
+
+  local-priority 20
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.15 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  selection input
+
+  priority 20
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/1
+
+  description To_SZNZ-ZY2-IVZ-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state slave-only
+
+  local-priority 10
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.31 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  selection input
+
+  priority 10
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/2
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/3
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/4
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/5
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/6
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/7
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/8
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/9
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/10
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/11
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/12
+
+  description To_SZNZ-M01-WP-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.43 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/13
+
+  description To_SZNZ-M02-IVZ-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.51 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/14
+
+  description To_SZNZ-M03-NQU-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.69 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/15
+
+  description To_SZNZ-M04-PND-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.67 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/16
+
+  description To_SZNZ-M05-IVU-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.75 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/0/0/17
+
+  description To_SZNZ-M06-JZ-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.83 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface FourHundredGigE0/0/0/18
+
+ shutdown
+
+!
+
+interface FourHundredGigE0/0/0/19
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/20
+
+  description To_SZNZ-M00-PZI-KYP5508-PJ-MY1_ErDfdB0/0/0/20_100D:1
+ mtu 9000
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.154.2 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+!
+
+interface FourHundredGigE0/0/0/21
+
+ shutdown
+
+!
+
+interface FourHundredGigE0/0/0/22
+
+ shutdown
+
+!
+
+interface FourHundredGigE0/0/0/23
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/24
+
+  description To_SZVQ-ZEV-3C-WU9H18BW-PJ-Y002_ydbf-0/4/1/1_100D:1
+ bundle id 4 mode active
+
+!
+
+interface HundredGigE0/0/0/25
+
+  description To_SZTC-EU-2C-KB8HU8-PJ-Y002_100DB1/0/0_100D:1
+ bundle id 2 mode active
+
+!
+
+interface HundredGigE0/0/0/26
+
+  description To_SZIV-VJI-6C-WU9H18BW-PJ-Y002_ydbf_0/4/0/1_100D:1
+ bundle id 3 mode active
+
+!
+
+interface HundredGigE0/0/0/27
+
+  description To_SZTE-522-2C-KB8HU8-PJ-Y2_100DB1/0/0_100D:1
+ bundle id 1 mode active
+
+!
+
+interface HundredGigE0/0/0/28
+
+ shutdown
+
+!
+
+interface HundredGigE0/0/0/29
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/0
+
+  description To_SZNZ-ZY1-PZI-KYP55W1-PJ-YY2_ErDfdB0/0/0/9_100D:2
+ mtu 9000
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.29 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+!
+
+interface HundredGigE0/3/0/1
+
+  description To_SZNZ-ZY2-IVZ-KYP55W1-PJ-YY2_ErDfdB0/0/0/9_100D:2
+ mtu 9000
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.35 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+!
+
+interface HundredGigE0/3/0/2
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/3
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/4
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/5
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/6
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/7
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/8
+
+  description To_SZNZ-M07-EVI-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.91 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/9
+
+  description To_SZNZ-M08-DOI-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.189 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/10
+
+  description To_SZNZ-M09-IY308-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.187 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/11
+
+  description To_SZNZ-M10-IYIPE-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.195 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/12
+
+  description To_SZNZ-M11-DUPJ-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.103 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/13
+
+  description To_SZNZ-M12-YVUW-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.111 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/14
+
+  description To_SZNZ-M13-GJWEG-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.129 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/15
+
+  description To_SZNZ-M14-IUTEW-KYP55W1-PJ-YY2_ErDfdB0/0/0/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.127 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/16
+
+  description To_SZNZ-M15-MZHCN-KYP5501-PJ-OB2_ErDfdB0/0/1/0_100D:1
+ mtu 9000
+
+ ptp
+
+  profile g82751_any
+
+  port state master-only
+
+ !
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.135 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+ frequency synchronization
+
+  wait-to-restore 0
+
+ !
+
+!
+
+interface HundredGigE0/3/0/17
+
+ shutdown
+
+!
+
+interface FourHundredGigE0/3/0/18
+
+ shutdown
+
+!
+
+interface FourHundredGigE0/3/0/19
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/20
+
+  description To_SZNZ-M00-PZI-KYP5508-PJ-MY1_ErDfdB0/3/0/20_100D:2
+ mtu 9000
+
+ service-policy input PM_NNI_IN
+
+ service-policy output PM_NNI_OUT
+
+ ipv4 address 150.15.155.1 255.255.255.252
+ ipv4 unreachables disable
+
+ carrier-delay up 2000 down 0
+
+ load-interval 30
+
+ dampening 1 250 950 1
+
+!
+
+interface FourHundredGigE0/3/0/21
+
+ shutdown
+
+!
+
+interface FourHundredGigE0/3/0/22
+
+ shutdown
+
+!
+
+interface FourHundredGigE0/3/0/23
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/24
+
+  description To_SZVQ-ZEV-3C-WU9H18BW-PJ-Y002_ydbf-0/5/1/1_100D:2
+ bundle id 4 mode active
+
+!
+
+interface HundredGigE0/3/0/25
+
+  description To_SZTC-EU-2C-KB8HU8-PJ-Y002_100DB2/0/0_100D:2
+ bundle id 2 mode active
+
+!
+
+interface HundredGigE0/3/0/26
+
+  description To_SZIV-VJI-6C-WU9H18BW-PJ-Y002_ydbf_0/4/1/1_100D:2
+ bundle id 3 mode active
+
+!
+
+interface HundredGigE0/3/0/27
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/28
+
+ shutdown
+
+!
+
+interface HundredGigE0/3/0/29
+
+ shutdown
+
+!
+
+interface PTP0/RP0/CPU0/0
+
+ shutdown
+
+!
+
+interface PTP0/RP1/CPU0/0
+
+ shutdown
+
+!
+
+!
+
+prefix-set pl_QD_5GC
+
+  2408:8140:80F0:2F00::/56 le 128
+end-set
+
+!
+
+prefix-set pl_LY_5G_RAN
+
+  2408:8160:8C00::/64
+end-set
+
+!
+
+prefix-set pl_WF_5G_RAN
+
+  2408:8160:8700::/64
+end-set
+
+!
+
+prefix-set pl_WH_5G_RAN
+
+  2408:8160:8A00::/64
+end-set
+
+!
+
+prefix-set pl_YT_5G_RAN
+
+  2408:8160:8600::/64
+end-set
+
+!
+
+community-set cs_Core_Routes
+
+  64585:9999
+
+end-set
+
+!
+
+route-policy pass_all
+
+  pass
+
+end-policy
+
+!
+
+route-policy rp_ADD_PATH_Adv
+
+  set path-selection all advertise
+
+end-policy
+
+!
+
+route-policy rp_LY_5G_RAN_in
+
+  if destination in pl_LY_5G_RAN then
+
+    set community cs_Core_Routes
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_WF_5G_RAN_in
+
+  if destination in pl_WF_5G_RAN then
+
+    set community cs_Core_Routes
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_WH_5G_RAN_in
+
+  if destination in pl_WH_5G_RAN then
+
+    set community cs_Core_Routes
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_YT_5G_RAN_in
+
+  if destination in pl_YT_5G_RAN then
+
+    set community cs_Core_Routes
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+route-policy rp_QD_5GC_CITY_out
+
+  if destination in pl_QD_5GC then
+
+    pass
+
+  endif
+
+end-policy
+
+!
+
+router isis 1000
+
+ max-metric on-startup wait-for-bgp
+
+ is-type level-2-only
+
+ net 86.4585.1000.0100.4817.6002.00
+
+ distribute link-state instance-id 1000 level 2
+
+ log adjacency changes
+
+ lsp-gen-interval maximum-wait 1000 initial-wait 1 secondary-wait 10 level 2
+
+ lsp-refresh-interval 65000
+
+ max-lsp-lifetime 65535
+
+ address-family ipv4 unicast
+
+  metric-style wide
+
+  metric 100000
+
+  spf-interval maximum-wait 1000 initial-wait 5 secondary-wait 10 level 2
+
+  router-id Loopback0
+
+  segment-routing mpls
+
+ !
+
+ interface Loopback0
+
+  passive
+
+  circuit-type level-2-only
+
+  address-family ipv4 unicast
+
+   metric 100 level 2
+
+   prefix-sid index 12
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/0
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 530581ae0506b354d0c64a5f39d1c3af
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/1
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 9bf04cdcd41c519bdd40b23599821340
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/12
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 41853881380ad83b083366670df90c1e
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/13
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted b532302d02bdb01f561c2c6cb0e62ea2
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/14
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 96be38c20e3f053d9078092c0169a59d
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/15
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted a8a6cc80702d97176db52fa8deccc7be
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/16
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted b9393ced000d19faa1c969ccc1669da2
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/17
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 41853881380ad83b083366670df90c1e
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/0/0/20
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 9bf04cdcd41c519bdd40b23599821340
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 150 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/0
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted a8a6cc80702d97176db52fa8deccc7be
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/1
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted a740d639699366b662083bccc82af4b3
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/8
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 9946fb8d3fe0d0ce99796f608cd2043b
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/9
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted b532302d02bdb01f561c2c6cb0e62ea2
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/10
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 9bf04cdcd41c519bdd40b23599821340
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/11
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 41853881380ad83b083366670df90c1e
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/12
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 41853881380ad83b083366670df90c1e
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/13
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 530581ae0506b354d0c64a5f39d1c3af
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/14
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted a8a6cc80702d97176db52fa8deccc7be
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/15
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted a8a6cc80702d97176db52fa8deccc7be
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/16
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 530581ae0506b354d0c64a5f39d1c3af
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 100 level 2
+
+  !
+
+ !
+
+ interface HundredGigE0/3/0/20
+
+  circuit-type level-2-only
+
+  bfd minimum-interval 10
+
+  bfd multiplier 3
+
+  bfd fast-detect ipv4
+
+  point-to-point
+
+   hello-password hmac-md5 encrypted 2e907c92ffcf702244db20e39db17137
+  address-family ipv4 unicast
+
+   fast-reroute per-prefix
+
+   fast-reroute per-prefix ti-lfa
+
+   metric 150 level 2
+
+  !
+
+ !
+
+!
+
+snmp-server traps isis adjacency-change
+
+snmp-server traps bgp
+
+router bgp 64585
+
+ nsr
+
+ bgp router-id 18.46.154.2
+ bgp log neighbor changes detail
+
+ ibgp policy out enforce-modifications
+
+ address-family vpnv4 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+  additional-paths selection route-policy rp_ADD_PATH_Adv
+
+ !
+
+ address-family vpnv6 unicast
+
+  additional-paths receive
+
+  additional-paths send
+
+  additional-paths selection route-policy rp_ADD_PATH_Adv
+
+ !
+
+ address-family l2vpn evpn
+
+  additional-paths receive
+
+  additional-paths send
+
+  additional-paths selection route-policy rp_ADD_PATH_Adv
+
+ !
+
+ address-family link-state link-state
+
+ !
+
+ neighbor-group RE
+
+  remote-as 64585
+
+   password encrypted 41853881380ad83b083366670df90c1e
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-reflector-client
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-reflector-client
+
+  !
+
+  address-family l2vpn evpn
+
+   route-reflector-client
+
+  !
+
+  address-family link-state link-state
+
+   route-reflector-client
+
+  !
+
+ !
+
+ neighbor-group RR
+
+  remote-as 64585
+
+   password encrypted a1f16e8ad3a8d470d707aa0e4192fd7f
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+  !
+
+  address-family vpnv6 unicast
+
+  !
+
+  address-family l2vpn evpn
+
+  !
+
+  address-family link-state link-state
+
+  !
+
+ !
+
+ neighbor-group RRC
+
+  remote-as 64585
+
+   password encrypted 9946fb8d3fe0d0ce99796f608cd2043b
+  update-source Loopback0
+
+  address-family vpnv4 unicast
+
+   route-reflector-client
+
+  !
+
+  address-family vpnv6 unicast
+
+   route-reflector-client
+
+  !
+
+  address-family l2vpn evpn
+
+   route-reflector-client
+
+  !
+
+ !
+
+ neighbor 18.46.154.1
+  use neighbor-group RR
+
+ !
+
+ neighbor 18.46.154.19
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.10
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.11
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.12
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.13
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.14
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.39
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.30
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.31
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.32
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.33
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.34
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.59
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.50
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.51
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.52
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.53
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.79
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.70
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.71
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.72
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.73
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.74
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.99
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.90
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.91
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.92
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.93
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.199
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.190
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.191
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.192
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.193
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.194
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.195
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.196
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.119
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.110
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.111
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.112
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.113
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.114
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.115
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.139
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.130
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.131
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.132
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.133
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.134
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.135
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.136
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.159
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.150
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.151
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.152
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.153
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.179
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.170
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.171
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.172
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.173
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.299
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.290
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.291
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.292
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.293
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.294
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.295
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.219
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.210
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.154.211
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.212
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.213
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.154.214
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.139
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.130
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.131
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.132
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.133
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.134
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.135
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.136
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.159
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.150
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.151
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.152
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.153
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.154
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.155
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.156
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.157
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.168
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.179
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.170
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.171
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.172
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.173
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.174
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.175
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.299
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.290
+  use neighbor-group RRC
+
+ !
+
+ neighbor 18.46.155.291
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.292
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.293
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.219
+  use neighbor-group RE
+
+ !
+
+ neighbor 18.46.155.210
+  use neighbor-group RE
+
+ !
+
+ vrf 5G_RAN
+
+  rd 64585:10010
+
+  address-family ipv6 unicast
+
+   label mode per-vrf
+
+   maximum-paths ibgp 2
+
+  !
+
+  neighbor 2408:8160:8600::FF:10:5
+   remote-as 64586
+
+   bfd fast-detect
+
+   bfd multiplier 3
+
+   bfd minimum-interval 150
+
+    password encrypted a1f16e8ad3a8d470d707aa0e4192fd7f
+   address-family ipv6 unicast
+
+    route-policy rp_YT_5G_RAN_in in
+
+    route-policy rp_QD_5GC_CITY_out out
+
+   !
+
+  !
+
+  neighbor 2408:8160:8700::FF:10:7
+   remote-as 64587
+
+   bfd fast-detect
+
+   bfd multiplier 3
+
+   bfd minimum-interval 150
+
+    password encrypted c42010fcd2ce2b2506b6ce2685c164a4
+   address-family ipv6 unicast
+
+    route-policy rp_WF_5G_RAN_in in
+
+    route-policy rp_QD_5GC_CITY_out out
+
+   !
+
+  !
+
+  neighbor 2408:8160:8A00::FF:10:7
+   remote-as 64588
+
+   bfd fast-detect
+
+   bfd multiplier 3
+
+   bfd minimum-interval 150
+
+    password encrypted 1751d8f91cb5356c82ab31e0f99ae5f4
+   address-family ipv6 unicast
+
+    route-policy rp_WH_5G_RAN_in in
+
+    route-policy rp_QD_5GC_CITY_out out
+
+   !
+
+  !
+
+  neighbor 2408:8160:8C00::FF:11:1001
+   remote-as 64590
+
+   bfd fast-detect
+
+   bfd multiplier 3
+
+   bfd minimum-interval 150
+
+    password encrypted 6ef111cdd35961793f200c5ad4c2d272
+   address-family ipv6 unicast
+
+    route-policy rp_LY_5G_RAN_in in
+
+    route-policy rp_QD_5GC_CITY_out out
+
+   !
+
+  !
+
+ !
+
+!
+
+mpls oam
+
+!
+
+segment-routing
+
+ global-block 24000 43999
+
+!
+
+netconf agent tty
+
+!
+
+snmp-server traps ospf state-change neighbor-state-change
+
+lldp
+
+!
+
+ssh server rate-limit 600
+
+ssh server session-limit 10
+
+ssh server v2
+
+ssh server netconf vrf default
+
+ipsla
+
+ responder
+
+ !
+
+!
+
+snmp-server traps fabric plane
+
+end
+
+
+

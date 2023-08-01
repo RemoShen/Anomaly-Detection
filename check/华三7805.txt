@@ -1,0 +1,1776 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 3606
+
+#
+
+ clock protocol ntp mdc 1
+
+#
+
+mdc Admin id 1
+
+#
+
+  sysname KDVPB-BGO-5I-V6890-VP-H015-VPB00025
+
+#
+
+ip vpn-instance 5G_OAM
+
+ route-distinguisher 65316:10030
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65316:10030 import-extcommunity
+
+ vpn-target 65316:10030 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65316:10030
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65316:10030
+
+  apply-label per-instance
+
+
+
+               
+#
+
+ip vpn-instance 5G_RAN
+
+ route-distinguisher 65316:10010
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65316:10010 import-extcommunity
+
+ vpn-target 65316:10010 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65316:10010
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65316:10010
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_RAN_VIP
+
+ route-distinguisher 65316:10020
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65316:10020 import-extcommunity
+
+ vpn-target 65316:10020 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+
+
+               
+ address-family ipv4
+
+  route-distinguisher 65316:10020
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65316:10020
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance __mgnt_vpn__
+
+#
+
+ telnet server enable
+
+#
+
+bfd template 50
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+ bfd detect-multiplier 3
+
+#
+
+ irf mac-address persistent always
+
+ irf auto-update enable
+
+ undo irf link-delay
+
+ irf member 1 priority 1
+
+#
+
+ bfd multi-hop min-transmit-interval 10
+
+
+
+               
+ bfd multi-hop min-receive-interval 10
+
+ bfd multi-hop min-echo-receive-interval 10
+
+ bfd multi-hop detect-multiplier 3
+
+ undo bfd ip-router-alert
+
+#
+
+track 500 ipv6 route vpn-instance 5G_RAN 9B7F:F8D7:4A77::8:4 128 reachability
+
+#
+
+isis 1000
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50
+
+ timer lsp-generation 10 50
+
+ set-overload on-startup 120 allow external
+
+  is-name KDVPB-BGO-5I-V6890-VP-H015-VPB00025
+
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 24000 43999
+
+ network-entity 86.5316.1000.0102.4302.6025.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+
+
+               
+  fast-reroute ti-lfa
+
+  preference 115
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+ospf 65535 vpn-instance __mgnt_vpn__
+
+ non-stop-routing
+
+ area 0.0.0.0
+
+  network 0.0.0.0 255.255.255.255
+
+#
+
+ mpls lsr-id 15.298.21.20
+
+ mpls label advertise non-null
+
+#
+
+ lldp global enable
+
+#
+
+ ptp profile 1588v2
+
+ ptp mode bc
+
+ ptp domain 24
+
+ ptp clock-state enable 
+
+#
+
+ system-working-mode bridgee
+
+ hardware-resource tcam mix
+
+
+
+               
+ password-recovery enable
+
+#
+
+vlan 1
+
+#
+
+qos map-table dot1p-lp
+
+ import 0 export 0
+
+ import 1 export 1
+
+ import 2 export 2
+
+#
+
+qos map-table exp-dscp
+
+ import 1 export 10
+
+ import 2 export 18
+
+ import 3 export 26
+
+ import 4 export 34
+
+ import 5 export 46
+
+#
+
+qos wred queue table 100GE
+
+ queue 0 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+
+
+               
+ queue 1 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 6400 high-limit 8000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 2000 high-limit 2000 discard-probability 100
+
+
+
+               
+ queue 7 drop-level 1 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 2000 high-limit 2000 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+qos wred queue table 10GE
+
+ queue 0 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+
+
+               
+ queue 4 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+mpls te
+
+#
+
+tunnel-policy SRBE_TUNNEL
+
+ select-seq sr-lsp load-balance-number 32
+
+#
+
+ mpls bfd enable
+
+#
+
+interface Route-Aggregation1
+
+
+
+               
+  description TO-HDVPB-BGO-5I-V6890-H016-VPB00026-Urx1
+
+ ip address 127.20.173.156 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-level level-2
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode gca 1 hmac-sha-256 cipher 5428bee4071af14b1ea0965469606caf
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ link-aggregation bfd ipv4 source 127.20.173.156 destination 127.20.173.157
+
+ link-aggregation bfd-compatible enable
+
+ link-aggregation mode dynamic
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface Route-Aggregation2
+
+  description TO-HDVPB-BGO-5I-V12508U-F001-VPB00001-Urx37
+
+
+
+               
+ ip address 127.20.173.99 255.255.255.252
+
+ isis enable 1000
+
+ isis circuit-level level-2
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode gca 1 hmac-sha-256 cipher 54b2d8f25082e6ed17a3395e6ad32d36
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ link-aggregation bfd ipv4 source 127.20.173.99 destination 127.20.173.98
+
+ link-aggregation bfd-compatible enable
+
+ link-aggregation mode dynamic
+
+ mpls enable
+
+ mpls te enable
+
+ ip mtu 9000
+
+ ipv6 mtu 9000
+
+ bfd min-transmit-interval 10
+
+ bfd min-receive-interval 10
+
+ bfd detect-multiplier 3
+
+#
+
+interface NULL0
+
+#
+
+interface LoopBack0
+
+
+
+               
+ ip address 15.298.21.20 255.255.255.255
+
+ isis enable 1000
+
+ isis prefix-sid index 25 no-php
+
+#
+
+interface HundredGigE1/0/41
+
+ port link-mode route
+
+  description TO-HDVPB-BGO-5I-V12508U-F001-VPB00001-100J
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ port link-aggregation group 2
+
+#
+
+
+
+               
+interface HundredGigE1/0/42
+
+ port link-mode route
+
+  description TO-HDVPB-BGO-5I-V6890-H016-VPB00026-100J1/0/42:1
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 100GE
+
+ qos gts queue 5 cir 80000000 cbs 16000000 
+
+ qos gts queue 4 cir 80000000 cbs 16000000 
+
+ qos gts queue 7 cir 80000000 cbs 16000000 
+
+ qos gts queue 6 cir 80000000 cbs 16000000 
+
+ port link-aggregation group 1
+
+#
+
+interface HundredGigE1/0/43
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+
+
+               
+interface HundredGigE1/0/44
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface M-GigabitEthernet0/0/0
+
+#
+
+interface M-GigabitEthernet0/0/1
+
+#
+
+interface Ten-GigabitEthernet1/0/1
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/2
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/3
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/4
+
+ port link-mode bridge
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet1/0/5
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/6
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/7
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/8
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/9
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/10
+
+ port link-mode bridge
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/11
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/12
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/13
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/14
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/15
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/16
+
+
+
+               
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/17
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/18
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/19
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/20
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/21
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+
+
+               
+interface Ten-GigabitEthernet1/0/22
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/23
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/24
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/25
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/26
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/27
+
+ port link-mode bridge
+
+ shutdown
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet1/0/28
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/29
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/30
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/31
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/32
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/33
+
+ port link-mode bridge
+
+
+
+               
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/34
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/35
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/36
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/37
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/38
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/39
+
+
+
+               
+ port link-mode bridge
+
+ shutdown
+
+#
+
+interface Ten-GigabitEthernet1/0/40
+
+ port link-mode bridge
+
+ shutdown
+
+#
+
+bgp 65316
+
+ bgp update-delay on-startup 600
+
+ non-stop-routing
+
+ retain local-label 5
+
+ labeled-route ignore-no-tunnel
+
+ router-id 15.298.21.20
+
+ group MAR internal
+
+ peer MAR connect-interface LoopBack0
+
+ peer MAR route-update-interval 0
+
+  peer MAR password cipher 785616f37dc71eee97c53e145d7cc2b6
+
+ group MCR internal
+
+ peer MCR connect-interface LoopBack0
+
+ peer MCR route-update-interval 0
+
+  peer MCR password cipher 8aa501a01858a73dad82d82e0d17df46
+
+ peer 15.298.21.1 group MCR
+
+  peer 15.298.21.1 description HASMB-BGO-5I-V12508U-F001-VPB00001
+
+
+
+               
+ peer 15.298.21.2 group MCR
+
+  peer 15.298.21.2 description HASMB-OIO-3I-V12508U-F002-VPB00002
+
+ #
+
+ address-family vpnv4
+
+  pic
+
+  route-select delay 180
+
+  reflect change-path-attribute
+
+  peer MAR enable
+
+  peer MAR route-policy to-MAR export
+
+  peer MAR next-hop-local
+
+  peer MAR reflect-client
+
+  peer MAR preferred-value 10
+
+  peer MCR enable
+
+  peer MCR route-policy from-MCR import
+
+  peer MCR route-policy to-MCR export
+
+  peer MCR advertise-community
+
+  peer MCR next-hop-local
+
+ #
+
+ address-family vpnv6
+
+  pic
+
+  route-select delay 180
+
+  reflect change-path-attribute
+
+  peer MAR enable
+
+
+
+               
+  peer MAR route-policy to-MAR-v6 export
+
+  peer MAR reflect-client
+
+  peer MAR preferred-value 10
+
+  peer MCR enable
+
+  peer MCR route-policy from-MCR-v6 import
+
+  peer MCR route-policy to-MCR-v6 export
+
+  peer MCR advertise-community
+
+  peer MCR next-hop-local
+
+ #
+
+ address-family l2vpn evpn
+
+  pic
+
+  route-select delay 180
+
+  peer MAR enable
+
+  peer MAR next-hop-local
+
+  peer MAR reflect-client
+
+  peer MAR advertise encap-type mpls
+
+  peer MCR enable
+
+  peer MCR next-hop-local
+
+  peer MCR advertise encap-type mpls
+
+ #
+
+ ip vpn-instance 5G_OAM
+
+  #
+
+  address-family ipv6 unicast
+
+
+
+               
+   pic
+
+   network :: 0
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   network :: 0 route-policy SET_DEF_ROUTE_v6
+
+ #
+
+ ip vpn-instance 5G_RAN_VIP
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   network :: 0
+
+#
+
+dcn
+
+ auto-report
+
+#
+
+route-policy SET_DEF_ROUTE_v6 permit node 10
+
+ apply community 64500:1000 
+
+#
+
+route-policy from-MCR permit node 10
+
+ if-match community name from-A
+
+
+
+               
+ apply local-preference 100
+
+#
+
+route-policy from-MCR permit node 20
+
+ if-match community name from-B
+
+ apply local-preference 50
+
+#
+
+route-policy from-MCR permit node 30
+
+#
+
+route-policy from-MCR-v6 permit node 10
+
+ if-match community name from-A
+
+ apply local-preference 100
+
+#
+
+route-policy from-MCR-v6 permit node 20
+
+ if-match community name from-B
+
+ apply local-preference 50
+
+#
+
+route-policy from-MCR-v6 permit node 30
+
+#
+
+route-policy nms-ip permit node 10
+
+ if-match ip address prefix-list import-loopback
+
+ apply label-index 25
+
+#
+
+route-policy nms-ip permit node 20
+
+
+
+               
+ if-match ip address prefix-list nms-ip
+
+ apply cost 10000
+
+#
+
+route-policy nms-ip permit node 30
+
+ if-match ip address prefix-list SMAN_NMS_JT
+
+ apply cost 10000
+
+ apply tag 2
+
+#
+
+route-policy nms-ip deny node 1000
+
+#
+
+route-policy nms-iplct deny node 10
+
+ if-match ip address prefix-list nms-ip
+
+#
+
+route-policy nms-iplct deny node 20
+
+ if-match ip address prefix-list SMAN_NMS_JT
+
+#
+
+route-policy nms-iplct permit node 30
+
+ if-match ip address prefix-list nms-iplct
+
+ apply cost 10000
+
+#
+
+route-policy nms-iplct deny node 1000
+
+#
+
+route-policy to-MAR permit node 10
+
+
+
+               
+ if-match ip address prefix-list default
+
+#
+
+route-policy to-MAR permit node 20
+
+ if-match extcommunity 5G_RAN_RT2
+
+#
+
+route-policy to-MAR permit node 30
+
+ if-match extcommunity 5G_RAN_VIP_RT2
+
+#
+
+route-policy to-MAR deny node 1000
+
+#
+
+route-policy to-MAR-v6 permit node 10
+
+ if-match ipv6 address prefix-list default-ipv6
+
+#
+
+route-policy to-MAR-v6 permit node 20
+
+ if-match extcommunity 5G_RAN_RT2
+
+#
+
+route-policy to-MAR-v6 permit node 30
+
+ if-match extcommunity 5G_RAN_VIP_RT2
+
+#
+
+route-policy to-MAR-v6 deny node 1000
+
+#
+
+route-policy to-MCR deny node 10
+
+ if-match ip address prefix-list default
+
+
+
+               
+#
+
+route-policy to-MCR permit node 20
+
+ apply community 65316:1 additive 
+
+#
+
+route-policy to-MCR-v6 deny node 10
+
+ if-match ipv6 address prefix-list default-ipv6
+
+#
+
+route-policy to-MCR-v6 permit node 20
+
+ apply community 65316:1 additive 
+
+#
+
+ ip prefix-list SMAN_NMS_JT index 5 permit 15.295.37.175 29
+
+ ip prefix-list SMAN_NMS_JT index 10 permit 147.113.209.0 24
+
+ ip prefix-list default index 5 permit 0.0.0.0 0
+
+ ip prefix-list import-loopback index 5 permit 15.298.21.20 32
+
+ ip prefix-list nms-ip index 5 permit 15.298.200.0 24 less-equal 32
+
+ ip prefix-list nms-iplct index 5 permit 0.0.0.0 0 greater-equal 30
+
+#
+
+ ipv6 prefix-list default-ipv6 index 5 permit :: 0
+
+#
+
+ ip community-list advanced from-A permit 65316:1
+
+ ip community-list advanced from-B permit 65316:2
+
+#
+
+ ip extcommunity-list 5G_RAN_RT2 permit rt 65316:1015001
+
+
+
+               
+ ip extcommunity-list 5G_RAN_VIP_RT2 permit rt 65316:2015001
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class aux
+
+ user-role network-admin
+
+#
+
+line class vty
+
+ user-role network-operator
+
+#
+
+line aux 0
+
+ user-role network-admin
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+ user-role network-operator
+
+#
+
+ ip route-static default-preference 1
+
+ ipv6 route-static default-preference 1
+
+#
+
+ ipv6 route-static vpn-instance 5G_OAM :: 0 9B7F:F8D7:4A77::9:87
+
+ ipv6 route-static vpn-instance 5G_RAN :: 0 9B7F:F8D7:4A77::8:87
+
+ ipv6 route-static vpn-instance 5G_RAN :: 0 NULL0 track 500
+
+
+
+               
+ ipv6 route-static vpn-instance 5G_RAN_VIP :: 0 9B7F:F8D7:4A77::A:87
+
+#
+
+ snmp-agent
+
+ snmp-agent local-engineid 800063A280703AA66DE10000000001
+
+ snmp-agent community write smart#202! acl 2001
+
+ snmp-agent community read smart#202) acl 2001
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 15.298.200.2 params securityname NMunicomoss v2c
+
+ snmp-agent target-host trap address udp-domain 147.113.209.208 params securityname NMunicomoss v2c
+
+ snmp-agent target-host trap address udp-domain 15.298.200.61 params securityname smart#202) v2c
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable mpls 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+ snmp-agent trap source LoopBack0
+
+#
+
+ mpls tunnel-bfd 15.298.21.1 32 template 50
+
+ mpls tunnel-bfd 15.298.21.21 32 template 50
+
+#
+
+ ssh server enable
+
+ ssh server acl 2000
+
+#
+
+ ntp-service enable
+
+
+
+               
+ ntp-service authentication enable
+
+ ntp-service source LoopBack0
+
+  ntp-service authentication-keyid 1 authentication-mode hmac-sha-256 cipher 55759c08ca617610ed9c66a17c4fdc76
+
+ ntp-service reliable authentication-keyid 1 
+
+ ntp-service unicast-server 15.298.21.1 priority
+
+ ntp-service unicast-server 15.298.21.2
+
+#
+
+acl basic 2000
+
+ rule 0 permit source 15.295.37.175 0.0.0.7
+
+ rule 5 permit source 147.113.209.0 0.0.0.255
+
+ rule 10 permit source 15.298.200.0 0.0.0.255
+
+ rule 50 permit source 15.298.21.0 0.0.0.255
+
+ rule 55 permit source 15.298.121.0 0.0.7.255
+
+ rule 60 permit source 127.20.0.0 0.0.127.255
+
+#
+
+acl basic 2001
+
+  description NCE&MlWxdqBlWrqj
+
+ rule 0 permit source 147.113.209.0 0.0.0.255
+
+ rule 50 permit source 15.298.200.0 0.0.0.255
+
+ rule 500 deny
+
+#
+
+acl ipv6 basic 2001
+
+  description NCE&MlWxdqBlWrqj
+
+
+
+               
+ rule 500 deny
+
+#
+
+ tftp client source interface LoopBack0
+
+#
+
+domain name system
+
+#
+
+ domain default enable system
+
+#
+
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+  description Predefined level-4 role
+
+#
+
+
+
+               
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+role name level-6
+
+  description Predefined level-6 role
+
+#
+
+role name level-7
+
+  description Predefined level-7 role
+
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+role name level-12
+
+  description Predefined level-12 role
+
+
+
+               
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+#
+
+role name level-14
+
+  description Predefined level-14 role
+
+#
+
+user-group system
+
+#
+
+local-user HA-SMX-Manager class manage
+
+  password hash ea67955cdce0b9d58ae7d8529122ebed
+
+ service-type ssh
+
+ authorization-attribute user-role level-1
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user HA-SMX-SDNcontroler class manage
+
+  password hash 792857e2fe385aa28282dfe9f51754ea
+
+ service-type ssh
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user hnlt-h3c class manage
+
+  password hash 82c7fc9d5797a31860dc10ecfaa20444
+
+
+
+               
+ service-type ftp
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user sm-hs class manage
+
+  password hash 1c9454268b72754b8d820042e02a3d96
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user sm-jituan class manage
+
+  password hash 5c29b764770962361ed32ae969ac14bf
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user sm-wgzx class manage
+
+  password hash f28e8846252e0fd709ff255fe891c2d5
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-15
+
+ authorization-attribute user-role network-operator
+
+#
+
+
+
+               
+ netconf soap http enable
+
+ netconf ssh server enable
+
+#
+
+ grpc enable
+
+#
+
+telemetry
+
+ sensor-group 1
+
+  sensor path device/cpus
+
+  sensor path device/physicalentities
+
+  sensor path diagnostic/memories
+
+ sensor-group 2
+
+  sensor path ifmgr/interfaces
+
+  sensor path ifmgr/statistics
+
+  sensor path ipfw/ipstatistic
+
+ sensor-group 3
+
+  sensor path nqa/twamplightclients
+
+  sensor path nqa/twamplightdelaystats/twamplightdelaystat/detailstats/detailstat
+
+  sensor path nqa/twamplightlossstats/twamplightlossstat/detailstats/detailstat
+
+ destination-group 1
+
+  ipv4-address 147.113.209.49 port 8899
+
+ subscription 1
+
+  sensor-group 1 sample-interval 10
+
+  sensor-group 2 sample-interval 10
+
+
+
+               
+  sensor-group 3 sample-interval 10
+
+  source-address interface LoopBack0
+
+  destination-group 1
+
+#
+
+return
+

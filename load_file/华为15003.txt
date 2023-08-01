@@ -1,0 +1,3176 @@
+display current-configuration
+!Software Version V800R012C00SPC300
+!Last configuration was updated at 2021-01-05 00:17:25+08:00 by cqlt
+!Last configuration was saved at 2021-01-15 09:36:13+08:00 by CQ-CQ-SDNcontroler
+#
+clock timezone beijing add 08:00:00
+#
+sysname ESDZ-COU-1J2H-PG8MZ8-UO-E001
+#
+set neid 72efdc
+#
+FTP server enable
+FTP server-source all-interface
+undo FTP ipv6 server-source all-interface
+#
+FTP client-source -i LoopBack0
+#
+info-center source default channel 0 log state off
+info-center source default channel 2 log level warning
+info-center source default channel 4 log level notification
+info-center loghost source LoopBack0
+info-center loghost 14.184.0.289
+info-center logbuffer size 1024
+#
+[16D                [16Dslave batch-backup self-healing-timeout 600
+#
+undo user-security-policy enable
+#
+port-wred af4-cs7-pq
+ queue-depth 2000
+#
+port-wred be-af3
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+port-wred af1-af2
+ queue-depth 4000
+ color green low-limit 80 high-limit 100 discard-percentage 100
+ color yellow low-limit 80 high-limit 100 discard-percentage 100
+ color red low-limit 80 high-limit 100 discard-percentage 100
+#
+service-template template-default0
+#
+service-template template-default1
+#
+service-template template-default2
+[16D                [16D#
+service-template template-default3
+#
+service-template template-default4
+#
+ntp-service ipv6 server disable
+ntp-service server source-interface all disable
+ntp-service ipv6 server source-interface all disable
+ ntp-service authentication-keyid 1 authentication-mode md5 cipher cedcf6bb384b28c14541c3f00b30af90
+ntp-service reliable authentication-keyid 1
+ ntp-service authentication-keyid 10000 authentication-mode md5 cipher 850d946fb0475a3a72f733bdd9b27b7b
+ntp-service reliable authentication-keyid 10000
+ntp-service unicast-server 14.184.0.289 authentication-keyid 10000 source-interface LoopBack0 preference
+ntp-service refclock-master
+ntp-service authentication enable
+ntp-service server source-interface LoopBack0
+ntp-service source-interface LoopBack0
+#
+slot 2
+ port-mode card-id 0 group-id 16 10GE-1GE
+#
+alarm
+ suppression alarm-name hwMplsTunnelHotstandbySwitch cause-period 60
+[16D                [16D suppression alarm-name hwBfdSessFaultDown cause-period 600
+ suppression alarm-name hwPortDown cause-period 5
+ suppression alarm-name hwLosAlarm cause-period 5
+ suppression alarm-name hwIfFlowDown cause-period 60
+ suppression alarm-name hwIfFlowDown clear-period 60
+ suppression alarm-name hwPWVcDown cause-period 60
+ suppression alarm-name hwPWVcDown clear-period 60
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand cause-period 600
+ suppression alarm-name hwVpwsPwRedundancyDegradedExpand clear-period 600
+#
+rsa peer-public-key 14.184.0.289
+ public-key-code begin
+ 3082010A
+  02820101
+    00C57B6E 56546DD3 21600D36 DA96C84F 7BF75532 D7D8979B 4443CF99 EFE0C3F2
+    26D3ABBB C1E3D1FE 217CB2BC E10FBAF7 6EC8D030 9F1E10C7 8F570E64 3F3B25B2
+    A185EC90 D93A6B51 5BD25E1D 5BBE24CE F1342A6A 9A86A322 46899FCE 060030B8
+    5F0D82D1 B7F192B6 9DB07661 E4AB670C CF07ED69 56B7724F CEED004C E091BBD4
+    27473874 094E7F58 D9BC1C52 A7E18CBA 49A4016C A0C4029D 879DDAA5 93C1525F
+    457341DF 819BECEB 07C09A35 FA259DCA 90DE8344 41A9AD9D 6C4F2F69 0949DCCC
+    0847B005 2D1D9B1F 0B55D3F2 6DDC52BE E9E44C1E 1767CC45 32E72395 35920B68
+    7F08C996 443DFFF7 F4084233 1644B451 D1DAE62E E1E30B69 B7257B3F 76703EF8
+    61
+[16D                [16D  0203
+    010001
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 184.6.0.6
+ public-key-code begin
+  040108CE 414AC165 6E100DC5 EEF04EF6 EE7EFE08 50A63CD9 12A40FC5 29BF3BE1
+  D9C8297E CCB6E89C 23326AB4 8FBFD5DF 1396BF7E 05F5E5A4 574AD154 AF38A8BA
+  40F12C00 634FA18A F8023149 64DC1196 22299B66 F4E079DD 7B3A87D7 46517E0C
+  362114B9 F126A06C 80E9711E EE6BC450 016AE9BF 2EE9E907 F7DBCBF1 4A8C2669
+  C368BD78 E3
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 14.168.33.32
+ public-key-code begin
+  04015137 F38639FC 11D52AA9 A35E7CDB 2F6A2696 0B482DBA 8D9ACE9A C4635EB7
+  8B0F9000 6FBB53A3 3AB38FBE 7A6710AA 5E3FD1AE C9054F8C 1E6B37D6 1295E8FB
+  C3E5D200 C2A59C2F 1408D613 36D8123C 79B2A48A 469ACBCD 111E8D0A 757F89A0
+  6A9161FA C77FCFBD 9D7CB731 FA08BFAC EE57EB47 1495D950 390CA3B6 886158F6
+  605F5B65 42
+ public-key-code end
+[16D                [16D peer-public-key end
+#
+ecc peer-public-key 14.184.0.289
+ public-key-code begin
+  04BC02A0 447770F5 32645E5F 6D707437 25E17C55 2EBB9D02 23F1343D A4605ADC
+  154B636B BC9E09C3 C1911C94 67D70ABA 0E448900 B164146A A83A039F 3F1D2940
+  A5
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 14.184.6.299
+ public-key-code begin
+  040108CE 414AC165 6E100DC5 EEF04EF6 EE7EFE08 50A63CD9 12A40FC5 29BF3BE1
+  D9C8297E CCB6E89C 23326AB4 8FBFD5DF 1396BF7E 05F5E5A4 574AD154 AF38A8BA
+  40F12C00 634FA18A F8023149 64DC1196 22299B66 F4E079DD 7B3A87D7 46517E0C
+  362114B9 F126A06C 80E9711E EE6BC450 016AE9BF 2EE9E907 F7DBCBF1 4A8C2669
+  C368BD78 E3
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 14.184.15.298
+ public-key-code begin
+  04011917 E055DA8F A9C4F62C 34C8554D B7B83B73 BF524824 9316D7A9 8CA07620
+[16D                [16D  AC8F5F02 BA0A1533 CB43CEE2 86E4FEB4 EEC35ED5 B33B3094 B40930F5 180662ED
+  5D5F6A00 2352985B 2BB64110 0C2340B0 99173141 D58ACF6F 43C1913A 3FE1BA77
+  68D3D0CD B8BFF504 BD592CF9 15520E8E 88983224 DF3AB672 A6105A6C 09EF4EBF
+  06DC8C46 1D
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 14.184.25.299
+ public-key-code begin
+  04014052 BD8293E0 3CC78862 E5DC42A8 47D484D9 1D7637CA 42C68947 5DA3E701
+  22B1549C 92A794F4 844E4A6D E2DBB693 D42D2DFC 96F07BE4 7175B199 8752BE9B
+  BEF6D200 9397F9F0 B2786D05 C296CED3 0B75C2F0 4A15D28B 4932F48C E868FDBD
+  497890B8 99EE94EC C973D67A F354512A 276FB09E B972974A 58501D8A 48728E28
+  ABF2E440 A1
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 14.184.299.298
+ public-key-code begin
+  04005763 639E4B47 C34B5325 48C68DB9 6C16233E FB2CDCB3 27368C1F C553FFC8
+  6E52F7D5 A683B1B9 0AC7BEB1 143840B6 C021BCA8 D9AA4848 3FC4D856 217EC229
+  AC5FAF01 EF7B17C6 9F5FB7B5 4B03FAEB 8BA63422 903B0DFA EAD7A56B AAAF4270
+  6D597974 78CA7D79 9DBB054C 90DB2379 ED65488A B23A7F72 E506033D 97B6794D
+[16D                [16D  B525CA91 65
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 162.158.296.15
+ public-key-code begin
+  040108CE 414AC165 6E100DC5 EEF04EF6 EE7EFE08 50A63CD9 12A40FC5 29BF3BE1
+  D9C8297E CCB6E89C 23326AB4 8FBFD5DF 1396BF7E 05F5E5A4 574AD154 AF38A8BA
+  40F12C00 634FA18A F8023149 64DC1196 22299B66 F4E079DD 7B3A87D7 46517E0C
+  362114B9 F126A06C 80E9711E EE6BC450 016AE9BF 2EE9E907 F7DBCBF1 4A8C2669
+  C368BD78 E3
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 162.158.296.56
+ public-key-code begin
+  0400D320 754F48E0 1112AEC6 2937E2CB 072992C4 7B7FDC6A 252722A1 ED15D62A
+  3E5D81E7 742735D9 7B234321 DB0AC1DC 56C191B6 13E4AC9B 42000971 AFB17E4C
+  59A76300 8482D009 D078A40F 07D2687D EA3EF99C 47E67507 C3F08632 AE6CC45A
+  63AF4CB9 FE732DB4 4971F97E 9AEEF4D8 96A2F676 5824E8CF 5823106B 0D898AA6
+  14FD22A2 F3
+ public-key-code end
+ peer-public-key end
+[16D                [16D#
+ecc peer-public-key 162.158.277.124
+ public-key-code begin
+  04014052 BD8293E0 3CC78862 E5DC42A8 47D484D9 1D7637CA 42C68947 5DA3E701
+  22B1549C 92A794F4 844E4A6D E2DBB693 D42D2DFC 96F07BE4 7175B199 8752BE9B
+  BEF6D200 9397F9F0 B2786D05 C296CED3 0B75C2F0 4A15D28B 4932F48C E868FDBD
+  497890B8 99EE94EC C973D67A F354512A 276FB09E B972974A 58501D8A 48728E28
+  ABF2E440 A1
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 162.151.266.141
+ public-key-code begin
+  0400EFCC 25B3FBC5 423EF366 92469968 4AC50E9F 3BBF4055 B62082C9 D1E9C6D8
+  333018BE 636FD68E 59159796 D7529080 AD1AFF48 295F17A9 DF98831B F34EB51E
+  18DD7300 1F892807 B55C19A4 64215B19 8C171880 85163354 427BE97D DA6446D7
+  CA7C8131 EEBC9A02 D2B9F39A 52869125 F34A3790 BDEBEB86 CAC675BE B52F9DD1
+  21F39A7E 84
+ public-key-code end
+ peer-public-key end
+#
+router id 14.184.299.299
+#
+[16D                [16Dundo telnet ipv6 server enable
+telnet server-source all-interface
+undo telnet ipv6 server-source all-interface
+#
+diffserv domain default
+#
+diffserv domain 5p3d
+#
+ptp enable
+ptp domain 24
+ptp device-type bc
+ptp passive-measure enable
+ptp clock-source local priority2 124
+#
+clock ssm-control on
+clock ethernet-synchronization enable
+#
+soc
+#
+ip vpn-instance 3G_RAN
+  description IN_CjkpcWpkeqo_3I
+ ipv4-family
+  route-distinguisher 65448:18040
+[16D                [16D  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:18040 export-extcommunity
+  vpn-target 65448:18040 import-extcommunity
+#
+ip vpn-instance 4G_OAM
+  description IN_CjkpcWpkeqo_NVG
+ ipv4-family
+  route-distinguisher 65448:18030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:18030 export-extcommunity
+  vpn-target 65448:18030 import-extcommunity
+#
+ip vpn-instance 4G_RAN
+  description IN_CjkpcWpkeqo_NVG
+ ipv4-family
+  route-distinguisher 65448:18020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+[16D                [16D  vpn-target 65448:18020 export-extcommunity
+  vpn-target 65448:20001 export-extcommunity
+  vpn-target 65448:18020 import-extcommunity
+  vpn-target 65448:20001 import-extcommunity
+#
+ip vpn-instance 5GC_WAP
+  description IN_CjkpcWpkeqo_PT_YCR
+ ipv4-family
+  route-distinguisher 65448:18010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:18010 export-extcommunity
+  vpn-target 65448:18010 import-extcommunity
+#
+ip vpn-instance 5G_MEC
+  description IN_CjkpcWpkeqo_PT_OGE
+ ipv4-family
+  route-distinguisher 65448:10060
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10060 export-extcommunity
+[16D                [16D  vpn-target 65448:10060 import-extcommunity
+#
+ip vpn-instance 5G_OAM
+  description IN_CjkpcWpkeqo_PT
+ ipv4-family
+  route-distinguisher 65448:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10030 export-extcommunity
+  vpn-target 65448:50002 export-extcommunity
+  vpn-target 65448:10030 import-extcommunity
+  vpn-target 65448:50002 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10030
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10030 export-extcommunity
+  vpn-target 65448:50002 export-extcommunity
+  vpn-target 65448:10030 import-extcommunity
+  vpn-target 65448:50002 import-extcommunity
+#
+[16D                [16Dip vpn-instance 5G_RAN
+  description IN_CjkpcWpkeqo_PT
+ ipv4-family
+  route-distinguisher 65448:10010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10010 export-extcommunity
+  vpn-target 65448:50001 export-extcommunity
+  vpn-target 65448:10010 import-extcommunity
+  vpn-target 65448:50001 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10010
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10010 export-extcommunity
+  vpn-target 65448:50001 export-extcommunity
+  vpn-target 65448:10010 import-extcommunity
+  vpn-target 65448:50001 import-extcommunity
+#
+ip vpn-instance 5G_RAN_VIP
+  description IN_CjkpcWpkeqo_PT
+[16D                [16D ipv4-family
+  route-distinguisher 65448:10020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10020 export-extcommunity
+  vpn-target 65448:10020 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10020
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10020 export-extcommunity
+  vpn-target 65448:10020 import-extcommunity
+#
+ip vpn-instance GPRS_Gn_C
+  description IN_CjkpcWpkeqo_PT_IRTU_Ip_E
+ ipv4-family
+  route-distinguisher 65448:10040
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10040 export-extcommunity
+[16D                [16D  vpn-target 65448:10040 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:10040
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:10040 export-extcommunity
+  vpn-target 65448:10040 import-extcommunity
+#
+ip vpn-instance LTE-VPN
+  description LTE-XRP
+ ipv4-family
+  route-distinguisher 65448:20001
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:20001 export-extcommunity
+  vpn-target 65448:20001 import-extcommunity
+#
+ip vpn-instance VoLTE_SGi
+  description IN_CjkpcWpkeqo_PT_XqNVG_UIk
+ ipv4-family
+  route-distinguisher 65448:20000
+[16D                [16D  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:20000 export-extcommunity
+  vpn-target 65448:20000 import-extcommunity
+ ipv6-family
+  route-distinguisher 65448:20000
+  vpn frr
+  tnl-policy nms-tunnel-policy
+  apply-label per-instance
+  vpn-target 65448:20000 export-extcommunity
+  vpn-target 65448:20000 import-extcommunity
+#
+ip dcn vpn-instance __dcn_vpn__
+ ipv4-family
+#
+tunnel-selector NMS-Tunnel-Policy permit node 10
+ apply tunnel-policy NMS-Tunnel-Policy
+#
+tunnel-selector nms-tunnel-policy permit node 10
+ apply tunnel-policy nms-tunnel-policy
+#
+bfd
+[16D                [16D mpls-passive
+#
+mpls lsr-id 14.184.299.299
+#
+mpls
+ label advertise non-null
+#
+mpls ldp
+ #
+ ipv4-family
+#
+dhcp server request-packet all-interface disable
+#
+dot1x-template 1
+#
+acl number 2000
+ rule 6 permit source 14.170.0.284 0.0.0.15
+ rule 7 permit source 136.102.298.0 0.0.0.255
+ rule 8 permit source 14.184.0.289 0
+#
+security password
+ #
+ rule admin
+[16D                [16D  forbidden word changeme_123
+#
+aaa
+  local-user root password irreversible-cipher $1c$|8]]"bb!cF$g&z^W6[0w8,iL]Kz@WU#s8(rP{^r)JkU27:7w.~K$   local-user root password irreversible-cipher 67e86b7bf429e3e349ea17dcef92a649
+ local-user root service-type telnet
+ local-user root level 3
+ local-user root state active
+  local-user cqlt password irreversible-cipher $1c$mq~V@e<QvE$)]lD2j"svVZ!cm*Ij3p(E@2!(h&jcTOu&VX1sgf>$   local-user cqlt password irreversible-cipher c8bfa2cd76e5be15a730a93077d942b0
+ local-user cqlt service-type ftp telnet ssh snmp
+ local-user cqlt level 3
+ local-user cqlt state active
+ local-user cqlt ftp-directory cfcard:/logfile/
+  local-user cq-cq-sdncontroler password irreversible-cipher $1c$&D;;~My|Y#$ii$yXMeI;J>QqeT@Hm6C.F3L)ctRH)_M<`>fKs|U$   local-user cq-cq-sdncontroler password irreversible-cipher 4da06aba71a09e9de97da515baa10585
+ local-user cq-cq-sdncontroler service-type telnet ssh
+ local-user cq-cq-sdncontroler level 2
+ local-user cq-cq-sdncontroler state block fail-times 3 interval 5
+  local-user cq-cq-manager password irreversible-cipher $1c$!mjEFj*|.2$4%5$FR<-'6V!cu6&E-{&btW=YCX77B_Nl+0!>3sK$   local-user cq-cq-manager password irreversible-cipher bdd6b753f24a5de09d42a20c8482a5fa
+ local-user cq-cq-manager service-type telnet ssh
+ local-user cq-cq-manager level 2
+ local-user cq-cq-manager state block fail-times 3 interval 5
+ #
+ authentication-scheme default0
+ #
+[16D                [16D authentication-scheme default1
+ #
+ authentication-scheme default
+  authentication-mode local radius
+ #
+ authorization-scheme default
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+#
+license
+ active port-basic slot 1 card 0 port 0-7,33-34,36
+ active port-basic slot 2 card 0 port 0-10,36,63,66-71
+ active port-basic slot 5 card 0 port 0-8,33-34,36-39
+#
+segment-routing
+[16D                [16D bfd enable mode tunnel
+ bfd tunnel min-tx-interval 50 min-rx-interval 50
+#
+isis 1000
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 50 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 10 min-rx-interval 10 frr-binding
+ network-entity 86.5448.1000.0101.4025.5255.00
+ avoid-microloop frr-protected
+ avoid-microloop frr-protected rib-update-delay 5000
+  is-name ESDZ-COU-1J2H-PG8MZ8-UO-E001
+ import-route direct route-policy NCE-ZMS
+ import-route static route-policy NMS-to-JiTuan
+ timer spf 1 50 50
+ traffic-eng level-2
+ segment-routing mpls
+ segment-routing global-block 76800 142334
+ avoid-microloop segment-routing
+ set-overload on-startup send-sa-bit 120 allow external
+ frr
+[16D                [16D  loop-free-alternate level-2
+  remote-lfa tunnel ldp level-2
+  ti-lfa level-2
+#
+interface Eth-Trunk0
+ mtu 9000
+  description TO-CSDD-UV-G8000-Z8-OET-Gvj-Vtwpm0
+ ip address 184.299.0.2 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 076a379d9166d94087b8e1d1a8be5875
+ isis cost 190
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+[16D                [16D port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk1
+ mtu 9000
+  description TO-CSES-LD-RY-UO-PG8MO14-G1-Gvj-vtwpm1
+ ip address 184.1.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 171d39521c3091e54bf7dd0755f4b327
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+[16D                [16D isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk6
+ mtu 9000
+  description TO-CSDZ-UHL-PG8000-O14-OGT-Gvj-Vtwpm1
+ ip address 184.6.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+ [16D                [16D isis authentication-mode md5 cipher 97f624ab8c9d3a1de9e29fd264dd21f2
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk7
+[16D                [16D mtu 9000
+  description TO-CSDZ-COU-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.7.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher e191e802b82ad7e68ab8ac737845b0fa
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+[16D                [16D port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk11
+ mtu 9000
+  description TO-CSBD-BIZS-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.15.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher cf318b14204545cd1df25e7e60c9f27b
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+[16D                [16D port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk12
+ mtu 9000
+  description TO-CSBD-TME-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.16.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 75a397a06b5e16a2842a3cf4ac75530c
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+[16D                [16D isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk13
+ mtu 9000
+  description TO-CSBD-DUICJN-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.17.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+[16D                [16D isis circuit-type p2p
+  isis authentication-mode md5 cipher e900e955cc15b198fb828644d3e2e064
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+[16D                [16Dinterface Eth-Trunk14
+ mtu 9000
+  description TO-CSBD-NZ-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.18.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher e8fb47e1c819c6ae6f6352e5c5df20ad
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+[16D                [16D port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk16
+ mtu 9000
+  description TO-CSPC-LPILZE-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.10.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher d519aca7332717f827c0228cfc89638a
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+[16D                [16D port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk17
+ mtu 9000
+  description TO-CSPC-PRCL-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.11.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 1239a905e1cc3193af0e59c2ac7c77d4
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+[16D                [16D isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk18
+ mtu 9000
+  description TO-CSPC-LIUE-G8000-O14-OGT-Gvj-Vtwpm1
+ ip address 184.12.0.5 255.255.255.252
+ trust upstream default
+[16D                [16D isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 681ab69d29a00e46163a6e39651c018c
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+[16D                [16D#
+interface Eth-Trunk19
+ mtu 9000
+  description TO-CSPC-CBBLU-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.13.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 3d0808294a84507dfa33035373f2303d
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+[16D                [16D port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk20
+ mtu 9000
+  description TO-CSPC-JRL-PG8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.24.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher f9c97719758841bd69e98b376b5b322e
+ isis cost 100
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+[16D                [16D mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk21
+ mtu 9000
+  description TO-CSEU-NVZFN-G8000-O14-OGT-Gvj-vtwpm1
+ ip address 184.25.0.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 050668c1495aeea9fed631944fbefda8
+ isis cost 100
+ isis small-hello
+[16D                [16D isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk200
+  description TO-ZOU-KQV_WRH_GQT_01_KQV_Gvj-4-WRH700
+ mode lacp-static
+ lacp timeout fast
+[16D                [16D#
+interface Eth-Trunk200.300
+ vlan-type dot1q 300
+  description To_CS-ES-COU1D-2H01-T08E09W32-KQV-UUR-0001-JY8861-WRH700
+ ip binding vpn-instance 5G_MEC
+ ip address 1.41.156.14 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk200.2950
+ vlan-type dot1q 2950
+  description TO-URH_GQT_4I_TCP
+ ip binding vpn-instance LTE-VPN
+ ip address 57.289.0.151 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk200.2952
+ vlan-type dot1q 2952
+  description TO-ZOU-KQV-WRH_GQT_5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:7566::/127
+ statistic enable
+#
+[16D                [16Dinterface Eth-Trunk200.2954
+ vlan-type dot1q 2954
+  description TO-URH_GQT_IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 136.102.296.185 255.255.255.252
+ ipv6 address 8A6E:E7A8:2657:7266::/127
+ statistic enable
+#
+interface Eth-Trunk200.2958
+ vlan-type dot1q 2958
+  description TO-URH_GQT_XqNVG_UIk
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:7F76::/127
+ statistic enable
+#
+interface Eth-Trunk200.2960
+ vlan-type dot1q 2960
+  description TO-URH_GQT_5I_QCO
+ ip binding vpn-instance 5G_OAM
+ ip address 1.5.104.1 255.255.255.252
+ statistic enable
+[16D                [16D#
+interface Eth-Trunk201
+  description TO-Bycpi_COU_CT
+ mode lacp-static
+#
+interface Eth-Trunk201.301
+ vlan-type dot1q 301
+  description TO-Bycpi_COU_CT-IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:7255:5555:5555:5555:7/127
+ statistic enable
+#
+interface Eth-Trunk201.817
+ vlan-type dot1q 817
+  description TO-Bycpi_LV_UO_lkcjqpiycpiiwcp
+ ip address 14.184.299.245 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk201.837
+ vlan-type dot1q 837
+  description TO-Bycpi_COU_CT-5I_QCO
+ ip binding vpn-instance 5G_OAM
+[16D                [16D ipv6 enable
+ ip address 1.5.104.20 255.255.255.252
+ ipv6 address 8A6E:E7A8:2656:7555:5555:5555:5555:7/127
+ statistic enable
+#
+interface Eth-Trunk201.839
+ vlan-type dot1q 839
+  description TO-Bycpi_COU_CT-5I_OGE
+ ip binding vpn-instance 5G_MEC
+ ip address 1.41.156.2 255.255.255.252
+#
+interface Eth-Trunk201.843
+ vlan-type dot1q 843
+  description TO-Bycpi_CT_COU_5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7C8:2666::7/127
+ statistic enable
+#
+interface Eth-Trunk201.909
+ vlan-type dot1q 909
+  description TO-Bycpi_CT_COU_5IE_YCR
+ ip binding vpn-instance 5GC_WAP
+[16D                [16D ip address 14.168.33.6 255.255.255.252
+#
+interface Eth-Trunk201.3010
+ vlan-type dot1q 3010
+  description TO-Bycpi_COU_CT-XqNVG_UIk
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2667::/127
+ statistic enable
+#
+interface Eth-Trunk202
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-WRH800
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk202.909
+ vlan-type dot1q 909
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-WRH800-5IE_YCR
+ ip binding vpn-instance 5GC_WAP
+ ip address 14.168.33.65 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk202.2950
+[16D                [16D vlan-type dot1q 2950
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-WRH800-NVG-XRP
+ ip binding vpn-instance LTE-VPN
+ ip address 57.289.0.149 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk202.2952
+ vlan-type dot1q 2952
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-WRH800-5I_QCO
+ ip binding vpn-instance 5G_OAM
+ ip address 1.5.104.17 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk202.2954
+ vlan-type dot1q 2954
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-WRH800-5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:9566::/127
+ statistic enable
+#
+interface Eth-Trunk202.2956
+ vlan-type dot1q 2956
+ [16D                [16D description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-WRH800-IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 136.102.296.109 255.255.255.252
+ ipv6 address 8A6E:E7A8:2657:9266::/127
+ statistic enable
+#
+interface Eth-Trunk202.2958
+ vlan-type dot1q 2958
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-WRH800-XqNVG_UIk
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:9F76::/127
+ statistic enable
+#
+interface Eth-Trunk203
+  description TO-SV-KQV_WRH_GQT_01_KQV_Gvj-4-WRH750
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk203.300
+ vlan-type dot1q 300
+  description To_CS-ES-UVUP1D-3H01-T03E07W32-KQV-UUR-0003-JY8861-Gvj-Vtwpm4_WRH750
+[16D                [16D ip binding vpn-instance 5G_MEC
+ ip address 1.41.156.12 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk203.2950
+ vlan-type dot1q 2950
+  description TO-URH750-4I_TCP
+ ip binding vpn-instance LTE-VPN
+ ip address 57.289.0.289 255.255.255.252
+#
+interface Eth-Trunk203.2952
+ vlan-type dot1q 2952
+  description TO-URH750-5IE_OIOP
+ ip binding vpn-instance 5G_OAM
+ ip address 1.5.104.163 255.255.255.252
+#
+interface Eth-Trunk203.2954
+ vlan-type dot1q 2954
+  description TO-URH750-5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:8566::/127
+#
+[16D                [16Dinterface Eth-Trunk203.2956
+ vlan-type dot1q 2956
+  description TO-URH750-IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 136.102.296.198 255.255.255.252
+ ipv6 address 8A6E:E7A8:2657:8266::/127
+#
+interface Eth-Trunk203.2958
+ vlan-type dot1q 2958
+  description TO-URH750-XQNVG_XRP
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:8F76::/127
+#
+interface Eth-Trunk204
+  description TO-CS-ES-UV1D-3H01-T03E08W36-5IE-UUR-0005-JY8861-WRH900
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk204.909
+ vlan-type dot1q 909
+  description TO-CS-ES-UV1D-3H01-T03E08W36-5IE-UUR-0005-JY8861-WRH900-5IE_YCR
+[16D                [16D ip binding vpn-instance 5GC_WAP
+ ip address 14.168.33.31 255.255.255.252
+#
+interface Eth-Trunk204.2950
+ vlan-type dot1q 2950
+  description TO-URH900-4I_TCP
+ ip binding vpn-instance LTE-VPN
+ ip address 57.289.0.277 255.255.255.252
+#
+interface Eth-Trunk204.2952
+ vlan-type dot1q 2952
+  description TO-URH900-5IE_OIOP
+ ip binding vpn-instance 5G_OAM
+ ip address 1.5.104.185 255.255.255.252
+#
+interface Eth-Trunk204.2954
+ vlan-type dot1q 2954
+  description TO-URH900-5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:B566::/127
+#
+interface Eth-Trunk204.2956
+[16D                [16D vlan-type dot1q 2956
+  description TO-URH900-IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 136.102.296.123 255.255.255.252
+ ipv6 address 8A6E:E7A8:2657:B266::/127
+#
+interface Eth-Trunk204.2958
+ vlan-type dot1q 2958
+  description TO-URH900-XQNVG_XRP
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:BF76::/127
+#
+interface Eth-Trunk205
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0003-JY8861-Gvj-vtwpm4-WRH801
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk205.2950
+ vlan-type dot1q 2950
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0003-JY8861-Gvj-vtwpm4-WRH801-NVG-XRP
+ ip binding vpn-instance LTE-VPN
+[16D                [16D ip address 57.289.0.97 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk205.2952
+ vlan-type dot1q 2952
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0003-JY8861-Gvj-vtwpm4-WRH801-5I_QCO
+ ip binding vpn-instance 5G_OAM
+ ip address 1.5.104.31 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk205.2954
+ vlan-type dot1q 2954
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0003-JY8861-Gvj-vtwpm4-WRH801-5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:A566::/127
+ statistic enable
+#
+interface Eth-Trunk205.2956
+ vlan-type dot1q 2956
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0003-JY8861-Gvj-vtwpm4-WRH801-IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+[16D                [16D ip address 136.102.296.111 255.255.255.252
+ ipv6 address 8A6E:E7A8:2657:A266::/127
+ statistic enable
+#
+interface Eth-Trunk205.2958
+ vlan-type dot1q 2958
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0003-JY8861-Gvj-vtwpm4-WRH801-XqNVG_UIk
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:AF76::/127
+ statistic enable
+#
+interface Eth-Trunk206
+  description TO-CS-ES-UV1D-3H01-T03E09W32-5IE-UUR-0007-JY8861-GVJ4_WRH901
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk206.2950
+ vlan-type dot1q 2950
+  description TO-CS-ES-UV1D-3H01-T03E09W32-5IE-UUR-0007-JY8861-GVJ4_WRH901-NVG-XRP
+ ip binding vpn-instance LTE-VPN
+ ip address 57.289.0.265 255.255.255.252
+ statistic enable
+[16D                [16D#
+interface Eth-Trunk206.2952
+ vlan-type dot1q 2952
+  description TO-CS-ES-UV1D-3H01-T03E09W32-5IE-UUR-0007-JY8861-GVJ4_WRH901-5I_QCO
+ ip binding vpn-instance 5G_OAM
+ ip address 1.5.104.197 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk206.2954
+ vlan-type dot1q 2954
+  description TO-CS-ES-UV1D-3H01-T03E09W32-5IE-UUR-0007-JY8861-GVJ4_WRH901-5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:C566::/127
+ statistic enable
+#
+interface Eth-Trunk206.2956
+ vlan-type dot1q 2956
+  description TO-CS-ES-UV1D-3H01-T03E09W32-5IE-UUR-0007-JY8861-GVJ4_WRH901-IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ipv6 enable
+ ip address 136.102.296.245 255.255.255.252
+ ipv6 address 8A6E:E7A8:2657:C266::/127
+[16D                [16D statistic enable
+#
+interface Eth-Trunk206.2958
+ vlan-type dot1q 2958
+  description TO-CS-ES-UV1D-3H01-T03E09W32-5IE-UUR-0007-JY8861-GVJ4_WRH901-XqNVG_UIk
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:CF76::/127
+ statistic enable
+#
+interface Eth-Trunk210
+  description TO-CSYCYC-NVFU-CZEVP9000-18G-JZ01-eigk-0/0/0/1
+ ip address 184.299.0.17 255.255.255.252
+ mode lacp-static
+#
+interface Eth-Trunk210.843
+ vlan-type dot1q 843
+  description TO-CSYCYC-NVFU-CZEVP9000-18G-JZ01-5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:7566::766/127
+ ipv6 mtu 9000
+ statistic enable
+[16D                [16D#
+interface Eth-Trunk210.875
+ vlan-type dot1q 875
+  description TO-CSYCYC-NVFU-CZEVP9000-18G-JZ01-5I_QCO
+ ip binding vpn-instance 5G_OAM
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:7F86::/127
+ ipv6 mtu 9000
+ statistic enable
+#
+interface Eth-Trunk220
+  description TO-Aycpi_COU_G_2_GVj-Vtwpm88
+ mode lacp-static
+#
+interface Eth-Trunk220.10
+ vlan-type dot1q 10
+  description TO-Aycpi_COU_G_2_POU_LV
+ ip address 14.184.299.137 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk220.11
+ vlan-type dot1q 11
+  description TO-Aycpi_COU_G_2_POU_EL
+[16D                [16D ip address 14.184.299.131 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk230
+  description TO-CSES-COU-OEG_GVJ230
+ mode lacp-static
+ lacp timeout fast
+#
+interface Eth-Trunk230.875
+ vlan-type dot1q 875
+  description TO-CSES-COU-OEG-5I_QCO
+ ip binding vpn-instance 5G_OAM
+ ip address 1.5.104.169 255.255.255.252
+#
+interface Eth-Trunk230.2954
+ vlan-type dot1q 2954
+  description TO-CSES-COU-OEG-IRTU_Ip_E
+ ip binding vpn-instance GPRS_Gn_C
+ ip address 136.102.284.1 255.255.255.252
+ statistic enable
+#
+interface Eth-Trunk230.2958
+ vlan-type dot1q 2958
+ [16D                [16D description TO-CSES-COU-OEG-XqNVG_UIk
+ ip binding vpn-instance VoLTE_SGi
+ ipv6 enable
+ ipv6 address 8A6E:E7A8:2657:7F86::/127
+ statistic enable
+#
+interface Eth-Trunk3611
+ mtu 9000
+  description TO-CSLD-BZO-EZ600Z8C-CUI-Gvj-Vtwpm2
+ ip address 184.299.15.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 8818a78d4a0eac041a21bfc91cabe0aa
+ isis cost 5000
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+[16D                [16D port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface Eth-Trunk3612
+ mtu 9000
+  description TO-CSLD-BVB-EZ600Z8C-CUI-Gvj-Vtwpm2
+ ip address 184.299.16.5 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 5d8847fe98d3d2f19a494cf3bb01ce88
+ isis cost 5000
+ isis small-hello
+ isis ldp-sync
+[16D                [16D isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mode lacp-static
+ mpls
+ mpls ldp
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+ port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ bit-error-detection
+#
+interface GigabitEthernet0/0/0
+ speed auto
+ duplex auto
+ undo shutdown
+ ip address 136.102.24.148 255.255.0.0
+[16D                [16D#
+interface 25GE2/0/0
+  description TO-Hwcygk_UO_PEG
+ undo shutdown
+ dcn
+#
+interface 25GE2/0/0.400
+ vlan-type dot1q 400
+  description TO-Hwcygk_UO_PEG
+ ip address 14.184.0.285 255.255.255.240
+ statistic enable
+#
+interface 25GE2/0/1
+ undo shutdown
+ dcn
+#
+interface 25GE2/0/2
+ undo shutdown
+ dcn
+#
+interface 25GE2/0/3
+  description TO-CS-ES-COU1D-2H01-T08E09W32-KQV-UUR-0001-JY8861-25IG1/2/2
+ undo shutdown
+[16D                [16D eth-trunk 200
+ dcn
+#
+interface 25GE2/0/4
+  description TO-CS-ES-COU1D-2H01-T08E09W32-KQV-UUR-0001-JY8861-25IG1/2/3
+ undo shutdown
+ eth-trunk 200
+#
+interface 25GE2/0/5
+  description TO-CS-ES-COU1D-2H01-T08E09W32-KQV-UUR-0001-JY8861-25IG1/2/4
+ undo shutdown
+ eth-trunk 200
+#
+interface 25GE2/0/6
+  description TO-CS-ES-COU1D-2H01-T08E10W32-5IE-UUR-0001-JY8861-25IG1/2/2
+ shutdown
+ eth-trunk 202
+#
+interface 25GE2/0/7
+ shutdown
+#
+interface 25GE2/0/8
+  description TO-CS-ES-UVUP1D-3H01-T03E07W32-KQV-UUR-0003-JY8861-25IG1/2/2
+[16D                [16D undo shutdown
+ eth-trunk 203
+#
+interface 25GE2/0/9
+  description TO-CS-ES-UVUP1D-3H01-T03E07W32-KQV-UUR-0003-JY8861-25IG1/2/3
+ undo shutdown
+ eth-trunk 203
+#
+interface 25GE2/0/10
+  description TO-CS-ES-UVUP1D-3H01-T03E07W32-KQV-UUR-0003-JY8861-25IG1/2/4
+ undo shutdown
+ eth-trunk 203
+#
+interface 25GE2/0/11
+ undo shutdown
+#
+interface 25GE2/0/12
+ undo shutdown
+#
+interface 25GE2/0/13
+ undo shutdown
+#
+interface 25GE2/0/14
+[16D                [16D undo shutdown
+#
+interface 25GE2/0/15
+ undo shutdown
+#
+interface 25GE2/0/16
+ undo shutdown
+#
+interface 25GE2/0/17
+ undo shutdown
+#
+interface 25GE2/0/18
+ undo shutdown
+#
+interface 25GE2/0/19
+ undo shutdown
+#
+interface 25GE2/0/20
+ undo shutdown
+#
+interface 25GE2/0/21
+ undo shutdown
+#
+[16D                [16Dinterface 25GE2/0/22
+ undo shutdown
+#
+interface 25GE2/0/23
+ undo shutdown
+#
+interface 25GE2/0/24
+ undo shutdown
+#
+interface 25GE2/0/25
+ undo shutdown
+#
+interface 25GE2/0/26
+ undo shutdown
+#
+interface 25GE2/0/27
+ undo shutdown
+#
+interface 25GE2/0/28
+ undo shutdown
+#
+interface 25GE2/0/29
+ undo shutdown
+[16D                [16D#
+interface 25GE2/0/30
+ undo shutdown
+#
+interface 25GE2/0/31
+ undo shutdown
+#
+interface 25GE2/0/32
+ undo shutdown
+#
+interface 25GE2/0/33
+ undo shutdown
+#
+interface 25GE2/0/34
+ undo shutdown
+#
+interface 25GE2/0/35
+ undo shutdown
+#
+interface 25GE2/0/36
+ undo shutdown
+ negotiation auto
+#
+[16D                [16Dinterface 25GE2/0/37
+ undo shutdown
+#
+interface 25GE2/0/38
+ undo shutdown
+#
+interface 25GE2/0/39
+ undo shutdown
+#
+interface 25GE2/0/40
+ undo shutdown
+#
+interface 25GE2/0/41
+ undo shutdown
+#
+interface 25GE2/0/42
+ undo shutdown
+#
+interface 25GE2/0/43
+ undo shutdown
+#
+interface 25GE2/0/44
+ undo shutdown
+[16D                [16D#
+interface 25GE2/0/45
+ undo shutdown
+#
+interface 25GE2/0/46
+ undo shutdown
+#
+interface 25GE2/0/47
+ undo shutdown
+#
+interface 25GE2/0/48
+ undo shutdown
+#
+interface 25GE2/0/49
+ undo shutdown
+#
+interface 25GE2/0/50
+ undo shutdown
+#
+interface 25GE2/0/51
+ undo shutdown
+#
+interface 25GE2/0/52
+[16D                [16D undo shutdown
+#
+interface 25GE2/0/53
+ undo shutdown
+#
+interface 25GE2/0/54
+ undo shutdown
+#
+interface 25GE2/0/55
+ undo shutdown
+#
+interface 25GE2/0/56
+ undo shutdown
+#
+interface 25GE2/0/57
+ undo shutdown
+#
+interface 25GE2/0/58
+ undo shutdown
+#
+interface 25GE2/0/59
+ undo shutdown
+#
+[16D                [16Dinterface 25GE2/0/60
+ undo shutdown
+#
+interface 25GE2/0/61
+ undo shutdown
+#
+interface 25GE2/0/62
+ undo shutdown
+#
+interface 25GE2/0/63
+ port-mode 1GE
+  description TO-ZOU-1588X2-IG1/0/0
+ undo shutdown
+ clock synchronization enable
+ clock priority 5
+ ptp enable
+#
+interface 25GE2/0/64
+ undo shutdown
+#
+interface 25GE2/0/65
+ undo shutdown
+#
+[16D                [16Dinterface 25GE2/0/66
+  description TO-ZOU_IP-PG40G-EG-3-I5/0/11
+ undo shutdown
+#
+interface 25GE2/0/67
+ undo shutdown
+#
+interface 25GE2/0/68
+  description TO-Aycpi_COU_G_2_
+ undo shutdown
+ eth-trunk 220
+ clock synchronization enable
+#
+interface 25GE2/0/69
+  description TO-Aycpi_COU_G_2_
+ undo shutdown
+ eth-trunk 220
+#
+interface 25GE2/0/70
+ port-mode 10GE
+ mtu 9000
+  description TO-HY_5I_UC_POU_UV
+ undo shutdown
+[16D                [16D ip binding vpn-instance 5G_OAM
+ ipv6 enable
+ ipv6 address 8A6E:E7C8:2655:5555:5555:5555:5555:5550/126
+#
+interface 25GE2/0/71
+  description TO-Bycpi_COU_CT_PG40G_10/1/0
+ undo shutdown
+ eth-trunk 201
+#
+interface 100GE1/0/0
+ undo shutdown
+ dcn
+#
+interface 100GE1/0/1
+  description TO-CSLD-BVB-EZ600Z8C-CUI-50|100IG1/0/0
+ undo shutdown
+ eth-trunk 3612
+ undo dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface 100GE1/0/2
+  description TO-CSDZ-UHL-PG8000-O14-OGT-0/7/0
+ undo shutdown
+[16D                [16D eth-trunk 6
+ undo dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE1/0/3
+ carrier down-hold-time 150
+  description TO-CSBD-DUICJN-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 13
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE1/0/4
+ carrier down-hold-time 150
+  description TO-CSBD-NZ-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 14
+[16D                [16D dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE1/0/5
+ carrier down-hold-time 150
+  description TO-CSPC-LPILZE-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 16
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE1/0/6
+ carrier down-hold-time 150
+  description TO-CSPC-CBBLU-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 19
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+[16D                [16D ptp announce-drop enable
+ ptp enable
+#
+interface 100GE1/0/7
+ carrier down-hold-time 150
+  description TO-CSPC-JRL-PG8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 20
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE1/0/8
+ undo shutdown
+#
+interface 100GE1/0/9
+ undo shutdown
+#
+interface 100GE1/0/10
+ undo shutdown
+#
+interface 100GE1/0/11
+[16D                [16D undo shutdown
+#
+interface 100GE1/0/12
+ undo shutdown
+#
+interface 100GE1/0/13
+ undo shutdown
+#
+interface 100GE1/0/14
+ undo shutdown
+#
+interface 100GE1/0/15
+ undo shutdown
+#
+interface 100GE1/0/16
+ undo shutdown
+#
+interface 100GE1/0/17
+ undo shutdown
+#
+interface 100GE1/0/18
+ undo shutdown
+#
+[16D                [16Dinterface 100GE1/0/19
+ undo shutdown
+#
+interface 100GE1/0/20
+ undo shutdown
+#
+interface 100GE1/0/21
+ undo shutdown
+#
+interface 100GE1/0/22
+ undo shutdown
+#
+interface 100GE1/0/23
+ undo shutdown
+#
+interface 100GE1/0/24
+ undo shutdown
+#
+interface 100GE1/0/25
+ undo shutdown
+#
+interface 100GE1/0/26
+ undo shutdown
+[16D                [16D#
+interface 100GE1/0/27
+ undo shutdown
+#
+interface 100GE1/0/28
+ undo shutdown
+#
+interface 100GE1/0/29
+ undo shutdown
+#
+interface 100GE1/0/30
+ undo shutdown
+#
+interface 100GE1/0/31
+ undo shutdown
+#
+interface 100GE1/0/32
+ undo shutdown
+#
+interface 100GE1/0/33
+  description TO- CQ-CQ-ZMS1B-2F01-R08C10U32-5GC-SSP-0001-HW8861-100GE1/3/1
+ undo shutdown
+ eth-trunk 202
+[16D                [16D#
+interface 100GE1/0/34
+  description TO- CQ-CQ-ZMS1B-2F01-R08C10U32-5GC-SSP-0003-HW8861-100GE1/3/1-UPF801
+ undo shutdown
+ eth-trunk 205
+#
+interface 100GE1/0/35
+ undo shutdown
+#
+interface 100GE1/0/36
+  description TO-CSES-COU-OEG-100IG7/1/0
+ undo shutdown
+ eth-trunk 230
+#
+interface 100GE1/0/37
+ undo shutdown
+#
+interface 100GE1/0/38
+ undo shutdown
+#
+interface 100GE1/0/39
+ undo shutdown
+#
+[16D                [16Dinterface 100GE5/0/0
+ carrier down-hold-time 150
+  description TO-CSDD-UV-G8000-Z8-OET-100IG5/0/0
+ undo shutdown
+ eth-trunk 0
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ clock priority 10
+ ptp enable
+#
+interface 100GE5/0/1
+  description TO-CSLD-BZO-EZ600Z8C-CUI-50|100IG1/0/0
+ undo shutdown
+ eth-trunk 3611
+ undo dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+#
+interface 100GE5/0/2
+ carrier down-hold-time 150
+  description TO-CSES-LD-RY-UO-PG8MO14-G1-100IG0/7/0
+ undo shutdown
+ eth-trunk 1
+[16D                [16D dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE5/0/3
+  description TO-CSDZ-COU-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 7
+ undo dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE5/0/4
+  description TO-CSBD-BIZS-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 11
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+[16D                [16D ptp enable
+#
+interface 100GE5/0/5
+  description TO-CSBD-TME-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 12
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE5/0/6
+ carrier down-hold-time 150
+  description TO-CSPC-PRCL-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 17
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE5/0/7
+[16D                [16D carrier down-hold-time 150
+  description TO-CSPC-LIUE-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 18
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE5/0/8
+ carrier down-hold-time 150
+  description TO-CSEU-NVZFN-G8000-O14-OGT-100IG0/7/0
+ undo shutdown
+ eth-trunk 21
+ dcn
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE5/0/9
+ undo shutdown
+#
+[16D                [16Dinterface 100GE5/0/10
+  description 12345-CjwcpZkcp-LkgTwO14-BwNkw
+ undo shutdown
+#
+interface 100GE5/0/11
+ undo shutdown
+#
+interface 100GE5/0/12
+ undo shutdown
+#
+interface 100GE5/0/13
+ undo shutdown
+#
+interface 100GE5/0/14
+ undo shutdown
+#
+interface 100GE5/0/15
+ undo shutdown
+#
+interface 100GE5/0/16
+ undo shutdown
+#
+interface 100GE5/0/17
+[16D                [16D undo shutdown
+#
+interface 100GE5/0/18
+ undo shutdown
+#
+interface 100GE5/0/19
+ undo shutdown
+#
+interface 100GE5/0/20
+ undo shutdown
+#
+interface 100GE5/0/21
+ undo shutdown
+#
+interface 100GE5/0/22
+ undo shutdown
+#
+interface 100GE5/0/23
+ undo shutdown
+#
+interface 100GE5/0/24
+ undo shutdown
+#
+[16D                [16Dinterface 100GE5/0/25
+ undo shutdown
+#
+interface 100GE5/0/26
+ undo shutdown
+#
+interface 100GE5/0/27
+ undo shutdown
+#
+interface 100GE5/0/28
+ undo shutdown
+#
+interface 100GE5/0/29
+ undo shutdown
+#
+interface 100GE5/0/30
+ undo shutdown
+#
+interface 100GE5/0/31
+ undo shutdown
+#
+interface 100GE5/0/32
+ undo shutdown
+[16D                [16D#
+interface 100GE5/0/33
+  description TO-SV_5IE_GQT
+ undo shutdown
+ eth-trunk 204
+#
+interface 100GE5/0/34
+  description TO-CS-ES-UV1D-3H01-T03E09W32-5IE-UUR-0007-JY8861-WRH901
+ undo shutdown
+ eth-trunk 206
+#
+interface 100GE5/0/35
+ undo shutdown
+#
+interface 100GE5/0/36
+  description TO-CSES-COU-OEG-100I16/1/0
+ undo shutdown
+ eth-trunk 230
+#
+interface 100GE5/0/37
+  description TO-CSYCYC-NVFU-CZEVP9000-18G-JZ01-eigk-0/0/0/1
+ undo shutdown
+ eth-trunk 210
+[16D                [16D#
+interface 100GE5/0/38
+ mtu 9000
+  description TO-CSLNR-PHJB-EZ600-Z16C-EQTG01-50|100IG7/0/0
+ undo shutdown
+ ip address 184.299.0.6 255.255.255.252
+ trust upstream default
+ isis enable 1000
+ isis circuit-type p2p
+  isis authentication-mode md5 cipher 138bff6a5668382d86b8f3ec2eec767a
+ isis cost 5000
+ isis small-hello
+ isis ldp-sync
+ isis timer ldp-sync hold-max-cost 60
+ isis link-quality low incr-cost 5000
+ isis peer hold-max-cost timer 60000
+ mpls
+ mpls ldp
+ link-quality low bit-error-threshold error-ratio 1 3 resume-ratio 1 4
+ port-queue be wfq weight 30 port-wred be-af3 outbound
+ port-queue af1 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af2 wfq weight 20 port-wred af1-af2 outbound
+ port-queue af3 wfq weight 30 port-wred be-af3 outbound
+[16D                [16D port-queue af4 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue ef pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs6 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ port-queue cs7 pq shaping shaping-percentage 80 port-wred af4-cs7-pq outbound
+ qos phb disable
+ statistic enable
+ clock synchronization enable
+ ptp announce-drop enable
+ ptp enable
+#
+interface 100GE5/0/39
+  description TO-DZ_ES-ES-FcR-O-1.UVP.EZ600-100IG11/0/0
+ undo shutdown
+#
+interface 100GE5/0/39.3004
+ vlan-type dot1q 3004
+ mtu 9000
+  description TO-DZ_ES-ES-FcR-O-1.UVP.EZ600_5I_TCP
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 8A64:7E9:7F2:86::5550/126
+ ipv6 mtu 9000
+ statistic enable
+[16D                [16D#
+interface LoopBack0
+ ip address 14.184.299.299 255.255.255.255
+ isis enable 1000
+ isis prefix-sid index 65511
+#
+interface LoopBack101
+  description For_FghcwnvTqwvgPgzvJqr5I
+ ip binding vpn-instance 5G_RAN
+ ipv6 enable
+ ipv6 address 5426::0E2:5567/128
+#
+interface LoopBack102
+  description For_FghcwnvTqwvgPgzvJqr4I
+ ip binding vpn-instance 4G_RAN
+ ip address 14.184.299.25 255.255.255.255
+#
+interface LoopBack103
+  description For_FghcwnvTqwvgPgzvJqr3I
+ ip binding vpn-instance 3G_RAN
+ ip address 14.184.299.9 255.255.255.255
+#
+interface LoopBack104
+ [16D                [16D description For_FghcwnvTqwvgPgzvJqr5I
+ ip binding vpn-instance 5G_RAN_VIP
+ ipv6 enable
+ ipv6 address 5426::0E2:556A/128
+#
+interface LoopBack105
+  description For_FghcwnvTqwvgPgzvJqr5I
+ ip binding vpn-instance 5G_OAM
+ ipv6 enable
+ ipv6 address 5426::0E2:556B/128
+#
+interface LoopBack106
+  description For_FghcwnvTqwvgPgzvJqr4I
+ ip binding vpn-instance 4G_OAM
+ ip address 14.184.299.26 255.255.255.255
+#
+interface LoopBack2147483647
+  description DCN loopback interface
+ ip binding vpn-instance __dcn_vpn__
+ ip address 162.158.273.264 255.255.0.0
+#
+interface NULL0
+#
+[16D                [16Dbfd auto_2_1 bind peer-ip default-ip interface 100GE5/0/0
+ discriminator local 2
+ discriminator remote 1
+ tos-exp 7
+ min-tx-interval 10
+ min-rx-interval 10
+#
+bfd Awang-nms bind peer-ip 14.184.299.138 interface Eth-Trunk220.10 source-ip 14.184.299.137 auto
+ min-tx-interval 300
+ min-rx-interval 300
+#
+bfd Awang-tool bind peer-ip 14.184.299.132 interface Eth-Trunk220.11 source-ip 14.184.299.131 auto
+ min-tx-interval 300
+ min-rx-interval 300
+#
+bfd Bwang-nms bind peer-ip 14.184.299.246 interface Eth-Trunk201.817 source-ip 14.184.299.245 auto
+#
+bfd Eth-Trunk0 bind link-bundle peer-ip 184.299.0.1 interface Eth-Trunk0 source-ip 184.299.0.2
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk1 bind link-bundle peer-ip 184.1.0.6 interface Eth-Trunk1 source-ip 184.1.0.5
+[16D                [16D min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk11 bind link-bundle peer-ip 184.15.0.6 interface Eth-Trunk11 source-ip 184.15.0.5
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+bfd Eth-Trunk12 bind link-bundle peer-ip 184.16.0.6 interface Eth-Trunk12 source-ip 184.16.0.5
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+bfd Eth-Trunk13 bind link-bundle peer-ip 184.17.0.6 interface Eth-Trunk13 source-ip 184.17.0.5
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk14 bind link-bundle peer-ip 184.18.0.6 interface Eth-Trunk14 source-ip 184.18.0.5
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+[16D                [16D#
+bfd Eth-Trunk16 bind link-bundle peer-ip 184.10.0.6 interface Eth-Trunk16 source-ip 184.10.0.5
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk17 bind link-bundle peer-ip 184.11.0.6 interface Eth-Trunk17 source-ip 184.11.0.5
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk18 bind link-bundle peer-ip 184.12.0.6 interface Eth-Trunk18 source-ip 184.12.0.5
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk19 bind link-bundle peer-ip 184.13.0.6 interface Eth-Trunk19 source-ip 184.13.0.5
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk20 bind link-bundle peer-ip 184.24.0.6 interface Eth-Trunk20 source-ip 184.24.0.5
+ min-tx-interval 30
+[16D                [16D min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk21 bind link-bundle peer-ip 184.25.0.6 interface Eth-Trunk21 source-ip 184.25.0.5
+ min-tx-interval 30
+ min-rx-interval 30
+ process-pst
+#
+bfd Eth-Trunk3611 bind link-bundle peer-ip 184.299.15.6 interface Eth-Trunk3611 source-ip 184.299.15.5
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+bfd Eth-Trunk3612 bind link-bundle peer-ip 184.299.16.6 interface Eth-Trunk3612 source-ip 184.299.16.5
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+bfd Eth-Trunk6 bind link-bundle peer-ip 184.6.0.6 interface Eth-Trunk6 source-ip 184.6.0.5
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+[16D                [16Dbfd Eth-Trunk7 bind link-bundle peer-ip 184.7.0.6 interface Eth-Trunk7 source-ip 184.7.0.5
+ min-tx-interval 10
+ min-rx-interval 10
+ process-pst
+#
+bfd UPF800_VoLTE bind peer-ipv6 8A6E:E7A8:2657:9F76::7 vpn-instance VoLTE_SGi interface Eth-Trunk202.2958 source-ipv6 8A6E:E7A8:2657:9F76:: auto
+#
+bfd UPF801_VoLTE bind peer-ipv6 8A6E:E7A8:2657:AF76::7 vpn-instance VoLTE_SGi interface Eth-Trunk205.2958 source-ipv6 8A6E:E7A8:2657:AF76:: auto
+#
+bfd UPF900_VoLTE bind peer-ipv6 8A6E:E7A8:2657:BF76::7 vpn-instance VoLTE_SGi interface Eth-Trunk204.2958 source-ipv6 8A6E:E7A8:2657:BF76:: auto
+#
+bfd UPF901_VoLTE bind peer-ipv6 8A6E:E7A8:2657:CF76::7 vpn-instance VoLTE_SGi interface Eth-Trunk206.2958 source-ipv6 8A6E:E7A8:2657:CF76:: auto
+#
+bfd ZMMCR-MCE-VoLTE bind peer-ipv6 8A6E:E7A8:2657:7F86::7 vpn-instance VoLTE_SGi interface Eth-Trunk230.2958 source-ipv6 8A6E:E7A8:2657:7F86:: auto
+#
+bfd ZMSMCR-MCE-Gn_C bind peer-ip 136.102.284.2 vpn-instance GPRS_Gn_C interface Eth-Trunk230.2954 source-ip 136.102.284.1 auto
+#
+bfd ZMSMCR-MCE-OM bind peer-ip 1.5.104.160 vpn-instance 5G_OAM interface Eth-Trunk230.875 source-ip 1.5.104.169 auto
+#
+bgp 65448
+ router-id 14.184.299.299
+ graceful-restart
+ graceful-restart peer-reset
+[16D                [16D group RR-M internal
+ peer RR-M connect-interface LoopBack0
+  peer RR-M password cipher 0cf5e8bdfae465ca27c41976d4e05eba
+ peer 14.170.0.7 as-number 65448
+ peer 14.170.0.7 group RR-M
+ group RR-S internal
+ peer RR-S connect-interface LoopBack0
+  peer RR-S password cipher e88621c321a227b5631fb472fd54f42c
+ peer 14.170.0.8 as-number 65448
+ peer 14.170.0.8 group RR-S
+ #
+ ipv4-family unicast
+  undo synchronization
+  network 14.184.299.299 255.255.255.255 route-policy LabelRoute-NetworkLoopBack
+  tunnel-selector NMS-Tunnel-Policy
+  ingress-lsp protect-mode bgp-frr
+  bestroute nexthop-resolved tunnel
+  route-select delay 300
+  peer RR-M enable
+  peer RR-M route-policy Import-LabelRoute-From-RR import
+  peer RR-M route-policy Export-LabelRoute-To-RR-Master export
+  peer RR-M label-route-capability
+  peer RR-M advertise-community
+[16D                [16D  peer 14.170.0.7 enable
+  peer 14.170.0.7 group RR-M
+  peer RR-S enable
+  peer RR-S route-policy Import-LabelRoute-From-RR import
+  peer RR-S route-policy Export-LabelRoute-To-RR-Slave export
+  peer RR-S label-route-capability
+  peer RR-S advertise-community
+  peer 14.170.0.8 enable
+  peer 14.170.0.8 group RR-S
+ #
+ ipv4-family vpnv4
+  policy vpn-target
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  peer RR-M enable
+  peer RR-M route-policy Import-Ipv4-From-RR import
+  peer RR-M route-policy Export-Ipv4-To-RR-Master export
+  peer RR-M advertise-community
+  peer 14.170.0.7 enable
+  peer 14.170.0.7 group RR-M
+  peer RR-S enable
+  peer RR-S route-policy Import-Ipv4-From-RR import
+  peer RR-S route-policy Export-Ipv4-To-RR-Slave export
+[16D                [16D  peer RR-S advertise-community
+  peer 14.170.0.8 enable
+  peer 14.170.0.8 group RR-S
+ #
+ ipv4-family vpn-instance 5GC_WAP
+  import-route static
+ #
+ ipv4-family vpn-instance 5G_MEC
+  import-route static
+ #
+ ipv4-family vpn-instance 5G_OAM
+  import-route static
+ #
+ ipv4-family vpn-instance GPRS_Gn_C
+  import-route static
+ #
+ ipv4-family vpn-instance LTE-VPN
+  import-route direct
+  import-route static
+  auto-frr
+ #
+ ipv6-family vpnv6
+  reflect change-path-attribute
+[16D                [16D  policy vpn-target
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  peer RR-M enable
+  peer RR-M route-policy Import-Ipv6-From-RR import
+  peer RR-M route-policy Export-Ipv6-To-RR-Master export
+  peer RR-M advertise-community
+  peer 14.170.0.7 enable
+  peer 14.170.0.7 group RR-M
+  peer RR-S enable
+  peer RR-S route-policy Import-Ipv6-From-RR import
+  peer RR-S route-policy Export-Ipv6-To-RR-Slave export
+  peer RR-S advertise-community
+  peer 14.170.0.8 enable
+  peer 14.170.0.8 group RR-S
+ #
+ ipv6-family vpn-instance 5G_OAM
+  import-route direct
+  import-route static
+ #
+ ipv6-family vpn-instance 5G_RAN
+  network 8A6E:E7A8:2657:7566::867 128
+  network 8A6E:E7A8:2657:7566::868 128
+[16D                [16D  network 8A6E:E7A8:4655:5566:767:556C:6:7 128
+  network 8A6E:E7A8:4655:5566:767:556C:6:8 128
+  network 8A64:7E9:3:: 64
+  network 8A64:7E9:3:76:: 64
+  network 8A64:7E9:7B:: 64
+  network 8A64:7E9:7B:76:: 64
+  network 8A64:7E9:7F:: 64
+  network 8A64:7E9:7F:76:: 64
+  network 8A64:7E9:87:: 64
+  network 8A64:7E9:87:76:: 64
+  network 8A64:7E9:B7:: 64
+  network 8A64:7E9:B7:76:: 64
+  network 8A64:7E9:BB:: 64
+  network 8A64:7E9:BB:76:: 64
+  network 8A64:7E9:BF:: 64
+  network 8A64:7E9:BF:76:: 64
+  network 8A64:7E9:B3:: 64
+  network 8A64:7E9:B3:76:: 64
+  network 8A64:7E9:C7:: 64
+  network 8A64:7E9:C7:76:: 64
+  network 8A64:7E9:CB:: 64
+  network 8A64:7E9:CB:76:: 64
+  network 8A64:7E9:CF:: 64
+[16D                [16D  network 8A64:7E9:CF:76:: 64
+  network 8A64:7E9:C3:: 64
+  network 8A64:7E9:C3:76:: 64
+  network 8A64:7E9:DB:: 64
+  network 8A64:7E9:DB:76:: 64
+  network 8A64:7E9:DF:: 64
+  network 8A64:7E9:DF:76:: 64
+  network 8A64:7E9:D3:: 64
+  network 8A64:7E9:D3:76:: 64
+  network 5266:7666:6:716F::7 128
+  import-route direct
+  import-route static
+  maximum load-balancing eibgp 8
+  peer 8A64:7E9:7F2:86::555F as-number 65228
+   peer 8A64:7E9:7F2:86::555F description LTfotFZ-5I-UC
+   peer 8A64:7E9:7F2:86::555F password cipher 990af031c52360380c09de3596e48ea5
+  peer 8A64:7E9:7F2:86::555F bfd min-tx-interval 150 min-rx-interval 150
+  peer 8A64:7E9:7F2:86::555F bfd enable
+  peer 8A64:7E9:7F2:86::555F tracking delay 30
+  peer 8A64:7E9:7F2:86::555F route-policy DXforLT-5G-SA-in import
+  peer 8A64:7E9:7F2:86::555F route-policy LTforDX-5G-SA-out export
+ #
+ ipv6-family vpn-instance 5G_RAN_VIP
+[16D                [16D  import-route static
+ #
+ ipv6-family vpn-instance GPRS_Gn_C
+  import-route static
+ #
+ ipv6-family vpn-instance VoLTE_SGi
+  import-route static
+ #
+ l2vpn-family evpn
+  undo policy vpn-target
+  bestroute nexthop-resolved tunnel
+  route-select delay 180
+  peer RR-M enable
+  peer RR-M route-policy Import-EVPN-From-RR import
+  peer RR-M route-policy Export-EVPN-To-RR-Master export
+  peer RR-M advertise-community
+  peer 14.170.0.7 enable
+  peer 14.170.0.7 group RR-M
+  peer RR-S enable
+  peer RR-S route-policy Import-EVPN-From-RR import
+  peer RR-S route-policy Export-EVPN-To-RR-Slave export
+  peer RR-S advertise-community
+  peer 14.170.0.8 enable
+[16D                [16D  peer 14.170.0.8 group RR-S
+#
+ospf 65534 vpn-instance __dcn_vpn__
+  description DCN ospf create by default
+ opaque-capability enable
+ hostname
+ vpn-instance-capability simple
+ area 0.0.0.0
+  network 0.0.0.0 255.255.255.255
+#
+!The DCN function implements the capability of plug-and-play for this device.
+!A NE IP address based on the unique NE ID is automatically generated in VPN
+!of DCN. It is recommended that the NE IP address be changed to the planned
+!one by running the ne-ip X.X.X.X <MASK> command after the device being online.
+dcn
+#
+route-policy DXforLT-5G-SA-in permit node 10
+ if-match ipv6 address prefix-list DXforLT-5G-SA-in
+#
+route-policy Export-EVPN-To-RR-Master permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+ apply local-preference 100
+ apply community 65448:100 additive
+[16D                [16D#
+route-policy Export-EVPN-To-RR-Slave permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+ apply local-preference 50
+ apply community 65448:100 additive
+#
+route-policy Export-Ipv4-To-RR-Master permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+ apply local-preference 100
+ apply community 65448:100 additive
+#
+route-policy Export-Ipv4-To-RR-Slave permit node 10
+ if-match ip-prefix No-Ipv4-Default-To-RR
+ apply local-preference 50
+ apply community 65448:100 additive
+#
+route-policy Export-Ipv6-To-RR-Master permit node 10
+ if-match ipv6 address prefix-list No-Ipv6-Default-To-RR
+ apply local-preference 100
+ apply community 65448:100 additive
+#
+route-policy Export-Ipv6-To-RR-Slave permit node 10
+ if-match ipv6 address prefix-list No-Ipv6-Default-To-RR
+[16D                [16D apply local-preference 50
+ apply community 65448:100 additive
+#
+route-policy Export-LabelRoute-To-RR-Master permit node 10
+ if-match mpls-label
+ apply ip-address next-hop peer-address
+ apply local-preference 100
+ apply community 65448:100
+ apply mpls-label
+#
+route-policy Export-LabelRoute-To-RR-Master permit node 20
+ if-match ip-prefix LoopBack-Label
+ apply local-preference 100
+ apply community 65448:100
+ apply mpls-label
+#
+route-policy Export-LabelRoute-To-RR-Slave permit node 10
+ if-match mpls-label
+ apply ip-address next-hop peer-address
+ apply local-preference 50
+ apply community 65448:100
+ apply mpls-label
+#
+[16D                [16Droute-policy Export-LabelRoute-To-RR-Slave permit node 20
+ if-match ip-prefix LoopBack-Label
+ apply local-preference 50
+ apply community 65448:100
+ apply mpls-label
+#
+route-policy Import-EVPN-From-RR permit node 10
+ if-match community-filter From-MER-M
+ apply local-preference 100
+#
+route-policy Import-EVPN-From-RR permit node 20
+ if-match community-filter From-MER-S
+ apply local-preference 50
+#
+route-policy Import-EVPN-From-RR permit node 30
+#
+route-policy Import-Ipv4-From-RR permit node 10
+ if-match community-filter From-MER-M
+ apply local-preference 100
+#
+route-policy Import-Ipv4-From-RR permit node 20
+ if-match community-filter From-MER-S
+ apply local-preference 50
+[16D                [16D#
+route-policy Import-Ipv4-From-RR permit node 30
+#
+route-policy Import-Ipv6-From-RR permit node 10
+ if-match community-filter From-MER-M
+ apply local-preference 100
+#
+route-policy Import-Ipv6-From-RR permit node 20
+ if-match community-filter From-MER-S
+ apply local-preference 50
+#
+route-policy Import-Ipv6-From-RR permit node 30
+#
+route-policy Import-LabelRoute-From-RR permit node 10
+ if-match community-filter From-MER-M
+ apply local-preference 100
+#
+route-policy Import-LabelRoute-From-RR permit node 20
+ if-match community-filter From-MER-S
+ apply local-preference 50
+#
+route-policy Import-LabelRoute-From-RR permit node 30
+#
+[16D                [16Droute-policy LTforDX-5G-SA-out permit node 10
+ if-match ipv6 address prefix-list LTforDX-5G-SA-out
+#
+route-policy LabelRoute-NetworkLoopBack permit node 10
+ if-match ip-prefix LoopBack-Label
+ apply community 65448:100
+ apply mpls-label
+#
+route-policy NCE-ZMS permit node 10
+ if-match ip-prefix NCE-ZMS
+#
+route-policy NMS-to-JiTuan permit node 10
+ if-match ip-prefix NMS-to-JiTuan
+#
+nqa twamp-light
+ client
+   test-session 1 sender-ip 184.299.0.2 reflector-ip 184.299.0.1 sender-port 10001 reflector-port 10000 description Eth-Vtwpm0
+   test-session 2 sender-ip 184.1.0.5 reflector-ip 184.1.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm1
+   test-session 3 sender-ip 184.6.0.5 reflector-ip 184.6.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm6
+   test-session 4 sender-ip 184.7.0.5 reflector-ip 184.7.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm7
+   test-session 5 sender-ip 184.15.0.5 reflector-ip 184.15.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm11
+   test-session 6 sender-ip 184.16.0.5 reflector-ip 184.16.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm12
+   test-session 7 sender-ip 184.17.0.5 reflector-ip 184.17.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm13
+ [16D                [16D  test-session 8 sender-ip 184.18.0.5 reflector-ip 184.18.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm14
+   test-session 9 sender-ip 184.10.0.5 reflector-ip 184.10.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm16
+   test-session 10 sender-ip 184.11.0.5 reflector-ip 184.11.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm17
+   test-session 11 sender-ip 184.12.0.5 reflector-ip 184.12.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm18
+   test-session 12 sender-ip 184.13.0.5 reflector-ip 184.13.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm19
+   test-session 13 sender-ip 184.24.0.5 reflector-ip 184.24.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm20
+   test-session 14 sender-ip 184.25.0.5 reflector-ip 184.25.0.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm21
+   test-session 15 sender-ip 184.299.15.5 reflector-ip 184.299.15.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm3611
+   test-session 16 sender-ip 184.299.16.5 reflector-ip 184.299.16.6 sender-port 10001 reflector-port 10000 description Eth-Vtwpm3612
+ sender
+  test start-continual test-session 1 period 1000
+  test start-continual test-session 2 period 1000
+  test start-continual test-session 3 period 1000
+  test start-continual test-session 4 period 1000
+  test start-continual test-session 5 period 1000
+  test start-continual test-session 6 period 1000
+  test start-continual test-session 7 period 1000
+  test start-continual test-session 8 period 1000
+  test start-continual test-session 9 period 1000
+  test start-continual test-session 10 period 1000
+  test start-continual test-session 11 period 1000
+  test start-continual test-session 12 period 1000
+  test start-continual test-session 13 period 1000
+[16D                [16D  test start-continual test-session 14 period 1000
+  test start-continual test-session 15 period 1000
+  test start-continual test-session 16 period 1000
+ responder
+  test-session 1 local-ip 184.299.0.2 remote-ip 184.299.0.1 local-port 10000 remote-port 10001
+  test-session 2 local-ip 184.1.0.5 remote-ip 184.1.0.6 local-port 10000 remote-port 10001
+  test-session 3 local-ip 184.6.0.5 remote-ip 184.6.0.6 local-port 10000 remote-port 10001
+  test-session 4 local-ip 184.7.0.5 remote-ip 184.7.0.6 local-port 10000 remote-port 10001
+  test-session 5 local-ip 184.15.0.5 remote-ip 184.15.0.6 local-port 10000 remote-port 10001
+  test-session 6 local-ip 184.16.0.5 remote-ip 184.16.0.6 local-port 10000 remote-port 10001
+  test-session 7 local-ip 184.17.0.5 remote-ip 184.17.0.6 local-port 10000 remote-port 10001
+  test-session 8 local-ip 184.18.0.5 remote-ip 184.18.0.6 local-port 10000 remote-port 10001
+  test-session 9 local-ip 184.10.0.5 remote-ip 184.10.0.6 local-port 10000 remote-port 10001
+  test-session 10 local-ip 184.11.0.5 remote-ip 184.11.0.6 local-port 10000 remote-port 10001
+  test-session 11 local-ip 184.12.0.5 remote-ip 184.12.0.6 local-port 10000 remote-port 10001
+  test-session 12 local-ip 184.13.0.5 remote-ip 184.13.0.6 local-port 10000 remote-port 10001
+  test-session 13 local-ip 184.24.0.5 remote-ip 184.24.0.6 local-port 10000 remote-port 10001
+  test-session 14 local-ip 184.25.0.5 remote-ip 184.25.0.6 local-port 10000 remote-port 10001
+  test-session 15 local-ip 184.299.15.5 remote-ip 184.299.15.6 local-port 10000 remote-port 10001
+  test-session 16 local-ip 184.299.16.5 remote-ip 184.299.16.6 local-port 10000 remote-port 10001
+#
+ip ip-prefix LoopBack-Label index 10 permit 14.184.299.299 32
+ip ip-prefix NCE-ZMS index 10 permit 14.184.0.284 28
+[16D                [16Dip ip-prefix NMS-to-JiTuan index 10 permit 136.102.298.0 24
+ip ip-prefix NMS-to-JiTuan index 15 permit 14.184.0.0 16
+ip ip-prefix NMS-to-JiTuan index 20 permit 14.284.36.188 29
+ip ip-prefix NMS-to-JiTuan index 25 permit 14.284.37.10 29
+ip ip-prefix No-Ipv4-Default-To-RR index 10 deny 0.0.0.0 0
+ip ip-prefix No-Ipv4-Default-To-RR index 20 permit 0.0.0.0 0 less-equal 32
+ip community-filter basic From-MER-M index 10 permit 65448:100
+ip community-filter basic From-MER-S index 10 permit 65448:200
+#
+ ip route-static 14.184.0.0 255.255.0.0 184.299.0.18 description FOR_YC_CVG&J3E_UO_QCO
+ ip route-static 14.284.36.188 255.255.255.248 14.184.299.138 preference 1 track bfd-session Awang-nms description TO CQ-CQ-SDNcontroler
+ ip route-static 14.284.37.10 255.255.255.248 14.184.299.132 preference 1 track bfd-session Awang-tool description FOR HUAWEI-TOOL
+ ip route-static 14.284.37.36 255.255.255.240 14.184.299.132 preference 1 track bfd-session Awang-tool description FOR ZTE&H3C-TOOL
+ ip route-static 136.102.298.0 255.255.255.0 14.184.299.246 track bfd-session Bwang-nms description to_JV_UO_lkcjqpiycpiiwcp
+ ip route-static vpn-instance LTE-VPN 57.289.0.1 255.255.255.255 57.289.0.152 description to_ZOU_WRH_4I_TCP
+ ip route-static vpn-instance LTE-VPN 57.289.0.2 255.255.255.255 57.289.0.152 description to_ZOU_WRH_4I_TCP
+ ip route-static vpn-instance LTE-VPN 116.25.0.280 255.255.255.255 57.289.0.152 description to_ZOU_WRH_4I_TCP
+ ip route-static vpn-instance 5G_OAM 1.2.162.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.174.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.177.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.184.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.189.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.104.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ [16D                [16Dip route-static vpn-instance 5G_OAM 1.2.105.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.106.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.107.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.108.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.109.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.115.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.119.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.111.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.2.139.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_KOU_QCO
+ ip route-static vpn-instance 5G_OAM 1.5.105.0 255.255.255.224 1.5.104.2 description to  ZMS-IOT-EOR1-UPF700-for-U2020
+ ip route-static vpn-instance 5G_OAM 1.5.105.36 255.255.255.224 1.5.104.18 description to   ZMS-5GC-EOR1-UPF800-for U2020
+ ip route-static vpn-instance 5G_OAM 1.5.105.68 255.255.255.224 1.5.104.32 description to   ZMS-5GC-EOR1-UPF801-for U2020
+ ip route-static vpn-instance 5G_OAM 1.5.105.162 255.255.255.224 1.5.104.18 description to_URH800-GQT1_5I_QCO_hqt_7jcqnqw
+ ip route-static vpn-instance 5G_OAM 1.5.106.0 255.255.255.224 1.5.104.174 description to_SV_WRH750_KQV_OIOP_hqt_7jcqnqw_10H_Enkgpv
+ ip route-static vpn-instance 5G_OAM 1.5.106.36 255.255.255.224 1.5.104.186 description to_SV_WRH900_5IE_OIOP_hqt_7jcqnqw_10H_Enkgpv
+ ip route-static vpn-instance 5G_OAM 1.5.106.68 255.255.255.224 1.5.104.198 description to_SV_WRH901_5IE_OIOP_hqt_7jcqnqw_10H_Enkgpv
+ ip route-static vpn-instance 5G_OAM 1.5.106.162 255.255.255.224 1.5.104.18 description to_URH800-GQT1_5I_QCO_hqt_7jcqnqw_vq_ejgpifw_W2020
+ ip route-static vpn-instance 5G_OAM 1.73.162.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.73.163.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.73.174.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.73.176.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.73.184.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_REH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.73.104.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ [16D                [16Dip route-static vpn-instance 5G_OAM 1.73.105.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.73.106.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.73.108.0 255.255.255.0 1.5.104.29 description to_DS_ejgpifw_WRH_QCO-hqt-rccu
+ ip route-static vpn-instance 5G_OAM 1.89.68.2 255.255.255.255 1.5.104.2 description to_NVR_WRH700
+ ip route-static vpn-instance 5G_OAM 1.89.68.68 255.255.255.224 1.5.104.2 description to_URH700_GQT_5I_QCO
+ ip route-static vpn-instance 5G_OAM 1.89.68.90 255.255.255.255 1.5.104.29 description to_DS_ejgpifw_WRH_QCO
+ ip route-static vpn-instance 5G_OAM 1.89.68.147 255.255.255.255 1.5.104.2 description TO-ZOU-KQV-WRH700
+ ip route-static vpn-instance 5G_OAM 1.89.68.174 255.255.255.255 1.5.104.18 description TO-ZOU-KQV-WRH800
+ ip route-static vpn-instance 5G_OAM 1.89.68.136 255.255.255.192 1.5.104.18 description to_URH800_GQT_5I_QCO
+ ip route-static vpn-instance 5G_OAM 1.89.69.2 255.255.255.255 1.5.104.174 description to_NVR_WRH750
+ ip route-static vpn-instance 5G_OAM 1.89.69.162 255.255.255.128 1.5.104.186 description to_SV_WRH900_5IE_OIOP_hqt_7jcqnqw_10H_Enkgpv
+ ip route-static vpn-instance 5G_OAM 1.89.60.2 255.255.255.255 1.5.104.32 description to_URH801_GQT_5I_QCO
+ ip route-static vpn-instance 5G_OAM 1.89.60.68 255.255.255.192 1.5.104.32 description to_URH801_GQT_5I_QCO
+ ip route-static vpn-instance 5G_OAM 1.89.61.0 255.255.255.192 1.5.104.198 description to_URH901_GQT1_5I_QCO
+ ip route-static vpn-instance 5G_OAM 1.89.61.68 255.255.255.224 1.5.104.198 description to_URH901_GQT1_5I_QCO
+ ip route-static vpn-instance 5G_OAM 1.89.61.90 255.255.255.240 1.5.104.198 description to_URH901_GQT1_5I_QCO
+ ip route-static vpn-instance 5G_OAM 14.15.16.1 255.255.255.255 1.5.104.160 track bfd-session ZMSMCR-MCE-OM description to_ZOU_PVR_ugtxgt_Nqecn
+ ip route-static vpn-instance GPRS_Gn_C 150.73.254.0 255.255.255.0 136.102.284.2 track bfd-session ZMSMCR-MCE-Gn_C description to_GRTU_IP_E-IIUP
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.166 255.255.255.255 136.102.296.197 description to_URH_IRTU_IP_E_KQV_UV-WRH750
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.167 255.255.255.255 136.102.296.197 description to_URH_IRTU_IP_E_KQV_UV-WRH750
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.168 255.255.255.255 136.102.296.186 description to_IQV_COU_WRH_Ip_E-WRH700
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.169 255.255.255.255 136.102.296.186 description to_IQV_COU_WRH_Ip_E-WRH700
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.160 255.255.255.255 136.102.296.186 description to_IQV_COU_WRH_Ip_E-WRH700
+ [16D                [16Dip route-static vpn-instance GPRS_Gn_C 264.240.122.161 255.255.255.255 136.102.296.197 description to_URH_IRTU_IP_E_KQV_UV-WRH750
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.172 255.255.255.255 136.102.296.100 description to_5IE_COU_WRH_Ip_E-WRH800
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.173 255.255.255.255 136.102.296.100 description to_5IE_COU_WRH_Ip_E-WRH800
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.184 255.255.255.255 136.102.296.100 description to_5IE_COU_WRH_Ip_E-WRH800
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.185 255.255.255.255 136.102.296.112 description to_5IE_COU_WRH_Ip_E-WRH801
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.186 255.255.255.255 136.102.296.112 description to_5IE_COU_WRH_Ip_E-WRH801
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.187 255.255.255.255 136.102.296.112 description to_5IE_COU_WRH_Ip_E-WRH801
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.198 255.255.255.255 136.102.296.134 description to_URH_IRTU_IP_E_5IE_UV-WRH900
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.199 255.255.255.255 136.102.296.134 description to_URH_IRTU_IP_E_5IE_UV-WRH900
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.190 255.255.255.255 136.102.296.134 description to_URH_IRTU_IP_E_5IE_UV-WRH900
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.100 255.255.255.255 136.102.296.246 description to_URH_IRTU_IP_E_5IE_UV-WRH901
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.101 255.255.255.255 136.102.296.246 description to_URH_IRTU_IP_E_5IE_UV-WRH901
+ ip route-static vpn-instance GPRS_Gn_C 264.240.122.102 255.255.255.255 136.102.296.246 description to_URH_IRTU_IP_E_5IE_UV-WRH901
+ ip route-static vpn-instance 5G_MEC 1.45.0.0 255.255.0.0 1.41.156.1 description to_Bycpi_5I_OGE
+ ip route-static vpn-instance 5G_MEC 1.41.0.0 255.255.252.0 1.41.156.9 description TO_ZOU_OGE_ugtxgt
+ ip route-static vpn-instance 5G_MEC 1.41.4.0 255.255.254.0 1.41.156.11 description TO_SV_OGE_ugtxgt
+ ip route-static vpn-instance 5G_MEC 1.41.6.0 255.255.255.0 1.41.156.11 description TO_SV_OGE_ugtxgt
+ ip route-static vpn-instance 5GC_WAP 14.168.33.162 255.255.255.224 14.168.33.5 description to_zgpicjkbgywejgpicckycpi_5IE_YCR
+ ip route-static vpn-instance 5GC_WAP 14.168.33.174 255.255.255.255 14.168.33.66 description to UPF800
+ ip route-static vpn-instance 5GC_WAP 14.168.33.176 255.255.255.255 14.168.33.32 description to_SV_WRH_5IE_YCR-5IE-WRH900
+ ip route-static vpn-instance 5GC_WAP 14.168.33.136 255.255.255.248 14.168.33.5 description to_zgpicjkbgywejgpicckycpi_5IE_YCR
+#
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26BA:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-ejgpimqw-vqEugtxkeg-QCO
+ [16D                [16Dipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26BE:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-hgpilkg-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26B2:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-mckcjqw-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26C6:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-ycpcjqw-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26CA:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-nkcpirkpi-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26CE:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-ywujcp-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26C2:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-ywzk-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26DA:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-bwpbcpi-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26DE:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-cjqpizkcp-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:26D2:555:: 64 Eth-Trunk210.875 8A6E:E7A8:2657:7F86::7 description to_LV-UC-IT-lkcjcp-fkcplkcpi-vqEugtxkeg-QCO
+ ipv6 route-static vpn-instance 5G_OAM 8A6E:E7C8:2655:5555:5555:5555:5555:5566 121 25GE2/0/70 8A6E:E7C8:2655:5555:5555:5555:5555:555F description to_HY_5I_POU_UC_UV
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:7266::867 128 Eth-Trunk200.2954 8A6E:E7A8:2657:7266::7 description to_ZOU_WRH_Ip_E-KQV-WRH700
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:7266::868 128 Eth-Trunk200.2954 8A6E:E7A8:2657:7266::7 description to_ZOU_WRH_Ip_E-KQV-WRH700
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:7266::869 128 Eth-Trunk200.2954 8A6E:E7A8:2657:7266::7 description to_ZOU_WRH_Ip_E-KQV-WRH700
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:7266::86A 128 Eth-Trunk200.2954 8A6E:E7A8:2657:7266::7 description to_ZOU_WRH_Ip_E-KQV-WRH700
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:8266::867 128 Eth-Trunk203.2956 8A6E:E7A8:2657:8266::7 description to_SV_WRH_IRTU_Ip_E-KQV-WRH750
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:8266::868 128 Eth-Trunk203.2956 8A6E:E7A8:2657:8266::7 description to_SV_WRH_IRTU_Ip_E-KQV-WRH750
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:8266::869 128 Eth-Trunk203.2956 8A6E:E7A8:2657:8266::7 description to_SV_WRH_IRTU_Ip_E-KQV-WRH750
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:8266::86A 128 Eth-Trunk203.2956 8A6E:E7A8:2657:8266::7 description to_SV_WRH_IRTU_Ip_E-KQV-WRH750
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:9266::867 128 Eth-Trunk202.2956 8A6E:E7A8:2657:9266::7 description to_ZOU_WRH_Ip_E-5IE-WRH800
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:9266::868 128 Eth-Trunk202.2956 8A6E:E7A8:2657:9266::7 description to_ZOU_WRH_Ip_E-5IE-WRH800
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:9266::869 128 Eth-Trunk202.2956 8A6E:E7A8:2657:9266::7 description to_ZOU_WRH_Ip_E-5IE-WRH800
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:9266::86A 128 Eth-Trunk202.2956 8A6E:E7A8:2657:9266::7 description to_ZOU_WRH_Ip_E-5IE-WRH800
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:A266::867 128 Eth-Trunk205.2956 8A6E:E7A8:2657:A266::7 description to_ZOU_WRH_Ip_E-5IE-WRH801
+ [16D                [16Dipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:A266::868 128 Eth-Trunk205.2956 8A6E:E7A8:2657:A266::7 description to_ZOU_WRH_Ip_E-5IE-WRH801
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:A266::869 128 Eth-Trunk205.2956 8A6E:E7A8:2657:A266::7 description to_ZOU_WRH_Ip_E-5IE-WRH801
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:A266::86A 128 Eth-Trunk205.2956 8A6E:E7A8:2657:A266::7 description to_ZOU_WRH_Ip_E-5IE-WRH801
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:B266::867 128 Eth-Trunk204.2956 8A6E:E7A8:2657:B266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH900
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:B266::868 128 Eth-Trunk204.2956 8A6E:E7A8:2657:B266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH900
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:B266::869 128 Eth-Trunk204.2956 8A6E:E7A8:2657:B266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH900
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:B266::86A 128 Eth-Trunk204.2956 8A6E:E7A8:2657:B266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH900
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:C266::867 128 Eth-Trunk206.2956 8A6E:E7A8:2657:C266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH901
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:C266::868 128 Eth-Trunk206.2956 8A6E:E7A8:2657:C266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH901
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:C266::869 128 Eth-Trunk206.2956 8A6E:E7A8:2657:C266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH901
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:2657:C266::86A 128 Eth-Trunk206.2956 8A6E:E7A8:2657:C266::7 description to_SV_WRH_IRTU_Ip_E-5IE-WRH901
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:4655:5266:767:556C:6:7 128 Eth-Trunk201.301 8A6E:E7A8:2657:7255:5555:5555:5555:6 description to_CF_FS_Ip_E-KQV
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:4655:5266:76A:556C:6:7 128 Eth-Trunk201.301 8A6E:E7A8:2657:7255:5555:5555:5555:6 description to_CF_FS_Ip_E-5IE
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:4655:52A6:767:556C:6:7 128 Eth-Trunk201.301 8A6E:E7A8:2657:7255:5555:5555:5555:6 description to_CF_FS_Ip_E-KQV-FE2
+ ipv6 route-static vpn-instance GPRS_Gn_C 8A6E:E7A8:4655:52A6:76A:556C:6:7 128 Eth-Trunk201.301 8A6E:E7A8:2657:7255:5555:5555:5555:6 description to_CF_FS_Ip_E-5IE
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::96 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-COU
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::97 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-COU
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::98 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-COU
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::99 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-COU
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::9A 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-COU
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::9B 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-COU
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::9C 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-UV
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::9D 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-UV
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::9E 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-UV
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::9F 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-UV
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::90 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-UV
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::91 128 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-UV
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:E7A8:2667::C6 123 Eth-Trunk230.2958 8A6E:E7A8:2657:7F86::7 track bfd-session ZMMCR-MCE-VoLTE description to_SDE-UV
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC8:7666:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC8:7676:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 description to_ZOU_WRH_5I_TCP-5IE-WRH801
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC8:7686:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 description to_SV_WRH_XqNVG_UIK-5IE-WRH900
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC8:7696:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 description to_SV_WRH_XqNVG_UIK-5IE-WRH901
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_BwCjqpiSw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_BwCjqpiSw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_BwCjqpiSw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_FcFwMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_FcFwMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_FcFwMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_FcFwMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:266:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_LkcpiDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:276:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_LkcpiDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:286:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_LkcpiDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:296:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_LkcpiDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7866:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_UjcRkpiDc
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7876:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_UjcRkpiDc
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7886:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_UjcRkpiDc
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7896:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_UjcRkpiDc
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7E66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_LkwNqpiRq
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7E76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_LkwNqpiRq
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7E86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_LkwNqpiRq
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7E96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_LkwNqpiRq
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7466:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_PcpCp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7476:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_PcpCp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7486:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_PcpCp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:7496:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_PcpCp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8A66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_DgkDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8A76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_DgkDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8A86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_DgkDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8A96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_DgkDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8066:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_BwDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8076:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_BwDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8086:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_BwDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:8096:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_BwDgk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9666:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_DcPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9676:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_DcPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9686:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_DcPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9696:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_DcPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9C66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_Ycpcjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9C76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_Ycpcjqw
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9C86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_Ycpcjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9C96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_Ycpcjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9266:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_HwNkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9276:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_HwNkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9286:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_HwNkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:9296:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_HwNkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A866:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_SkcpLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A876:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_SkcpLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A886:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_SkcpLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A896:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_SkcpLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:AE66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_EjcpiUjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:AE76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_EjcpiUjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:AE86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_EjcpiUjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:AE96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_EjcpiUjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A466:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_LkcpiLkp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A476:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_LkcpiLkp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A486:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_LkcpiLkp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:A496:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_LkcpiLkp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:BA66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_JgEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:BA76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_JgEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:BA86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_JgEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:BA96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_JgEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:B066:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_BqpiEjwcp
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:B076:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_BqpiEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:B086:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_BqpiEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:B096:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_BqpiEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C666:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_PcpEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C676:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_PcpEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C686:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_PcpEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C696:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_PcpEjwcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:CC66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_SkLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:CC76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_SkLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:CC86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_SkLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:CC96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_SkLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C266:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_FcCw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C276:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_FcCw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C286:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_FcCw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:C296:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_FcCw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D866:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_VqpiPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D876:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_VqpiPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D886:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_VqpiPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D896:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_VqpiPcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:DE66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_VqpiNkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:DE76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_VqpiNkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:DE86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_VqpiNkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:DE96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_VqpiNkcpi
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D466:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_TqpiEjcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D476:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_TqpiEjcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D486:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_TqpiEjcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:D496:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_TqpiEjcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:EA66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_DkUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:EA76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_DkUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:EA86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_DkUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:EA96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_DkUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:E066:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_NkcpiRkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:E076:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_NkcpiRkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:E086:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_NkcpiRkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:E096:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_NkcpiRkpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F666:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_EjgpiMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F676:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_EjgpiMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F686:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_EjgpiMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F696:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_EjgpiMqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:FC66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_HgpiFw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:FC76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_HgpiFw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:FC86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_HgpiFw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:FC96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_HgpiFw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F266:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_FkcpLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F276:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_FkcpLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F286:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_FkcpLkcpi
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:F296:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_FkcpLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0866:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_YwNqpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0876:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_YwNqpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0886:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_YwNqpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0896:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_YwNqpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0E66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_CjqpiZkcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0E76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_CjqpiZkcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0E86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_CjqpiZkcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0E96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_CjqpiZkcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0466:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_MckCjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0476:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_MckCjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0486:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_MckCjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:0496:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_MckCjqw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1A66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_BwpBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1A76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_BwpBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1A86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_BwpBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1A96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_BwpBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1066:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_HgpiLkg
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1076:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_HgpiLkg
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1086:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_HgpiLkg
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:1096:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_HgpiLkg
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2666:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_YwUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2676:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_YwUjcp
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2686:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_YwUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2696:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_YwUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2C66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_YwZk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2C76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_YwZk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2C86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_YwZk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2C96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_YwZk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2266:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_UjkCjw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2276:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_UjkCjw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2286:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_UjkCjw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:2296:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_UjkCjw
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3866:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_ZkwUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3876:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_ZkwUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3886:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_ZkwUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3896:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_ZkwUjcp
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3E66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_BqwBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3E76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_BqwBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3E86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_BqwBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3E96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_BqwBcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3466:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_RgpiUjwk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3476:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_RgpiUjwk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3486:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_RgpiUjwk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:3496:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_RgpiUjwk
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4A66:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_YcpUjgpi
+ [16D                [16Dipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4A76:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_YcpUjgpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4A86:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_YcpUjgpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4A96:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_YcpUjgpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4066:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_NkcpiLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4076:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_NkcpiLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4086:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_NkcpiLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4096:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_NkcpiLkcpi
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4166:: 44 Eth-Trunk202.2958 8A6E:E7A8:2657:9F76::7 track bfd-session UPF800_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH800_OqTgp_tgugtxgf
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4176:: 44 Eth-Trunk205.2958 8A6E:E7A8:2657:AF76::7 track bfd-session UPF801_VoLTE description to_ZOU_WRH_XqNVG_UIK-5IE-WRH801_OqTgp_tgugtxgf
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4186:: 44 Eth-Trunk204.2958 8A6E:E7A8:2657:BF76::7 track bfd-session UPF900_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH900_OqTgp_tgugtxgf
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBC9:4196:: 44 Eth-Trunk206.2958 8A6E:E7A8:2657:CF76::7 track bfd-session UPF901_VoLTE description to_SV_WRH_XqNVG_UIK-5IE-WRH901_OqTgp_tgugtxgf
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBCB:: 44 Eth-Trunk200.2958 8A6E:E7A8:2657:7F76::7 description to_ZOU_WRH_XqNVG_UIK-KQV-WRH700
+ ipv6 route-static vpn-instance VoLTE_SGi 8A6E:EBCB:7666:: 44 Eth-Trunk203.2958 8A6E:E7A8:2657:8F76::7 description to_SV_WRH_XqNVG_UIK-KQV-WRH750
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:7566::867 128 Eth-Trunk200.2952 8A6E:E7A8:2657:7566::7 description to_ZOU_WRH_5I_TCP-KQV-WRH700
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:7566::868 128 Eth-Trunk200.2952 8A6E:E7A8:2657:7566::7 description to_ZOU_WRH_5I_TCP-KQV-WRH700
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:8566::867 128 Eth-Trunk203.2954 8A6E:E7A8:2657:8566::7 description to_SV_WRH_5I_TCP-KQV-WRH750
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:8566::868 128 Eth-Trunk203.2954 8A6E:E7A8:2657:8566::7 description to_SV_WRH_5I_TCP-KQV-WRH750
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:9566::867 128 Eth-Trunk202.2954 8A6E:E7A8:2657:9566::7 description to_ZOU_WRH_5I_TCP-5IE-WRH800
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:A566::867 128 Eth-Trunk205.2954 8A6E:E7A8:2657:A566::7 description to_ZOU_WRH_5I_TCP-5IE-WRH801
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:B566::867 128 Eth-Trunk204.2954 8A6E:E7A8:2657:B566::7 description to_SV_WRH_5I_TCP-5IE-WRH900
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:2657:C566::867 128 Eth-Trunk206.2954 8A6E:E7A8:2657:C566::7 description to_SV_WRH_5I_TCP-5IE-WRH901
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:5566:767:556C:6:7 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-KQV
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:5566:767:556C:6:8 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-KQV
+ [16D                [16Dipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:5566:76A:556C:6:7 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-5IE
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:5566:76A:556C:6:8 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-5IE
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:55A6:767:556C:6:7 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-KQV
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:55A6:767:556C:6:8 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-KQV
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:55A6:76A:556C:6:7 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-5IE
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7A8:4655:55A6:76A:556C:6:8 128 Eth-Trunk201.843 8A6E:E7C8:2666:: description to_CF_FS_P2-5IE
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26BA:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-ejgpimqw-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26BE:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-hgpilkg-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26B2:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-mckcjqw-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26C6:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-ycpcjqw-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26CA:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-nkcpirkpi-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26CE:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-ywujcp-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26C2:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-ywzk-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26DA:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-bwpbcpi-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26DE:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-cjqpizkcp-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A6E:E7C8:26D2:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LV-UC-IT-lkcjcp-fkcplkcpi-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:3:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-lkcpidgk-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:3:76:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-lkcpidgk-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:7B:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-nkcpilkcpi-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:7B:76:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-nkcpilkcpi-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:7F:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-pcpcp-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:7F:76:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-pcpcp-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:87:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-bwdgk-vqEugtxkeg
+ [16D                [16Dipv6 route-static vpn-instance 5G_RAN 8A64:7E9:87:76:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-bwdgk-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:B7:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-ejcpiujqw-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:B7:76:: 64 NULL0 description to_LVhqtFZ-UC-IT-lkcjcp-ejcpiujqw-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:BB:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ejgpimqw-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:BB:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ejgpimqw-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:BF:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-hgpilkg-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:BF:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-hgpilkg-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:B3:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-mckcjqw-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:B3:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-mckcjqw-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:C7:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ycpcjqw-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:C7:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ycpcjqw-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:CB:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-nkcpirkpi-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:CB:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-nkcpirkpi-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:CF:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ywujcp-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:CF:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ywujcp-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:C3:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ywzk-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:C3:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-ywzk-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:DB:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-bwpbcpi-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:DB:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-bwpbcpi-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:DF:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-cjqpizkcp-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:DF:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-cjqpizkcp-vqDugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:D3:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-fkcplkcpi-vqEugtxkeg
+ ipv6 route-static vpn-instance 5G_RAN 8A64:7E9:D3:76:: 64 Eth-Trunk210.843 8A6E:E7A8:2657:7566::767 description to_LVhqtFZ-UC-IT-lkcjcp-fkcplkcpi-vqDugtxkeg
+[16D                [16D#
+ip ipv6-prefix DXforLT-5G-SA-in index 5 permit 8A6E:E7C8:2666:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 15 permit 8A6E:E7C8:266A:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 25 permit 8A6E:E7C8:266E:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 35 permit 8A6E:E7C8:2676:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 45 permit 8A6E:E7C8:2672:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 55 permit 8A6E:E7C8:268A:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 65 permit 8A6E:E7C8:268E:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 75 permit 8A6E:E7C8:2682:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 85 permit 8A6E:E7C8:2696:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 95 permit 8A6E:E7C8:269A:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 105 permit 8A6E:E7C8:269E:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 115 permit 8A6E:E7C8:2692:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 125 permit 8A6E:E7C8:26A6:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 135 permit 8A6E:E7C8:26AA:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 145 permit 8A6E:E7C8:26AE:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 155 permit 8A6E:E7C8:26A2:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 165 permit 8A6E:E7C8:26D6:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 175 permit 8A6E:E7C8:26E6:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 185 permit 8A6E:E7C8:26EA:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 195 permit 8A6E:E7C8:26EE:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 205 permit 8A6E:E7C8:26E2:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 215 permit 8A6E:E7C8:26F6:78:: 64
+[16D                [16Dip ipv6-prefix DXforLT-5G-SA-in index 225 permit 8A6E:E7C8:26FA:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 235 permit 8A6E:E7C8:26FE:78:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 236 permit 8A6E:E7C8:2666:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 245 permit 8A6E:E7C8:266A:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 255 permit 8A6E:E7C8:266E:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 265 permit 8A6E:E7C8:2676:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 275 permit 8A6E:E7C8:2672:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 285 permit 8A6E:E7C8:268A:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 295 permit 8A6E:E7C8:268E:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 305 permit 8A6E:E7C8:2682:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 315 permit 8A6E:E7C8:2696:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 325 permit 8A6E:E7C8:269A:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 335 permit 8A6E:E7C8:269E:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 345 permit 8A6E:E7C8:2692:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 355 permit 8A6E:E7C8:26A6:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 365 permit 8A6E:E7C8:26AA:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 375 permit 8A6E:E7C8:26AE:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 385 permit 8A6E:E7C8:26A2:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 395 permit 8A6E:E7C8:26D6:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 405 permit 8A6E:E7C8:26E6:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 415 permit 8A6E:E7C8:26EA:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 425 permit 8A6E:E7C8:26EE:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 435 permit 8A6E:E7C8:26E2:76:: 64
+[16D                [16Dip ipv6-prefix DXforLT-5G-SA-in index 445 permit 8A6E:E7C8:26F6:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 455 permit 8A6E:E7C8:26FA:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 465 permit 8A6E:E7C8:26FE:76:: 64
+ip ipv6-prefix DXforLT-5G-SA-in index 475 permit 8A64:7E9:8A:86::7 128
+ip ipv6-prefix DXforLT-5G-SA-in index 485 permit 8A64:7E9:8A:86::86 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 495 permit 8A64:7E9:8A:86::96 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 505 permit 8A64:7E9:8A:86::A6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 515 permit 8A64:7E9:8A:86::B6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 525 permit 8A64:7E9:7A:86::7 128
+ip ipv6-prefix DXforLT-5G-SA-in index 535 permit 8A64:7E9:8A:86::C6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 545 permit 8A64:7E9:8A:86::D6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 555 permit 8A64:7E9:8A:86::E6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 565 permit 8A64:7E9:8A:86::F6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 575 permit 8A64:7E9:7A:86::86 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 585 permit 8A64:7E9:7A:86::96 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 595 permit 8A64:7E9:7A:86::A6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 605 permit 8A64:7E9:7A:86::B6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 615 permit 8A64:7E9:7A:86::C6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 625 permit 8A64:7E9:7A:86::D6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 635 permit 8A64:7E9:7A:86::E6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix DXforLT-5G-SA-in index 645 permit 8A64:7E9:7A:86::F6 124 greater-equal 124 less-equal 128
+ip ipv6-prefix LTforDX-5G-SA-out index 10 permit 8A64:7E9:3:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 20 permit 8A64:7E9:7B:: 64
+[16D                [16Dip ipv6-prefix LTforDX-5G-SA-out index 30 permit 8A64:7E9:7F:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 40 permit 8A64:7E9:87:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 50 permit 8A64:7E9:B7:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 60 permit 8A64:7E9:BB:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 70 permit 8A64:7E9:BF:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 80 permit 8A64:7E9:B3:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 90 permit 8A64:7E9:C7:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 100 permit 8A64:7E9:CB:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 110 permit 8A64:7E9:CF:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 120 permit 8A64:7E9:C3:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 130 permit 8A64:7E9:DB:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 140 permit 8A64:7E9:DF:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 150 permit 8A64:7E9:D3:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 160 permit 8A64:7E9:3:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 170 permit 8A64:7E9:7B:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 180 permit 8A64:7E9:7F:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 190 permit 8A64:7E9:87:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 200 permit 8A64:7E9:B7:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 210 permit 8A64:7E9:BB:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 220 permit 8A64:7E9:BF:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 230 permit 8A64:7E9:B3:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 240 permit 8A64:7E9:C7:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 250 permit 8A64:7E9:CB:76:: 64
+[16D                [16Dip ipv6-prefix LTforDX-5G-SA-out index 260 permit 8A64:7E9:CF:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 270 permit 8A64:7E9:C3:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 280 permit 8A64:7E9:DB:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 290 permit 8A64:7E9:DF:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 300 permit 8A64:7E9:D3:76:: 64
+ip ipv6-prefix LTforDX-5G-SA-out index 310 permit 8A6E:E7A8:4655:5566:767:556C:6:7 128
+ip ipv6-prefix LTforDX-5G-SA-out index 320 permit 8A6E:E7A8:4655:5566:767:556C:6:8 128
+ip ipv6-prefix LTforDX-5G-SA-out index 330 permit 8A6E:E7A8:2657:7566::867 128
+ip ipv6-prefix LTforDX-5G-SA-out index 340 permit 8A6E:E7A8:2657:7566::868 128
+ip ipv6-prefix LTforDX-5G-SA-out index 350 permit 5266:7666:6:716F::7 128
+ip ipv6-prefix LTforDX-5G-SA-out index 360 permit 8A6E:E7A8:2657:8566::867 128
+ip ipv6-prefix LTforDX-5G-SA-out index 370 permit 8A6E:E7A8:2657:8566::868 128
+ip ipv6-prefix LTforDX-5G-SA-out index 390 permit 8A6E:E7A8:4655:5566:76A:556C:6:7 128
+ip ipv6-prefix LTforDX-5G-SA-out index 400 permit 8A6E:E7A8:4655:5566:76A:556C:6:8 128
+ip ipv6-prefix LTforDX-5G-SA-out index 410 permit 8A6E:E7A8:4655:55A6:76A:556C:6:7 128
+ip ipv6-prefix LTforDX-5G-SA-out index 420 permit 8A6E:E7A8:4655:55A6:76A:556C:6:8 128
+ip ipv6-prefix LTforDX-5G-SA-out index 430 permit 8A6E:E7A8:4655:55A6:767:556C:6:7 128
+ip ipv6-prefix LTforDX-5G-SA-out index 440 permit 8A6E:E7A8:4655:55A6:767:556C:6:8 128
+ip ipv6-prefix LTforDX-5G-SA-out index 450 permit 8A6E:E7A8:2657:9566::867 128
+ip ipv6-prefix LTforDX-5G-SA-out index 460 permit 8A6E:E7A8:2657:A566::867 128
+ip ipv6-prefix LTforDX-5G-SA-out index 470 permit 8A6E:E7A8:2657:B566::867 128
+ip ipv6-prefix LTforDX-5G-SA-out index 480 permit 8A6E:E7A8:2657:C566::867 128
+ip ipv6-prefix No-Ipv6-Default-To-RR index 10 deny :: 0
+[16D                [16Dip ipv6-prefix No-Ipv6-Default-To-RR index 20 permit :: 0 less-equal 128
+ip ipv6-prefix default-ipv6 index 10 permit :: 0
+ip ipv6-prefix nodefault-ipv6 index 10 deny :: 0
+ip ipv6-prefix nodefault-ipv6 index 20 permit :: 0 less-equal 128
+#
+snmp-agent
+snmp-agent local-engineid 800007DB031CAECB5F4F00
+ snmp-agent community read cipher 0213e5ae381df1cab348dc21737a9c04 mib-view iso-view acl 2000
+ snmp-agent community write cipher 25c1e2df7308fc04b8725ed6ca29187b mib-view iso-view acl 2000
+#
+snmp-agent sys-info version v2c
+undo snmp-agent sys-info version v3
+ snmp-agent target-host host-name __targetHost_1_21919 trap address udp-domain 136.102.298.33 params securityname cipher f661f5744dd3398e052eedf5989bcf43 v2c private-netmanager ext-vb
+ snmp-agent target-host host-name __targetHost_2_3783 trap address udp-domain 14.184.0.289 params securityname cipher d2c131b1b0f09d9cf74890295da3c0c3 v2c private-netmanager ext-vb
+#
+snmp-agent local-user password complexity-check disable
+snmp-agent mib-view included iso-view iso
+#
+snmp-agent trap source LoopBack0
+#
+snmp-agent protocol source-status all-interface
+undo snmp-agent protocol source-status ipv6 all-interface
+#
+[16D                [16Dundo snmp-agent proxy protocol source-status all-interface
+undo snmp-agent proxy protocol source-status ipv6 all-interface
+#
+snmp-agent trap enable
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfTxRetransmit
+undo snmp-agent trap enable feature-name ospf trap-name ospfOriginateLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfMaxAgeLsa
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfAuthFailure
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfConfigError
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfRxBadPacket
+undo snmp-agent trap enable feature-name ospf trap-name ospfVirtIfTxRetransmit
+undo snmp-agent trap enable feature-name isis trap-name isisIDLenMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationTypeFailure
+undo snmp-agent trap enable feature-name isis trap-name isisAuthenticationFailure
+undo snmp-agent trap enable feature-name isis trap-name isisVersionSkew
+undo snmp-agent trap enable feature-name isis trap-name isisAreaMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisRejectedAdjacency
+undo snmp-agent trap enable feature-name isis trap-name isisOrigLSPBuffSizeMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisProtocolsSupportedMismatch
+undo snmp-agent trap enable feature-name isis trap-name isisMaxAreaAddressesMismatch
+[16D                [16D#
+lldp enable
+#
+stelnet server enable
+snetconf server enable
+ssh user CQ-CQ-Manager
+ssh user CQ-CQ-Manager authentication-type password
+ssh user CQ-CQ-Manager service-type snetconf stelnet
+ssh user CQ-CQ-SDNcontroler
+ssh user CQ-CQ-SDNcontroler authentication-type password
+ssh user CQ-CQ-SDNcontroler service-type all
+ssh user cqlt
+ssh user cqlt authentication-type password
+ssh user cqlt service-type all
+ssh user root
+ssh user root authentication-type password
+ssh user root service-type snetconf stelnet
+ssh server-source all-interface
+ssh ipv6 server-source all-interface
+ssh authorization-type default aaa
+#
+ ssh server cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+ssh server hmac sha2_512 sha2_256
+[16D                [16Dssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa
+#
+ssh server dh-exchange min-len 2048
+#
+ssh client first-time enable
+ssh client peer 14.168.33.32 assign ecc-key 14.168.33.32
+ssh client peer 14.184.0.289 assign rsa-key 14.184.0.289
+ssh client peer 14.184.0.289 assign ecc-key 14.184.0.289
+ssh client peer 14.184.15.298 assign ecc-key 14.184.15.298
+ssh client peer 14.184.25.299 assign ecc-key 14.184.25.299
+ssh client peer 14.184.299.298 assign ecc-key 14.184.299.298
+ssh client peer 14.184.6.299 assign ecc-key 14.184.6.299
+ssh client peer 162.158.277.124 assign ecc-key 162.158.277.124
+ssh client peer 162.158.296.15 assign ecc-key 162.158.296.15
+ssh client peer 162.158.296.56 assign ecc-key 162.158.296.56
+ssh client peer 162.151.266.141 assign ecc-key 162.151.266.141
+ssh client peer 184.6.0.6 assign ecc-key 184.6.0.6
+#
+ssh client publickey ecc rsa
+#
+ ssh client cipher 37bc4d44f38272aca24f59a0ad074388 aes128_gcm aes256_ctr aes192_ctr aes128_ctr
+[16D                [16Dssh client hmac sha2_512 sha2_256
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+command-privilege level 2 view shell system-view
+#
+tunnel-policy NMS-Tunnel-Policy
+ tunnel select-seq cr-lsp lsp load-balance-number 1
+#
+tunnel-policy nms-tunnel-policy
+ tunnel select-seq sr-te te sr-lsp ldp load-balance-number 1
+#
+user-interface maximum-vty 21
+#
+user-interface con 0
+ authentication-mode password
+  set authentication password cipher d7391762d2cafadbea0c77ca716d5a1b
+ screen-length 0
+#
+user-interface vty 0 20
+ authentication-mode aaa
+ user privilege level 3
+ idle-timeout 0 0
+#
+[16D                [16Dnetconf
+ activate module huawei-ip
+#
+local-aaa-server
+#
+pm
+ statistics enable
+ pm-server PMS_101400245
+  protocol sftp ip-address 14.184.0.289
+  username ftpuser password %^%#HDAA=}B[}R3wXW9d9%F5Ny!HWs%0+~9x/;(^CUoR%^%#
+  path ftproot/Bulk_Stat/VRP/167772160
+ upload-config PMS_101400245 server PMS_101400245
+ statistics-task n1544445_g15_i1005_t0
+  record-interval 1
+  binding instance-type interface instance 25GE2/0/70
+  binding instance-type interface instance 100GE1/0/33
+  binding instance-type interface instance 100GE1/0/34
+  binding instance-type interface instance 100GE1/0/36
+  binding instance-type interface instance 100GE5/0/33
+  binding instance-type interface instance 100GE5/0/36
+  binding instance-type interface instance Eth-Trunk203
+  binding instance-type interface instance Eth-Trunk204
+  binding instance-type interface instance Eth-Trunk205
+[16D                [16D#
+telemetry
+ #
+ sensor-group Group1
+  sensor-path huawei-debug:debug/cpu-infos/cpu-info
+  sensor-path huawei-debug:debug/memory-infos/memory-info
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity
+  sensor-path huawei-devm:devm/physical-entitys/physical-entity[class="chassis"]
+  sensor-path huawei-ifm:ifm/interfaces/interface
+  sensor-path huawei-ifm:ifm/interfaces/interface/mib-statistics
+  sensor-path huawei-twamp-controller:twamp-controller/client/sessions/session
+  sensor-path huawei-twamp-controller:twamp-controller/client/sessions/session/huawei-twamp-statistics:statistics
+ #
+ destination-group JiTuanWangGuan
+  ipv4-address 136.102.298.42 port 8895 protocol grpc no-tls
+ #
+ subscription JiTuanWangGuan
+  local-source-address ipv4 14.184.299.299
+  sensor-group Group1 sample-interval 10000
+  destination-group JiTuanWangGuan
+#
+evpn srv6 next-header-field 59 
+#
+[16D                [16Dreturn

@@ -1,0 +1,1708 @@
+display current-configuration
+
+#
+
+ version 7.1.075, Release 0107P30
+
+#
+
+ clock timezone CST add 08:00:00
+
+ clock protocol none
+
+#
+
+  sysname FTZD-ZV-TBM-UD5300-VP-D3
+
+#
+
+ip vpn-instance 4G_OAM
+
+ route-distinguisher 65448:18030
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65448:18030 import-extcommunity
+
+ vpn-target 65448:18030 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65448:18030
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65448:18030
+
+  apply-label per-instance
+
+#
+
+
+
+               
+ip vpn-instance 4G_RAN
+
+ route-distinguisher 65448:18020
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65448:18020 import-extcommunity
+
+ vpn-target 65448:18020 65448:1121003 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65448:18020
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65448:18020
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_OAM
+
+ route-distinguisher 65448:10030
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65448:10030 import-extcommunity
+
+ vpn-target 65448:10030 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+
+
+               
+  route-distinguisher 65448:10030
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65448:10030
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_RAN
+
+ route-distinguisher 65448:10010
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65448:10010 import-extcommunity
+
+ vpn-target 65448:10010 65448:1121003 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65448:10010
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65448:10010
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance 5G_RAN_VIP
+
+
+
+               
+ route-distinguisher 65448:10020
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65448:10020 import-extcommunity
+
+ vpn-target 65448:10020 65448:1121003 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65448:10020
+
+  apply-label per-instance
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65448:10020
+
+  apply-label per-instance
+
+#
+
+ip vpn-instance LTE-OAM-VPN
+
+ route-distinguisher 65448:20002
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65448:20002 import-extcommunity
+
+ vpn-target 65448:20002 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65448:20002
+
+
+
+               
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65448:20002
+
+#
+
+ip vpn-instance LTE-VPN
+
+ route-distinguisher 65448:20001
+
+ tnl-policy SRBE_TUNNEL
+
+ vpn-target 65448:20001 import-extcommunity
+
+ vpn-target 65448:20001 export-extcommunity
+
+ diffserv-mode ingress uniform egress pipe
+
+ #
+
+ address-family ipv4
+
+  route-distinguisher 65448:20001
+
+ #
+
+ address-family ipv6
+
+  route-distinguisher 65448:20001
+
+#
+
+ip vpn-instance __mgnt_vpn__
+
+#
+
+ telnet server enable
+
+#
+
+bfd template 10
+
+#
+
+
+
+               
+bfd template 50
+
+ bfd min-transmit-interval 50
+
+ bfd min-receive-interval 50
+
+#
+
+ undo bfd ip-router-alert
+
+#
+
+isis 3
+
+ non-stop-routing
+
+ is-level level-2
+
+ cost-style wide
+
+ flash-flood 
+
+ timer spf 5 50 50
+
+ timer lsp-generation 10 50 50
+
+ set-overload on-startup 120 allow external
+
+  is-name FTZD-ZV-TBM-UD5300-VP-D3
+
+ mpls te enable
+
+ distribute bgp-ls level-2
+
+ segment-routing global-block 200000 265535
+
+ network-entity 86.5448.0003.0401.4006.1017.00
+
+ #
+
+ address-family ipv4 unicast
+
+  fast-reroute lfa
+
+  fast-reroute ti-lfa
+
+
+
+               
+  fast-reroute microloop-avoidance enable
+
+  segment-routing mpls
+
+  segment-routing adjacency enable
+
+  segment-routing microloop-avoidance enable level-2
+
+#
+
+ospf 65535 vpn-instance __mgnt_vpn__
+
+ non-stop-routing
+
+ area 0.0.0.0
+
+  network 0.0.0.0 255.255.255.255
+
+#
+
+ mpls lsr-id 15.195.66.12
+
+#
+
+ lldp global enable
+
+#
+
+ ptp profile 1588v2
+
+ ptp mode bc
+
+ ptp domain 24
+
+ ptp clock-state enable 
+
+ ptp sync-uncertain enable 
+
+#
+
+ undo version auto-update enable
+
+ version check ignore
+
+ password-recovery enable
+
+
+
+               
+ network-clock ssmcontrol on
+
+ network-clock source lpuport Ten-GigabitEthernet8/0/0 forcessm off 
+
+ network-clock source lpuport Ten-GigabitEthernet8/0/0 priority 1 
+
+ network-clock source lpuport Ten-GigabitEthernet9/0/0 forcessm off 
+
+ network-clock source lpuport Ten-GigabitEthernet9/0/0 priority 2 
+
+#
+
+vlan 1
+
+#
+
+qos wred queue table 10GE
+
+ queue 0 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 0 weighting-constant 0
+
+ queue 1 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 1 weighting-constant 0
+
+ queue 2 drop-level 0 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 1 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 drop-level 2 low-limit 1600 high-limit 2000 discard-probability 100
+
+ queue 2 weighting-constant 0
+
+ queue 3 drop-level 0 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 drop-level 1 low-limit 3200 high-limit 4000 discard-probability 100
+
+
+
+               
+ queue 3 drop-level 2 low-limit 3200 high-limit 4000 discard-probability 100
+
+ queue 3 weighting-constant 0
+
+ queue 4 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 4 weighting-constant 0
+
+ queue 5 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 5 weighting-constant 0
+
+ queue 6 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 6 weighting-constant 0
+
+ queue 7 drop-level 0 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 1 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 drop-level 2 low-limit 1000 high-limit 1000 discard-probability 100
+
+ queue 7 weighting-constant 0
+
+#
+
+mpls te
+
+#
+
+tunnel-policy SRBE_TUNNEL
+
+ select-seq sr-lsp load-balance-number 32
+
+
+
+               
+#
+
+ mpls bfd enable
+
+#
+
+interface NULL0
+
+#
+
+interface LoopBack0
+
+ ip address 15.195.66.12 255.255.255.255
+
+ isis enable 3
+
+ isis prefix-sid index 1267 no-php
+
+#
+
+interface LoopBack1023
+
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address 174.26.13.1 255.255.255.255
+
+#
+
+interface M-Ethernet0
+
+ ip address dhcp-alloc
+
+#
+
+interface Ten-GigabitEthernet8/0/0
+
+ port link-mode route
+
+  description TO_CTZD-ZV-DBMI-VP-V12504U-H1_WJ2/0/3
+
+ mtu 9000
+
+ ip address 195.66.3.6 255.255.255.252
+
+ isis enable 3
+
+
+
+               
+ isis circuit-type p2p
+
+ isis cost 100
+
+  isis authentication-mode md5 cipher d9b159f37bd59206e8b5e4166acd8ec0
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ isis peer hold-max-cost duration 60000
+
+ mpls enable
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+
+
+               
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet8/0/0.4094
+
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address unnumbered interface LoopBack1023
+
+ ospf network-type p2p
+
+ arp ip-unnumbered learning enable
+
+ vlan-type dot1q vid 4094
+
+#
+
+interface Ten-GigabitEthernet8/0/1
+
+ port link-mode route
+
+  description SHBWI0508巫山气象局
+
+ mtu 9000
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+
+
+               
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet8/0/1.843
+
+ ip binding vpn-instance 5G_RAN
+
+
+
+               
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 843
+
+ ipv6 address 9B7F:F8D9:37DF::D0/126
+
+#
+
+interface Ten-GigabitEthernet8/0/1.875
+
+ ip binding vpn-instance 5G_OAM
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 875
+
+ ipv6 dhcp select relay
+
+ ipv6 dhcp relay server-address 9B7F:F8D9:3766:6666:6666:6666:6666:6679
+
+ ipv6 address 9B7F:F8D9:37DF:666::D0/126
+
+#
+
+interface Ten-GigabitEthernet8/0/1.1843
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 1843
+
+ ipv6 address 9B75:8FA:D0::D0/126
+
+#
+
+interface Ten-GigabitEthernet8/0/2
+
+ port link-mode route
+
+
+
+               
+  description SHBWI0331巫山巫峡中学
+
+ mtu 9000
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+
+
+               
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet8/0/2.843
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 843
+
+ ipv6 address 9B7F:F8D9:37DF::F8/126
+
+#
+
+interface Ten-GigabitEthernet8/0/2.875
+
+ ip binding vpn-instance 5G_OAM
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 875
+
+ ipv6 dhcp select relay
+
+ ipv6 dhcp relay server-address 9B7F:F8D9:3766:6666:6666:6666:6666:6679
+
+ ipv6 address 9B7F:F8D9:37DF:666::F8/126
+
+#
+
+interface Ten-GigabitEthernet8/0/2.1843
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+
+
+               
+ vlan-type dot1q vid 1843
+
+ ipv6 address 9B75:8FA:D0::F8/126
+
+#
+
+interface Ten-GigabitEthernet8/0/3
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet8/0/4
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet8/0/5
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet8/0/6
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet8/0/7
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet9/0/0
+
+ port link-mode route
+
+  description TO_CTZD-ZV-KG-VP-UD5300-D1_WJ8/0/0
+
+ mtu 9000
+
+ ip address 195.66.3.9 255.255.255.252
+
+ isis enable 3
+
+ isis circuit-type p2p
+
+ isis cost 100
+
+
+
+               
+  isis authentication-mode md5 cipher dbb63017697e652a123d888f9ba82fe4
+
+ isis small-hello
+
+ isis bfd enable 
+
+ isis primary-path-detect bfd ctrl
+
+ isis peer hold-max-cost duration 60000
+
+ mpls enable
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+
+
+               
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet9/0/0.4094
+
+ ip binding vpn-instance __mgnt_vpn__
+
+ ip address unnumbered interface LoopBack1023
+
+ ospf network-type p2p
+
+ arp ip-unnumbered learning enable
+
+ vlan-type dot1q vid 4094
+
+#
+
+interface Ten-GigabitEthernet9/0/1
+
+ port link-mode route
+
+  description SHBWI0527巫山教师新村
+
+ mtu 9000
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+
+
+               
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+#
+
+interface Ten-GigabitEthernet9/0/1.843
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+
+
+               
+ vlan-type dot1q vid 843
+
+ ipv6 address 9B7F:F8D9:37DF::B0/126
+
+#
+
+interface Ten-GigabitEthernet9/0/1.875
+
+ ip binding vpn-instance 5G_OAM
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 875
+
+ ipv6 dhcp select relay
+
+ ipv6 dhcp relay server-address 9B7F:F8D9:3766:6666:6666:6666:6666:6679
+
+ ipv6 address 9B7F:F8D9:37DF:666::B0/126
+
+#
+
+interface Ten-GigabitEthernet9/0/1.1843
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 1843
+
+ ipv6 address 9B75:8FA:D0::B0/126
+
+#
+
+interface Ten-GigabitEthernet9/0/2
+
+ port link-mode route
+
+  description SHBWI0061巫山教师新村（电信）
+
+ mtu 9000
+
+
+
+               
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+ ptp syn-interval -1
+
+ ptp min-delayreq-interval -1
+
+ ptp enable
+
+ synchronous mode
+
+ esmc enable
+
+ qos wfq weight
+
+ qos wfq be group 1 weight 30
+
+ qos wfq af1 group 1 weight 20
+
+ qos wfq af2 group 1 weight 20
+
+ qos wfq af3 group 1 weight 30
+
+ qos wfq af4 group sp
+
+ qos wfq ef group sp
+
+ qos wfq cs6 group sp
+
+ qos wfq cs7 group sp
+
+ qos wred apply 10GE
+
+ qos gts queue 7 cir 8000000 cbs 16000000 
+
+ qos gts queue 6 cir 8000000 cbs 16000000 
+
+ qos gts queue 5 cir 8000000 cbs 16000000 
+
+ qos gts queue 4 cir 8000000 cbs 16000000 
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet9/0/2.843
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 843
+
+ ipv6 address 9B7F:F8D9:37DF::F0/126
+
+#
+
+interface Ten-GigabitEthernet9/0/2.875
+
+ ip binding vpn-instance 5G_OAM
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 875
+
+ ipv6 dhcp select relay
+
+ ipv6 dhcp relay server-address 9B7F:F8D9:3766:6666:6666:6666:6666:6679
+
+ ipv6 address 9B7F:F8D9:37DF:666::F0/126
+
+#
+
+interface Ten-GigabitEthernet9/0/2.1843
+
+ ip binding vpn-instance 5G_RAN
+
+ ipv6 mtu 9000
+
+ qos trust dscp
+
+ vlan-type dot1q vid 1843
+
+ ipv6 address 9B75:8FA:D0::F0/126
+
+
+
+               
+#
+
+interface Ten-GigabitEthernet9/0/3
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet9/0/4
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet9/0/5
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet9/0/6
+
+
+
+               
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+interface Ten-GigabitEthernet9/0/7
+
+ port link-mode route
+
+ lldp source-mac vlan 4094
+
+ lldp management-address arp-learning vlan 4094
+
+ lldp tlv-enable basic-tlv management-address-tlv interface LoopBack1023
+
+ undo lldp tlv-enable dot3-tlv max-frame-size
+
+#
+
+bgp 65448
+
+ non-stop-routing
+
+ retain local-label 5
+
+ labeled-route ignore-no-tunnel
+
+ router-id 15.195.66.12
+
+ peer 15.195.66.209 as-number 65448
+
+ peer 15.195.66.209 connect-interface LoopBack0
+
+ peer 15.195.66.209 route-update-interval 0
+
+  peer 15.195.66.209 password cipher 8814d5bbb0466af8426eda5f8af268da
+
+ peer 15.195.66.200 as-number 65448
+
+
+
+               
+ peer 15.195.66.200 connect-interface LoopBack0
+
+ peer 15.195.66.200 route-update-interval 0
+
+  peer 15.195.66.200 password cipher abd60c6ce44fc60a2a5e1378f274815b
+
+ #
+
+ address-family vpnv4
+
+  pic
+
+  route-select delay 180
+
+  peer 15.195.66.209 enable
+
+  peer 15.195.66.200 enable
+
+ #
+
+ address-family vpnv6
+
+  pic
+
+  route-select delay 180
+
+  peer 15.195.66.209 enable
+
+  peer 15.195.66.200 enable
+
+ #
+
+ address-family l2vpn evpn
+
+  peer 15.195.66.209 enable
+
+  peer 15.195.66.209 advertise encap-type mpls
+
+  peer 15.195.66.200 enable
+
+  peer 15.195.66.200 advertise encap-type mpls
+
+ #
+
+ ip vpn-instance 4G_OAM
+
+
+
+               
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+ #
+
+ ip vpn-instance 4G_RAN
+
+  #
+
+  address-family ipv4 unicast
+
+   pic
+
+   import-route direct
+
+ #
+
+ ip vpn-instance 5G_OAM
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+ #
+
+ ip vpn-instance 5G_RAN
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+ #
+
+
+
+               
+ ip vpn-instance 5G_RAN_VIP
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   import-route direct
+
+ #
+
+ ip vpn-instance LTE-OAM-VPN
+
+  #
+
+  address-family ipv4 unicast
+
+   balance 2
+
+   pic
+
+   route-select delay 180
+
+   import-route direct
+
+  #
+
+  address-family ipv6 unicast
+
+   balance 2
+
+   pic
+
+   route-select delay 180
+
+   import-route direct
+
+ #
+
+ ip vpn-instance LTE-VPN
+
+  #
+
+  address-family ipv4 unicast
+
+
+
+               
+   pic
+
+   route-select delay 180
+
+   import-route direct
+
+  #
+
+  address-family ipv6 unicast
+
+   pic
+
+   route-select delay 180
+
+   import-route direct
+
+#
+
+dcn
+
+ auto-report
+
+#
+
+ scheduler logfile size 16
+
+#
+
+line class console
+
+ user-role network-admin
+
+#
+
+line class tty
+
+ user-role network-operator
+
+#
+
+line class vty
+
+ user-role network-operator
+
+#
+
+
+
+               
+line con 0 1
+
+ authentication-mode scheme
+
+ user-role network-admin
+
+#
+
+line vty 0 63
+
+ authentication-mode scheme
+
+ user-role network-admin
+
+ user-role network-operator
+
+#
+
+ snmp-agent
+
+ snmp-agent local-engineid 800063A28078AA8215120000000001
+
+ snmp-agent community write cq.un1c0m_private acl 2000
+
+ snmp-agent community read cq.un1c0m_public acl 2000
+
+ snmp-agent sys-info version v2c v3 
+
+ snmp-agent target-host trap address udp-domain 195.200.0.296 params securityname cq.un1c0m_private v2c
+
+ snmp-agent trap enable arp 
+
+ snmp-agent trap enable mpls 
+
+ snmp-agent trap enable radius 
+
+ snmp-agent trap enable syslog 
+
+ snmp-agent trap enable te 
+
+ snmp-agent trap source LoopBack0
+
+#
+
+ mpls tunnel-bfd 15.195.66.209 32 template 50
+
+
+
+               
+ mpls tunnel-bfd 15.195.66.200 32 template 50
+
+#
+
+ ssh server enable
+
+#
+
+acl basic 2000
+
+ rule 0 permit source 15.195.0.0 0.0.255.255
+
+ rule 5 permit source 195.200.0.296 0
+
+ rule 100 permit
+
+#
+
+ tftp client source interface LoopBack0
+
+#
+
+domain name system
+
+#
+
+ aaa session-limit telnet 10
+
+ aaa session-limit ssh 10
+
+ domain default enable system
+
+#
+
+role name level-0
+
+  description Predefined level-0 role
+
+#
+
+role name level-1
+
+  description Predefined level-1 role
+
+#
+
+
+
+               
+role name level-2
+
+  description Predefined level-2 role
+
+#
+
+role name level-3
+
+  description Predefined level-3 role
+
+#
+
+role name level-4
+
+  description Predefined level-4 role
+
+#
+
+role name level-5
+
+  description Predefined level-5 role
+
+#
+
+role name level-6
+
+  description Predefined level-6 role
+
+#
+
+role name level-7
+
+  description Predefined level-7 role
+
+#
+
+role name level-8
+
+  description Predefined level-8 role
+
+#
+
+role name level-9
+
+  description Predefined level-9 role
+
+
+
+               
+#
+
+role name level-10
+
+  description Predefined level-10 role
+
+#
+
+role name level-11
+
+  description Predefined level-11 role
+
+#
+
+role name level-12
+
+  description Predefined level-12 role
+
+#
+
+role name level-13
+
+  description Predefined level-13 role
+
+#
+
+role name level-14
+
+  description Predefined level-14 role
+
+#
+
+user-group system
+
+#
+
+local-user CQ-CQ-SDNcontroler class manage
+
+  password hash 457b3ff077ff4498e2ef4bbabb2ef443
+
+ service-type ssh telnet
+
+ authorization-attribute user-role level-3
+
+ authorization-attribute user-role network-admin
+
+
+
+               
+ authorization-attribute user-role network-operato
+
+ authorization-attribute user-role network-operator
+
+#
+
+local-user admin class manage
+
+  password hash eb2476625fc26f55d9980c35b9af8fe1
+
+ service-type telnet terminal
+
+ authorization-attribute user-role network-admin
+
+#
+
+local-user cqlt class manage
+
+  password hash 9a3309bd5af7e551499eb0a0cd70db0c
+
+ service-type ftp
+
+ service-type ssh telnet
+
+ authorization-attribute user-role network-admin
+
+ authorization-attribute user-role network-operator
+
+#
+
+ ftp server enable
+
+#
+
+ netconf ssh server enable
+
+#
+
+return
+
